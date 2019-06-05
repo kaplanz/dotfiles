@@ -63,6 +63,12 @@ ln -s ~/.dotfiles/.exports ~/
 ln -s ~/.dotfiles/.functions ~/
 ```
 
+**.vimrc** can be installed with a symbolic link to your home directory:
+
+```shell
+ln -s ~/.dotfiles/.vimrc ~/
+```
+
 **.zprofile** can be installed with a symbolic link to your home directory:
 
 ```shell
