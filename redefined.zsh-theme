@@ -7,22 +7,21 @@
 #
 
 # Colour vars
-eval DeepSkyBlue3='$FG[032]'
-eval SteelBlue1='$FG[075]'
+eval DeepSkyBlue2='$FG[031]'
 eval SeaGreen3='$FG[078]'
-eval LightSlateBlue='$FG[105]'
+eval MediumPurple1='$FG[141]'
 eval Orange1='$FG[214]'
 eval Grey23='$FG[237]'
 
 # Primary prompt
-PROMPT='$SteelBlue1%~$(git_prompt_info) $LightSlateBlue%(!.#.»)%{$reset_color%} '
+PROMPT='$DeepSkyBlue2%~$(git_prompt_info) $MediumPurple1%(!.#.»)%{$reset_color%} '
 
 # Right prompt
 RPROMPT='$Grey23%n@%m%{$reset_color%}'
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="$SteelBlue1($SeaGreen3"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$SteelBlue1)%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="$DeepSkyBlue2($SeaGreen3"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$DeepSkyBlue2)%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="$Orange1*"
 
