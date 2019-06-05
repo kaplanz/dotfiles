@@ -6,34 +6,25 @@
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
-# Set NCOLOR, return_code
-if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+# Colour vars
+eval DeepSkyBlue3='$FG[032]'
+eval SteelBlue1='$FG[075]'
+eval SeaGreen3='$FG[078]'
+eval LightSlateBlue='$FG[105]'
+eval Orange1='$FG[214]'
+eval Grey23='$FG[237]'
 
 # Primary prompt
-PROMPT='$FG[032]%~\
-$(git_prompt_info) \
-$FG[105]%(!.#.»)%{$reset_color%} '
-PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
-RPS1='${return_code}'
-
-# Color vars
-eval my_gray='$FG[237]'
-eval my_orange='$FG[214]'
+PROMPT='$SteelBlue1%~$(git_prompt_info) $LightSlateBlue%(!.#.»)%{$reset_color%} '
 
 # Right prompt
-if type "virtualenv_prompt_info" > /dev/null
-then
-    RPROMPT='$(virtualenv_prompt_info)$my_gray%n@%m%{$reset_color%}%'
-else
-    RPROMPT='$my_gray%n@%m%{$reset_color%}%'
-fi
+RPROMPT='$Grey23%n@%m%{$reset_color%}'
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075]($FG[078]"
+ZSH_THEME_GIT_PROMPT_PREFIX="$SteelBlue1($SeaGreen3"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$SteelBlue1)%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="$Orange1*"
 
 # Displays the exec time of the last command if set threshold was exceeded
 cmd_exec_time() {
@@ -48,7 +39,7 @@ preexec() {
     cmd_timestamp=`date +%s`
 }
 
-# Output additional information about paths, repos and exec time
+# Output information about exec time
 precmd() {
     cmd_exec_time
     unset cmd_timestamp # Reset cmd exec time
