@@ -1,0 +1,19 @@
+#
+#  .functions
+#  My shell functions.
+#
+#  Created by Zakhary Kaplan on 2019-06-04.
+#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
+#
+
+# --------------------------------
+#            Functions
+# --------------------------------
+
+# -- Developer --
+function runc() { gcc $@ && ./a.out && rm a.out; }
+
+# -- Filesystem --
+function finder() { find ${2:-.} -iname "*$1*"; }
+function findin() { grep -yErIn --color=always $1 ${2:-.}; }
+function trash() { mv -f $@ ~/.Trash; }
