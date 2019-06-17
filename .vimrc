@@ -23,6 +23,12 @@ set shiftwidth=4
 set smarttab
 set tabstop=4
 
+" -- Plugins --
+" lightline.vim
+let g:lightline = {
+            \ 'colorscheme': 'jellybeans',
+            \ }
+
 " -- Search --
 set hlsearch
 set ignorecase
@@ -30,7 +36,10 @@ set incsearch
 set smartcase
 
 " -- User Interface --
+set display+=lastline
+set laststatus=2
 set mouse=a
+set noshowmode
 set number
 set wildmenu
 
@@ -38,3 +47,4 @@ set wildmenu
 set backspace=indent,eol,start
 set confirm
 set directory=~/.vim/swap
+set hidden
