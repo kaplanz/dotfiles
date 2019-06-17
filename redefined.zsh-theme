@@ -7,23 +7,34 @@
 #
 
 # Colour vars
-eval Grey='$FG[008]'
-eval DeepSkyBlue2='$FG[031]'
-eval SeaGreen3='$FG[078]'
-eval MediumPurple1='$FG[141]'
-eval Orange1='$FG[214]'
+DeepSkyBlue2='031'
+SeaGreen3='078'
+LightSlateGrey='103'
+DarkOliveGreen3='107'
+MediumPurple1='141'
+Orange1='214'
+Grey7='233'
+Grey19='236'
+Grey42='242'
+Grey58='246'
+
+# Prompt blocks
+conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$Grey19}%K{$DarkOliveGreen3} $CONDA_DEFAULT_ENV %f%k"}'
+hostname_block='${SSH_TTY:+"%F{$Grey19}%K{$LightSlateGrey} %n@%m %f%k"}'
+time_block='%F{$Grey42}%K{$Grey7} %D{%X} %f%k'
+date_block='%F{$Grey58}%K{$Grey19} %D{%x} %f%k'
 
 # Primary prompt
-PROMPT='$DeepSkyBlue2%~$(git_prompt_info) $MediumPurple1%(!.#.»)%{$reset_color%} '
+PROMPT='%F{$DeepSkyBlue2}%~$(git_prompt_info) %F{$MediumPurple1}%(!.#.»)%f '
 
 # Right prompt
-RPROMPT='${Grey}${SSH_TTY:+[%n@%m]}[%D{%X}][%D{%x}]%{$reset_color%}'
+RPROMPT="${conda_env_block}${hostname_block}${time_block}${date_block}"
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="$DeepSkyBlue2($SeaGreen3"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$DeepSkyBlue2)%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue2}(%F{$SeaGreen3}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%F{$DeepSkyBlue2})%f"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="$Orange1*"
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{$Orange1}*"
 
 # Displays the exec time of the last command if set threshold was exceeded
 cmd_exec_time() {
