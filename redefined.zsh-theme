@@ -7,17 +7,17 @@
 #
 
 # Colour vars
+eval Grey='$FG[008]'
 eval DeepSkyBlue2='$FG[031]'
 eval SeaGreen3='$FG[078]'
 eval MediumPurple1='$FG[141]'
 eval Orange1='$FG[214]'
-eval Grey23='$FG[237]'
 
 # Primary prompt
 PROMPT='$DeepSkyBlue2%~$(git_prompt_info) $MediumPurple1%(!.#.»)%{$reset_color%} '
 
 # Right prompt
-RPROMPT='$Grey23%n@%m%{$reset_color%}'
+RPROMPT='${Grey}${SSH_TTY:+[%n@%m]}[%D{%X}][%D{%x}]%{$reset_color%}'
 
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="$DeepSkyBlue2($SeaGreen3"
