@@ -3,15 +3,27 @@ My macOS environment, profiles, setup, and various dotfiles
 
 ## Getting Started
 
+This repository could be installed by running `install.sh` using either `curl` or `wget`. If you are having trouble with the installer, substitute `sh` with `bash`.
+
+### via curl
+
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/install.sh)"
+```
+
+### via wget
+
+```shell
+sh -c "$(wget -O-  https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/install.sh)"
+```
+
+## Manual Installation
+
 Start by cloning this repository to your home directory:
 
 ```shell
 git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
 ```
-
-To set up a file for use, link it using `ln -s` to the target directory. This will allow future updates to be easily installed with `git pull`.
-
-## Manual Installation
 
 ### Programs
 
@@ -38,6 +50,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 For more information on installation, see [repository](https://github.com/robbyrussell/oh-my-zsh).
 
 ### Dotfiles
+
+To set up a file for use, link it using `ln -s` to the target directory. This will allow future updates to be easily installed with `git pull`.
 
 **.aliases** can be installed with a symbolic link to your home directory:
 
