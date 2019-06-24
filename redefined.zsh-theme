@@ -29,6 +29,7 @@ PROMPT='%F{$DeepSkyBlue2}%~$(git_prompt_info) %F{$MediumPurple1}%(!.#.»)%f '
 
 # Right prompt
 RPROMPT="${conda_env_block}${hostname_block}${time_block}${date_block}"
+ZLE_RPROMPT_INDENT=-1
 
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue2}(%F{$SeaGreen3}"
