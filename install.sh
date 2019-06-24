@@ -7,164 +7,207 @@
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
-
-echo "Starting install..."
-
-# -- Install Programs --
-programs=()
-
-# Install dotfiles.git
-if [ ! -d ~/.dotfiles ]; then
-    echo "Installing dotfiles.git..."
-    git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
-    programs+="dotfiles.git "
-else # Update repo
-    sh -c "cd ~/.dotfiles && git pull"
-fi
-
-# Install Homebrew
-if [ ! $(command -v brew) ]; then
-    if [ $(uname) == "Darwin" ] && [ $(command -v curl) ]; then
-        echo "Installing Homebrew..."
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        programs+="Homebrew "
-    else
-        echo "Warning: Homebrew not installed"
+# -- Install programs --
+# Dotfiles
+install_dotfiles() {
+    if [ ! -d ~/.dotfiles ]; then
+        echo "Installing dotfiles.git..."
+        git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
+        programs+="Dotfiles "
+    else # Update repo
+        sh -c "cd ~/.dotfiles && git pull --rebase"
     fi
-fi
+}
 
-# Install Oh My Zsh
-if [ ! -d ~/.oh-my-zsh ]; then
-    echo "Installing Oh My Zsh..."
-    if [ $(command -v curl) ]; then
-        sh -c "$(echo "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | sed "s/exec zsh -l//")"
-        programs+="Oh-My-Zsh "
-    elif [ $(command -v wget) ]; then
-        sh -c "$(echo "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | sed "s/exec zsh -l//")"
-        programs+="Oh-My-Zsh "
-    else
-        echo 'Warning: Oh-My-Zsh not installed'
+# Homebrew
+install_homebrew() {
+    if [ ! $(command -v brew) ]; then
+        if [ $(uname) == "Darwin" ] && [ $(command -v curl) ]; then
+            echo "Installing Homebrew..."
+            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            programs+="Homebrew "
+        else
+            echo "Warning: Homebrew not installed"
+        fi
     fi
-fi
+}
 
-# Install .vim
-if [ ! -d ~/.vim ]; then
-    echo "Installing .vim..."
-    mkdir ~/.vim
-    mkdir ~/.vim/colors
-    mkdir ~/.vim/pack
-    mkdir ~/.vim/pack/plugins
-    mkdir ~/.vim/swap
-    programs+=".vim "
-fi
+# Oh My Zsh
+install_oh_my_zsh() {
+    if [ ! -d ~/.oh-my-zsh ]; then
+        echo "Installing Oh My Zsh..."
+        if [ $(command -v curl) ]; then
+            sh -c "$(echo "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | sed 's/exec zsh -l//')"
+            programs+="Oh-My-Zsh "
+        elif [ $(command -v wget) ]; then
+            sh -c "$(echo "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" | sed 's/exec zsh -l//')"
+            programs+="Oh-My-Zsh "
+        else
+            echo "Warning: Oh-My-Zsh not installed"
+        fi
+    fi
+}
 
 
-# -- Set-up plugins --
-plugins=()
-
+# -- Set-up programs --
 # Vim
-# jellybeans.vim
-if [ ! -f ~/.vim/colors/jellybeans.vim ]; then
-    curl -o ~/.vim/colors/jellybeans.vim https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
-    plugins+="jellybeans.vim "
-fi
+setup_vim() {
+    if [ ! -d ~/.vim ]; then
+        echo "Setting up .vim..."
+        mkdir ~/.vim
+        mkdir ~/.vim/colors
+        mkdir ~/.vim/pack
+        mkdir ~/.vim/pack/plugins
+        mkdir ~/.vim/swap
+        setup+=".vim "
+    fi
 
-# lightline.vim
-if [ ! -d ~/.vim/pack/plugins/start/lightline.vim ]; then
-    git clone https://github.com/itchyny/lightline.vim.git ~/.vim/pack/plugins/start/lightline.vim
-    plugins+="lightline.vim "
-fi
+    # jellybeans.vim
+    if [ ! -f ~/.vim/colors/jellybeans.vim ]; then
+        curl -o ~/.vim/colors/jellybeans.vim https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
+        plugins+="jellybeans.vim "
+    fi
+
+    # lightline.vim
+    if [ ! -d ~/.vim/pack/plugins/start/lightline.vim ]; then
+        git clone https://github.com/itchyny/lightline.vim.git ~/.vim/pack/plugins/start/lightline.vim
+        plugins+="lightline.vim "
+    fi
+}
 
 # Zsh
-zsh_plugins="(git zsh-autosuggestions zsh-syntax-highlighting)"
-
-# zsh-autosuggestions
-if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] && [ $(grep "zsh-autosuggestions" ~/.zshrc | wc -l) -eq 0 ]; then
-   git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-   plugins+="zsh-autosuggestions "
-fi
-
-# zsh-syntax-highlighting
-if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ] && [ $(grep "zsh-syntax-highlighting" ~/.zshrc | wc -l) -eq 0 ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-    plugins+="zsh-syntax-highlighting "
-fi
-
-# Add to ~/.zshrc
-if [ $(grep 'plugins=(' ~/.zshrc | wc -l) -gt 0 ]; then
-    if [ $(uname) == "Darwin" ]; then
-        sed -i '' "s/^plugins=(.*)$/plugins=$zsh_plugins/" ~/.zshrc
-    elif [ $(uname) == "Linux" ]; then
-        sed -i "s/^plugins=(.*)$/plugins=$zsh_plugins/" ~/.zshrc
+setup_zsh() {
+    # zsh-autosuggestions
+    if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        plugins+="zsh-autosuggestions "
     fi
-else
-    echo "plugins=$zsh_plugins" >> ~/.zshrc
-fi
+
+    # zsh-syntax-highlighting
+    if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        plugins+="zsh-syntax-highlighting "
+    fi
+
+    # Add to ~/.zshrc
+    if [ $(grep "plugins=(" ~/.zshrc | wc -l) -gt 0 ]; then
+        if [ $(uname) == "Darwin" ]; then
+            sed -i "" "s/^plugins=(.*)$/plugins=$zsh_plugins/" ~/.zshrc
+        elif [ $(uname) == "Linux" ]; then
+            sed -i "s/^plugins=(.*)$/plugins=$zsh_plugins/" ~/.zshrc
+        fi
+    else
+        echo "plugins=$zsh_plugins" >> ~/.zshrc
+    fi
+}
 
 
-# -- Link Dotfiles --
-linked=()
-
+# -- Link dotfiles --
 # Symlinks to home directory
-home_dotfiles=(.aliases .bash_profile .exports .functions .tmux.conf .vimrc .zprofile)
-for dotfile in ${home_dotfiles[@]}; do
-    if [ -f ~/$dotfile ] && [ ! -h ~/$dotfile ]; then
-        mv ~/$dotfile ~/$dotfile.old
-    fi
+link_to_home() {
+    for dotfile in ${home_dotfiles[@]}; do
+        if [ -f ~/$dotfile ] && [ ! -h ~/$dotfile ]; then
+            mv ~/$dotfile ~/$dotfile.old
+        fi
 
-    if [ ! -h ~/$dotfile ]; then
-        ln -s ~/.dotfiles/$dotfile ~/
-        linked+="$dotfile "
-    fi
-done
+        if [ ! -h ~/$dotfile ]; then
+            ln -s ~/.dotfiles/$dotfile ~/
+            linked+="$dotfile "
+        fi
+    done
+}
 
 # Symlinks to elsewhere
-if [ ! -h ~/.oh-my-zsh/custom/themes/redefined.zsh-theme ]; then
-    ln -sf ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
-    linked+="redefined.zsh-theme "
-fi
-
-# Add to ~/.zshrc
-if [ $(grep 'ZSH_THEME="*"' ~/.zshrc | wc -l) -gt 0 ]; then
-    if [ $(uname) == "Darwin" ]; then
-        sed -i '' 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' ~/.zshrc
-    elif [ $(uname) == "Linux" ]; then
-        sed -i 's/ZSH_THEME=".*"/ZSH_THEME="refined"/' ~/.zshrc
+link_zsh_theme() {
+    # redefined.zsh-theme
+    if [ ! -h ~/.oh-my-zsh/custom/themes/redefined.zsh-theme ]; then
+        ln -sf ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
+        linked+="redefined.zsh-theme "
     fi
-else
-    [ $(uname) == "Darwin" ] && echo 'ZSH_THEME="redefined"' >> ~/.zshrc
-    [ $(uname) == "Linux" ] && echo 'ZSH_THEME="refined"' >> ~/.zshrc
-fi
+
+    # Add to ~/.zshrc
+    if [ $(grep 'ZSH_THEME="*"' ~/.zshrc | wc -l) -gt 0 ]; then
+        if [ $(uname) == "Darwin" ]; then
+            sed -i "" 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' ~/.zshrc
+        elif [ $(uname) == "Linux" ]; then
+            sed -i 's/ZSH_THEME=".*"/ZSH_THEME="refined"/' ~/.zshrc
+        fi
+    else
+        [ $(uname) == "Darwin" ] && echo 'ZSH_THEME="redefined"' >> ~/.zshrc
+        [ $(uname) == "Linux" ] && echo 'ZSH_THEME="refined"' >> ~/.zshrc
+    fi
+}
 
 
 # -- Installation report --
-if [ ${!programs[@]} ] || [ ${!linked[@]} ]; then
+installation_report() {
+    if [ ${!linked[@]} ] || [ ${!plugins[@]} ] || [ ${!programs[@]} ] || [ ${!setup[@]} ]; then
+        echo "-------------------------"
+        echo "-- Installation report --"
+        echo "-------------------------"
+    fi
+
+    # Print installed programs
+    [ ${!programs[@]} ] && echo "Programs:"
+    for i in $programs; do
+        echo "- $i"
+    done
+
+    # Print set-up program directories
+    [ ${!setup[@]} ] && echo "Directories:"
+    for i in $setup; do
+        echo "- $i"
+    done
+
+    # Print set-up plugins
+    [ ${!plugins[@]} ] && echo "Plugins:"
+    for i in $plugins; do
+        echo "- $i"
+    done
+
+    # Print linked dotfiles
+    [ ${!linked[@]} ] && echo "Dotfiles:"
+    for i in $linked; do
+        echo "- $i"
+    done
+
     echo "-------------------------"
-    echo "-- Installation report --"
-    echo "-------------------------"
-fi
-
-# Print installed programs
-[ ${!programs[@]} ] && echo "Programs:"
-for i in $programs; do
-    echo "- $i"
-done
-
-# Print set-up plugins
-[ ${!plugins[@]} ] && echo "Plugins:"
-for i in $plugins; do
-    echo "- $i"
-done
+    echo "Done!"
+}
 
 
-# Print linked dotfiles
-[ ${!linked[@]} ] && echo "Dotfiles:"
-for i in $linked; do
-    echo "- $i"
-done
+# -- Run script --
+main() {
+    echo "Starting install..."
 
-echo "-------------------------"
-echo "Done!"
+    # Track installed
+    linked=()
+    plugins=()
+    programs=()
+    setup=()
 
-# Restart shell
-exec zsh -l
+    # Install options
+    home_dotfiles=(.aliases .bash_profile .exports .functions .tmux.conf .vimrc .zprofile)
+    zsh_plugins="(git zsh-autosuggestions zsh-syntax-highlighting)"
+
+    # Install programs
+    install_dotfiles
+    install_homebrew
+    install_oh_my_zsh
+
+    # Set-up programs
+    setup_vim
+    setup_zsh
+
+    # Link dotfiles
+    link_to_home
+    link_zsh_theme
+
+    # Installation report
+    installation_report
+
+    # Restart shell
+    exec zsh -l
+}
+
+main
