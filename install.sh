@@ -106,7 +106,7 @@ fi
 linked=()
 
 # Symlinks to home directory
-home_dotfiles=(.aliases .bash_profile .exports .functions .vimrc .zprofile)
+home_dotfiles=(.aliases .bash_profile .exports .functions .tmux.conf .vimrc .zprofile)
 for dotfile in ${home_dotfiles[@]}; do
     if [ -f ~/$dotfile ] && [ ! -h ~/$dotfile ]; then
         mv ~/$dotfile ~/$dotfile.old
