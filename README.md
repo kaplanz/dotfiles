@@ -108,3 +108,11 @@ ln -s ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
 ```
 
 Activate it by adding `ZSH_THEME="redefined"` to `~/.zshrc`
+
+## Uninstallation
+
+To uninstall, run the `uninstall.sh` script:
+
+```shell
+~/.dotfiles/uninstall.sh
+```
