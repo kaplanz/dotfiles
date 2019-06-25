@@ -50,6 +50,22 @@ install_oh_my_zsh() {
 
 
 # -- Set-up programs --
+# tmux
+setup_tmux() {
+    if [ ! -d ~/.tmux ]; then
+        echo "Setting up .tmux..."
+        mkdir ~/.tmux
+        mkdir ~/.tmux/themes
+        setup+=".tmux "
+    fi
+
+    # basic.tmux theme
+    if [ ! -f ~/.tmux/themes/basic.tmux ]; then
+        curl -o ~/.tmux/themes/basic.tmux https://raw.githubusercontent.com/jimeh/tmux-themepack/master/basic.tmuxtheme
+        plugins+="basic.tmux "
+    fi
+}
+
 # Vim
 setup_vim() {
     if [ ! -d ~/.vim ]; then
@@ -118,6 +134,14 @@ link_to_home() {
 }
 
 # Symlinks to elsewhere
+link_tmux_theme() {
+    # jellybeans.tmux
+    if [ ! -h ~/.tmux/themes/jellybeans.tmux ]; then
+        ln -sf ~/.dotfiles/jellybeans.tmux ~/.tmux/themes
+        linked+="jellybeans.tmux "
+    fi
+}
+
 link_zsh_theme() {
     # redefined.zsh-theme
     if [ ! -h ~/.oh-my-zsh/custom/themes/redefined.zsh-theme ]; then
@@ -196,11 +220,13 @@ main() {
     install_oh_my_zsh
 
     # Set-up programs
+    setup_tmux
     setup_vim
     setup_zsh
 
     # Link dotfiles
     link_to_home
+    link_tmux_theme
     link_zsh_theme
 
     # Installation report

@@ -95,6 +95,12 @@ ln -s ~/.dotfiles/.vimrc ~/
 ln -s ~/.dotfiles/.zprofile ~/
 ```
 
+**jellybeans.tmux** can be installed with a symbolic link to `~/.tmux/themes`:
+
+```shell
+ln -s ~/.dotfiles/jellybeans.tmux ~/.tmux/themes
+```
+
 **redefined.zsh-theme** can be installed with a symbolic link to `~/.oh-my-zsh/custom/themes`:
 
 ```shell
