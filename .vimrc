@@ -10,6 +10,10 @@
 "           Preferences
 " --------------------------------
 
+" -- Autocmds --
+" Remove trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+
 " -- Colours --
 colorscheme jellybeans
 syntax enable
@@ -22,6 +26,15 @@ set shiftround
 set shiftwidth=4
 set smarttab
 set tabstop=4
+
+" -- Mappings --
+" Brace autoclose
+inoremap {<CR> {<CR>}<Esc>ko<tab>
+inoremap { {}<Esc>i
+inoremap [ []<Esc>i
+inoremap ( ()<Esc>i
+" Buffer overview
+nnoremap gb :ls<CR>:b<Space>
 
 " -- Plugins --
 " lightline.vim
