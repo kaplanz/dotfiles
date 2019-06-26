@@ -3,18 +3,18 @@ My macOS environment, profiles, setup, and various dotfiles
 
 ## Getting Started
 
-This repository could be installed by running `install.sh` using either `curl` or `wget`. If you are having trouble with the installer, substitute `sh` with `bash`.
+This repository could be installed by running `install.sh` using either `curl` or `wget`.
 
 ### via curl
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
 ```
 
 ### via wget
 
 ```shell
-sh -c "$(wget -O-  https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/install.sh)"
+bash -c "$(wget -O-  https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
 ```
 
 ## Manual Installation
@@ -111,8 +111,8 @@ Activate it by adding `ZSH_THEME="redefined"` to `~/.zshrc`
 
 ## Uninstallation
 
-To uninstall, run the `uninstall.sh` script:
+To uninstall, run the `uninstall.sh` script in `tools` with:
 
 ```shell
-~/.dotfiles/uninstall.sh
+~/.dotfiles/tools/uninstall.sh
 ```
