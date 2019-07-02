@@ -56,3 +56,4 @@ set backspace=indent,eol,start
 set confirm
 set directory=~/.vim/swap
 set hidden
+set ttimeoutlen=0
