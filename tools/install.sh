@@ -74,6 +74,7 @@ setup_vim() {
         mkdir ~/.vim/colors
         mkdir ~/.vim/pack
         mkdir ~/.vim/pack/plugins
+        mkdir ~/.vim/plugin
         mkdir ~/.vim/swap
         setup+=".vim "
     fi
@@ -139,6 +140,14 @@ link_tmux_theme() {
     if [ ! -h ~/.tmux/themes/jellybeans.tmux ]; then
         ln -sf ~/.dotfiles/jellybeans.tmux ~/.tmux/themes
         linked+="jellybeans.tmux "
+    fi
+}
+
+link_vim_plugin() {
+    # autopair.vim
+    if [ ! -h ~/.vim/plugin/autopair.vim ]; then
+        ln -sf ~/.dotfiles/autopair.vim ~/.vim/plugin
+        linked+="autopair.vim "
     fi
 }
 
@@ -227,6 +236,7 @@ main() {
     # Link dotfiles
     link_to_home
     link_tmux_theme
+    link_vim_plugin
     link_zsh_theme
 
     # Installation report

@@ -28,11 +28,6 @@ set smarttab
 set tabstop=4
 
 " -- Mappings --
-" Brace autoclose
-inoremap {<CR> {<CR>}<Esc>ko<tab>
-inoremap { {}<Esc>i
-inoremap [ []<Esc>i
-inoremap ( ()<Esc>i
 " Buffer overview
 nnoremap gb :ls<CR>:b<Space>
 

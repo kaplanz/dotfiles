@@ -95,6 +95,12 @@ ln -s ~/.dotfiles/.vimrc ~/
 ln -s ~/.dotfiles/.zprofile ~/
 ```
 
+**autopair.vim** can be installed with a symbolic link to `~/.vim/plugin`:
+
+```shell
+ln -s ~/.dotfiles/autopair.vim ~/.vim/plugin
+```
+
 **jellybeans.tmux** can be installed with a symbolic link to `~/.tmux/themes`:
 
 ```shell
