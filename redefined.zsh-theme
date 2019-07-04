@@ -19,17 +19,16 @@ Grey42='242'
 Grey58='246'
 
 # Prompt blocks
-conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$Grey19}%K{$DarkOliveGreen3} $CONDA_DEFAULT_ENV %f%k"}'
-hostname_block='${SSH_TTY:+"%F{$Grey19}%K{$LightSlateGrey} %n@%m %f%k"}'
-time_block='%F{$Grey42}%K{$Grey7} %D{%X} %f%k'
-date_block='%F{$Grey58}%K{$Grey19} %D{%x} %f%k'
+conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$Grey19}%K{$DarkOliveGreen3} $CONDA_DEFAULT_ENV "}'
+hostname_block='${SSH_TTY:+"%F{$Grey19}%K{$LightSlateGrey} %n@%m "}'
+time_block='%F{$Grey42}%K{$Grey7} %D{%X} '
+date_block='%F{$Grey58}%K{$Grey19} %D{%Y-%m-%d}' # Use ZLE_RPROMPT_INDENT as final whitespace
 
 # Primary prompt
-PROMPT='%F{$DeepSkyBlue2}%~$(git_prompt_info) %F{$MediumPurple1}%(!.#.»)%f '
+PROMPT='%k%F{$DeepSkyBlue2}%~$(git_prompt_info) %F{$MediumPurple1}%(!.#.»)%f '
 
 # Right prompt
-RPROMPT="${conda_env_block}${hostname_block}${time_block}${date_block}"
-ZLE_RPROMPT_INDENT=-1
+RPROMPT="${conda_env_block}${hostname_block}${time_block}${date_block}%E"
 
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue2}(%F{$SeaGreen3}"
