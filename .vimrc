@@ -30,6 +30,8 @@ set tabstop=4
 " -- Mappings --
 " Buffer overview
 nnoremap gb :ls<CR>:b<Space>
+" Write file on ZW
+nnoremap ZW :w<CR>
 
 " -- Plugins --
 " lightline.vim
