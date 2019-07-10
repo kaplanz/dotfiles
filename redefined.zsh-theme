@@ -19,16 +19,16 @@ Grey42='242'
 Grey58='246'
 
 # Prompt blocks
-conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$Grey19}%K{$DarkOliveGreen3} $CONDA_DEFAULT_ENV "}'
-hostname_block='${SSH_TTY:+"%F{$Grey19}%K{$LightSlateGrey} %n@%m "}'
-time_block='%F{$Grey42}%K{$Grey7} %D{%X} '
-date_block='%F{$Grey58}%K{$Grey19} %D{%Y-%m-%d}' # Use ZLE_RPROMPT_INDENT as final whitespace
+command_time_block='${command_time:+"%F{$Grey42}%K{$Grey7} $command_time %f%k"}'
+conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$DarkOliveGreen3}%K{$Grey7} $CONDA_DEFAULT_ENV "}'
+hostname_block='${SSH_TTY:+"%F{$LightSlateGrey}%K{$Grey7} %n@%m "}'
+time_block='%F{$Grey58}%K{$Grey19} %D{%X}' # Use ZLE_RPROMPT_INDENT as final whitespace
 
 # Primary prompt
 PROMPT='%k%F{$DeepSkyBlue2}%~$(git_prompt_info) %F{$MediumPurple1}%(!.#.»)%f '
 
 # Right prompt
-RPROMPT="${conda_env_block}${hostname_block}${time_block}${date_block}%E"
+RPROMPT="${command_time_block}${conda_env_block}${hostname_block}${time_block}%E"
 
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue2}(%F{$SeaGreen3}"
@@ -36,23 +36,23 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%F{$DeepSkyBlue2})%f"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="%F{$Orange1}*"
 
-# Displays the exec time of the last command if set threshold was exceeded
-cmd_exec_time() {
-    local stop=`date +%s`
-    local start=${cmd_timestamp:-$stop}
+# Calculate command execution time
+get_command_time() {
+    local stop=$(ruby -e 'puts Time.now.to_f')
+    local start=${timestamp:-$stop}
     let local elapsed=$stop-$start
-    [ $elapsed -gt 5 ] && print -P "%F{yellow}${elapsed}s%f"
+    (( $elapsed > 0 )) && printf "%.2fs" $elapsed
 }
 
-# Get the initial timestamp for cmd_exec_time
+# Get the initial command timestamp
 preexec() {
-    cmd_timestamp=`date +%s`
+    timestamp=$(ruby -e 'puts Time.now.to_f')
 }
 
-# Output information about exec time
+# Get the elapsed command execution time
 precmd() {
-    cmd_exec_time
-    unset cmd_timestamp # Reset cmd exec time
+    command_time=$(get_command_time)
+    unset timestamp # Reset timestamp
 }
 
 
