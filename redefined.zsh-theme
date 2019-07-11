@@ -6,6 +6,9 @@
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
+# Load zsh modules
+zmodload zsh/datetime
+
 # Colour vars
 DeepSkyBlue2='031'
 SeaGreen3='078'
@@ -38,7 +41,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%F{$Orange1}*"
 
 # Calculate command execution time
 get_command_time() {
-    local stop=$(ruby -e 'puts Time.now.to_f')
+    local stop=$EPOCHREALTIME
     local start=${timestamp:-$stop}
     let local elapsed=$stop-$start
     (( $elapsed > 0 )) && printf "%.2fs" $elapsed
@@ -46,7 +49,7 @@ get_command_time() {
 
 # Get the initial command timestamp
 preexec() {
-    timestamp=$(ruby -e 'puts Time.now.to_f')
+    timestamp=$EPOCHREALTIME
 }
 
 # Get the elapsed command execution time
