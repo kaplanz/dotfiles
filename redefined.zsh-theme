@@ -12,7 +12,6 @@ zmodload zsh/datetime
 # Colour vars
 DeepSkyBlue2='031'
 SeaGreen3='078'
-LightSlateGrey='103'
 DarkOliveGreen3='107'
 MediumPurple1='141'
 Orange1='214'
@@ -24,7 +23,7 @@ Grey58='246'
 # Prompt blocks
 command_time_block='${command_time:+"%F{$Grey42}%K{$Grey7} $command_time %f%k"}'
 conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$DarkOliveGreen3}%K{$Grey7} $CONDA_DEFAULT_ENV "}'
-hostname_block='${SSH_TTY:+"%F{$LightSlateGrey}%K{$Grey7} %n@%m "}'
+hostname_block='${SSH_TTY:+"%F{$DeepSkyBlue2}%K{$Grey7} %n@%m "}'
 time_block='%F{$Grey58}%K{$Grey19} %D{%X}' # Use ZLE_RPROMPT_INDENT as final whitespace
 
 # Primary prompt
