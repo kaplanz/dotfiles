@@ -17,22 +17,31 @@ function! AtPair()
     return l:pair == '()' || l:pair == '[]' || l:pair == '{}' ||
          \ l:pair == '<>' || l:pair == "''" || l:pair == '""'
 endfunction
+" Get current character under cursor
+function! CurrentChar()
+    return getline('.')[getpos('.')[2] - 2]
+endfunction
+" Get next character after cursor
+function! NextChar()
+    return getline('.')[getpos('.')[2] - 1]
+endfunction
 
 " -- Mappings --
 " Auto close pair
-inoremap <expr> ( col('.') == col('$') ? '()<Esc>i' : '('
-inoremap <expr> [ col('.') == col('$') ? '[]<Esc>i' : '['
-inoremap <expr> { col('.') == col('$') ? '{}<Esc>i' : '{'
-inoremap <expr> < col('.') == col('$') ? '<><Esc>i' : '<'
-inoremap <expr> ' col('.') == col('$') ? "''<Esc>i" :
-                \ getline('.')[getpos('.')[2] - 1] == "'" ? '<Right>' : "'"
-inoremap <expr> " col('.') == col('$') ? '""<Esc>hli' :
-                \ getline('.')[getpos('.')[2] - 1] == '"' ? '<Right>' : '"'
+inoremap <expr> ( NextChar() !~ '\w' ? '()<Esc>i' : '('
+inoremap <expr> [ NextChar() !~ '\w' ? '[]<Esc>i' : '['
+inoremap <expr> { NextChar() !~ '\w' ? '{}<Esc>i' : '{'
+inoremap <expr> < NextChar() !~ '\w' ? '<><Esc>i' : '<'
 " Auto skip over closing char
-inoremap <expr> ) getline('.')[getpos('.')[2] - 1] == ')' ? '<Right>' : ')'
-inoremap <expr> ] getline('.')[getpos('.')[2] - 1] == ']' ? '<Right>' : ']'
-inoremap <expr> } getline('.')[getpos('.')[2] - 1] == '}' ? '<Right>' : '}'
-inoremap <expr> > getline('.')[getpos('.')[2] - 1] == '>' ? '<Right>' : '>'
+inoremap <expr> ) NextChar() == ')' ? '<Right>' : ')'
+inoremap <expr> ] NextChar() == ']' ? '<Right>' : ']'
+inoremap <expr> } NextChar() == '}' ? '<Right>' : '}'
+inoremap <expr> > NextChar() == '>' ? '<Right>' : '>'
+" Properly handle quotes
+inoremap <expr> ' NextChar() == "'" ? '<Right>' :
+                \ CurrentChar() !~ '\w' && NextChar() !~ '\w' ? "''<Esc>i" : "'"
+inoremap <expr> " NextChar() == '"' ? '<Right>' :
+                \ CurrentChar() !~ '\w' && NextChar() !~ '\w' ? '""<Esc>i' : '"'
 " Auto delete closing pair
 inoremap <expr> <BS> AtPair() ? '<BS><Del>' : '<BS>'
 " Allow <CR> within pair
