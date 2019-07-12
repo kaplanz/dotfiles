@@ -15,7 +15,7 @@
 function! AtPair()
     let pair = getline('.')[getpos('.')[2] - 2:getpos('.')[2] - 1]
     return l:pair == '()' || l:pair == '[]' || l:pair == '{}' ||
-         \ l:pair == '<>' || l:pair == "''" || l:pair == '""'
+         \ l:pair == "''" || l:pair == '""'
 endfunction
 " Get current character under cursor
 function! CurrentChar()
@@ -31,12 +31,10 @@ endfunction
 inoremap <expr> ( NextChar() !~ '\w' ? '()<Esc>i' : '('
 inoremap <expr> [ NextChar() !~ '\w' ? '[]<Esc>i' : '['
 inoremap <expr> { NextChar() !~ '\w' ? '{}<Esc>i' : '{'
-inoremap <expr> < NextChar() !~ '\w' ? '<><Esc>i' : '<'
 " Auto skip over closing char
 inoremap <expr> ) NextChar() == ')' ? '<Right>' : ')'
 inoremap <expr> ] NextChar() == ']' ? '<Right>' : ']'
 inoremap <expr> } NextChar() == '}' ? '<Right>' : '}'
-inoremap <expr> > NextChar() == '>' ? '<Right>' : '>'
 " Properly handle quotes
 inoremap <expr> ' NextChar() == "'" ? '<Right>' :
                 \ CurrentChar() !~ '\w' && NextChar() !~ '\w' ? "''<Esc>i" : "'"
