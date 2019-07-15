@@ -38,6 +38,10 @@ nnoremap ZW :w<CR>
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ }
+" nerdtree
+let NERDTreeShowHidden = 1
+nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>N :NERDTree<CR>
 
 " -- Search --
 set hlsearch

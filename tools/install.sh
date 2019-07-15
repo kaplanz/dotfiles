@@ -90,6 +90,12 @@ setup_vim() {
         git clone https://github.com/itchyny/lightline.vim.git ~/.vim/pack/plugins/start/lightline.vim
         plugins+="lightline.vim "
     fi
+
+    # nerdtree
+    if [ ! -d ~/.vim/pack/plugins/start/nerdtree ]; then
+        git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/plugins/start/nerdtree
+        plugins+="nerdtree "
+    fi
 }
 
 # Zsh
