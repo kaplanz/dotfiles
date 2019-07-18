@@ -32,6 +32,8 @@ set tabstop=4
 nnoremap gb :ls<CR>:b<Space>
 " Write file on ZW
 nnoremap ZW :w<CR>
+" Clear last used search pattern
+nnoremap <silent> <Leader>/ :let @/ = ''<CR>
 
 " -- Plugins --
 " lightline.vim
