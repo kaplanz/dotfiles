@@ -21,14 +21,10 @@ install_dotfiles() {
 
 # Homebrew
 install_homebrew() {
-    if [ ! $(command -v brew) ]; then
-        if [ $(uname) == "Darwin" ] && [ $(command -v curl) ]; then
-            echo "Installing Homebrew..."
-            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-            programs+="Homebrew "
-        else
-            echo "Warning: Homebrew not installed"
-        fi
+    if [ ! $(command -v brew) ] && [ $(uname) == "Darwin" ]; then
+        echo "Installing Homebrew..."
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        programs+="Homebrew "
     fi
 }
 
@@ -50,6 +46,13 @@ install_oh_my_zsh() {
 
 
 # -- Set-up programs --
+# Homebrew
+setup_homebrew() {
+    if [ $(command -v brew) ] && ! brew bundle --file=~/.dotfiles/tools/Brewfile check; then
+        brew bundle --file=~/.dotfiles/tools/Brewfile
+    fi
+}
+
 # tmux
 setup_tmux() {
     if [ ! -d ~/.tmux ]; then
@@ -235,6 +238,7 @@ main() {
     install_oh_my_zsh
 
     # Set-up programs
+    setup_homebrew
     setup_tmux
     setup_vim
     setup_zsh

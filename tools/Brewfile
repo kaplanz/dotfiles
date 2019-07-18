@@ -1,0 +1,18 @@
+#
+#  Brewfile
+#  My Homebrew bundle.
+#
+#  Created by Zakhary Kaplan on 2019-07-18.
+#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
+#
+
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+brew "fd"
+brew "fzf"
+brew "htop"
+brew "tmux"
+brew "tree"
+brew "vim"
+brew "zsh"
