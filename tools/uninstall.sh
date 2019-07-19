@@ -53,7 +53,7 @@ main(){
     unlinked=()
 
     # Uninstall options
-    home_dotfiles=(.aliases .bash_profile .exports .functions .tmux.conf .vimrc .zprofile)
+    home_dotfiles=(.aliases .bash_profile .exports .functions .ignore .tmux.conf .vimrc .zprofile)
 
     # Unlink dotfiles
     unlink_from_home

@@ -229,7 +229,7 @@ main() {
     setup=()
 
     # Install options
-    home_dotfiles=(.aliases .bash_profile .exports .functions .tmux.conf .vimrc .zprofile)
+    home_dotfiles=(.aliases .bash_profile .exports .functions .ignore .tmux.conf .vimrc .zprofile)
     zsh_plugins="(git zsh-autosuggestions zsh-syntax-highlighting)"
 
     # Install programs

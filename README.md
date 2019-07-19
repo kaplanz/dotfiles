@@ -77,6 +77,12 @@ ln -s ~/.dotfiles/.exports ~/
 ln -s ~/.dotfiles/.functions ~/
 ```
 
+**.ignore** can be installed with a symbolic link to your home directory:
+
+```shell
+ln -s ~/.dotfiles/.ignore ~/
+```
+
 **.tmux.conf** can be installed with a symbolic link to your home directory:
 
 ```shell
