@@ -36,6 +36,9 @@ nnoremap ZW :w<CR>
 nnoremap <silent> <Leader>/ :let @/ = ''<CR>
 
 " -- Plugins --
+" fzf
+nnoremap <C-p> :FZF<CR>
+set runtimepath+=/usr/local/opt/fzf
 " lightline.vim
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
