@@ -15,7 +15,7 @@ alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
 
 # -- Shell --
 alias path='echo ${PATH//:/\\n}'
-alias reload='exec $SHELL -l'
+alias reload='clear && exec $SHELL -l'
 
 # -- tmux --
 alias t='tmux'
