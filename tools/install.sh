@@ -172,11 +172,10 @@ link_zsh_theme() {
         if [ $(uname) == "Darwin" ]; then
             sed -i "" 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' ~/.zshrc
         elif [ $(uname) == "Linux" ]; then
-            sed -i 's/ZSH_THEME=".*"/ZSH_THEME="refined"/' ~/.zshrc
+            sed -i 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' ~/.zshrc
         fi
     else
-        [ $(uname) == "Darwin" ] && echo 'ZSH_THEME="redefined"' >> ~/.zshrc
-        [ $(uname) == "Linux" ] && echo 'ZSH_THEME="refined"' >> ~/.zshrc
+        echo 'ZSH_THEME="redefined"' >> ~/.zshrc
     fi
 }
 
