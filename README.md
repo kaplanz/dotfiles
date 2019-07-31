@@ -3,7 +3,7 @@ My macOS environment, profiles, setup, and various dotfiles
 
 ## Getting Started
 
-This repository could be installed by running `install.sh` using either `curl` or `wget`.
+This repository could be installed by running [`install.sh`](tools/install.sh) using either `curl` or `wget`.
 
 ### via curl
 
@@ -25,7 +25,9 @@ Start by cloning this repository to your home directory:
 git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
 ```
 
-### Programs
+### Dependencies
+
+Some features of this repository have dependencies as listed in the [`Brewfile`](tools/Brewfile). Before installing, ensure `Homebrew` and `zsh` are installed.
 
 **Homebrew**:
 
@@ -35,95 +37,39 @@ git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
 
 For more information on installation, see [website](https://brew.sh).
 
-**Zsh**:
-
-```shell
-brew install zsh
-```
-
-**Oh My Zsh**:
-
-```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
-
-For more information on installation, see [repository](https://github.com/robbyrussell/oh-my-zsh).
-
 ### Dotfiles
 
-To set up a file for use, link it using `ln -s` to the target directory. This will allow future updates to be easily installed with `git pull`.
+To set up a file for use, create a symbolic link to it with `ln -s` to the target directory. This will allow future updates to be easily installed with `git pull`.
 
-**.aliases** can be installed with a symbolic link to your home directory:
+The following files should be installed to your home directory:
 
-```shell
-ln -s ~/.dotfiles/.aliases ~/
-```
+* .aliases
+* .bash_profile
+* .exports
+* .functions
+* .ignore
+* .tmux.conf
+* .vimrc
+* .zprofile
 
-**.bash_profile** can be installed with a symbolic link to your home directory:
+The following files must be installed to a specific directory:
 
-```shell
-ln -s ~/.dotfiles/.bash_profile ~/
-```
-
-**.exports** can be installed with a symbolic link to your home directory:
-
-```shell
-ln -s ~/.dotfiles/.exports ~/
-```
-
-**.functions** can be installed with a symbolic link to your home directory:
-
-```shell
-ln -s ~/.dotfiles/.functions ~/
-```
-
-**.ignore** can be installed with a symbolic link to your home directory:
-
-```shell
-ln -s ~/.dotfiles/.ignore ~/
-```
-
-**.tmux.conf** can be installed with a symbolic link to your home directory:
-
-```shell
-ln -s ~/.dotfiles/.tmux.conf ~/
-```
-
-**.vimrc** can be installed with a symbolic link to your home directory:
-
-```shell
-ln -s ~/.dotfiles/.vimrc ~/
-```
-
-**.zprofile** can be installed with a symbolic link to your home directory:
-
-```shell
-ln -s ~/.dotfiles/.zprofile ~/
-```
-
-**autopair.vim** can be installed with a symbolic link to `~/.vim/plugin`:
-
-```shell
-ln -s ~/.dotfiles/autopair.vim ~/.vim/plugin
-```
-
-**jellybeans.tmux** can be installed with a symbolic link to `~/.tmux/themes`:
-
-```shell
-ln -s ~/.dotfiles/jellybeans.tmux ~/.tmux/themes
-```
-
-**redefined.zsh-theme** can be installed with a symbolic link to `~/.oh-my-zsh/custom/themes`:
-
-```shell
-ln -s ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
-```
-
-Activate it by adding `ZSH_THEME="redefined"` to `~/.zshrc`
+* **autopair.vim** can be installed with a symbolic link to `~/.vim/plugin`:
+    ```shell
+    ln -s ~/.dotfiles/autopair.vim ~/.vim/plugin
+    ```
+* **jellybeans.tmux** can be installed with a symbolic link to `~/.tmux/themes`:
+    ```shell
+    ln -s ~/.dotfiles/jellybeans.tmux ~/.tmux/themes
+    ```
+* **redefined.zsh-theme** can be installed with a symbolic link to `~/.oh-my-zsh/custom/themes`, then activated by adding `ZSH_THEME="redefined"` to `~/.zshrc`:
+    ```shell
+    ln -s ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
+    ```
 
 ## Uninstallation
 
-To uninstall, run the `uninstall.sh` script in `tools` with:
+To uninstall, run the [`uninstall.sh`](tools/uninstall.sh) script with:
 
 ```shell
 ~/.dotfiles/tools/uninstall.sh
