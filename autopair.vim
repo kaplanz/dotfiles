@@ -28,9 +28,9 @@ endfunction
 
 " -- Mappings --
 " Auto close pair
-inoremap <expr> ( NextChar() !~ '\w' ? '()<Esc>i' : '('
-inoremap <expr> [ NextChar() !~ '\w' ? '[]<Esc>i' : '['
-inoremap <expr> { NextChar() !~ '\w' ? '{}<Esc>i' : '{'
+inoremap <expr> ( NextChar() !~ '\S\&[^)]' ? '()<Esc>i' : '('
+inoremap <expr> [ NextChar() !~ '\S\&[^]]' ? '[]<Esc>i' : '['
+inoremap <expr> { NextChar() !~ '\S\&[^}]' ? '{}<Esc>i' : '{'
 " Auto skip over closing char
 inoremap <expr> ) NextChar() == ')' ? '<Right>' : ')'
 inoremap <expr> ] NextChar() == ']' ? '<Right>' : ']'
