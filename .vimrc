@@ -36,6 +36,7 @@ nnoremap ZW :w<CR>
 nnoremap <silent> <Leader>/ :let @/ = ''<CR>
 
 " -- Plugins --
+filetype plugin on
 " fzf
 nnoremap <C-p> :FZF<CR>
 set runtimepath+=/usr/local/opt/fzf
