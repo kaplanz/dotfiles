@@ -15,3 +15,10 @@
 [ -f ~/.functions ] && source ~/.functions
 [ -f ~/.localrc ] && source ~/.localrc
 [ -f ~/.profile ] && source ~/.profile
+
+
+# --------------------------------
+#           Preferences
+# --------------------------------
+
+setopt noclobber
