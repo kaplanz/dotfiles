@@ -20,6 +20,10 @@ autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
 colorscheme jellybeans
 syntax enable
 
+" -- Folding --
+set foldmethod=indent
+set nofoldenable
+
 " -- Indentation --
 filetype indent on
 set autoindent
