@@ -13,6 +13,8 @@
 " -- Autocmds --
 " Remove trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
+" Override formatoptions
+autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
 
 " -- Colours --
 colorscheme jellybeans
