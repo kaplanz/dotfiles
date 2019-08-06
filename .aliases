@@ -19,8 +19,5 @@ alias reload='clear && exec $SHELL -l'
 
 # -- tmux --
 alias t='tmux'
-alias tas='tmux attach-session -t'
-alias tkss='tmux kill-session -t'
 alias tksv='tmux kill-server'
 alias tls='tmux list-sessions'
-alias tns='tmux new-session -s'
