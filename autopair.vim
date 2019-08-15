@@ -25,21 +25,25 @@ endfunction
 function! NextChar()
     return getline('.')[getpos('.')[2] - 1]
 endfunction
+" Check if closing pair should be added
+function! ShouldClose()
+    return NextChar() !~ '\S' || NextChar() =~ '[)]\|[]]\|[}]'
+endfunction
 
 " -- Mappings --
 " Auto close pair
-inoremap <expr> ( NextChar() !~ '\S\&[^)]' ? '()<Esc>i' : '('
-inoremap <expr> [ NextChar() !~ '\S\&[^]]' ? '[]<Esc>i' : '['
-inoremap <expr> { NextChar() !~ '\S\&[^}]' ? '{}<Esc>i' : '{'
+inoremap <expr> ( ShouldClose() ? '()<Esc>i' : '('
+inoremap <expr> [ ShouldClose() ? '[]<Esc>i' : '['
+inoremap <expr> { ShouldClose() ? '{}<Esc>i' : '{'
 " Auto skip over closing char
 inoremap <expr> ) NextChar() == ')' ? '<Right>' : ')'
 inoremap <expr> ] NextChar() == ']' ? '<Right>' : ']'
 inoremap <expr> } NextChar() == '}' ? '<Right>' : '}'
 " Properly handle quotes
 inoremap <expr> ' NextChar() == "'" ? '<Right>' :
-                \ CurrentChar() !~ '\w' && NextChar() !~ '\w' ? "''<Esc>i" : "'"
+                \ ShouldClose() ? "''<Esc>i" : "'"
 inoremap <expr> " NextChar() == '"' ? '<Right>' :
-                \ CurrentChar() !~ '\w' && NextChar() !~ '\w' ? '""<Esc>i' : '"'
+                \ ShouldClose() ? '""<Esc>i' : '"'
 " Auto delete closing pair
 inoremap <expr> <BS> AtPair() ? '<BS><Del>' : '<BS>'
 " Allow <CR> within pair
