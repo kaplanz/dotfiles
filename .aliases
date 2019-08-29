@@ -10,6 +10,9 @@
 #             Aliases
 # --------------------------------
 
+# -- Filesystem --
+alias tree2='tree -L 2'
+
 # -- git --
 alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
 
