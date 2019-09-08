@@ -12,6 +12,7 @@
 
 # -- Developer --
 function runc() { gcc $@ && ./a.out && rm a.out; }
+function runcpp() { g++ $@ && ./a.out && rm a.out; }
 function sourcecode() {
     local description="\[Description\]"
     [ ! $2 ] && echo -n "Comment prefix: " && read 2
