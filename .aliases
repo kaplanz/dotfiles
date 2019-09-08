@@ -11,6 +11,7 @@
 # --------------------------------
 
 # -- Filesystem --
+alias lh='ls -A'
 alias tree2='tree -L 2'
 
 # -- git --
