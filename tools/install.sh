@@ -105,6 +105,12 @@ setup_vim() {
         git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/plugins/start/nerdtree
         plugins+="nerdtree "
     fi
+
+    # unimpaired.vim
+    if [ ! -d ~/.vim/pack/plugins/start/unimpaired.vim ]; then
+        git clone https://github.com/tpope/vim-unimpaired.git ~/.vim/pack/plugins/start/unimpaired.vim
+        plugins+="unimpaired.vim "
+    fi
 }
 
 # Zsh
