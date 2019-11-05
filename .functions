@@ -28,7 +28,7 @@ function sourcecode() {
 
 # -- Filesystem --
 function finder() { find ${2:-.} -iname "*$1*"; }
-function findin() { grep -yErIn --color=always $1 ${2:-.}; }
+function fdin() { grep -yErIn --color=always $1 ${2:-.}; }
 function trash() { mv -f $@ ~/.Trash; }
 
 # -- tmux --
