@@ -13,12 +13,18 @@
 " -- Autocmds --
 " Remove trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
+" Replace tabs with spaces
+autocmd BufWritePre * retab
 " Override formatoptions
 autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
 
 " -- Colours --
 colorscheme jellybeans
 syntax enable
+
+" -- Cursor --
+set backspace=indent,eol,start
+set whichwrap+=<,>,[,]
 
 " -- Folding --
 set foldmethod=indent
@@ -75,8 +81,12 @@ set number
 set wildmenu
 
 " -- Various --
-set backspace=indent,eol,start
 set confirm
 set directory=~/.vim/swap
 set hidden
+set shell+=\ -l
 set ttimeoutlen=0
+
+" -- Window --
+set splitbelow
+set splitright
