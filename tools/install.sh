@@ -111,6 +111,12 @@ setup_vim() {
         git clone https://github.com/tpope/vim-unimpaired.git ~/.vim/pack/plugins/start/unimpaired.vim
         plugins+="unimpaired.vim "
     fi
+
+    # vim-multiple-cursors
+    if [ ! -d ~/.vim/pack/plugins/start/vim-multiple-cursors ]; then
+        git clone https://github.com/terryma/vim-multiple-cursors.git ~/.vim/pack/plugins/start/vim-multiple-cursors
+        plugins+="vim-multiple-cursors "
+    fi
 }
 
 # Zsh
