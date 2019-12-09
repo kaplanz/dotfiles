@@ -29,6 +29,11 @@ endfunction
 function! ShouldClose()
     return (NextChar() !~ '\S') || (NextChar() =~ '[)]\|[]]\|[}]')
 endfunction
+" Check if closing quote pair should be added
+function! ShouldCloseQuote()
+    return ((CurrentChar() !~ '\S') && (NextChar() !~ '\S')) ||
+         \ ((CurrentChar() !~ '\w') && (NextChar() =~ '[)]\|[]]\|[}])'))
+endfunction
 
 " -- Mappings --
 " Auto close pair
@@ -41,9 +46,9 @@ inoremap <expr> ] (NextChar() == ']') ? '<Right>' : ']'
 inoremap <expr> } (NextChar() == '}') ? '<Right>' : '}'
 " Properly handle quotes
 inoremap <expr> ' (NextChar() == "'") ? '<Right>' :
-                \ ShouldClose() ? "''<Esc>i" : "'"
+                \ ShouldCloseQuote() ? "''<Esc>i" : "'"
 inoremap <expr> " (NextChar() == '"') ? '<Right>' :
-                \ ShouldClose() ? '""<Esc>i' : '"'
+                \ ShouldCloseQuote() ? '""<Esc>i' : '"'
 " Auto delete closing pair
 inoremap <expr> <BS> AtPair() ? '<BS><Del>' : '<BS>'
 " Allow <CR> within pair
