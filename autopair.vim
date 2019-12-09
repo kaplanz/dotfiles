@@ -27,7 +27,7 @@ function! NextChar()
 endfunction
 " Check if closing pair should be added
 function! ShouldClose()
-    return NextChar() !~ '\S' || NextChar() =~ '[)]\|[]]\|[}]'
+    return (NextChar() !~ '\S') || (NextChar() =~ '[)]\|[]]\|[}]')
 endfunction
 
 " -- Mappings --
@@ -36,13 +36,13 @@ inoremap <expr> ( ShouldClose() ? '()<Esc>i' : '('
 inoremap <expr> [ ShouldClose() ? '[]<Esc>i' : '['
 inoremap <expr> { ShouldClose() ? '{}<Esc>i' : '{'
 " Auto skip over closing char
-inoremap <expr> ) NextChar() == ')' ? '<Right>' : ')'
-inoremap <expr> ] NextChar() == ']' ? '<Right>' : ']'
-inoremap <expr> } NextChar() == '}' ? '<Right>' : '}'
+inoremap <expr> ) (NextChar() == ')') ? '<Right>' : ')'
+inoremap <expr> ] (NextChar() == ']') ? '<Right>' : ']'
+inoremap <expr> } (NextChar() == '}') ? '<Right>' : '}'
 " Properly handle quotes
-inoremap <expr> ' NextChar() == "'" ? '<Right>' :
+inoremap <expr> ' (NextChar() == "'") ? '<Right>' :
                 \ ShouldClose() ? "''<Esc>i" : "'"
-inoremap <expr> " NextChar() == '"' ? '<Right>' :
+inoremap <expr> " (NextChar() == '"') ? '<Right>' :
                 \ ShouldClose() ? '""<Esc>i' : '"'
 " Auto delete closing pair
 inoremap <expr> <BS> AtPair() ? '<BS><Del>' : '<BS>'
