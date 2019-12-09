@@ -67,6 +67,12 @@ setup_tmux() {
         curl -o ~/.tmux/themes/basic.tmux https://raw.githubusercontent.com/jimeh/tmux-themepack/master/basic.tmuxtheme
         plugins+="basic.tmux "
     fi
+
+    # tmux plugin manager (tpm)
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        plugins+="tpm "
+    fi
 }
 
 # Vim
