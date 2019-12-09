@@ -15,7 +15,12 @@ install_dotfiles() {
         git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
         programs+="Dotfiles "
     else # Update repo
-        sh -c "cd ~/.dotfiles && git pull --rebase"
+        ( # Run in subshell
+            cd ~/.dotfiles
+            [[ -z $(git status -s) ]] || { git stash push --all && REPO_IS_DIRTY=1; }
+            git pull --rebase
+            [[ $REPO_IS_DIRTY ]] && git stash pop
+        )
     fi
 }
 
