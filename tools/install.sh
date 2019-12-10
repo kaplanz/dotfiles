@@ -123,6 +123,12 @@ setup_vim() {
         plugins+="unimpaired.vim "
     fi
 
+    # vim-mucomplete
+    if [ ! -d ~/.vim/pack/plugins/start/mucomplete.vim ]; then
+        git clone https://github.com/lifepillar/vim-mucomplete.git ~/.vim/pack/plugins/start/mucomplete.vim
+        plugins+="vim-mucomplete "
+    fi
+
     # vim-multiple-cursors
     if [ ! -d ~/.vim/pack/plugins/start/vim-multiple-cursors ]; then
         git clone https://github.com/terryma/vim-multiple-cursors.git ~/.vim/pack/plugins/start/vim-multiple-cursors

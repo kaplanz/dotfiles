@@ -65,6 +65,13 @@ let g:NERDSpaceDelims = 1
 let NERDTreeShowHidden = 1
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
+" vim-mucomplete
+let g:mucomplete#enable_auto_at_startup = 1
+nnoremap <silent> <Leader>m :MUcompleteAutoToggle<CR>
+set completeopt-=preview
+set completeopt+=menuone,noselect
+set shortmess+=c " shut off completion messages
+set belloff+=complete,ctrlg
 
 " -- Search --
 set hlsearch
