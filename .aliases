@@ -12,7 +12,9 @@
 
 # -- Filesystem --
 alias lh='ls -A'
-alias tree2='tree -L 2'
+for i in {1..9}; do
+    alias tree$i="tree -L $i"
+done
 
 # -- git --
 alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
