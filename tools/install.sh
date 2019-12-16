@@ -86,6 +86,12 @@ setup_vim() {
         setup+=".vim "
     fi
 
+    # fugitive.vim
+    if [ ! -d ~/.vim/pack/plugins/start/fugitive.vim ]; then
+            git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/plugins/start/fugitive.vim
+            plugins+="fugitive.vim "
+    fi
+
     # jellybeans.vim
     if [ ! -f ~/.vim/colors/jellybeans.vim ]; then
         curl -o ~/.vim/colors/jellybeans.vim https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
