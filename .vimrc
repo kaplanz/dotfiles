@@ -40,8 +40,12 @@ set smarttab
 set tabstop=4
 
 " -- Mappings --
+" Set mapleader
+let mapleader = ','
 " Buffer overview
 nnoremap gb :ls<CR>:b<Space>
+" Disable Ex mode
+nnoremap Q <Nop>
 " Write to file
 nnoremap <Leader>s :w<CR>
 " Clear last used search pattern
