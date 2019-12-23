@@ -17,13 +17,14 @@ function sourcecode() {
     local description="\[Description\]"
     [ ! $2 ] && echo -n "Comment prefix: " && read 2
     [ ! $3 ] && echo -n "Description: " && read 3
+    mkdir -p $(dirname $1)
     cat $CODE_TEMPLATE |
-        sed "s/template.txt/${1:-template.txt}/" |
+        sed "s/template.txt/$(basename ${1:-template.txt})/" |
         sed "s|//|${2:-//}|" |
         sed "s/$description/${3:-$description}/" |
         sed "s/2019-01-01/$(date +%F)/" |
         sed "s/2019/$(date +%Y)/" > $1
-    vim $1
+    cat $1
 }
 
 # -- Filesystem --
