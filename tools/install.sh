@@ -112,6 +112,12 @@ setup_vim() {
         plugins+="nerdtree "
     fi
 
+    # syntastic
+    if [ ! -d ~/.vim/pack/plugins/start/syntastic ]; then
+        git clone https://github.com/vim-syntastic/syntastic.git ~/.vim/pack/plugins/start/syntastic
+        plugins+="syntastic "
+    fi
+
     # unimpaired.vim
     if [ ! -d ~/.vim/pack/plugins/start/unimpaired.vim ]; then
         git clone https://github.com/tpope/vim-unimpaired.git ~/.vim/pack/plugins/start/unimpaired.vim
