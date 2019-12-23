@@ -53,12 +53,12 @@ setup_homebrew() {
 
 # tmux
 setup_tmux() {
+    # Directory structure
     if [ ! -d ~/.tmux ]; then
         echo "Setting up .tmux..."
-        mkdir ~/.tmux
-        mkdir ~/.tmux/themes
         setup+=".tmux "
     fi
+    mkdir -p ~/.tmux/themes
 
     # basic.tmux theme
     if [ ! -f ~/.tmux/themes/basic.tmux ]; then
@@ -75,16 +75,12 @@ setup_tmux() {
 
 # Vim
 setup_vim() {
+    # Directory structure
     if [ ! -d ~/.vim ]; then
         echo "Setting up .vim..."
-        mkdir ~/.vim
-        mkdir ~/.vim/colors
-        mkdir ~/.vim/pack
-        mkdir ~/.vim/pack/plugins
-        mkdir ~/.vim/plugin
-        mkdir ~/.vim/swap
         setup+=".vim "
     fi
+    mkdir -p ~/.vim/{colors,pack/plugins,plugin,swap}
 
     # fugitive.vim
     if [ ! -d ~/.vim/pack/plugins/start/fugitive.vim ]; then
