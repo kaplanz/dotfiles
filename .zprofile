@@ -21,4 +21,6 @@
 #           Preferences
 # --------------------------------
 
+bindkey -v
+export KEYTIMEOUT=1
 setopt noclobber
