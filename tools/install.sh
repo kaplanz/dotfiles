@@ -82,6 +82,12 @@ setup_vim() {
     fi
     mkdir -p ~/.vim/{colors,pack/plugins,plugin,swap}
 
+    # commentary.vim
+    if [ ! -d ~/.vim/pack/plugins/start/commentary.vim ]; then
+            git clone https://github.com/tpope/vim-commentary.git ~/.vim/pack/plugins/start/commentary.vim
+            plugins+="commentary.vim "
+    fi
+
     # fugitive.vim
     if [ ! -d ~/.vim/pack/plugins/start/fugitive.vim ]; then
             git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/plugins/start/fugitive.vim
