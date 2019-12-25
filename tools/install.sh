@@ -112,6 +112,12 @@ setup_vim() {
         plugins+="nerdtree "
     fi
 
+    # surround.vim
+    if [ ! -d ~/.vim/pack/plugins/start/surround.vim ]; then
+            git clone https://github.com/tpope/vim-surround.git ~/.vim/pack/plugins/start/surround.vim
+            plugins+="surround.vim "
+    fi
+
     # syntastic
     if [ ! -d ~/.vim/pack/plugins/start/syntastic ]; then
         git clone https://github.com/vim-syntastic/syntastic.git ~/.vim/pack/plugins/start/syntastic
