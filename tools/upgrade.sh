@@ -1,15 +1,15 @@
 #!/bin/bash
 #
-#  update.sh
-#  Update script.
+#  upgrade.sh
+#  Upgrade script.
 #
 #  Created by Zakhary Kaplan on 2019-12-10.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
-# -- Update programs --
+# -- Upgrade programs --
 # Dotfiles
-update_dotfiles() {
+upgrade_dotfiles() {
     ( # Run in subshell
         cd ~/.dotfiles
         [[ -z $(git status -s) ]] || { git stash push --all && REPO_IS_DIRTY=1; }
@@ -19,15 +19,15 @@ update_dotfiles() {
 }
 
 # Homebrew
-update_homebrew() {
+upgrade_homebrew() {
     if [ $(command -v brew) ]; then
         echo "Updating Homebrew..."
-        brew update && brew upgrade && brew cleanup
+        brew upgrade && brew upgrade && brew cleanup
     fi
 }
 
 # Oh My Zsh
-update_oh_my_zsh() {
+upgrade_oh_my_zsh() {
     if [ -d ~/.oh-my-zsh ]; then
         echo "Updating Oh My Zsh..."
         env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
@@ -37,12 +37,12 @@ update_oh_my_zsh() {
 
 # -- Run script --
 main() {
-    echo "Starting update..."
+    echo "Starting upgrade..."
 
-    # Update programs
-    update_dotfiles
-    [ "$1" = "--all" ] && update_homebrew
-    [ "$1" = "--all" ] && update_oh_my_zsh
+    # Upgrade programs
+    upgrade_dotfiles
+    [ "$1" = "--all" ] && upgrade_homebrew
+    [ "$1" = "--all" ] && upgrade_oh_my_zsh
 
     # Run installer
     ~/.dotfiles/tools/install.sh
