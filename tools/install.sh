@@ -106,12 +106,6 @@ setup_vim() {
         plugins+="lightline.vim "
     fi
 
-    # nerdcommenter
-    if [ ! -d ~/.vim/pack/plugins/start/nerdcommenter ]; then
-        git clone https://github.com/scrooloose/nerdcommenter.git ~/.vim/pack/plugins/start/nerdcommenter
-        plugins+="nerdcommenter "
-    fi
-
     # nerdtree
     if [ ! -d ~/.vim/pack/plugins/start/nerdtree ]; then
         git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/plugins/start/nerdtree

@@ -60,11 +60,6 @@ set runtimepath+=/usr/local/opt/fzf
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ }
-" nerdcommenter
-let g:NERDAltDelims_c = 1
-let g:NERDAltDelims_python = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDSpaceDelims = 1
 " nerdtree
 let NERDTreeShowHidden = 1
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
