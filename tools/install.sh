@@ -112,6 +112,12 @@ setup_vim() {
         plugins+="nerdtree "
     fi
 
+    # repeat.vim
+    if [ ! -d ~/.vim/pack/plugins/start/repeat.vim ]; then
+            git clone https://github.com/tpope/vim-repeat.git ~/.vim/pack/plugins/start/repeat.vim
+            plugins+="repeat.vim "
+    fi
+
     # surround.vim
     if [ ! -d ~/.vim/pack/plugins/start/surround.vim ]; then
             git clone https://github.com/tpope/vim-surround.git ~/.vim/pack/plugins/start/surround.vim
