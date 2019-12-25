@@ -26,6 +26,9 @@ function sourcecode() {
         sed "s/2019/$(date +%Y)/" > $1
     cat $1
 }
+function upgrade_dotfiles() {
+    bash ~/.dotfiles/tools/upgrade.sh "$@"
+}
 
 # -- Filesystem --
 function finder() { find ${2:-.} -iname "*$1*"; }
