@@ -17,6 +17,11 @@ function! AtPair()
     return l:pair == '()' || l:pair == '[]' || l:pair == '{}' ||
          \ l:pair == "''" || l:pair == '""'
 endfunction
+" Check if cursor is within a string
+function! IsString()
+    let highlight_group = join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'))
+    return l:highlight_group =~ 'string'
+endfunction
 " Get current character under cursor
 function! CurrentChar()
     return getline('.')[getpos('.')[2] - 2]
@@ -31,8 +36,8 @@ function! ShouldClose()
 endfunction
 " Check if closing quote pair should be added
 function! ShouldCloseQuote()
-    return ((CurrentChar() !~ '\S') && (NextChar() !~ '\S')) ||
-         \ ((CurrentChar() !~ '\w') && (NextChar() =~ '[)]\|[]]\|[}])'))
+    return !IsString() && (((CurrentChar() !~ '\S') && (NextChar() !~ '\S')) ||
+                         \ ((CurrentChar() !~ '\w') && (NextChar() =~ '[)]\|[]]\|[}])')))
 endfunction
 
 " -- Mappings --
