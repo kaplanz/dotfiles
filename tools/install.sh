@@ -200,11 +200,17 @@ link_tmux_theme() {
     fi
 }
 
-link_vim_plugin() {
+link_vim_plugins() {
     # autopair.vim
     if [ ! -h ~/.vim/plugin/autopair.vim ]; then
         ln -sf ~/.dotfiles/autopair.vim ~/.vim/plugin
         linked+="autopair.vim "
+    fi
+
+    # vicarious.vim
+    if [ ! -h ~/.vim/plugin/vicarious.vim ]; then
+        ln -sf ~/.dotfiles/vicarious.vim ~/.vim/plugin
+        linked+="vicarious.vim "
     fi
 }
 
@@ -293,7 +299,7 @@ main() {
     # Link dotfiles
     link_to_home
     link_tmux_theme
-    link_vim_plugin
+    link_vim_plugins
     link_zsh_theme
 
     # Installation report

@@ -66,6 +66,10 @@ The following files must be installed to a specific directory:
     ```shell
     ln -s ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
     ```
+* **vicarious.vim** can be installed with a symbolic link to `~/.vim/plugin`:
+    ```shell
+    ln -s ~/.dotfiles/vicarious.vim ~/.vim/plugin
+    ```
 
 ## Uninstallation
 
