@@ -67,6 +67,7 @@ nnoremap <silent> <Leader>N :NERDTree<CR>
 " vim-mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 nnoremap <silent> <Leader>m :MUcompleteAutoToggle<CR>
+set complete-=t
 set completeopt-=preview
 set completeopt+=menuone,noselect
 set shortmess+=c " shut off completion messages
