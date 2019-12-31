@@ -17,44 +17,53 @@ function! AtPair()
     return l:pair == '()' || l:pair == '[]' || l:pair == '{}' ||
          \ l:pair == "''" || l:pair == '""'
 endfunction
+
 " Check if cursor is within a string
 function! IsString()
-    let highlight_group = join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'))
-    return l:highlight_group =~ 'string'
+    return join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')) =~ 'string'
 endfunction
+
 " Get current character under cursor
 function! CurrentChar()
     return getline('.')[getpos('.')[2] - 2]
 endfunction
+
 " Get next character after cursor
 function! NextChar()
     return getline('.')[getpos('.')[2] - 1]
 endfunction
+
 " Check if closing pair should be added
 function! ShouldClose()
     return (NextChar() !~ '\S') || (NextChar() =~ '[)]\|[]]\|[}]')
 endfunction
+
 " Check if closing quote pair should be added
 function! ShouldCloseQuote()
     return !IsString() && (((CurrentChar() !~ '\S') && (NextChar() !~ '\S')) ||
                          \ ((CurrentChar() !~ '\w') && (NextChar() =~ '[)]\|[]]\|[}])')))
 endfunction
 
+
 " -- Mappings --
 " Auto close pair
 inoremap <expr> ( ShouldClose() ? '()<Esc>i' : '('
 inoremap <expr> [ ShouldClose() ? '[]<Esc>i' : '['
 inoremap <expr> { ShouldClose() ? '{}<Esc>i' : '{'
+
 " Auto skip over closing char
 inoremap <expr> ) (NextChar() == ')') ? '<Right>' : ')'
 inoremap <expr> ] (NextChar() == ']') ? '<Right>' : ']'
 inoremap <expr> } (NextChar() == '}') ? '<Right>' : '}'
+
 " Properly handle quotes
 inoremap <expr> ' (NextChar() == "'") ? '<Right>' :
                 \ ShouldCloseQuote() ? "''<Esc>i" : "'"
 inoremap <expr> " (NextChar() == '"') ? '<Right>' :
                 \ ShouldCloseQuote() ? '""<Esc>i' : '"'
+
 " Auto delete closing pair
 inoremap <expr> <BS> AtPair() ? '<BS><Del>' : '<BS>'
+
 " Allow <CR> within pair
 inoremap <expr> <CR> AtPair() ? '<CR><Esc>ko' : '<CR>'
