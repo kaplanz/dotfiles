@@ -22,8 +22,8 @@ function sourcecode() {
         sed "s/template.txt/$(basename ${1:-template.txt})/" |
         sed "s|//|${2:-//}|" |
         sed "s/$description/${3:-$description}/" |
-        sed "s/2019-01-01/$(date +%F)/" |
-        sed "s/2019/$(date +%Y)/" > $1
+        sed "s/1970-01-01/$(date +%F)/" |
+        sed "s/1970/$(date +%Y)/" > $1
     cat $1
 }
 function upgrade_dotfiles() {
