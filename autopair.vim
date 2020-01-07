@@ -15,7 +15,7 @@
 function! AtPair()
     let pair = getline('.')[getpos('.')[2] - 2:getpos('.')[2] - 1]
     return l:pair == '()' || l:pair == '[]' || l:pair == '{}' ||
-         \ l:pair == "''" || l:pair == '""'
+         \ l:pair == "''" || l:pair == '""' || l:pair == '``'
 endfunction
 
 " Check if cursor is within a string
@@ -61,6 +61,8 @@ inoremap <expr> ' (NextChar() == "'") ? '<Right>' :
                 \ ShouldCloseQuote() ? "''<Esc>i" : "'"
 inoremap <expr> " (NextChar() == '"') ? '<Right>' :
                 \ ShouldCloseQuote() ? '""<Esc>i' : '"'
+inoremap <expr> ` (NextChar() == '`') ? '<Right>' :
+                \ ShouldCloseQuote() ? '``<Esc>i' : '`'
 
 " Auto delete closing pair
 inoremap <expr> <BS> AtPair() ? '<BS><Del>' : '<BS>'
