@@ -27,6 +27,7 @@ alias reload='clear && exec $SHELL -l'
 alias t='tmux'
 alias tksv='tmux kill-server'
 alias tls='tmux list-sessions'
+alias tv='tmux new-session "vim"'
 
 # -- Vim --
 alias v='vim'
