@@ -118,6 +118,12 @@ setup_vim() {
             plugins+="repeat.vim "
     fi
 
+    # sneak.vim
+    if [ ! -d ~/.vim/pack/plugins/start/sneak.vim ]; then
+            git clone https://github.com/justinmk/vim-sneak.git ~/.vim/pack/plugins/start/sneak.vim
+            plugins+="sneak.vim "
+    fi
+
     # surround.vim
     if [ ! -d ~/.vim/pack/plugins/start/surround.vim ]; then
             git clone https://github.com/tpope/vim-surround.git ~/.vim/pack/plugins/start/surround.vim
