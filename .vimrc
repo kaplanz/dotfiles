@@ -53,6 +53,9 @@ nnoremap <silent> <Leader>/ :let @/ = ''<CR>
 
 " -- Plugins --
 filetype plugin on
+" ale
+let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
+nnoremap <Leader>f :ALEFix<CR>
 " fzf
 nnoremap <C-p> :FZF<CR>
 set runtimepath+=/usr/local/opt/fzf

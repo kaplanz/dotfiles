@@ -82,6 +82,12 @@ setup_vim() {
     fi
     mkdir -p ~/.vim/{colors,pack/plugins,plugin,swap}
 
+    # ale
+    if [ ! -d ~/.vim/pack/plugins/start/ale ]; then
+            git clone https://github.com/dense-analysis/ale.git ~/.vim/pack/plugins/start/ale
+            plugins+="ale "
+    fi
+
     # commentary.vim
     if [ ! -d ~/.vim/pack/plugins/start/commentary.vim ]; then
             git clone https://github.com/tpope/vim-commentary.git ~/.vim/pack/plugins/start/commentary.vim
