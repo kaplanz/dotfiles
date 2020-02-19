@@ -44,6 +44,8 @@ set tabstop=4
 let mapleader = ','
 " Buffer overview
 nnoremap gb :ls<CR>:b<Space>
+" Mark overview
+nnoremap gm :marks<CR>:norm<Space>`
 " Disable Ex mode
 nnoremap Q <Nop>
 " Write to file
