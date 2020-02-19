@@ -88,6 +88,12 @@ setup_vim() {
             plugins+="ale "
     fi
 
+    # comfortable-motion.vim
+    if [ ! -d ~/.vim/pack/plugins/start/comfortable-motion.vim ]; then
+            git clone https://github.com/yuttie/comfortable-motion.vim.git ~/.vim/pack/plugins/start/comfortable-motion.vim
+            plugins+="comfortable-motion.vim "
+    fi
+
     # commentary.vim
     if [ ! -d ~/.vim/pack/plugins/start/commentary.vim ]; then
             git clone https://github.com/tpope/vim-commentary.git ~/.vim/pack/plugins/start/commentary.vim

@@ -56,6 +56,12 @@ filetype plugin on
 " ale
 let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 nnoremap <Leader>f :ALEFix<CR>
+" comfortable-motion.vim
+let g:comfortable_motion_no_default_key_mappings = 1
+nnoremap <silent> <C-d> :call comfortable_motion#flick(winheight(0) * 2)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(winheight(0) * -2)<CR>
+nnoremap <silent> <C-f> :call comfortable_motion#flick(winheight(0) * 4)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(winheight(0) * -4)<CR>
 " fzf
 nnoremap <C-p> :FZF<CR>
 set runtimepath+=/usr/local/opt/fzf
