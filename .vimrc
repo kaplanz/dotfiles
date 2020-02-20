@@ -24,6 +24,7 @@ syntax enable
 
 " -- Cursor --
 set backspace=indent,eol,start
+set cursorline
 set whichwrap+=<,>,[,]
 
 " -- Folding --
