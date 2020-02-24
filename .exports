@@ -10,6 +10,9 @@
 #             Exports
 # --------------------------------
 
+# -- Dotfiles --
+export DOTFILES="$HOME/.dotfiles"
+
 # -- Plugins --
 # fzf
 export FZF_DEFAULT_COMMAND='fd'
