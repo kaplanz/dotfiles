@@ -39,42 +39,16 @@ For more information on installation, see [website](https://brew.sh).
 
 ### Dotfiles
 
-To set up a file for use, create a symbolic link to it with `ln -s` to the target directory. This will allow future updates to be easily installed with `git pull`.
+The dotfiles are installed through symlinks to various directories. To use my configuration, setup  directories and link all dotfiles using the [`Makefile`](Makefile):
 
-The following files should be installed to your home directory:
-
-* .aliases
-* .bash_profile
-* .exports
-* .functions
-* .ignore
-* .tmux.conf
-* .vimrc
-* .zprofile
-
-The following files must be installed to a specific directory:
-
-* **autopair.vim** can be installed with a symbolic link to `~/.vim/plugin`:
-    ```shell
-    ln -s ~/.dotfiles/autopair.vim ~/.vim/plugin
-    ```
-* **jellybeans.tmux** can be installed with a symbolic link to `~/.tmux/themes`:
-    ```shell
-    ln -s ~/.dotfiles/jellybeans.tmux ~/.tmux/themes
-    ```
-* **redefined.zsh-theme** can be installed with a symbolic link to `~/.oh-my-zsh/custom/themes`, then activated by adding `ZSH_THEME="redefined"` to `~/.zshrc`:
-    ```shell
-    ln -s ~/.dotfiles/redefined.zsh-theme ~/.oh-my-zsh/custom/themes
-    ```
-* **vicarious.vim** can be installed with a symbolic link to `~/.vim/plugin`:
-    ```shell
-    ln -s ~/.dotfiles/vicarious.vim ~/.vim/plugin
-    ```
+```shell
+make --directory=~/.dotfiles
+```
 
 ## Uninstallation
 
-To uninstall, run the [`uninstall.sh`](tools/uninstall.sh) script with:
+To unlink all dotfiles, use the [`Makefile`](Makefile):
 
 ```shell
-~/.dotfiles/tools/uninstall.sh
+make --directory=~/.dotfiles uninstall
 ```
