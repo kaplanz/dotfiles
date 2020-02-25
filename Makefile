@@ -35,6 +35,7 @@ VIM_PLUGINS += camspiers/animate.vim
 VIM_PLUGINS += yuttie/comfortable-motion.vim
 VIM_PLUGINS += tpope/vim-commentary
 VIM_PLUGINS += tpope/vim-fugitive
+VIM_PLUGINS += camspiers/lens.vim
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += lifepillar/vim-mucomplete
 VIM_PLUGINS += scrooloose/nerdtree
