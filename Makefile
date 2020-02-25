@@ -31,6 +31,7 @@ TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
 VIM_COLOURS += https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
 VIM_PLUGINS += dense-analysis/ale
+VIM_PLUGINS += camspiers/animate.vim
 VIM_PLUGINS += yuttie/comfortable-motion.vim
 VIM_PLUGINS += tpope/vim-commentary
 VIM_PLUGINS += tpope/vim-fugitive
