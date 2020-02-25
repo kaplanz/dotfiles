@@ -12,6 +12,7 @@
 
 # -- Filesystem --
 alias lh='ls -A'
+alias scp='scp -r'
 alias tree='tree -C'
 for i in {1..9}; do
     alias tree$i="tree -L $i"
