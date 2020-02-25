@@ -7,9 +7,8 @@
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
-# -- Upgrade programs --
-# Dotfiles
-upgrade_dotfiles() {
+# Upgrade dotfiles repo
+upgrade_dotfiles_repo() {
     ( # Run in subshell
         cd ~/.dotfiles
         [[ -z $(git status -s) ]] || { git stash push --all && REPO_IS_DIRTY=1; }
@@ -21,7 +20,6 @@ upgrade_dotfiles() {
 # Homebrew
 upgrade_homebrew() {
     if [ $(command -v brew) ]; then
-        echo "Updating Homebrew..."
         brew upgrade && brew upgrade && brew cleanup
     fi
 }
@@ -29,23 +27,22 @@ upgrade_homebrew() {
 # Oh My Zsh
 upgrade_oh_my_zsh() {
     if [ -d ~/.oh-my-zsh ]; then
-        echo "Updating Oh My Zsh..."
         env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
     fi
 }
 
-
-# -- Run script --
+# Run script
 main() {
-    echo "Starting upgrade..."
-
     # Upgrade programs
-    upgrade_dotfiles
+    upgrade_dotfiles_repo
     [ "$1" = "--all" ] && upgrade_homebrew
     [ "$1" = "--all" ] && upgrade_oh_my_zsh
 
-    # Run installer
-    ~/.dotfiles/tools/install.sh
+    # Run Makefile
+    make --directory=~/.dotfiles
+
+    # Restart shell
+    exec zsh -l
 }
 
 main "$@"
