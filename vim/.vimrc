@@ -68,8 +68,6 @@ nnoremap <silent> <C-b> :call comfortable_motion#flick(winheight(0) * -4)<CR>
 " fzf
 nnoremap <C-p> :FZF<CR>
 set runtimepath+=/usr/local/opt/fzf
-" lens.vim
-let g:lens#disabled_filetypes = ['fzf', 'nerdtree']
 " lightline.vim
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
