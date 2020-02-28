@@ -12,10 +12,10 @@
 
 " Change cursor shape between NORMAL, INSERT, and REPLACE mode
 if $TERM_PROGRAM =~ "Apple_Terminal"
-    if exists('$TMUX') " not currently supported
-        let &t_EI = "\<Esc>Ptmux;\e[2 q\<Esc>\\"
-        let &t_SI = "\<Esc>Ptmux;\e[5 q\<Esc>\\"
-        let &t_SR = "\<Esc>Ptmux;\e[3 q\<Esc>\\"
+    if exists('$TMUX')
+        let &t_EI = "\ePtmux;\e\e[2 q\e\\"
+        let &t_SI = "\ePtmux;\e\e[5 q\e\\"
+        let &t_SR = "\ePtmux;\e\e[3 q\e\\"
     else
         let &t_EI = "\e[2 q" " block in NORMAL mode
         let &t_SI = "\e[5 q" " vertical bar in INSERT mode (blinking)
