@@ -17,6 +17,8 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * retab
 " Override formatoptions
 autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
+" Disable line numbers in terminal buffers
+autocmd TerminalOpen * set nonumber
 
 " -- Colours --
 colorscheme jellybeans
@@ -51,8 +53,12 @@ nnoremap gm :marks<CR>:norm<Space>`
 nnoremap Q <Nop>
 " Write to file
 nnoremap <Leader>s :w<CR>
+" Open a new terminal window
+nnoremap <silent> <Leader>t :terminal<CR>
 " Clear last used search pattern
 nnoremap <silent> <Leader>/ :let @/ = ''<CR>
+" Enter Terminal-Normal mode
+tnoremap <Esc><Esc> <C-W>N
 
 " -- Plugins --
 filetype plugin on
