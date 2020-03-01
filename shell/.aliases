@@ -11,6 +11,7 @@
 # --------------------------------
 
 # -- Filesystem --
+alias cp='cp -R'
 alias lh='ls -A'
 alias scp='scp -r'
 alias tree='tree -C'
