@@ -116,3 +116,15 @@ set ttimeoutlen=0
 " -- Window --
 set splitbelow
 set splitright
+
+
+" --------------------------------
+"             Sources
+" --------------------------------
+
+" 2nd user vimrc file
+try
+    source ~/.vim/vimrc
+catch
+    " file not found
+endtry
