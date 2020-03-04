@@ -9,6 +9,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
+brew "coreutils"
 brew "fd"
 brew "fzf"
 brew "htop"
