@@ -9,6 +9,11 @@
 # Load zsh modules
 zmodload zsh/datetime
 
+# Use jellybeans $LS_COLORS theme
+LS_COLORS="$(cat $DOTFILES/utils/jellybeans.ls-colors | tr '\n' ':')"
+# Take advantage of $LS_COLORS for completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
 # Colour vars
 DeepSkyBlue4='25'
 DeepSkyBlue3='31'
