@@ -27,7 +27,7 @@ function sourcecode() {
     cat $1
 }
 function upgrade_dotfiles() {
-    bash ~/.dotfiles/tools/upgrade.sh "$@"
+    bash "$DOTFILES/tools/upgrade.sh" "$@"
 }
 
 # -- Filesystem --

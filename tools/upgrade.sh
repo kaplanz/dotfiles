@@ -10,7 +10,7 @@
 # Upgrade dotfiles repo
 upgrade_dotfiles_repo() {
     ( # Run in subshell
-        cd ~/.dotfiles
+        cd $DOTFILES
         [[ -z $(git status -s) ]] || { git stash push --all && REPO_IS_DIRTY=1; }
         git pull --rebase
         [[ $REPO_IS_DIRTY ]] && git stash pop
@@ -39,7 +39,7 @@ main() {
     [ "$1" = "--all" ] && upgrade_oh_my_zsh
 
     # Run Makefile
-    make --directory=~/.dotfiles
+    make --directory=$DOTFILES
 
     # Restart shell
     exec zsh -l
