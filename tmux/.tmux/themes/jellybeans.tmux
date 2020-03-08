@@ -22,7 +22,7 @@ set -g mode-style fg=black,bg=colour110
 
 # -- Panes --
 set -g pane-border-style fg=colour239
-set -g pane-active-border-style fg=colour103
+set -g pane-active-border-style fg=colour110
 set -g display-panes-colour colour110
 set -g display-panes-active-colour colour167
 
