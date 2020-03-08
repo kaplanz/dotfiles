@@ -13,6 +13,9 @@
 # -- Dotfiles --
 export DOTFILES="$HOME/.dotfiles"
 
+# -- Shell --
+export EDITOR="$(command -v vim)"
+
 # -- Plugins --
 # fzf
 export FZF_DEFAULT_COMMAND='fd'
