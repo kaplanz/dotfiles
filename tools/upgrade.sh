@@ -10,16 +10,16 @@
 # Upgrade dotfiles repo
 upgrade_dotfiles_repo() {
     ( # Run in subshell
-        cd $DOTFILES
-        [[ -z $(git status -s) ]] || { git stash push --all && REPO_IS_DIRTY=1; }
+        cd "$DOTFILES"
+        [[ -z "$(git status -s)" ]] || { git stash push --all && REPO_IS_DIRTY=1; }
         git pull --rebase
-        [[ $REPO_IS_DIRTY ]] && git stash pop
+        [[ "$REPO_IS_DIRTY" ]] && git stash pop
     )
 }
 
 # Homebrew
 upgrade_homebrew() {
-    if [ $(command -v brew) ]; then
+    if [ "$(command -v brew)" ]; then
         brew upgrade && brew upgrade && brew cleanup
     fi
 }
@@ -27,7 +27,7 @@ upgrade_homebrew() {
 # Oh My Zsh
 upgrade_oh_my_zsh() {
     if [ -d ~/.oh-my-zsh ]; then
-        env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
+        env ZSH="$ZSH" sh "$ZSH/tools/upgrade.sh"
     fi
 }
 
@@ -39,7 +39,7 @@ main() {
     [ "$1" = "--all" ] && upgrade_oh_my_zsh
 
     # Run Makefile
-    make --directory=$DOTFILES
+    make --directory="$DOTFILES"
 
     # Restart shell
     exec zsh -l
