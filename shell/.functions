@@ -35,6 +35,15 @@ function finder() { find ${2:-.} -iname "*$1*"; }
 function fdin() { grep -yErIn --color=always $1 ${2:-.}; }
 function trash() { mv -f $@ ~/.Trash; }
 
+# -- Plugins --
+# fzf
+function _fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+function _fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
 # -- tmux --
 function tas() { tmux attach-session ${1:+"-t$1"}; }
 function tkss() { tmux kill-session ${1:+"-t$1"}; }
