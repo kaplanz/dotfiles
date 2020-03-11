@@ -46,7 +46,7 @@ set tabstop=4
 " Set mapleader
 let mapleader = ','
 " Buffer overview
-nnoremap gb :ls<CR>:b<Space>
+nnoremap gb :buffers<CR>:b<Space>
 " Mark overview
 nnoremap gm :marks<CR>:norm<Space>`
 " Register overview
