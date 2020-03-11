@@ -53,6 +53,8 @@ nnoremap gm :marks<CR>:norm<Space>`
 nnoremap gr :registers<CR>:norm<Space>"
 " Disable Ex mode
 nnoremap Q <Nop>
+" Reload .vimrc
+nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
 " Write to file
 nnoremap <Leader>s :w<CR>
 " Open a new terminal window
