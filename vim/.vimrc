@@ -82,12 +82,7 @@ set runtimepath+=/usr/local/opt/fzf,~/.fzf
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ }
-" nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeShowHidden = 1
-nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
-nnoremap <silent> <Leader>N :NERDTree<CR>
-" vim-mucomplete
+" mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 nnoremap <silent> <Leader>m :MUcompleteAutoToggle<CR>
 set complete-=t
@@ -95,6 +90,11 @@ set completeopt-=preview
 set completeopt+=menuone,noselect
 set shortmess+=c " shut off completion messages
 set belloff+=complete,ctrlg
+" nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden = 1
+nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>N :NERDTree<CR>
 
 " -- Search --
 set hlsearch
