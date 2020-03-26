@@ -24,6 +24,16 @@ autocmd TerminalOpen * set nonumber
 colorscheme jellybeans
 syntax enable
 
+" -- Completion --
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+set belloff+=complete,ctrlg
+set complete-=t
+set completeopt-=preview
+set completeopt+=menuone,noselect
+set shortmess+=c " shut off completion messages
+
 " -- Cursor --
 set backspace=indent,eol,start
 set cursorline
@@ -85,11 +95,6 @@ let g:lightline = {
 " mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 nnoremap <silent> <Leader>m :MUcompleteAutoToggle<CR>
-set complete-=t
-set completeopt-=preview
-set completeopt+=menuone,noselect
-set shortmess+=c " shut off completion messages
-set belloff+=complete,ctrlg
 " nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
