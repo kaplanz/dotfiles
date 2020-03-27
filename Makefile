@@ -143,7 +143,7 @@ $(VIM):
 	@bash -c "$(MKDIR) $(VIM)/{colors,ftplugin,pack/plugins/start,plugin,swap}"
 
 .PHONY: $(VIM_PLUGINS)
-$(VIM_PLUGINS): PLUGIN = $(VIM)/pack/plugins/start/$(patsubst vim-%,%.vim,$(notdir $@))
+$(VIM_PLUGINS): PLUGIN = $(VIM)/pack/plugins/start/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
 $(VIM_PLUGINS): $(VIM)
 	$(if $(wildcard $(PLUGIN)),,git clone https://github.com/$@.git $(PLUGIN))
 
