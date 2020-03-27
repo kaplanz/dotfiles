@@ -92,9 +92,6 @@ set runtimepath+=/usr/local/opt/fzf,~/.fzf
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ }
-" mucomplete
-let g:mucomplete#enable_auto_at_startup = 1
-nnoremap <silent> <Leader>m :MUcompleteAutoToggle<CR>
 " nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
