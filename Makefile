@@ -33,14 +33,17 @@ VIM_COLOURS += https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/
 VIM_PLUGINS += dense-analysis/ale
 VIM_PLUGINS += yuttie/comfortable-motion.vim
 VIM_PLUGINS += tpope/vim-commentary
+VIM_PLUGINS += Shougo/deoplete.nvim
 VIM_PLUGINS += tpope/vim-fugitive
 VIM_PLUGINS += junegunn/fzf.vim
+VIM_PLUGINS += roxma/vim-hug-neovim-rpc
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += scrooloose/nerdtree
 VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += justinmk/vim-sneak
 VIM_PLUGINS += tpope/vim-surround
 VIM_PLUGINS += tpope/vim-unimpaired
+VIM_PLUGINS += roxma/nvim-yarp
 
 # Zsh
 OH_MY_ZSH_PLUGINS += git
