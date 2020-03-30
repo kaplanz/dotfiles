@@ -23,9 +23,6 @@ colorscheme jellybeans
 syntax enable
 
 " -- Completion --
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 set belloff+=complete,ctrlg
 set complete-=t
 set completeopt-=preview

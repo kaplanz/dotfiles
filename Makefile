@@ -39,6 +39,7 @@ VIM_PLUGINS += junegunn/fzf.vim
 VIM_PLUGINS += roxma/vim-hug-neovim-rpc
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += scrooloose/nerdtree
+VIM_PLUGINS += zakharykaplan/vim-relatable
 VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += justinmk/vim-sneak
 VIM_PLUGINS += tpope/vim-surround
