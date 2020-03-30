@@ -17,8 +17,6 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * retab
 " Override formatoptions
 autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
-" Disable line numbers in terminal buffers
-autocmd TerminalOpen * set nonumber
 
 " -- Colours --
 colorscheme jellybeans
@@ -67,12 +65,8 @@ nnoremap Q <Nop>
 nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
 " Write to file
 nnoremap <Leader>s :w<CR>
-" Open a new terminal window
-nnoremap <silent> <Leader>t :terminal<CR>
 " Clear last used search pattern
 nnoremap <silent> <Leader>/ :let @/ = ''<CR>
-" Enter Terminal-Normal mode
-tnoremap <Esc><Esc> <C-W>N
 
 " -- Plugins --
 filetype plugin on
@@ -108,6 +102,18 @@ set hlsearch
 set ignorecase
 set incsearch
 set smartcase
+
+" -- Terminal --
+if exists('##TerminalOpen')
+    " Disable line numbers in terminal buffers
+    autocmd TerminalOpen * set nonumber
+endif
+if exists(':terminal')
+    " Open a new terminal window
+    nnoremap <silent> <Leader>t :terminal<CR>
+    " Enter Terminal-Normal mode
+    tnoremap <Esc><Esc> <C-w>N
+endif
 
 " -- User Interface --
 set display+=lastline
