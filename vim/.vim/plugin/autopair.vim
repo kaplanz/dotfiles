@@ -23,8 +23,8 @@ function! IsString()
     return join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')) =~ 'string'
 endfunction
 
-" Get current character under cursor
-function! CurrentChar()
+" Get previous character before cursor
+function! PrevChar()
     return getline('.')[getpos('.')[2] - 2]
 endfunction
 
@@ -40,8 +40,8 @@ endfunction
 
 " Check if closing quote pair should be added
 function! ShouldCloseQuote()
-    return !IsString() && (((CurrentChar() !~ '\S') && (NextChar() !~ '\S')) ||
-                         \ ((CurrentChar() !~ '\w') && (NextChar() =~ '[)]\|[]]\|[}])')))
+    return !IsString() && (((PrevChar() !~ '\S') && (NextChar() !~ '\S')) ||
+                         \ ((PrevChar() !~ '\w') && (NextChar() =~ '[)]\|[]]\|[}])')))
 endfunction
 
 
