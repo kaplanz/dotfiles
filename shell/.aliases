@@ -20,6 +20,7 @@ for i in {1..9}; do
 done
 
 # -- git --
+alias gdiff='git diff --no-index'
 alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
 
 # -- Shell --
