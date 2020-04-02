@@ -35,6 +35,13 @@ function finder() { find ${2:-.} -iname "*$1*"; }
 function fdin() { grep -yErIn --color=always $1 ${2:-.}; }
 function trash() { mv -f $@ ~/.Trash; }
 
+# -- Unix --
+function ansicolours() {
+    for i in {0..255}; do
+        print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
+    done
+}
+
 # -- Utilities --
 # fzf
 function _fzf_compgen_path() {
