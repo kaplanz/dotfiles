@@ -13,11 +13,11 @@
 # -- Dotfiles --
 export DOTFILES="$HOME/.dotfiles"
 
-# -- Shell --
+# -- Environment --
 export EDITOR="$(command -v vim)"
 export PAGER="$(command -v less)"
 
-# -- Plugins --
+# -- Utilities --
 # bat
 export BAT_THEME='Boron'
 # fzf

@@ -10,6 +10,10 @@
 #             Aliases
 # --------------------------------
 
+# -- Environment --
+alias path='echo ${PATH//:/\\n}'
+alias reload='clear && exec $SHELL -l'
+
 # -- Filesystem --
 alias cp='cp -R'
 alias lh='ls -A'
@@ -19,19 +23,14 @@ for i in {1..9}; do
     alias tree$i="tree -L $i"
 done
 
-# -- git --
+# -- Utilities --
+# git
 alias gdiff='git diff --no-index'
 alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
-
-# -- Shell --
-alias path='echo ${PATH//:/\\n}'
-alias reload='clear && exec $SHELL -l'
-
-# -- tmux --
+# tmux
 alias t='tmux'
 alias tksv='tmux kill-server'
 alias tls='tmux list-sessions'
 alias tv='tmux new-session "vim"'
-
-# -- Vim --
+# vim
 alias v='vim'
