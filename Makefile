@@ -6,32 +6,33 @@
 #  Copyright © 2020 Zakhary Kaplan. All rights reserved.
 #
 
+# --------------------------------
+#            Variables
+# --------------------------------
+
 # -- Directories --
 DOTFILES = $(HOME)/.dotfiles
 TMUX = $(HOME)/.tmux
 VIM = $(HOME)/.vim
 ZSH = $(HOME)/.oh-my-zsh
 
-
 # -- Commands --
 BAT := $(notdir $(shell command -v bat 2> /dev/null))
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 MKDIR = mkdir -p
 STOW = stow --dir=$(DOTFILES) --target=$(HOME)
+# System dependent
 ifeq ($(shell uname),Darwin)
 	SED = sed -i ''
 else ifeq ($(shell uname),Linux)
 	SED = sed -i
 endif
 
-
 # -- Plugins --
 # bat
 BAT_THEMES += tzarskyz/boron.tmtheme
-
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
-
 # Vim
 VIM_COLOURS += https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
 VIM_PLUGINS += dense-analysis/ale
@@ -49,15 +50,17 @@ VIM_PLUGINS += justinmk/vim-sneak
 VIM_PLUGINS += tpope/vim-surround
 VIM_PLUGINS += tpope/vim-unimpaired
 VIM_PLUGINS += roxma/nvim-yarp
-
 # Zsh
 OH_MY_ZSH_PLUGINS += git
 ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
 
-# -- Targets --
-# Make all programs
+# --------------------------------
+#             Targets
+# --------------------------------
+
+# -- Make all programs --
 .PHONY: all
 all: local tmux utils vim zsh
 
@@ -77,12 +80,12 @@ vim: plug-vim stow-vim
 zsh: plug-zsh stow-zsh
 
 
-# Install Brewfile dependencies, configure utilities, install plugins, stow dotfiles
+# -- Install all --
 .PHONY: install
 install: brew config plug stow
 
 
-# Uninstall stowed dotfiles
+#  -- Uninstall stowed dotfiles --
 .PHONY: uninstall
 uninstall:
 	@$(STOW) -v --delete local
@@ -92,7 +95,7 @@ uninstall:
 	@$(STOW) -v --delete zsh
 
 
-# Install Brewfile dependencies
+# -- Install Brewfile dependencies --
 .PHONY: brew
 brew:
 ifdef BREW
@@ -100,7 +103,7 @@ ifdef BREW
 endif
 
 
-# Stow dotfiles
+# -- Stow dotfiles --
 .PHONY: stow
 stow: stow-local stow-shell stow-tmux stow-vim stow-zsh
 
@@ -125,7 +128,7 @@ stow-zsh: $(ZSH) stow-shell
 	$(STOW) --restow zsh
 
 
-# Configure utilities
+# -- Configure utilities --
 .PHONY: config
 config: config-bat
 
@@ -149,7 +152,7 @@ $(BAT_THEMES): $(BAT_CONFIG_DIR)
 endif
 
 
-# Install plugins
+# -- Install plugins --
 .PHONY: plug
 plug: plug-tmux plug-vim plug-zsh
 
