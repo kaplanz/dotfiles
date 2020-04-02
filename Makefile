@@ -14,6 +14,7 @@ ZSH = $(HOME)/.oh-my-zsh
 
 
 # -- Commands --
+BAT := $(notdir $(shell command -v bat 2> /dev/null))
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 MKDIR = mkdir -p
 STOW = stow --dir=$(DOTFILES) --target=$(HOME)
@@ -25,6 +26,9 @@ endif
 
 
 # -- Plugins --
+# bat
+BAT_THEMES += tzarskyz/boron.tmtheme
+
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 
@@ -55,13 +59,16 @@ ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 # -- Targets --
 # Make all programs
 .PHONY: all
-all: local tmux vim zsh
+all: local tmux utils vim zsh
 
 .PHONY: local
 local: stow-local
 
 .PHONY: tmux
 tmux: plug-tmux stow-tmux
+
+.PHONY: utils
+utils: config-bat
 
 .PHONY: vim
 vim: plug-vim stow-vim
@@ -70,9 +77,9 @@ vim: plug-vim stow-vim
 zsh: plug-zsh stow-zsh
 
 
-# Install Brewfile dependencies, install plugins, stow dotfiles
+# Install Brewfile dependencies, configure utilities, install plugins, stow dotfiles
 .PHONY: install
-install: brew plug stow
+install: brew config plug stow
 
 
 # Uninstall stowed dotfiles
@@ -116,6 +123,30 @@ stow-vim: $(VIM)
 .PHONY: stow-zsh
 stow-zsh: $(ZSH) stow-shell
 	$(STOW) --restow zsh
+
+
+# Configure utilities
+.PHONY: config
+config: config-bat
+
+# bat
+.PHONY: config-bat
+ifndef BAT
+config-bat:
+else
+BAT_CONFIG_DIR = $(shell $(BAT) --config-dir)
+
+config-bat: $(BAT_CONFIG_DIR) $(BAT_THEMES)
+
+.PHONY: $(BAT_CONFIG_DIR)
+$(BAT_CONFIG_DIR):
+	@bash -c "$(MKDIR) $(BAT_CONFIG_DIR)/{syntaxes,themes}"
+
+.PHONY: $(BAT_THEMES)
+$(BAT_THEMES): THEME = $(BAT_CONFIG_DIR)/themes/$(notdir $@)
+$(BAT_THEMES): $(BAT_CONFIG_DIR)
+	$(if $(wildcard $(THEME)),,git clone https://github.com/$@.git $(THEME) && $(BAT) cache --build)
+endif
 
 
 # Install plugins

@@ -17,6 +17,8 @@ export DOTFILES="$HOME/.dotfiles"
 export EDITOR="$(command -v vim)"
 
 # -- Plugins --
+# bat
+export BAT_THEME='Boron'
 # fzf
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='--select-1 --exit-0'
