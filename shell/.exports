@@ -15,6 +15,7 @@ export DOTFILES="$HOME/.dotfiles"
 
 # -- Shell --
 export EDITOR="$(command -v vim)"
+export PAGER="$(command -v less)"
 
 # -- Plugins --
 # bat
