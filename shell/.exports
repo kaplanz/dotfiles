@@ -21,9 +21,22 @@ export EDITOR="$(command -v vim)"
 export BAT_THEME='Boron'
 # fzf
 export FZF_DEFAULT_COMMAND='fd'
-export FZF_DEFAULT_OPTS='--select-1 --exit-0'
+export FZF_DEFAULT_OPTS="
+--bind 'ctrl-a:toggle-all'
+--bind 'ctrl-v:execute(echo {+} | xargs -o vim)'
+--bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+--bind '?:toggle-preview'
+--color='prompt:25,pointer:110,marker:222'
+--exit-0
+--info=inline
+--layout=reverse
+--multi
+--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+--prompt='~ ' --pointer='»' --marker='›'
+--select-1
+"
 export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_R_OPTS="--sort --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_CTRL_T_OPTS=""
+export FZF_CTRL_R_OPTS="--sort --preview 'echo {}' --preview-window down:3:hidden:wrap"
 export FZF_ALT_C_COMMAND='$FZF_DEFAULT_COMMAND --type d'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
