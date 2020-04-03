@@ -20,7 +20,7 @@ upgrade_dotfiles_repo() {
 # Homebrew
 upgrade_homebrew() {
     if [ "$(command -v brew)" ]; then
-        brew upgrade && brew upgrade && brew cleanup
+        brew update && brew upgrade && brew cleanup
     fi
 }
 
