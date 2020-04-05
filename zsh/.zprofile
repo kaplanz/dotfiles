@@ -21,4 +21,5 @@
 #           Preferences
 # --------------------------------
 
+setopt extendedglob
 setopt noclobber
