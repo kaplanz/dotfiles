@@ -12,6 +12,7 @@
 
 # -- Clock --
 set -g clock-mode-colour colour110
+set -g clock-mode-style 12
 
 # -- Message --
 set -g message-style fg=colour253,bg=colour239
