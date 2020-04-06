@@ -35,7 +35,7 @@ set cursorline
 set whichwrap+=<,>,[,]
 
 " -- Folding --
-set foldmethod=indent
+set foldmethod=syntax
 set nofoldenable
 
 " -- Indentation --
