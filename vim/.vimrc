@@ -78,7 +78,7 @@ nnoremap <silent> <C-f> :call comfortable_motion#flick(winheight(0) * 4)<CR>
 nnoremap <silent> <C-b> :call comfortable_motion#flick(winheight(0) * -4)<CR>
 " deoplete.nvim
 if has('python3')
-    let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 1
 endif
 nnoremap <Leader>d :call deoplete#toggle()<CR>
 " fzf
@@ -89,7 +89,7 @@ let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ }
 " nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden = 1
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
@@ -102,14 +102,14 @@ set smartcase
 
 " -- Terminal --
 if exists('##TerminalOpen')
-    " Disable line numbers in terminal buffers
-    autocmd TerminalOpen * set nonumber
+  " Disable line numbers in terminal buffers
+  autocmd TerminalOpen * set nonumber
 endif
 if exists(':terminal')
-    " Open a new terminal window
-    nnoremap <silent> <Leader>t :terminal<CR>
-    " Enter Terminal-Normal mode
-    tnoremap <Esc><Esc> <C-w>N
+  " Open a new terminal window
+  nnoremap <silent> <Leader>t :terminal<CR>
+  " Enter Terminal-Normal mode
+  tnoremap <Esc><Esc> <C-w>N
 endif
 
 " -- User Interface --
@@ -138,7 +138,7 @@ set splitright
 
 " 2nd user vimrc file
 try
-    source ~/.vim/vimrc
+  source ~/.vim/vimrc
 catch
-    " file not found
+  " file not found
 endtry
