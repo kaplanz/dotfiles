@@ -58,6 +58,8 @@ nnoremap gm :marks<CR>:norm<Space>`
 nnoremap gr :registers<CR>:norm<Space>"
 " Disable Ex mode
 nnoremap Q <Nop>
+" Toggle Paste mode
+nnoremap <Leader>p :set paste!<CR>
 " Reload .vimrc
 nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
 " Write to file
