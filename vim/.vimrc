@@ -1,6 +1,6 @@
 "
 "  .vimrc
-"  My vim configuration.
+"  Vim configuration.
 "
 "  Created by Zakhary Kaplan on 2019-06-05.
 "  Copyright © 2019 Zakhary Kaplan. All rights reserved.

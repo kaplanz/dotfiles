@@ -1,6 +1,6 @@
 #
 #  redefined.zsh-theme
-#  My zsh theme.
+#  af-magic inspired zsh theme.
 #
 #  Created by Zakhary Kaplan on 2019-05-13.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -124,5 +124,5 @@ unset cyan
 #            References
 # --------------------------------
 #
-# af-magic.zsh-theme: https://github.com/andyfleming/oh-my-zsh
-# pure.zsh-theme: https://github.com/sindresorhus
+# af-magic.zsh-theme: <https://github.com/andyfleming/oh-my-zsh>
+# pure.zsh-theme: <https://github.com/sindresorhus>

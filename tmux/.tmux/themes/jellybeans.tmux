@@ -1,6 +1,6 @@
 #
 #  jellybeans.tmux
-#  My tmux theme.
+#  Jellybeans inspired tmux theme.
 #
 #  Created by Zakhary Kaplan on 2019-06-25.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -52,5 +52,6 @@ set -g window-status-separator ''
 #            References
 # --------------------------------
 #
-# basic.tmuxtheme: https://github.com/jimeh/tmux-themepack
-# jellybeans.tmux: https://github.com/atweiden/dotfiles
+# basic.tmuxtheme: <https://github.com/jimeh/tmux-themepack>
+# jellybeans.tmux: <https://github.com/atweiden/dotfiles>
+# jellybeans.vim: <https://github.com/nanotech/jellybeans.vim>

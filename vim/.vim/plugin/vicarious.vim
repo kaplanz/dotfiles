@@ -38,5 +38,5 @@ endif
 "            References
 " --------------------------------
 "
-" https://github.com/sjl/vitality.vim
-" https://hamberg.no/erlend/posts/2014-03-09-change-vim-cursor-in-iterm.html
+" vitality.vim: <https://github.com/sjl/vitality.vim>
+" <https://hamberg.no/erlend/posts/2014-03-09-change-vim-cursor-in-iterm.html>

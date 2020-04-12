@@ -1,6 +1,6 @@
 #
 #  .bash_profile
-#  My bash profile.
+#  Bash profile.
 #
 #  Created by Zakhary Kaplan on 2019-05-13.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.

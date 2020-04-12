@@ -1,6 +1,6 @@
 #
 #  .zprofile
-#  My zsh profile.
+#  Zsh profile.
 #
 #  Created by Zakhary Kaplan on 2019-05-13.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
