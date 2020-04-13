@@ -22,6 +22,7 @@ alias tree='tree -C'
 for i in {1..9}; do
     alias tree$i="tree -L $i"
 done
+alias tree-all="tree -a -I '.git'"
 
 # -- Utilities --
 # git
