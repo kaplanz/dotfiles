@@ -32,6 +32,7 @@ Grey58='246'
 
 # -- Prompt --
 # Prompt blocks
+exit_status_block='%(?,,%F{$IndianRed}%K{$Grey7} $? %f%k)'
 command_time_block='${command_time:+"%F{$Grey42}%K{$Grey7} $command_time %f%k"}'
 conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$DarkOliveGreen3}%K{$Grey7} $CONDA_DEFAULT_ENV "}'
 hostname_block='${SSH_TTY:+"%F{$DeepSkyBlue3}%K{$Grey7} %n@%m "}'
@@ -41,7 +42,7 @@ time_block='%F{$Grey58}%K{$Grey19} %D{%X}' # Use ZLE_RPROMPT_INDENT as final whi
 PROMPT='%k%F{$DeepSkyBlue4}%~$(git_prompt_info) %F{$LightSkyBlue3}%(!.#.»)%f '
 
 # Right prompt
-RPROMPT="${command_time_block}${conda_env_block}${hostname_block}${time_block}%E"
+RPROMPT="${exit_status_block}${command_time_block}${conda_env_block}${hostname_block}${time_block}%E"
 
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue4}(%F{$DarkSeaGreen4}"
