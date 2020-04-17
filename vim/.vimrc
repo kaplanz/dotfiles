@@ -26,7 +26,7 @@ syntax enable
 set belloff+=complete,ctrlg
 set complete-=t
 set completeopt-=preview
-set completeopt+=menuone,noselect
+set completeopt+=menuone
 set shortmess+=c " shut off completion messages
 
 " -- Cursor --
