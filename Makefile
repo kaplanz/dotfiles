@@ -46,6 +46,7 @@ VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += preservim/nerdtree
 VIM_PLUGINS += zakharykaplan/vim-relatable
 VIM_PLUGINS += tpope/vim-repeat
+VIM_PLUGINS += tpope/vim-sleuth
 VIM_PLUGINS += justinmk/vim-sneak
 VIM_PLUGINS += tpope/vim-surround
 VIM_PLUGINS += tpope/vim-unimpaired
