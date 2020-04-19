@@ -31,7 +31,11 @@ endif
 
 # -- Colours --
 # Vim
+VIM_COLOURS += morhetz/gruvbox
+VIM_COLOURS += cocopon/iceberg.vim
 VIM_COLOURS += nanotech/jellybeans.vim
+VIM_COLOURS += kaicataldo/material.vim
+VIM_COLOURS += xero/sourcerer.vim
 
 # -- Plugins --
 # bat
