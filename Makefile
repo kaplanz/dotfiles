@@ -20,6 +20,7 @@ ZSH = $(HOME)/.oh-my-zsh
 BAT := $(notdir $(shell command -v bat 2> /dev/null))
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 MKDIR = mkdir -p
+LN = ln -s
 STOW = stow --dir=$(DOTFILES) --target=$(HOME)
 # System dependent
 ifeq ($(shell uname),Darwin)
@@ -28,13 +29,16 @@ else ifeq ($(shell uname),Linux)
 	SED = sed -i
 endif
 
+# -- Colours --
+# Vim
+VIM_COLOURS += nanotech/jellybeans.vim
+
 # -- Plugins --
 # bat
 BAT_THEMES += tzarskyz/boron.tmtheme
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
-VIM_COLOURS += https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
 VIM_PLUGINS += dense-analysis/ale
 VIM_PLUGINS += yuttie/comfortable-motion.vim
 VIM_PLUGINS += tpope/vim-commentary
@@ -172,20 +176,23 @@ $(TMUX_PLUGINS): $(TMUX)
 
 # Vim
 .PHONY: plug-vim
-plug-vim: $(VIM) $(VIM_PLUGINS) colours-vim
+plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_PLUGINS)
 
 .PHONY: $(VIM)
 $(VIM):
-	@bash -c "$(MKDIR) $(VIM)/{colors,ftplugin,pack/plugins/start,plugin,swap}"
+	@bash -c "$(MKDIR) $(VIM)/{colors,ftplugin,pack/{colors,plugins}/start,plugin,swap}"
+
+.PHONY: $(VIM_COLOURS)
+$(VIM_COLOURS): REPO = $(VIM)/pack/colors/start/$(patsubst vim-%,%.vim,$(notdir $@))
+$(VIM_COLOURS): COLOUR = $(VIM)/colors/$(basename $(notdir $(REPO))).vim
+$(VIM_COLOURS): $(VIM)
+	$(if $(wildcard $(REPO)),,git clone https://github.com/$@.git $(REPO))
+	$(if $(wildcard $(COLOUR)),,$(LN) $(REPO)/colors/$(notdir $(COLOUR)) $(COLOUR))
 
 .PHONY: $(VIM_PLUGINS)
 $(VIM_PLUGINS): PLUGIN = $(VIM)/pack/plugins/start/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
 $(VIM_PLUGINS): $(VIM)
 	$(if $(wildcard $(PLUGIN)),,git clone https://github.com/$@.git $(PLUGIN))
-
-.PHONY: colours-vim
-colours-vim: $(VIM)
-	$(foreach url,$(VIM_COLOURS),$(if $(wildcard $(VIM)/colors/$(notdir $(url))),,curl -o $(VIM)/colors/$(notdir $(url)) $(url)))
 
 # Zsh
 .PHONY: plug-zsh
