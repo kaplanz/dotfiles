@@ -116,6 +116,7 @@ endif
 
 " -- User Interface --
 set display+=lastline
+set fillchars+=vert:│
 set laststatus=2
 set mouse=a
 set noshowmode
