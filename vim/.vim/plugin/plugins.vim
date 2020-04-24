@@ -43,3 +43,8 @@ autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isT
 let g:NERDTreeShowHidden = 1
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
+
+" tagbar
+let g:tagbar_autofocus = 1
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <silent> <Leader>B :TagbarOpenAutoClose<CR>

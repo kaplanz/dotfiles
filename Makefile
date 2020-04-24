@@ -55,6 +55,7 @@ VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += tpope/vim-sleuth
 VIM_PLUGINS += justinmk/vim-sneak
 VIM_PLUGINS += tpope/vim-surround
+VIM_PLUGINS += majutsushi/tagbar
 VIM_PLUGINS += tpope/vim-unimpaired
 VIM_PLUGINS += roxma/nvim-yarp
 # Zsh
