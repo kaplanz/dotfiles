@@ -10,8 +10,13 @@
 "             Plugins
 " --------------------------------
 
+" -- Locals --
+let s:sidebar_width = 31
+
+" -- Options --
 filetype plugin on
 
+" -- Preferences --
 " ale
 let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 nnoremap <Leader>f :ALEFix<CR>
@@ -41,10 +46,12 @@ let g:lightline = {
 " nerdtree
 autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeWinSize = s:sidebar_width
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
 
 " tagbar
 let g:tagbar_autofocus = 1
+let g:tagbar_width = s:sidebar_width
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 nnoremap <silent> <Leader>B :TagbarOpenAutoClose<CR>
