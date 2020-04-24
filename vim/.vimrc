@@ -58,6 +58,11 @@ nnoremap gm :marks<CR>:norm<Space>`
 nnoremap gr :registers<CR>:norm<Space>"
 " Disable Ex mode
 nnoremap Q <Nop>
+" Resize splits
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 " Toggle Paste mode
 nnoremap <Leader>p :set paste!<CR>
 " Reload .vimrc
