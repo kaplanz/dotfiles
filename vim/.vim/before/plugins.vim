@@ -36,6 +36,7 @@ nnoremap <Leader>d :call deoplete#toggle()<CR>
 
 " fzf
 nnoremap <C-p> :FZF<CR>
+nnoremap <Leader>p :Rg<CR>
 set runtimepath+=/usr/local/opt/fzf,~/.fzf
 
 " lightline.vim
