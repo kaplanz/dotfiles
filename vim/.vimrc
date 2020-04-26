@@ -112,12 +112,10 @@ set splitright
 
 
 " --------------------------------
-"             Sources
+"             Runtimes
 " --------------------------------
 
+" config directory
+runtime before/*
 " 2nd user vimrc file
-try
-  source ~/.vim/vimrc
-catch
-  " file not found
-endtry
+runtime vimrc
