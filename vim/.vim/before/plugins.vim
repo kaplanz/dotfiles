@@ -29,9 +29,6 @@ nnoremap <silent> <C-f> :call comfortable_motion#flick(winheight(0) * 4)<CR>
 nnoremap <silent> <C-b> :call comfortable_motion#flick(winheight(0) * -4)<CR>
 
 " deoplete.nvim
-if has('python3')
-  let g:deoplete#enable_at_startup = 1
-endif
 nnoremap <Leader>d :call deoplete#toggle()<CR>
 
 " fzf
