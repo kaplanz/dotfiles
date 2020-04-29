@@ -12,6 +12,7 @@
 
 # -- Directories --
 DOTFILES = $(HOME)/.dotfiles
+TERMINFO = $(HOME)/.terminfo
 TMUX = $(HOME)/.tmux
 VIM = $(HOME)/.vim
 ZSH = $(HOME)/.oh-my-zsh
@@ -21,6 +22,7 @@ BREW := $(notdir $(shell command -v brew 2> /dev/null))
 MKDIR = mkdir -p
 LN = ln -s
 STOW = stow --dir=$(DOTFILES) --target=$(HOME)
+TIC = tic
 # System dependent
 ifeq ($(shell uname),Darwin)
 	SED = sed -i ''
@@ -64,6 +66,10 @@ OH_MY_ZSH_PLUGINS += git
 ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
+# -- Utilities --
+FZF_SCRIPTS = $(addprefix $(HOME)/.fzf,.bash .zsh)
+TERMINFO_FILES = $(wildcard $(TERMINFO)/*.terminfo)
+
 
 # --------------------------------
 #             Targets
@@ -71,24 +77,29 @@ ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
 # -- Make all programs --
 .PHONY: all
-all: local tmux utils vim zsh
+all: dirs plug stow utils
 
 .PHONY: local
 local: stow-local
 
 .PHONY: tmux
-tmux: plug-tmux stow-tmux
+tmux: $(TMUX) plug-tmux stow-tmux
 
 .PHONY: vim
-vim: plug-vim stow-vim
+vim: $(VIM) plug-vim stow-vim
 
 .PHONY: zsh
-zsh: plug-zsh stow-zsh
+zsh: $(ZSH) plug-zsh stow-zsh
+
+
+# -- Create all directories --
+.PHONY: dirs
+dirs: $(TERMINFO) $(TMUX) $(VIM) $(ZSH)
 
 
 # -- Install all --
 .PHONY: install
-install: brew config plug stow
+install: all brew
 
 
 #  -- Uninstall stowed dotfiles --
@@ -185,3 +196,28 @@ $(ZSH): # use `oh-my-zsh` as base directory
 $(ZSH_PLUGINS): PLUGIN = $(ZSH)/custom/plugins/$(notdir $@)
 $(ZSH_PLUGINS): $(ZSH)
 	$(if $(wildcard $(PLUGIN)),,git clone https://github.com/$@.git $(PLUGIN))
+
+
+# -- Configure utilities --
+.PHONY: utils
+utils: fzf terminfo
+
+# fzf
+.PHONY: fzf
+fzf: $(FZF_SCRIPTS)
+
+$(FZF_SCRIPTS):
+ifdef BREW
+	$$($(BREW) --prefix)/opt/fzf/install --all
+endif
+
+# terminfo
+.PHONY: terminfo
+terminfo: $(TERMINFO) $(TERMINFO_FILES)
+
+.PHONY: $(TERMINFO)
+$(TERMINFO):
+	@bash -c "$(MKDIR) $(TERMINFO)"
+
+$(TERMINFO)/%.terminfo: $(TERMINFO)
+	@$(TIC) -o $(TERMINFO) $@
