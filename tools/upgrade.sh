@@ -39,7 +39,7 @@ main() {
     [ "$1" = "--all" ] && upgrade_oh_my_zsh
 
     # Run Makefile
-    make --directory="$DOTFILES"
+    make --directory="$DOTFILES" install
 
     # Restart shell
     exec zsh -l
