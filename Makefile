@@ -62,8 +62,9 @@ VIM_PLUGINS += majutsushi/tagbar
 VIM_PLUGINS += tpope/vim-unimpaired
 VIM_PLUGINS += roxma/nvim-yarp
 # Zsh
-OH_MY_ZSH_PLUGINS += git
+OH_MY_ZSH_PLUGINS += git docker docker-compose
 ZSH_PLUGINS += zsh-users/zsh-autosuggestions
+ZSH_PLUGINS += akarzim/zsh-docker-aliases
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
 # -- Utilities --
