@@ -71,6 +71,9 @@ nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
 nnoremap <Leader>s :w<CR>
 " Clear last used search pattern
 nnoremap <silent> <Leader>/ :let @/ = ''<CR>
+" Scroll forward/backrwards through buffers
+nnoremap <Leader>[ :bprevious<CR>
+nnoremap <Leader>] :bnext<CR>
 
 " -- Search --
 set hlsearch
