@@ -20,6 +20,7 @@ filetype plugin on
 " ale
 let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 nnoremap <Leader>f :ALEFix<CR>
+nnoremap <Leader>a :ALEToggleBuffer<CR>
 
 " comfortable-motion.vim
 let g:comfortable_motion_no_default_key_mappings = 1
