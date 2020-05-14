@@ -7,6 +7,20 @@
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
+# Check if minimum dependencies are installed
+check_dependencies() {
+    {
+        # Check if Homebrew is installed
+        test $(command -v brew)
+    } || {
+        # Check if individual dependencies are installed
+        test $(command -v git) && \
+        test $(command -v make) && \
+        test $(command -v stow) && \
+        test $(command -v zsh)
+    }
+}
+
 # Clone dotfiles repository
 clone_dotfiles_repo() {
     if [ ! -d ~/.dotfiles ]; then
@@ -14,23 +28,27 @@ clone_dotfiles_repo() {
     fi
 }
 
-# Install Homebrew
-install_homebrew() {
-    if [ ! $(command -v brew) ] && [ $(uname) == "Darwin" ]; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-}
-
 # Run script
 main() {
-    # Install programs
-    clone_dotfiles_repo
-    install_homebrew
+    # Check for dependencies
+    check_dependencies || {
+        # If dependencies not found, do not install
+        echo "Missing dependencies."
+        test $(uname) == "Darwin" && \
+            echo "  - recommended: brew"
+        echo "  - required: git, make, stow, zsh"
+        echo
+        echo "Installation cancelled."
+        return
+    }
 
-    # Run Makefile
+    # Clone dotfiles repository
+    clone_dotfiles_repo
+
+    # # Run Makefile
     make --directory=~/.dotfiles install
 
-    # Restart shell
+    # # Restart shell
     exec zsh -l
 }
 
