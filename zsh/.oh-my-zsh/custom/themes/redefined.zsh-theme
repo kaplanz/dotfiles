@@ -10,8 +10,8 @@
 # Load zsh modules
 zmodload zsh/datetime
 
-# Use jellybeans $LS_COLORS theme
-LS_COLORS="$(cat $DOTFILES/utils/jellybeans.ls-colors | tr '\n' ':')"
+# Use jellybeans $LS_COLORS theme for login shells
+[[ -o login ]] && LS_COLORS="$(cat $DOTFILES/utils/jellybeans.ls-colors | tr '\n' ':')"
 # Take advantage of $LS_COLORS for completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
