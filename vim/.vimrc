@@ -5,6 +5,8 @@
 "  Created by Zakhary Kaplan on 2019-06-05.
 "  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 "
+" Specify UTF-8 character encoding
+scriptencoding utf-8
 
 " --------------------------------
 "           Preferences
