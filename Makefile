@@ -12,17 +12,22 @@
 
 # -- Directories --
 DOTFILES = $(HOME)/.dotfiles
+FZF = $(HOME)/.fzf
 TERMINFO = $(HOME)/.terminfo
 TMUX = $(HOME)/.tmux
 VIM = $(HOME)/.vim
 ZSH = $(HOME)/.oh-my-zsh
 
 # -- Commands --
-BREW := $(notdir $(shell command -v brew 2> /dev/null))
-MKDIR = mkdir -p
+GIT_CLONE = git clone --depth 1
 LN = ln -s
+MKDIR = mkdir -p
 STOW = stow --dir=$(DOTFILES) --target=$(HOME)
 TIC = tic
+# May not exist
+BREW := $(notdir $(shell command -v brew 2> /dev/null))
+CURL := $(notdir $(shell command -v curl 2> /dev/null))
+WGET := $(notdir $(shell command -v wget 2> /dev/null))
 # System dependent
 ifeq ($(shell uname),Darwin)
 	SED = sed -i ''
@@ -69,7 +74,7 @@ ZSH_PLUGINS += akarzim/zsh-docker-aliases
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
 # -- Utilities --
-FZF_SCRIPTS = $(addprefix $(HOME)/.fzf,.bash .zsh)
+FZF_SCRIPTS = $(addprefix $(FZF),.bash .zsh)
 TERMINFO_FILES = $(wildcard $(TERMINFO)/*.terminfo)
 
 
@@ -101,7 +106,7 @@ dirs: $(TERMINFO) $(TMUX) $(VIM) $(ZSH)
 
 # -- Install all --
 .PHONY: install
-install: all brew
+install: brew all
 
 
 #  -- Uninstall stowed dotfiles --
@@ -162,7 +167,8 @@ $(TMUX):
 .PHONY: $(TMUX_PLUGINS)
 $(TMUX_PLUGINS): PLUGIN = $(TMUX)/plugins/$(notdir $@)
 $(TMUX_PLUGINS): $(TMUX)
-	$(if $(wildcard $(PLUGIN)),,git clone https://github.com/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
+
 
 # Vim
 .PHONY: plug-vim
@@ -176,28 +182,34 @@ $(VIM):
 $(VIM_COLOURS): REPO = $(VIM)/pack/colors/start/$(patsubst vim-%,%.vim,$(notdir $@))
 $(VIM_COLOURS): COLOUR = $(VIM)/colors/$(basename $(notdir $(REPO))).vim
 $(VIM_COLOURS): $(VIM)
-	$(if $(wildcard $(REPO)),,git clone https://github.com/$@.git $(REPO))
+	$(if $(wildcard $(REPO)),,$(GIT_CLONE) https://github.com/$@.git $(REPO))
 	$(if $(wildcard $(COLOUR)),,$(LN) $(REPO)/colors/$(notdir $(COLOUR)) $(COLOUR))
 
 .PHONY: $(VIM_PLUGINS)
 $(VIM_PLUGINS): PLUGIN = $(VIM)/pack/plugins/start/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
 $(VIM_PLUGINS): $(VIM)
-	$(if $(wildcard $(PLUGIN)),,git clone https://github.com/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
 
 # Zsh
 .PHONY: plug-zsh
 plug-zsh: PLUGINS = $(OH_MY_ZSH_PLUGINS) $(notdir $(ZSH_PLUGINS))
 plug-zsh: $(ZSH) $(ZSH_PLUGINS)
-	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' ~/.zshrc
-	@$(SED) "s/^plugins=(.*)$$/plugins=($(PLUGINS))/" ~/.zshrc
+	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' $(HOME)/.zshrc
+	@$(SED) "s/^plugins=(.*)$$/plugins=($(PLUGINS))/" $(HOME)/.zshrc
 
-$(ZSH): # use `oh-my-zsh` as base directory
-	@sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')"
+.PHONY: $(ZSH)
+$(ZSH): $(ZSH)/.git
+$(ZSH)/.git: # use oh-my-zsh as base directory
+ifdef CURL
+	@sh -c "$$($(CURL) -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')"
+else ifdef WGET
+	@sh -c "$$($(WGET) -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')"
+endif
 
 .PHONY: $(ZSH_PLUGINS)
 $(ZSH_PLUGINS): PLUGIN = $(ZSH)/custom/plugins/$(notdir $@)
 $(ZSH_PLUGINS): $(ZSH)
-	$(if $(wildcard $(PLUGIN)),,git clone https://github.com/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
 
 
 # -- Configure utilities --
@@ -206,11 +218,20 @@ utils: fzf terminfo
 
 # fzf
 .PHONY: fzf
-fzf: $(FZF_SCRIPTS)
+fzf: $(FZF) $(FZF_SCRIPTS)
 
-$(FZF_SCRIPTS):
+.PHONY: $(FZF)
+$(FZF): $(FZF)/.git
+$(FZF)/.git: # if not using brew, install fzf using git
+ifndef BREW
+	$(GIT_CLONE) https://github.com/junegunn/fzf.git $(FZF)
+endif
+
+$(FZF_SCRIPTS): | $(FZF)
 ifdef BREW
 	$$($(BREW) --prefix)/opt/fzf/install --all
+else
+	$(FZF)/install --all
 endif
 
 # terminfo
@@ -221,5 +242,5 @@ terminfo: $(TERMINFO) $(TERMINFO_FILES)
 $(TERMINFO):
 	@bash -c "$(MKDIR) $(TERMINFO)"
 
-$(TERMINFO)/%.terminfo: $(TERMINFO)
+$(TERMINFO)/%.terminfo: $(TERMINFO) stow-shell
 	@$(TIC) -o $(TERMINFO) $@
