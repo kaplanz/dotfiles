@@ -58,6 +58,7 @@ VIM_PLUGINS += junegunn/fzf.vim
 VIM_PLUGINS += roxma/vim-hug-neovim-rpc
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += preservim/nerdtree
+VIM_PLUGINS += zakharykaplan/vim-parry
 VIM_PLUGINS += zakharykaplan/vim-relatable
 VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += tpope/vim-sleuth
