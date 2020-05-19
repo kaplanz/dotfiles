@@ -49,7 +49,6 @@ TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
 VIM_PLUGINS += tpope/vim-abolish
 VIM_PLUGINS += dense-analysis/ale
-VIM_PLUGINS += jiangmiao/auto-pairs
 VIM_PLUGINS += yuttie/comfortable-motion.vim
 VIM_PLUGINS += tpope/vim-commentary
 VIM_PLUGINS += Shougo/deoplete.nvim
