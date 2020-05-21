@@ -29,6 +29,8 @@ alias tree-all="tree -a -I '.git'"
 alias dcha='cat ~/.oh-my-zsh/plugins/docker-compose/docker-compose.plugin.zsh | grep'
 alias dkha='cat ~/.oh-my-zsh/custom/plugins/zsh-docker-aliases/alias.zsh | grep'
 # git
+alias gci='git checkout-index'
+alias gci!='git checkout-index --all --force'
 alias gdiff='git diff --no-index'
 alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
 # tmux
