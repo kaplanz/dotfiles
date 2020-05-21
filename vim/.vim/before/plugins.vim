@@ -107,6 +107,10 @@ let g:NERDTreeWinSize = s:sidebar_width
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
 
+" sideways
+nnoremap <C-h> :SidewaysLeft<CR>
+nnoremap <C-l> :SidewaysRight<CR>
+
 " tagbar
 let g:tagbar_autofocus = 1
 let g:tagbar_width = s:sidebar_width
