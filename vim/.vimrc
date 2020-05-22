@@ -35,6 +35,10 @@ augroup END
 colorscheme jellybeans
 syntax enable
 
+" -- Commands --
+" Delete all registers
+command! DelRegisters for i in range(34, 122) | silent! call setreg(nr2char(i), []) | endfor
+
 " -- Completion --
 set belloff+=complete,ctrlg
 set complete-=t
