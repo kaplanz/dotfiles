@@ -123,7 +123,7 @@ set confirm
 set directory=~/.vim/swap
 set hidden
 set mouse=a
-set shell+=\ -l
+set shellcmdflag=-lc
 set ttimeoutlen=0
 
 " -- Window --
