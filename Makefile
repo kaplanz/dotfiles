@@ -16,6 +16,7 @@ FZF = $(HOME)/.fzf
 TERMINFO = $(HOME)/.terminfo
 TMUX = $(HOME)/.tmux
 VIM = $(HOME)/.vim
+VIM_PACK = $(VIM)/pack/plugins/start
 ZSH = $(HOME)/.oh-my-zsh
 
 # -- Commands --
@@ -47,6 +48,7 @@ VIM_COLOURS += xero/sourcerer.vim
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
+VIM_COC = $(VIM_PACK)/coc.nvim-release
 VIM_PLUGINS += tpope/vim-abolish
 VIM_PLUGINS += dense-analysis/ale
 VIM_PLUGINS += yuttie/comfortable-motion.vim
@@ -171,7 +173,7 @@ $(TMUX_PLUGINS): $(TMUX)
 
 # Vim
 .PHONY: plug-vim
-plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_PLUGINS)
+plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_COC) $(VIM_PLUGINS)
 
 .PHONY: $(VIM)
 $(VIM):
@@ -184,8 +186,11 @@ $(VIM_COLOURS): $(VIM)
 	$(if $(wildcard $(REPO)),,$(GIT_CLONE) https://github.com/$@.git $(REPO))
 	$(if $(wildcard $(COLOUR)),,$(LN) $(REPO)/colors/$(notdir $(COLOUR)) $(COLOUR))
 
+$(VIM_COC): | $(VIM)
+	cd $(VIM_PACK); curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
+
 .PHONY: $(VIM_PLUGINS)
-$(VIM_PLUGINS): PLUGIN = $(VIM)/pack/plugins/start/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
+$(VIM_PLUGINS): PLUGIN = $(VIM_PACK)/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
 $(VIM_PLUGINS): $(VIM)
 	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
 
