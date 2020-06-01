@@ -36,6 +36,9 @@ else ifeq ($(shell uname),Linux)
 	SED = sed -i
 endif
 
+# -- URLs --
+GITHUB = https://github.com
+
 # -- Colours --
 # Vim
 VIM_COLOURS += morhetz/gruvbox
@@ -168,7 +171,7 @@ $(TMUX):
 .PHONY: $(TMUX_PLUGINS)
 $(TMUX_PLUGINS): PLUGIN = $(TMUX)/plugins/$(notdir $@)
 $(TMUX_PLUGINS): $(TMUX)
-	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
 
 
 # Vim
@@ -183,16 +186,16 @@ $(VIM):
 $(VIM_COLOURS): REPO = $(VIM)/pack/colors/start/$(patsubst vim-%,%.vim,$(notdir $@))
 $(VIM_COLOURS): COLOUR = $(VIM)/colors/$(basename $(notdir $(REPO))).vim
 $(VIM_COLOURS): $(VIM)
-	$(if $(wildcard $(REPO)),,$(GIT_CLONE) https://github.com/$@.git $(REPO))
+	$(if $(wildcard $(REPO)),,$(GIT_CLONE) $(GITHUB)/$@.git $(REPO))
 	$(if $(wildcard $(COLOUR)),,$(LN) $(REPO)/colors/$(notdir $(COLOUR)) $(COLOUR))
 
 .PHONY: $(VIM_PLUGINS)
 $(VIM_PLUGINS): PLUGIN = $(VIM_PACK)/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
 $(VIM_PLUGINS): $(VIM)
-	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
 
 $(VIM_COC): | $(VIM)
-	git clone https://github.com/neoclide/coc.nvim.git $(VIM_COC)
+	git clone $(GITHUB)/neoclide/coc.nvim.git $(VIM_COC)
 	cd $(VIM_COC); git checkout release
 
 # Zsh
@@ -214,7 +217,7 @@ endif
 .PHONY: $(ZSH_PLUGINS)
 $(ZSH_PLUGINS): PLUGIN = $(ZSH)/custom/plugins/$(notdir $@)
 $(ZSH_PLUGINS): $(ZSH)
-	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) https://github.com/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
 
 
 # -- Configure utilities --
@@ -229,7 +232,7 @@ fzf: $(FZF) $(FZF_SCRIPTS)
 $(FZF): $(FZF)/.git
 $(FZF)/.git: # if not using brew, install fzf using git
 ifndef BREW
-	$(GIT_CLONE) https://github.com/junegunn/fzf.git $(FZF)
+	$(GIT_CLONE) $(GITHUB)/junegunn/fzf.git $(FZF)
 endif
 
 $(FZF_SCRIPTS): | $(FZF)
