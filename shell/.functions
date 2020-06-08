@@ -14,6 +14,10 @@
 function runc() { gcc ${@:-*.c} && ./a.out && rm a.out; }
 function runcpp() { g++ -std=c++2a ${@:-*.cpp} && ./a.out && rm a.out; }
 function sourcecode() {
+    [ -z "$SOURCECODE" ] && \
+        echo "sourcecode: could not find sourcecode template." && \
+        return
+
     local description="\[Description\]"
     [ ! $2 ] && echo -n "Comment prefix: " && read 2
     [ ! $3 ] && echo -n "Description: " && read 3
