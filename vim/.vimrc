@@ -75,6 +75,8 @@ nnoremap gm :marks<CR>:norm<Space>`
 nnoremap gr :registers<CR>:norm<Space>"
 " Disable Ex mode
 nnoremap Q <Nop>
+" Yank from cursor to end of line
+noremap Y y$
 " Resize splits
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 4/3)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 3/4)<CR>
