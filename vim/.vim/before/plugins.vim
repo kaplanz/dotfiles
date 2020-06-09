@@ -110,6 +110,7 @@ nnoremap <C-l> :SidewaysRight<CR>
 
 " tagbar
 let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
 let g:tagbar_width = s:sidebar_width
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 nnoremap <silent> <Leader>B :TagbarOpenAutoClose<CR>
