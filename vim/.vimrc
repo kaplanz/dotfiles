@@ -118,6 +118,7 @@ set fillchars+=vert:│
 set laststatus=2
 set noshowmode
 set number
+set showcmd
 set wildmenu
 
 " -- Various --
