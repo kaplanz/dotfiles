@@ -11,6 +11,7 @@
 # --------------------------------
 
 # -- Directories --
+CRON=$(HOME)/.cron
 DOTFILES = $(HOME)/.dotfiles
 FZF = $(HOME)/.fzf
 TERMINFO = $(HOME)/.terminfo
@@ -105,7 +106,7 @@ zsh: $(ZSH) plug-zsh stow-zsh
 
 # -- Create all directories --
 .PHONY: dirs
-dirs: $(TERMINFO) $(TMUX) $(VIM) $(ZSH)
+dirs: $(CRON) $(TERMINFO) $(TMUX) $(VIM) $(ZSH)
 
 
 # -- Install all --
@@ -227,7 +228,15 @@ $(ZSH_PLUGINS): $(ZSH)
 
 # -- Configure utilities --
 .PHONY: utils
-utils: fzf terminfo
+utils: cron fzf terminfo
+
+# cron
+.PHONY: cron
+cron: $(CRON) stow-utils
+
+.PHONY: $(CRON)
+$(CRON):
+	@bash -c "$(MKDIR) $(CRON)/{locks,logs,scripts}"
 
 # fzf
 .PHONY: fzf
