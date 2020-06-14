@@ -41,8 +41,8 @@ main() {
     # Run Makefile
     make --directory="$DOTFILES" install
 
-    # Restart shell
-    exec zsh -l
+    # Restart shell (if parent process is a session leader)
+    [[ "$(ps -o stat= -p $PPID)" =~ "s" ]] && exec zsh -l
 }
 
 main "$@"

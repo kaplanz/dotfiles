@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #  install.sh
-#  Installer script.
+#  Install script.
 #
 #  Created by Zakhary Kaplan on 2019-06-05.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -45,11 +45,11 @@ main() {
     # Clone dotfiles repository
     clone_dotfiles_repo
 
-    # # Run Makefile
+    # Run Makefile
     make --directory=~/.dotfiles install
 
-    # # Restart shell
-    exec zsh -l
+    # Restart shell (if parent process is a session leader)
+    [[ "$(ps -o stat= -p $PPID)" =~ "s" ]] && exec zsh -l
 }
 
 main "$@"
