@@ -80,7 +80,7 @@ ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
 # -- Utilities --
 FZF_SCRIPTS = $(addprefix $(FZF),.bash .zsh)
-TERMINFO_FILES = $(wildcard $(TERMINFO)/*.terminfo)
+TERMINFO_FILES = $(wildcard utils/.terminfo/*.terminfo)
 
 
 # --------------------------------
@@ -264,5 +264,5 @@ terminfo: $(TERMINFO) $(TERMINFO_FILES)
 $(TERMINFO):
 	@bash -c "$(MKDIR) $(TERMINFO)"
 
-$(TERMINFO)/%.terminfo: $(TERMINFO) stow-utils
+utils/.terminfo/%.terminfo: $(TERMINFO) stow-utils
 	@$(TIC) -o $(TERMINFO) $@
