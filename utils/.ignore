@@ -6,12 +6,12 @@
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
-# -- Filesystem --
-**/.git/
-
 # -- macOS --
 # Media
 /Library/
 /Movies/
 /Music/
 /Pictures/
+
+# -- VCS --
+.git/
