@@ -119,6 +119,7 @@ uninstall:
 	@$(STOW) -v --delete local
 	@$(STOW) -v --delete shell
 	@$(STOW) -v --delete tmux
+	@$(STOW) -v --delete utils
 	@$(STOW) -v --delete vim
 	@$(STOW) -v --delete zsh
 
@@ -133,7 +134,7 @@ endif
 
 # -- Stow dotfiles --
 .PHONY: stow
-stow: stow-local stow-shell stow-tmux stow-vim stow-zsh
+stow: stow-local stow-shell stow-tmux stow-utils stow-vim stow-zsh
 
 .PHONY: stow-local
 stow-local:
@@ -146,6 +147,10 @@ stow-shell:
 .PHONY: stow-tmux
 stow-tmux: $(TMUX)
 	$(STOW) --restow tmux
+
+.PHONY: stow-utils
+stow-utils:
+	$(STOW) --restow utils
 
 .PHONY: stow-vim
 stow-vim: $(VIM)
@@ -250,5 +255,5 @@ terminfo: $(TERMINFO) $(TERMINFO_FILES)
 $(TERMINFO):
 	@bash -c "$(MKDIR) $(TERMINFO)"
 
-$(TERMINFO)/%.terminfo: $(TERMINFO) stow-shell
+$(TERMINFO)/%.terminfo: $(TERMINFO) stow-utils
 	@$(TIC) -o $(TERMINFO) $@
