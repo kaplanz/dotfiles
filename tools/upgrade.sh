@@ -11,32 +11,34 @@
 upgrade_dotfiles_repo() {
     ( # Run in subshell
         cd "$DOTFILES"
-        [[ -z "$(git status -s)" ]] || { git stash push --all && REPO_IS_DIRTY=1; }
+        [ -n "$(git status -s)" ] && {
+            git stash push --all && REPO_IS_DIRTY=1
+        }
         git pull --rebase
-        [[ "$REPO_IS_DIRTY" ]] && git stash pop
+        [ -n "$REPO_IS_DIRTY" ] && git stash pop
     )
 }
 
 # Homebrew
 upgrade_homebrew() {
-    if [ "$(command -v brew)" ]; then
+    test "$(command -v brew)" && {
         brew update && brew upgrade && brew cleanup
-    fi
+    }
 }
 
 # Oh My Zsh
 upgrade_oh_my_zsh() {
-    if [ -d ~/.oh-my-zsh ]; then
+    [ -d ~/.oh-my-zsh ] && {
         env ZSH="$ZSH" sh "$ZSH/tools/upgrade.sh"
-    fi
+    }
 }
 
 # Run script
 main() {
     # Upgrade programs
     upgrade_dotfiles_repo
-    [ "$1" = '--all' ] && upgrade_homebrew
-    [ "$1" = '--all' ] && upgrade_oh_my_zsh
+    [[ "$1" = '--all' ]] && upgrade_homebrew
+    [[ "$1" = '--all' ]] && upgrade_oh_my_zsh
 
     # Run Makefile
     make --directory="$DOTFILES" install

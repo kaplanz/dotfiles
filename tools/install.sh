@@ -23,9 +23,9 @@ check_dependencies() {
 
 # Clone dotfiles repository
 clone_dotfiles_repo() {
-    if [ ! -d ~/.dotfiles ]; then
+    [ ! -d ~/.dotfiles ] && {
         git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
-    fi
+    }
 }
 
 # Run script
