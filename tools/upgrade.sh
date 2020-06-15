@@ -35,14 +35,14 @@ upgrade_oh_my_zsh() {
 main() {
     # Upgrade programs
     upgrade_dotfiles_repo
-    [ "$1" = "--all" ] && upgrade_homebrew
-    [ "$1" = "--all" ] && upgrade_oh_my_zsh
+    [ "$1" = '--all' ] && upgrade_homebrew
+    [ "$1" = '--all' ] && upgrade_oh_my_zsh
 
     # Run Makefile
     make --directory="$DOTFILES" install
 
     # Restart shell (if parent process is a session leader)
-    [[ "$(ps -o stat= -p $PPID)" =~ "s" ]] && exec zsh -l
+    [[ "$(ps -o stat= -p $PPID)" =~ 's' ]] && exec zsh -l
 }
 
 main "$@"

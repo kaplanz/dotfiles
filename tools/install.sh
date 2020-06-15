@@ -11,13 +11,13 @@
 check_dependencies() {
     {
         # Check if Homebrew is installed
-        test $(command -v brew)
+        test "$(command -v brew)"
     } || {
         # Check if individual dependencies are installed
-        test $(command -v git) && \
-        test $(command -v make) && \
-        test $(command -v stow) && \
-        test $(command -v zsh)
+        test "$(command -v git)" && \
+        test "$(command -v make)" && \
+        test "$(command -v stow)" && \
+        test "$(command -v zsh)"
     }
 }
 
@@ -33,12 +33,12 @@ main() {
     # Check for dependencies
     check_dependencies || {
         # If dependencies not found, do not install
-        echo "Missing dependencies."
-        test $(uname) == "Darwin" && \
-            echo "  - recommended: brew"
-        echo "  - required: git, make, stow, zsh"
+        echo 'Missing dependencies.'
+        test "$(uname)" == 'Darwin' && \
+            echo '  - recommended: brew'
+        echo '  - required: git, make, stow, zsh'
         echo
-        echo "Installation cancelled."
+        echo 'Installation cancelled.'
         return
     }
 
@@ -49,7 +49,7 @@ main() {
     make --directory=~/.dotfiles install
 
     # Restart shell (if parent process is a session leader)
-    [[ "$(ps -o stat= -p $PPID)" =~ "s" ]] && exec zsh -l
+    [[ "$(ps -o stat= -p $PPID)" =~ 's' ]] && exec zsh -l
 }
 
 main "$@"

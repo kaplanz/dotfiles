@@ -47,7 +47,7 @@ RPROMPT="${exit_status_block}${command_time_block}${conda_env_block}${hostname_b
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue4}(%F{$DarkSeaGreen4}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%F{$DeepSkyBlue4})%f"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_CLEAN=''
 ZSH_THEME_GIT_PROMPT_DIRTY="%F{$SandyBrown}*"
 
 # Calculate command execution time
@@ -55,7 +55,7 @@ get_command_time() {
     local stop=$EPOCHREALTIME
     local start=${timestamp:-$stop}
     let local elapsed=$stop-$start
-    (( $elapsed > 0 )) && printf "%.2fs" $elapsed
+    (( $elapsed > 0 )) && printf '%.2fs' $elapsed
 }
 
 # Get the initial command timestamp

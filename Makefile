@@ -209,7 +209,7 @@ $(VIM_COC): | $(VIM)
 plug-zsh: PLUGINS = $(OH_MY_ZSH_PLUGINS) $(notdir $(ZSH_PLUGINS))
 plug-zsh: $(ZSH) $(ZSH_PLUGINS)
 	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' $(HOME)/.zshrc
-	@$(SED) "s/^plugins=(.*)$$/plugins=($(PLUGINS))/" $(HOME)/.zshrc
+	@$(SED) 's/^plugins=(.*)$$/plugins=($(PLUGINS))/' $(HOME)/.zshrc
 
 .PHONY: $(ZSH)
 $(ZSH): $(ZSH)/.git

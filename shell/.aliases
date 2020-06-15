@@ -37,6 +37,6 @@ alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
 alias t='tmux'
 alias tksv='tmux kill-server'
 alias tls='tmux list-sessions'
-alias tv='tmux new-session "vim"'
+alias tv="tmux new-session 'vim'"
 # vim
 alias v='vim'
