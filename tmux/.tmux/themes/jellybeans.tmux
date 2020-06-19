@@ -38,7 +38,7 @@ set -g status-interval 1
 set -g status-style fg=colour244,bg=colour236
 # Left status
 set -g status-left-length 30
-set -g status-left '#{prefix_highlight}#[fg=colour236,bg=colour103] #S '
+set -g status-left '#{prefix_highlight}#[fg=colour236,bg=colour110] #S '
 # Right status
 set -g status-right-length 150
 set -g status-right '#[fg=colour244,bg=colour236] #H #[fg=colour248,bg=colour239] %X #[fg=colour236,bg=colour246] %x '
