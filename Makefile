@@ -66,6 +66,7 @@ VIM_PLUGINS += zakharykaplan/vim-relatable
 VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += AndrewRadev/sideways.vim
 VIM_PLUGINS += tpope/vim-sleuth
+VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += tpope/vim-speeddating
 VIM_PLUGINS += AndrewRadev/splitjoin.vim
 VIM_PLUGINS += tpope/vim-surround
