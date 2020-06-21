@@ -22,6 +22,77 @@ let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 nnoremap <Leader>f :ALEFix<CR>
 nnoremap <Leader>a :ALEToggle<CR>
 
+" coc
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" GoTo code navigation
+nmap <silent> <Leader>gd <Plug>(coc-definition)
+nmap <silent> <Leader>gy <Plug>(coc-type-definition)
+nmap <silent> <Leader>gi <Plug>(coc-implementation)
+nmap <silent> <Leader>gr <Plug>(coc-references)
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim', 'help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming
+nmap <Leader>rn <Plug>(coc-rename)
+" Formatting selected code
+nmap <Leader>f <Plug>(coc-format-selected)
+xmap <Leader>f <Plug>(coc-format-selected)
+nmap <Leader>F <Plug>(coc-format)
+" Applying codeAction to the selected region
+" Example: `<Leader>aap` for current paragraph
+xmap <Leader>a <Plug>(coc-codeaction-selected)
+nmap <Leader>a <Plug>(coc-codeaction-selected)
+" Remap keys for applying codeAction to the current buffer
+nmap <Leader>ac <Plug>(coc-codeaction)
+" Apply QuickFix to problem on the current line
+nmap <Leader>qf <Plug>(coc-fix-current)
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+omap if <Plug>(coc-funcobj-i)
+xmap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+xmap af <Plug>(coc-funcobj-a)
+omap ic <Plug>(coc-classobj-i)
+xmap ic <Plug>(coc-classobj-i)
+omap ac <Plug>(coc-classobj-a)
+xmap ac <Plug>(coc-classobj-a)
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+" Add `:OrganizeImports` command for organize imports of the current buffer
+command! -nargs=0 OrganizeImports :call CocAction('runCommand', 'editor.action.organizeImport')
+" Mappings for CocList
+" Show all lists
+nnoremap <silent><nowait> <Space>l :<C-u>CocList<CR>
+" Show all diagnostics
+nnoremap <silent><nowait> <Space>a :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent><nowait> <Space>e :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent><nowait> <Space>c :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent><nowait> <Space>o :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent><nowait> <Space>s :<C-u>CocList -I symbols<cr>
+" Do default action for next item
+nnoremap <silent><nowait> <Space>j :<C-u>CocNext<CR>
+" Do default action for previous item
+nnoremap <silent><nowait> <Space>k :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent><nowait> <Space>p :<C-u>CocListResume<CR>
+
 " comfortable-motion.vim
 let g:comfortable_motion_no_default_key_mappings = 1
 nnoremap <silent> <C-d> :call comfortable_motion#flick(winheight(0) * 2)<CR>

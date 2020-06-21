@@ -119,6 +119,9 @@ set laststatus=2
 set noshowmode
 set number
 set showcmd
+if has('patch-8.1.1564')
+  set signcolumn=number
+endif
 set wildmenu
 
 " -- Various --
@@ -128,6 +131,7 @@ set hidden
 set mouse=a
 set shellcmdflag=-lc
 set ttimeoutlen=0
+set updatetime=300
 
 " -- Window --
 set splitbelow
