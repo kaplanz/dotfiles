@@ -55,6 +55,9 @@ set whichwrap+=<,>,[,]
 set foldmethod=syntax
 set nofoldenable
 
+" -- Font --
+highlight Comment cterm=italic
+
 " -- Indentation --
 filetype indent on
 set autoindent
