@@ -17,11 +17,6 @@ let s:sidebar_width = 31
 filetype plugin on
 
 " -- Preferences --
-" ale
-let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
-nnoremap <Leader>f :ALEFix<CR>
-nnoremap <Leader>a :ALEToggle<CR>
-
 " coc
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
