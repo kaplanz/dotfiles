@@ -70,6 +70,7 @@ VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += tpope/vim-speeddating
 VIM_PLUGINS += AndrewRadev/splitjoin.vim
 VIM_PLUGINS += tpope/vim-surround
+VIM_PLUGINS += AndrewRadev/switch.vim
 VIM_PLUGINS += majutsushi/tagbar
 VIM_PLUGINS += tpope/vim-unimpaired
 # Zsh
