@@ -70,6 +70,7 @@ set tabstop=4
 " -- Mappings --
 " Set mapleader
 let mapleader = ','
+nnoremap <Leader><Leader> <Leader>
 " Buffer overview
 nnoremap gb :buffers<CR>:b<Space>
 " Mark overview
