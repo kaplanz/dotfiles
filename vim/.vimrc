@@ -108,6 +108,10 @@ nnoremap <silent> <Leader>/ :let @/ = ''<CR>
 nnoremap <Leader>[ :bprevious<CR>
 nnoremap <Leader>] :bnext<CR>
 
+" -- Mouse --
+set mouse=a
+set ttymouse=xterm2
+
 " -- Search --
 set hlsearch
 set ignorecase
@@ -142,7 +146,6 @@ set wildmenu
 set confirm
 set directory=~/.vim/swap
 set hidden
-set mouse=a
 set shellcmdflag=-lc
 set ttimeoutlen=0
 set updatetime=300
