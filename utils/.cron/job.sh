@@ -7,12 +7,15 @@
 #  Copyright © 2020 Zakhary Kaplan. All rights reserved.
 #
 
+# Commands
+MKDIR='/bin/mkdir -p'
+
 # Directories
 CRON="$(dirname $0)"
 
 # Files
 LOCK="$CRON/locks/$1.lock"
-LOG="$CRON/logs/$1.$(date +%s).log"
+LOG="$CRON/logs/$(date +%Y/%m/%d)/$1.$(date +%s).log"
 SCRIPT="$CRON/scripts/$1"
 
 # Run script
@@ -28,6 +31,9 @@ main() {
     else
         touch "$LOCK"
     fi
+
+    # Create directory for log
+    $MKDIR "$(dirname $LOG)"
 
     # Call job script to run
     "$SCRIPT" 2>&1 | tee "$LOG"
