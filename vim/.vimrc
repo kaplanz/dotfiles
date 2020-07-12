@@ -29,6 +29,18 @@ augroup vimrc
   autocmd BufWritePre * %s/\s\+$//e
   " Replace tabs with spaces on write
   autocmd BufWritePre * retab
+  " Don't screw up folds when inserting text that might affect them, until
+  " leaving insert mode. Foldmethod is local to the window. Protect against
+  " screwing up folding when switching between windows.
+  autocmd InsertEnter *
+    \ if !exists('w:foldmethod')
+    \ |   let w:foldmethod=&foldmethod | setlocal foldmethod=manual
+    \ | endif
+  autocmd InsertLeave,WinLeave *
+    \ if exists('w:foldmethod')
+    \ |   let &l:foldmethod=w:foldmethod
+    \ |   unlet w:foldmethod
+    \ | endif
 augroup END
 
 " -- Colours --
