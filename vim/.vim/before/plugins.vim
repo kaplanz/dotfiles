@@ -88,13 +88,6 @@ nnoremap <silent><nowait> <Space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <Space>p :<C-u>CocListResume<CR>
 
-" comfortable-motion.vim
-let g:comfortable_motion_no_default_key_mappings = 1
-nnoremap <silent> <C-d> :call comfortable_motion#flick(winheight(0) * 2)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(winheight(0) * -2)<CR>
-nnoremap <silent> <C-f> :call comfortable_motion#flick(winheight(0) * 4)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(winheight(0) * -4)<CR>
-
 " easymotion
 " Change leader key
 map s <Plug>(easymotion-prefix)
