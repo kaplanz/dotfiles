@@ -170,7 +170,7 @@ set splitright
 "             Runtimes
 " --------------------------------
 
-" config directory
-runtime before/*
+" before directory
+runtime! before/**/*.vim
 " 2nd user vimrc file
 runtime vimrc
