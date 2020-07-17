@@ -75,7 +75,6 @@ endif
 
 " -- Folding --
 set foldmethod=syntax
-set nofoldenable
 
 " -- Font --
 highlight Comment cterm=italic
