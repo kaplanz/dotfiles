@@ -30,14 +30,20 @@ function sourcecode() {
         sed "s/1970/$(date +%Y)/" > $1
     cat $1
 }
-function upgrade_dotfiles() {
-    bash "$DOTFILES/tools/upgrade.sh" "$@"
-}
 
 # -- Filesystem --
 function finder() { find ${2:-.} -iname "*$1*"; }
 function fdin() { grep -yErIn --color=always $1 ${2:-.}; }
+function mv!() {
+    mkdir -p $(dirname $2)
+    mv $1 $2
+}
 function trash() { mv -f $@ ~/.Trash; }
+
+# -- General --
+function upgrade_dotfiles() {
+    bash "$DOTFILES/tools/upgrade.sh" "$@"
+}
 
 # -- Unix --
 function ansicolours() {
