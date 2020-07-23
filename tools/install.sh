@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 #  install.sh
 #  Install script.
@@ -33,12 +33,18 @@ main() {
     # Check for dependencies
     check_dependencies || {
         # If dependencies not found, do not install
-        echo 'Missing dependencies.'
-        test "$(uname)" == 'Darwin' && \
-            echo '  - recommended: brew'
-        echo '  - required: git, make, stow, zsh'
+        echo 'Installation cancelled. Please install missing dependencies and try again.'
+        [ "$(uname)" = 'Darwin' ] && \
+            echo 'Note: Homebrew could be used to satisfy all dependencies.'
         echo
-        echo 'Installation cancelled.'
+        echo 'Required:'
+        printf '  %s git\n' "$(test $(command -v git) && echo '✓' || echo '✗')"
+        printf '  %s make\n' "$(test $(command -v make) && echo '✓' || echo '✗')"
+        printf '  %s stow\n' "$(test $(command -v stow) && echo '✓' || echo '✗')"
+        printf '  %s zsh\n' "$(test $(command -v zsh) && echo '✓' || echo '✗')"
+        echo 'Recommended:'
+        printf '  %s tmux\n' "$(test $(command -v tmux) && echo '✓' || echo '✗')"
+        printf '  %s vim\n' "$(test $(command -v vim) && echo '✓' || echo '✗')"
         return
     }
 
@@ -47,9 +53,6 @@ main() {
 
     # Run Makefile
     make --directory=~/.dotfiles install
-
-    # Restart shell (if parent process is a session leader)
-    [[ "$(ps -o stat= -p $PPID)" =~ 's' ]] && exec zsh -l
 }
 
 main "$@"
