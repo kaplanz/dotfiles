@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 #  upgrade_dotfiles.sh
 #  Cron script to upgrade dotfiles.

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 #  job.sh
 #  Cron script manager.
@@ -7,8 +7,13 @@
 #  Copyright © 2020 Zakhary Kaplan. All rights reserved.
 #
 
+# Ensure valid bash version
+if [ ! "${BASH_VERSINFO[0]}" -ge 4 ]; then
+    exit 3 # unsupported bash version
+fi
+
 # Commands
-MKDIR='/bin/mkdir -p'
+MKDIR='mkdir -p'
 
 # Directories
 CRON="$(dirname $0)"
@@ -36,7 +41,7 @@ main() {
     $MKDIR "$(dirname $LOG)"
 
     # Call job script to run
-    "$SCRIPT" 2>&1 | tee "$LOG"
+    "$SCRIPT" |& tee "$LOG"
 
     # Save exit status from job script
     EXIT="${PIPESTATUS[0]}"
