@@ -108,9 +108,9 @@ nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 3/4)<CR>
 nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 4/3)<CR>
 nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 3/4)<CR>
 " Toggle Paste mode
-nnoremap <Leader>p :set paste!<CR>
+nnoremap <Leader>P :set paste!<CR>
 " Reload .vimrc
-nnoremap <silent> <Leader>r :source $MYVIMRC<CR>
+nnoremap <silent> <Leader>R :source $MYVIMRC<CR>
 " Write to file
 nnoremap <Leader>s :w<CR>
 " Clear last used search pattern
