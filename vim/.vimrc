@@ -118,6 +118,8 @@ nnoremap <silent> <Leader>/ :let @/ = ''<CR>
 " Scroll forward/backrwards through buffers
 nnoremap <Leader>[ :bprevious<CR>
 nnoremap <Leader>] :bnext<CR>
+" Sort Visual mode selection
+vnoremap <Leader>o :sort<CR>
 
 " -- Mouse --
 set mouse=a
