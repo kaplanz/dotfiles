@@ -77,15 +77,15 @@ command! -nargs=0 OrganizeImports :call CocAction('runCommand', 'editor.action.o
 " Show all lists
 nnoremap <silent><nowait> <Space>l :<C-u>CocList<CR>
 " Show all diagnostics
-nnoremap <silent><nowait> <Space>a :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <Space>a :<C-u>CocList diagnostics<CR>
 " Manage extensions
-nnoremap <silent><nowait> <Space>e :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <Space>e :<C-u>CocList extensions<CR>
 " Show commands
-nnoremap <silent><nowait> <Space>c :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <Space>c :<C-u>CocList commands<CR>
 " Find symbol of current document
-nnoremap <silent><nowait> <Space>o :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <Space>o :<C-u>CocList outline<CR>
 " Search workspace symbols
-nnoremap <silent><nowait> <Space>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <Space>s :<C-u>CocList -I symbols<CR>
 " Do default action for next item
 nnoremap <silent><nowait> <Space>j :<C-u>CocNext<CR>
 " Do default action for previous item

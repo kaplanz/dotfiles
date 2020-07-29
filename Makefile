@@ -180,7 +180,6 @@ $(TMUX_PLUGINS): PLUGIN = $(TMUX)/plugins/$(notdir $@)
 $(TMUX_PLUGINS): $(TMUX)
 	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
 
-
 # Vim
 .PHONY: plug-vim
 plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_COC) $(VIM_PLUGINS)
