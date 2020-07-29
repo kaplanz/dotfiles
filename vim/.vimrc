@@ -5,16 +5,18 @@
 "  Created by Zakhary Kaplan on 2019-06-05.
 "  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 "
-" Specify UTF-8 character encoding
-scriptencoding utf-8
 
 " --------------------------------
-"           Preferences
+"           Autocommands
 " --------------------------------
 
-" -- Autocommands --
+" Vimrc: {{{
 augroup vimrc
   autocmd!
+
+  " Override formatoptions upon entering a new buffer
+  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid, when inside an event handler
   " (happens when dropping a file on gvim) and for a commit message (it's
@@ -23,12 +25,12 @@ augroup vimrc
     \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
     \ |   exe "normal! g`\""
     \ | endif
-  " Override formatoptions upon entering a new buffer
-  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
+
   " Trim trailing whitespace on write
   autocmd BufWritePre * %s/\s\+$//e
   " Replace tabs with spaces on write
   autocmd BufWritePre * retab
+
   " Don't screw up folds when inserting text that might affect them, until
   " leaving insert mode. Foldmethod is local to the window. Protect against
   " screwing up folding when switching between windows.
@@ -41,24 +43,78 @@ augroup vimrc
     \ |   let &l:foldmethod=w:foldmethod
     \ |   unlet w:foldmethod
     \ | endif
-augroup END
 
-" -- Colours --
+augroup END
+" }}}
+
+
+" --------------------------------
+"             Mappings
+" --------------------------------
+
+" Mapleader: {{{
+let mapleader = ','
+nnoremap <Leader><Leader> <Leader>
+" }}}
+
+" Normal: {{{
+" Disable Ex mode
+nnoremap Q <Nop>
+" Yank from cursor to end of line
+nnoremap Y y$
+" Buffer overview
+nnoremap gb :buffers<CR>:b<Space>
+" Mark overview
+nnoremap gm :marks<CR>:norm<Space>`
+" Register overview
+nnoremap gr :registers<CR>:norm<Space>"
+" Clear last used search pattern
+nnoremap <silent> <Leader>/ :let @/ = ''<CR>
+" Resize splits
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 4/3)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 3/4)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 4/3)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 3/4)<CR>
+" Toggle Paste mode
+nnoremap <Leader>P :set paste!<CR>
+" Reload .vimrc
+nnoremap <Leader>R :source $MYVIMRC<CR>
+" Scroll through buffers
+nnoremap <Leader>[ :bprevious<CR>
+nnoremap <Leader>] :bnext<CR>
+" Write to file
+nnoremap <Leader>s :w<CR>
+" }}}
+
+" Visual and Select: {{{
+" Sort Visual mode selection
+vnoremap <Leader>o :sort<CR>
+" }}}
+
+
+" --------------------------------
+"             Options
+" --------------------------------
+
+" Colours: {{{
 colorscheme jellybeans
 syntax enable
+" }}}
 
-" -- Commands --
+" Commands: {{{
 " Delete all registers
 command! DelRegisters for i in range(34, 122) | silent! call setreg(nr2char(i), []) | endfor
+" }}}
 
-" -- Completion --
+" Completion: {{{
 set belloff+=complete,ctrlg
 set complete-=t
 set completeopt-=preview
 set completeopt+=menuone
 set shortmess+=c " shut off completion messages
+" }}}
 
-" -- Cursor --
+" Cursor: {{{
 set backspace=indent,eol,start
 set cursorline
 set whichwrap+=<,>,[,]
@@ -72,14 +128,21 @@ else
     let &t_SI = "\e[5 q" " bar in INSERT mode (blink)
     let &t_SR = "\e[3 q" " underline in REPLACE mode (blink)
 endif
+" }}}
 
-" -- Folding --
+" Encoding: {{{
+scriptencoding utf-8
+" }}}
+
+" Folding: {{{
 set foldmethod=syntax
+" }}}
 
-" -- Font --
+" Font: {{{
 highlight Comment cterm=italic
+" }}}
 
-" -- Indentation --
+" Indentation: {{{
 filetype indent on
 set autoindent
 set expandtab
@@ -87,51 +150,21 @@ set shiftround
 set shiftwidth=4
 set smarttab
 set tabstop=4
+" }}}
 
-" -- Mappings --
-" Set mapleader
-let mapleader = ','
-nnoremap <Leader><Leader> <Leader>
-" Buffer overview
-nnoremap gb :buffers<CR>:b<Space>
-" Mark overview
-nnoremap gm :marks<CR>:norm<Space>`
-" Register overview
-nnoremap gr :registers<CR>:norm<Space>"
-" Disable Ex mode
-nnoremap Q <Nop>
-" Yank from cursor to end of line
-noremap Y y$
-" Resize splits
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 4/3)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 3/4)<CR>
-nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 4/3)<CR>
-nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 3/4)<CR>
-" Toggle Paste mode
-nnoremap <Leader>P :set paste!<CR>
-" Reload .vimrc
-nnoremap <silent> <Leader>R :source $MYVIMRC<CR>
-" Write to file
-nnoremap <Leader>s :w<CR>
-" Clear last used search pattern
-nnoremap <silent> <Leader>/ :let @/ = ''<CR>
-" Scroll forward/backrwards through buffers
-nnoremap <Leader>[ :bprevious<CR>
-nnoremap <Leader>] :bnext<CR>
-" Sort Visual mode selection
-vnoremap <Leader>o :sort<CR>
-
-" -- Mouse --
+" Mouse: {{{
 set mouse=a
 set ttymouse=xterm2
+" }}}
 
-" -- Search --
+" Search: {{{
 set hlsearch
 set ignorecase
 set incsearch
 set smartcase
+" }}}
 
-" -- Terminal --
+" Terminal: {{{
 if exists('##TerminalOpen')
   " Disable line numbers in terminal buffers
   autocmd TerminalOpen * set nonumber
@@ -142,8 +175,9 @@ if exists(':terminal')
   " Enter Terminal-Normal mode
   tnoremap <Esc><Esc> <C-w>N
 endif
+" }}}
 
-" -- User Interface --
+" User Interface: {{{
 set display+=lastline
 set fillchars+=vert:│
 set laststatus=2
@@ -154,18 +188,21 @@ if has('patch-8.1.1564')
   set signcolumn=number
 endif
 set wildmenu
+" }}}
 
-" -- Various --
+" Various: {{{
 set confirm
 set directory=~/.vim/swap
 set hidden
 set shellcmdflag=-lc
 set ttimeoutlen=0
 set updatetime=300
+" }}}
 
-" -- Window --
+" Window: {{{
 set splitbelow
 set splitright
+" }}}
 
 
 " --------------------------------
@@ -176,3 +213,5 @@ set splitright
 runtime! before/**/*.vim
 " 2nd user vimrc file
 runtime vimrc
+
+" vim: foldmethod=marker

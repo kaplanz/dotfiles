@@ -7,17 +7,22 @@
 "
 
 " --------------------------------
+"             Options
+" --------------------------------
+
+" Locals: {{{
+let s:sidebar_width = 31
+" }}}
+
+" Options: {{{
+filetype plugin on
+" }}}
+
+" --------------------------------
 "             Plugins
 " --------------------------------
 
-" -- Locals --
-let s:sidebar_width = 31
-
-" -- Options --
-filetype plugin on
-
-" -- Preferences --
-" coc
+" Coc: {{{
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -87,17 +92,20 @@ nnoremap <silent><nowait> <Space>j :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <Space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <Space>p :<C-u>CocListResume<CR>
+" }}}
 
-" easymotion
+" EasyMotion: {{{
 " Change leader key
 map s <Plug>(easymotion-prefix)
+" }}}
 
-" fzf
+" FZF: {{{
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>p :Rg<CR>
 set runtimepath+=/usr/local/opt/fzf,~/.fzf
+" }}}
 
-" lightline.vim
+" Lightline: {{{
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
@@ -159,20 +167,26 @@ function! LightlineMode()
         \ &ft ==# 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+" }}}
 
-" nerdtree
+" NERDTree: {{{
 autocmd bufenter * if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = s:sidebar_width
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
+" }}}
 
-" sideways
+" Sideways: {{{
 nnoremap <C-h> :SidewaysLeft<CR>
 nnoremap <C-l> :SidewaysRight<CR>
+" }}}
 
-" tagbar
+" Tagbar: {{{
 let g:tagbar_sort = 0
 let g:tagbar_width = s:sidebar_width
 nnoremap <silent> <Leader>m :TagbarToggle<CR>
 nnoremap <silent> <Leader>M :TagbarOpenAutoClose<CR>
+" }}}
+
+" vim: foldmethod=marker
