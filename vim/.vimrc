@@ -62,6 +62,9 @@ nnoremap <Leader><Leader> <Leader>
 nnoremap Q <Nop>
 " Yank from cursor to end of line
 nnoremap Y y$
+" Write to file
+nnoremap <silent> ZW :update<CR>
+nnoremap <silent> <C-S> :update<CR>
 " Buffer overview
 nnoremap gb :buffers<CR>:b<Space>
 " Mark overview
@@ -82,8 +85,6 @@ nnoremap <Leader>R :source $MYVIMRC<CR>
 " Scroll through buffers
 nnoremap <Leader>[ :bprevious<CR>
 nnoremap <Leader>] :bnext<CR>
-" Write to file
-nnoremap <Leader>s :w<CR>
 " }}}
 
 " Visual and Select: {{{
