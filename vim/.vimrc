@@ -82,9 +82,6 @@ nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 3/4)<CR>
 nnoremap <Leader>P :set paste!<CR>
 " Reload .vimrc
 nnoremap <Leader>R :source $MYVIMRC<CR>
-" Scroll through buffers
-nnoremap <Leader>[ :bprevious<CR>
-nnoremap <Leader>] :bnext<CR>
 " }}}
 
 " Visual and Select: {{{
