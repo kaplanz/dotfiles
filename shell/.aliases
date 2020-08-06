@@ -16,7 +16,9 @@ alias reload='clear && exec $SHELL -l'
 
 # -- Filesystem --
 alias cp='cp -R'
+alias l1='ls -1'
 alias lh='ls -A'
+alias rm='rm -d'
 alias scp='scp -r'
 alias tree="tree -C -I '.git'"
 for i in {1..9}; do

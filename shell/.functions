@@ -38,6 +38,10 @@ function mv!() {
     mkdir -p $(dirname $2)
     mv $1 $2
 }
+function cp!() {
+    mkdir -p $(dirname $2)
+    cp -R $1 $2
+}
 function trash() { mv -f $@ ~/.Trash; }
 
 # -- General --
