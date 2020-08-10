@@ -42,10 +42,10 @@ GITHUB = https://github.com
 
 # -- Colours --
 # Vim
-VIM_COLOURS += morhetz/gruvbox
 VIM_COLOURS += cocopon/iceberg.vim
-VIM_COLOURS += nanotech/jellybeans.vim
 VIM_COLOURS += kaicataldo/material.vim
+VIM_COLOURS += morhetz/gruvbox
+VIM_COLOURS += nanotech/jellybeans.vim
 VIM_COLOURS += xero/sourcerer.vim
 
 # -- Plugins --
@@ -53,30 +53,30 @@ VIM_COLOURS += xero/sourcerer.vim
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
 VIM_COC = $(VIM_PACK)/coc.nvim
+VIM_PLUGINS += AndrewRadev/sideways.vim
+VIM_PLUGINS += AndrewRadev/splitjoin.vim
+VIM_PLUGINS += AndrewRadev/switch.vim
+VIM_PLUGINS += easymotion/vim-easymotion
+VIM_PLUGINS += honza/vim-snippets
+VIM_PLUGINS += itchyny/lightline.vim
+VIM_PLUGINS += junegunn/fzf.vim
+VIM_PLUGINS += majutsushi/tagbar
+VIM_PLUGINS += preservim/nerdtree
 VIM_PLUGINS += tpope/vim-abolish
 VIM_PLUGINS += tpope/vim-commentary
-VIM_PLUGINS += easymotion/vim-easymotion
-VIM_PLUGINS += wsdjeg/vim-fetch
 VIM_PLUGINS += tpope/vim-fugitive
-VIM_PLUGINS += junegunn/fzf.vim
-VIM_PLUGINS += itchyny/lightline.vim
-VIM_PLUGINS += preservim/nerdtree
+VIM_PLUGINS += tpope/vim-repeat
+VIM_PLUGINS += tpope/vim-sleuth
+VIM_PLUGINS += tpope/vim-speeddating
+VIM_PLUGINS += tpope/vim-surround
+VIM_PLUGINS += tpope/vim-unimpaired
+VIM_PLUGINS += wsdjeg/vim-fetch
 VIM_PLUGINS += zakharykaplan/vim-parry
 VIM_PLUGINS += zakharykaplan/vim-relatable
-VIM_PLUGINS += tpope/vim-repeat
-VIM_PLUGINS += AndrewRadev/sideways.vim
-VIM_PLUGINS += tpope/vim-sleuth
-VIM_PLUGINS += honza/vim-snippets
-VIM_PLUGINS += tpope/vim-speeddating
-VIM_PLUGINS += AndrewRadev/splitjoin.vim
-VIM_PLUGINS += tpope/vim-surround
-VIM_PLUGINS += AndrewRadev/switch.vim
-VIM_PLUGINS += majutsushi/tagbar
-VIM_PLUGINS += tpope/vim-unimpaired
 # Zsh
 OH_MY_ZSH_PLUGINS += git docker docker-compose
-ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += akarzim/zsh-docker-aliases
+ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 
 # -- Utilities --
