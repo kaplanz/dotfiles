@@ -192,7 +192,7 @@ set wildmenu
 set confirm
 set directory=~/.vim/swap
 set hidden
-set shellcmdflag=-lc
+set shell+=\ -l
 set ttimeoutlen=0
 set updatetime=300
 " }}}
