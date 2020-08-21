@@ -49,13 +49,6 @@ function upgrade_dotfiles() {
     bash "$DOTFILES/tools/upgrade.sh" "$@"
 }
 
-# -- Unix --
-function ansicolours() {
-    for i in {0..255}; do
-        print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
-    done
-}
-
 # -- Utilities --
 # fzf
 function _fzf_compgen_path() {
