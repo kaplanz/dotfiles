@@ -130,3 +130,5 @@ unset cyan
 #
 # af-magic.zsh-theme: <https://github.com/andyfleming/oh-my-zsh>
 # pure.zsh-theme: <https://github.com/sindresorhus>
+
+# vim: filetype=zsh:

@@ -41,3 +41,5 @@ alias tls='tmux list-sessions'
 alias tv="tmux new-session 'vim'"
 # vim
 alias v='vim'
+
+# vim: filetype=sh:

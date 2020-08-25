@@ -61,3 +61,5 @@ function _fzf_compgen_dir() {
 function tas() { tmux attach-session ${1:+"-t$1"}; }
 function tkss() { tmux kill-session ${1:+"-t$1"}; }
 function tns() { tmux new-session ${1:+"-s$1"}; }
+
+# vim: filetype=sh:

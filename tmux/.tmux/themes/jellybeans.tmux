@@ -55,3 +55,5 @@ set -g window-status-separator ''
 # basic.tmuxtheme: <https://github.com/jimeh/tmux-themepack>
 # jellybeans.tmux: <https://github.com/atweiden/dotfiles>
 # jellybeans.vim: <https://github.com/nanotech/jellybeans.vim>
+
+# vim: filetype=tmux:
