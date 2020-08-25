@@ -95,7 +95,8 @@ vnoremap <Leader>o :sort<CR>
 " --------------------------------
 
 " Colours: {{{
-colorscheme jellybeans
+colorscheme iceberg
+set background=dark
 syntax enable
 " }}}
 

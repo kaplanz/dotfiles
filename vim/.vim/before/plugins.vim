@@ -107,7 +107,7 @@ set runtimepath+=/usr/local/opt/fzf,~/.fzf
 
 " Lightline: {{{
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'iceberg',
       \ 'active': {
       \   'left': [['mode', 'paste'], ['fugitive', 'readonly', 'filename', 'modified']],
       \ },
