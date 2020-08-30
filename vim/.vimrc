@@ -17,6 +17,21 @@ augroup vimrc
   " Override formatoptions upon entering a new buffer
   autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
 
+  " For very long files, set foldmethod to indent to avoid long folding times
+  autocmd BufNewFile,BufRead *
+    \ if line('$') < 1000
+    \ |   setlocal foldmethod=syntax
+    \ | else
+    \ |   setlocal foldmethod=indent
+    \ | endif
+  " Tier foldlevel depending on how many lines are in the buffer
+  autocmd BufNewFile,BufRead *
+    \ if line('$') < 100
+    \ |   setlocal foldlevel=99
+    \ | else
+    \ |   setlocal foldlevel=0
+    \ | endif
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid, when inside an event handler
   " (happens when dropping a file on gvim) and for a commit message (it's
@@ -131,10 +146,6 @@ endif
 
 " Encoding: {{{
 scriptencoding utf-8
-" }}}
-
-" Folding: {{{
-set foldmethod=syntax
 " }}}
 
 " Font: {{{
