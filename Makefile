@@ -90,7 +90,7 @@ TERMINFO_FILES = $(wildcard utils/.terminfo/*.terminfo)
 
 # -- Make all programs --
 .PHONY: all
-all: dirs plug stow utils
+all: dirs local plug stow utils
 
 .PHONY: local
 local: stow-local
@@ -266,3 +266,10 @@ $(TERMINFO):
 
 utils/.terminfo/%.terminfo: $(TERMINFO) stow-utils
 	@$(TIC) -o $(TERMINFO) $@
+
+
+# --------------------------------
+#             Includes
+# --------------------------------
+
+-include ./local/Makefile
