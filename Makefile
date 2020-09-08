@@ -19,6 +19,7 @@ TMUX = $(HOME)/.tmux
 VIM = $(HOME)/.vim
 VIM_PACK = $(VIM)/pack/plugins/start
 ZSH = $(HOME)/.oh-my-zsh
+ZSHRC = $(HOME)/.zshrc
 
 # -- Commands --
 GIT_CLONE = git clone --depth 1
@@ -102,7 +103,7 @@ tmux: $(TMUX) plug-tmux stow-tmux
 vim: $(VIM) plug-vim stow-vim
 
 .PHONY: zsh
-zsh: $(ZSH) plug-zsh stow-zsh
+zsh: $(ZSH) $(ZSHRC) plug-zsh stow-zsh
 
 
 # -- Create all directories --
@@ -207,9 +208,9 @@ $(VIM_COC): | $(VIM)
 # Zsh
 .PHONY: plug-zsh
 plug-zsh: PLUGINS = $(OH_MY_ZSH_PLUGINS) $(notdir $(ZSH_PLUGINS))
-plug-zsh: $(ZSH) $(ZSH_PLUGINS)
-	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' $(HOME)/.zshrc
-	@$(SED) 's/^plugins=(.*)$$/plugins=($(PLUGINS))/' $(HOME)/.zshrc
+plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
+	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' $(ZSHRC)
+	@$(SED) 's/^plugins=(.*)$$/plugins=($(PLUGINS))/' $(ZSHRC)
 
 .PHONY: $(ZSH)
 $(ZSH): $(ZSH)/.git
@@ -219,6 +220,9 @@ ifdef CURL
 else ifdef WGET
 	@sh -c "$$($(WGET) -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')"
 endif
+
+$(ZSHRC): | $(ZSH)
+	cp $(ZSH)/templates/zshrc.zsh-template $(ZSHRC)
 
 .PHONY: $(ZSH_PLUGINS)
 $(ZSH_PLUGINS): PLUGIN = $(ZSH)/custom/plugins/$(notdir $@)
