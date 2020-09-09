@@ -189,4 +189,26 @@ nnoremap <silent> <Leader>m :TagbarToggle<CR>
 nnoremap <silent> <Leader>M :TagbarOpenAutoClose<CR>
 " }}}
 
+" VisualMulti: {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-visual-multi configuration
+
+let g:VM_default_mappings           = 1
+let g:VM_mouse_mappings             = 1
+let g:VM_reselect_first             = 0
+let g:VM_case_setting               = "smart"
+let g:VM_disable_syntax_in_imode    = 0
+let g:VM_exit_on_1_cursor_left      = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:VM_mouse_mappings    = 1
+let g:VM_theme             = 'default'
+let g:VM_maps = {}
+let g:VM_maps["Undo"]      = 'u'
+let g:VM_maps["Redo"]      = '<C-r>'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
 " vim: foldmethod=marker
