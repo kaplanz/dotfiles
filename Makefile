@@ -61,6 +61,7 @@ VIM_PLUGINS += easymotion/vim-easymotion
 VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += junegunn/fzf.vim
+VIM_PLUGINS += junegunn/vim-peekaboo
 VIM_PLUGINS += majutsushi/tagbar
 VIM_PLUGINS += mg979/vim-visual-multi
 VIM_PLUGINS += preservim/nerdtree
