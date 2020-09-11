@@ -73,6 +73,7 @@ VIM_PLUGINS += tpope/vim-sleuth
 VIM_PLUGINS += tpope/vim-speeddating
 VIM_PLUGINS += tpope/vim-surround
 VIM_PLUGINS += tpope/vim-unimpaired
+VIM_PLUGINS += wellle/targets.vim
 VIM_PLUGINS += wsdjeg/vim-fetch
 VIM_PLUGINS += zakharykaplan/vim-parry
 VIM_PLUGINS += zakharykaplan/vim-relatable
