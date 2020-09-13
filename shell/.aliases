@@ -42,4 +42,4 @@ alias tv="tmux new-session 'vim'"
 # vim
 alias v='vim'
 
-# vim: filetype=sh:
+# vim:ft=sh:

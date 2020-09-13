@@ -65,4 +65,4 @@ augroup vimrc
 augroup END
 " }}}
 
-" vim: foldmethod=marker
+" vim:fdl=0:fdm=marker:

@@ -124,4 +124,4 @@ set splitright
 " 2nd user vimrc file
 runtime vimrc
 
-" vim: foldmethod=marker
+" vim:fdl=0:fdm=marker:

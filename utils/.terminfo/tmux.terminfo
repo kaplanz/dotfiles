@@ -3,4 +3,4 @@ tmux|tmux terminal multiplexer,
   smso=\E[7m, rmso=\E[27m,
   use=screen,
 
-# vim: filetype=terminfo:
+# vim:ft=terminfo:

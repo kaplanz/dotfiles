@@ -13,4 +13,4 @@
 " Italicize comments
 highlight Comment cterm=italic
 
-" vim: foldmethod=marker
+" vim:fdl=0:fdm=marker:

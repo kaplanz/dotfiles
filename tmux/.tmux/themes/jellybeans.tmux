@@ -56,4 +56,4 @@ set -g window-status-separator ''
 # jellybeans.tmux: <https://github.com/atweiden/dotfiles>
 # jellybeans.vim: <https://github.com/nanotech/jellybeans.vim>
 
-# vim: filetype=tmux:
+# vim:ft=tmux:

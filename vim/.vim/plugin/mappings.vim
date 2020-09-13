@@ -53,4 +53,4 @@ endif
 vnoremap <Leader>o :sort<CR>
 " }}}
 
-" vim: foldmethod=marker
+" vim:fdl=0:fdm=marker:
