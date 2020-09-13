@@ -102,7 +102,6 @@ map s <Plug>(easymotion-prefix)
 " FZF: {{{
 nnoremap <C-p> :FZF<CR>
 nnoremap <Leader>p :Rg<CR>
-set runtimepath+=/usr/local/opt/fzf,~/.fzf
 " }}}
 
 " Lightline: {{{
