@@ -38,6 +38,7 @@ augroup vimrc
   " likely a different one than last time).
   autocmd BufReadPost *
     \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \                                                 && &ft !~# 'gitrebase'
     \ |   exe "normal! g`\""
     \ | endif
 
