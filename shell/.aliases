@@ -10,6 +10,9 @@
 #             Aliases
 # --------------------------------
 
+# -- Developer --
+alias make='make -j$(nproc)'
+
 # -- Environment --
 alias path='echo ${PATH//:/\\n}'
 alias reload='clear && exec $SHELL -l'
