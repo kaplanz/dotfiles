@@ -21,5 +21,6 @@
 #             Options
 # --------------------------------
 
+setopt cshnullglob
 setopt extendedglob
 setopt noclobber
