@@ -40,15 +40,9 @@ set shortmess+=c " shut off completion messages
 
 " Cursor: {{{
 " Change cursor shape between NORMAL, INSERT, and REPLACE mode
-if exists('$TMUX')
-  let &t_EI = "\ePtmux;\e\e[2 q\e\\"
-  let &t_SI = "\ePtmux;\e\e[5 q\e\\"
-  let &t_SR = "\ePtmux;\e\e[3 q\e\\"
-else
-  let &t_EI = "\e[2 q" " block in NORMAL mode
-  let &t_SI = "\e[5 q" " bar in INSERT mode (blink)
-  let &t_SR = "\e[3 q" " underline in REPLACE mode (blink)
-endif
+let &t_EI = "\e[2 q" " block in NORMAL mode
+let &t_SI = "\e[5 q" " bar in INSERT mode (blink)
+let &t_SR = "\e[3 q" " underline in REPLACE mode (blink)
 set backspace=indent,eol,start
 set cursorline
 set whichwrap+=<,>,[,]
