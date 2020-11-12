@@ -106,7 +106,7 @@ nnoremap <Leader>p :Rg<CR>
 
 " Lightline: {{{
 let g:lightline = {
-      \ 'colorscheme': 'iceberg',
+      \ 'colorscheme': g:colors_name,
       \ 'active': {
       \   'left': [['mode', 'paste'], ['fugitive', 'readonly', 'filename', 'modified']],
       \ },
