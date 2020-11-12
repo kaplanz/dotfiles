@@ -15,40 +15,40 @@ zmodload zsh/datetime
 # Take advantage of $LS_COLORS for completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-# Colour vars
-DeepSkyBlue4='25'
-DeepSkyBlue3='31'
-DarkSeaGreen4='71'
-DarkOliveGreen3='107'
-LightSkyBlue3='110'
-IndianRed='167'
-Plum2='183'
-SandyBrown='215'
-LightGoldenrod2='222'
-Grey7='233'
-Grey19='236'
-Grey42='242'
-Grey58='246'
+# Colours
+zsh_prompt_arrow='110'
+zsh_prompt_blue_fg='31'
+zsh_prompt_git='71'
+zsh_prompt_git_dirty='215'
+zsh_prompt_green_fg='107'
+zsh_prompt_magenta_fg='183'
+zsh_prompt_main='25'
+zsh_prompt_primary_bg='233'
+zsh_prompt_primary_fg='242'
+zsh_prompt_red_fg='167'
+zsh_prompt_secondary_bg='236'
+zsh_prompt_secondary_fg='246'
+zsh_prompt_yellow_fg='222'
 
 # -- Prompt --
 # Prompt blocks
-exit_status_block='%(?,,%F{$IndianRed}%K{$Grey7} $? %f%k)'
-command_time_block='${command_time:+"%F{$Grey42}%K{$Grey7} $command_time %f%k"}'
-conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$DarkOliveGreen3}%K{$Grey7} $CONDA_DEFAULT_ENV "}'
-hostname_block='${SSH_TTY:+"%F{$DeepSkyBlue3}%K{$Grey7} %n@%m "}'
-time_block='%F{$Grey58}%K{$Grey19} %D{%X}' # Use ZLE_RPROMPT_INDENT as final whitespace
+exit_status_block='%(?,,%F{$zsh_prompt_red_fg}%K{$zsh_prompt_primary_bg} $? %f%k)'
+command_time_block='${command_time:+"%F{$zsh_prompt_primary_fg}%K{$zsh_prompt_primary_bg} $command_time %f%k"}'
+conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$zsh_prompt_green_fg}%K{$zsh_prompt_primary_bg} $CONDA_DEFAULT_ENV "}'
+hostname_block='${SSH_TTY:+"%F{$zsh_prompt_blue_fg}%K{$zsh_prompt_primary_bg} %n@%m "}'
+time_block='%F{$zsh_prompt_secondary_fg}%K{$zsh_prompt_secondary_bg} %D{%X}' # Use ZLE_RPROMPT_INDENT as final whitespace
 
 # Primary prompt
-PROMPT='%k%F{$DeepSkyBlue4}%~$(git_prompt_info) %F{$LightSkyBlue3}%(!.#.»)%f '
+PROMPT='%k%F{$zsh_prompt_main}%~$(git_prompt_info) %F{$zsh_prompt_arrow}%(!.#.»)%f '
 
 # Right prompt
 RPROMPT="${exit_status_block}${command_time_block}${conda_env_block}${hostname_block}${time_block}%E"
 
 # git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{$DeepSkyBlue4}(%F{$DarkSeaGreen4}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%F{$DeepSkyBlue4})%f"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{$zsh_prompt_main}(%F{$zsh_prompt_git}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%F{$zsh_prompt_main})%f"
 ZSH_THEME_GIT_PROMPT_CLEAN=''
-ZSH_THEME_GIT_PROMPT_DIRTY="%F{$SandyBrown}*"
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{$zsh_prompt_git_dirty}*"
 
 # Calculate command execution time
 get_command_time() {
@@ -72,12 +72,12 @@ precmd() {
 
 # -- Syntax Highlighting --
 # Set colours
-red=$IndianRed
-green=$DarkSeaGreen4
-yellow=$LightGoldenrod2
-blue=$DeepSkyBlue4
-magenta=$Plum2
-cyan=$LightSkyBlue3
+red=$zsh_prompt_red_fg
+green=$zsh_prompt_git
+yellow=$zsh_prompt_yellow_fg
+blue=$zsh_prompt_main
+magenta=$zsh_prompt_magenta_fg
+cyan=$zsh_prompt_arrow
 
 # Define styles
 ZSH_HIGHLIGHT_STYLES[default]=none
@@ -129,6 +129,6 @@ unset cyan
 # --------------------------------
 #
 # af-magic.zsh-theme: <https://github.com/andyfleming/oh-my-zsh>
-# pure.zsh-theme: <https://github.com/sindresorhus>
+# pure.zsh-theme: <https://github.com/sindresorhus/pure>
 
 # vim:ft=zsh:
