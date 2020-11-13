@@ -34,7 +34,7 @@ Some features of this repository have dependencies as listed in the [`Brewfile`]
 **Homebrew**:
 
 ```shell
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
 For more information on installation, see [website](https://brew.sh).
