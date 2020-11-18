@@ -100,8 +100,28 @@ map s <Plug>(easymotion-prefix)
 " }}}
 
 " FZF: {{{
+" Define fzf-leader key
+nmap \ <Plug>(fzf-leader)
+" Leader mappings
+nmap <Plug>(fzf-leader)f :Files<CR>
+nmap <Plug>(fzf-leader)F :GFiles<CR>
+nmap <Plug>(fzf-leader)c :Colors<CR>
+nmap <Plug>(fzf-leader)l :Lines<CR>
+nmap <Plug>(fzf-leader)L :BLines<CR>
+nmap <Plug>(fzf-leader)w :Windows<CR>
+nmap <Plug>(fzf-leader)y :History<CR>
+nmap <Plug>(fzf-leader); :History:<CR>
+nmap <Plug>(fzf-leader)/ :History/<CR>
+nmap <Plug>(fzf-leader)g :Commits<CR>
+nmap <Plug>(fzf-leader)G :BCommits<CR>
+nmap <Plug>(fzf-leader): :Commands<CR>
+nmap <Plug>(fzf-leader)m :Maps<CR>
+nmap <Plug>(fzf-leader)h :Helptags<CR>
+nmap <Plug>(fzf-leader)t :Filetypes<CR>
+" Other mappings
 nnoremap <C-p> :FZF<CR>
-nnoremap <Leader>p :Rg<CR>
+nnoremap gM :Marks<CR>
+nnoremap gB :Buffers<CR>
 " }}}
 
 " Lightline: {{{
