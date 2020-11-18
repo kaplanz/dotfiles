@@ -41,13 +41,6 @@ nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 4/3)<CR>
 nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 3/4)<CR>
 " }}}
 
-" Terminal: {{{
-if exists(':terminal')
-  " Enter Terminal-Normal mode
-  tnoremap <Esc><Esc> <C-w>N
-endif
-" }}}
-
 " Visual and Select: {{{
 " Sort Visual mode selection
 vnoremap <Leader>o :sort<CR>

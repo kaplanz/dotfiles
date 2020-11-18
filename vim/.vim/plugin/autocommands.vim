@@ -59,8 +59,8 @@ augroup vimrc
     \ |   let &l:foldmethod=w:foldmethod
 
   " Disable line numbers in terminal buffers
-  if exists('##TerminalOpen')
-    autocmd TerminalOpen * set nonumber
+  if exists('##TerminalWinOpen')
+    autocmd TerminalWinOpen * set nonumber
   endif
 
 augroup END
