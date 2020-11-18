@@ -176,11 +176,6 @@ nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
 " }}}
 
-" Sideways: {{{
-nnoremap <C-h> :SidewaysLeft<CR>
-nnoremap <C-l> :SidewaysRight<CR>
-" }}}
-
 " Tagbar: {{{
 let g:tagbar_sort = 0
 let g:tagbar_width = s:sidebar_width

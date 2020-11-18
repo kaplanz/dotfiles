@@ -54,7 +54,6 @@ VIM_COLOURS += xero/sourcerer.vim
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
 VIM_COC = $(VIM_PACK)/coc.nvim
-VIM_PLUGINS += AndrewRadev/sideways.vim
 VIM_PLUGINS += AndrewRadev/splitjoin.vim
 VIM_PLUGINS += AndrewRadev/switch.vim
 VIM_PLUGINS += easymotion/vim-easymotion
