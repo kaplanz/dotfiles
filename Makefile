@@ -122,7 +122,6 @@ install: brew all
 .PHONY: uninstall
 uninstall:
 	@$(STOW) -v --delete local
-	@$(STOW) -v --delete shell
 	@$(STOW) -v --delete tmux
 	@$(STOW) -v --delete utils
 	@$(STOW) -v --delete vim
@@ -139,15 +138,11 @@ endif
 
 # -- Stow dotfiles --
 .PHONY: stow
-stow: stow-local stow-shell stow-tmux stow-utils stow-vim stow-zsh
+stow: stow-local stow-tmux stow-utils stow-vim stow-zsh
 
 .PHONY: stow-local
 stow-local:
 	$(STOW) --restow local
-
-.PHONY: stow-shell
-stow-shell:
-	$(STOW) --restow shell
 
 .PHONY: stow-tmux
 stow-tmux: $(TMUX)
@@ -162,7 +157,7 @@ stow-vim: $(VIM)
 	$(STOW) --restow vim
 
 .PHONY: stow-zsh
-stow-zsh: $(ZSH) stow-shell
+stow-zsh: $(ZSH)
 	$(STOW) --restow zsh
 
 

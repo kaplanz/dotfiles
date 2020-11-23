@@ -28,7 +28,7 @@ upgrade_homebrew() {
 
 # Oh My Zsh
 upgrade_oh_my_zsh() {
-    [ -d ~/.oh-my-zsh ] && {
+    [ -d "$ZSH" ] && {
         env ZSH="$ZSH" sh "$ZSH/tools/upgrade.sh"
     }
 }

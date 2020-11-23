@@ -1,6 +1,6 @@
 #
-#  .exports
-#  Shell exports.
+#  exports.zsh
+#  Zsh exports.
 #
 #  Created by Zakhary Kaplan on 2019-06-04.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -10,12 +10,15 @@
 #             Exports
 # --------------------------------
 
-# -- Dotfiles --
+# -- Directories --
 export DOTFILES="$HOME/.dotfiles"
 
 # -- Environment --
 export EDITOR="$(command -v vim)"
 export PAGER="$(command -v less)"
+
+# -- Filesystem --
+export TREE_IGNORE='.git'
 
 # -- Utilities --
 # bat

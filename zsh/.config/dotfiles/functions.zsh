@@ -1,6 +1,6 @@
 #
-#  .functions
-#  Shell functions.
+#  functions.zsh
+#  Zsh functions.
 #
 #  Created by Zakhary Kaplan on 2019-06-04.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -32,8 +32,6 @@ function sourcecode() {
 }
 
 # -- Filesystem --
-function finder() { find ${2:-.} -iname "*$1*"; }
-function fdin() { grep -yErIn --color=always $1 ${2:-.}; }
 function mv!() {
     mkdir -p $(dirname $2)
     mv $1 $2

@@ -1,6 +1,6 @@
 #
-#  .aliases
-#  Shell aliases.
+#  aliases.zsh
+#  Zsh aliases.
 #
 #  Created by Zakhary Kaplan on 2019-06-04.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
@@ -25,7 +25,7 @@ alias l1='ls -1'
 alias lh='ls -A'
 alias rm='rm -d'
 alias scp='scp -r'
-alias tree="tree -C -I '.git'"
+alias tree='tree -C -I "$TREE_IGNORE"'
 for i in {1..9}; do
     alias tree$i="tree -L $i"
 done
@@ -46,5 +46,6 @@ alias tls='tmux list-sessions'
 alias tv="tmux new-session 'vim'"
 # vim
 alias v='vim'
+alias vd='vimdiff'
 
 # vim:ft=sh:

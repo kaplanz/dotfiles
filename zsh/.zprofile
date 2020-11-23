@@ -7,14 +7,23 @@
 #
 
 # --------------------------------
+#             Exports
+# --------------------------------
+
+export ALIASES="$HOME/.config/dotfiles/aliases.zsh"
+export EXPORTS="$HOME/.config/dotfiles/exports.zsh"
+export FUNCTIONS="$HOME/.config/dotfiles/functions.zsh"
+
+
+# --------------------------------
 #             Sources
 # --------------------------------
 
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.exports ] && source ~/.exports
-[ -f ~/.functions ] && source ~/.functions
-[ -f ~/.localrc ] && source ~/.localrc
-[ -f ~/.profile ] && source ~/.profile
+[ -f "$ALIASES" ] && source "$ALIASES"
+[ -f "$EXPORTS" ] && source "$EXPORTS"
+[ -f "$FUNCTIONS" ] && source "$FUNCTIONS"
+[ -f "$HOME/.localrc" ] && source "$HOME/.localrc"
+[ -f "$HOME/.profile" ] && source "$HOME/.profile"
 
 
 # --------------------------------
