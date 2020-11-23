@@ -114,6 +114,7 @@ nmap <Plug>(fzf-leader)w :Windows<CR>
 nmap <Plug>(fzf-leader)y :History<CR>
 nmap <Plug>(fzf-leader); :History:<CR>
 nmap <Plug>(fzf-leader)/ :History/<CR>
+nmap <Plug>(fzf-leader)s :Snippets<CR>
 nmap <Plug>(fzf-leader)g :Commits<CR>
 nmap <Plug>(fzf-leader)G :BCommits<CR>
 nmap <Plug>(fzf-leader): :Commands<CR>
@@ -203,6 +204,10 @@ let g:tagbar_sort = 0
 let g:tagbar_width = s:sidebar_width
 nnoremap <silent> <Leader>m :TagbarToggle<CR>
 nnoremap <silent> <Leader>M :TagbarOpenAutoClose<CR>
+" }}}
+
+" UltiSnips: {{{
+let g:UltiSnipsExpandTrigger = '<Nul>'
 " }}}
 
 " VisualMulti: {{{
