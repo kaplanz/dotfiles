@@ -181,7 +181,6 @@ $(TMUX_PLUGINS): $(TMUX)
 # Vim
 .PHONY: plug-vim
 plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_COC) $(VIM_PLUGINS)
-	@vim -c 'helptags ALL' -c 'q'
 
 .PHONY: $(VIM)
 $(VIM):
