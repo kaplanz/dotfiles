@@ -16,6 +16,7 @@ alias py='python'
 alias py3='python3'
 
 # -- Environment --
+alias fpath='echo ${FPATH//:/\\n}'
 alias path='echo ${PATH//:/\\n}'
 alias reload='clear && exec $SHELL -l'
 
