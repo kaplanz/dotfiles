@@ -40,6 +40,7 @@ endif
 
 # -- URLs --
 GITHUB = https://github.com
+OH_MY_ZSH_INSTALL = https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
 # -- Colours --
 # Vim
@@ -205,8 +206,9 @@ $(VIM_COC): | $(VIM)
 # Zsh
 .PHONY: plug-zsh
 plug-zsh: PLUGINS = $(OH_MY_ZSH_PLUGINS) $(notdir $(ZSH_PLUGINS))
+plug-zsh: THEME = redefined
 plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
-	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="redefined"/' $(ZSHRC)
+	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="$(THEME)"/' $(ZSHRC)
 	@$(SED) 's/^plugins=(.*)$$/plugins=($(PLUGINS))/' $(ZSHRC)
 	@$(SED) 's/^\(# \)\(DISABLE_UPDATE_PROMPT="true"\)/\2/' $(ZSHRC)
 
@@ -214,9 +216,9 @@ plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
 $(ZSH): $(ZSH)/.git
 $(ZSH)/.git: # use oh-my-zsh as base directory
 ifdef CURL
-	@sh -c "$$($(CURL) -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')"
+	@sh -c "$$($(CURL) -fsSL $(OH_MY_ZSH_INSTALL))" "" --unattended
 else ifdef WGET
-	@sh -c "$$($(WGET) -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed 's/exec zsh -l//')"
+	@sh -c "$$($(WGET) -O- $(OH_MY_ZSH_INSTALL))" "" --unattended
 endif
 
 $(ZSHRC): | $(ZSH)
