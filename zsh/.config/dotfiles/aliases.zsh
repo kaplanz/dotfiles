@@ -40,6 +40,8 @@ alias gci='git checkout-index'
 alias gci!='git checkout-index --all --force'
 alias gdiff='git diff --no-index'
 alias gha='cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh | grep'
+alias gt='git tag'
+alias gta='git tag -a'
 # tmux
 alias t='tmux'
 alias tksv='tmux kill-server'
