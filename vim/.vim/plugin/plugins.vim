@@ -23,12 +23,13 @@ filetype plugin on
 " --------------------------------
 
 " Coc: {{{
-" Global extension names to install when they aren't installed.
-let g:coc_global_extensions = ['coc-git', 'coc-snippets'] + get(g:, 'coc_global_extensions', [])
-" Use `[g` and `]g` to navigate diagnostics
+" Global extension names to install when they aren't installed
+let g:coc_global_extensions = ['coc-git', 'coc-snippets'] +
+  \ get(g:, 'coc_global_extensions', [])
+" Use `[d` and `]d` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 " GoTo code navigation
 nmap <silent> <Leader>gd <Plug>(coc-definition)
 nmap <silent> <Leader>gy <Plug>(coc-type-definition)
@@ -38,9 +39,11 @@ nmap <silent> <Leader>gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim', 'help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+    execute 'h ' . expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 " Highlight the symbol and its references when holding the cursor
@@ -57,7 +60,7 @@ xmap <Leader>a <Plug>(coc-codeaction-selected)
 nmap <Leader>a <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer
 nmap <Leader>ac <Plug>(coc-codeaction)
-" Apply QuickFix to problem on the current line
+" Apply AutoFix to problem on the current line
 nmap <Leader>qf <Plug>(coc-fix-current)
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server
