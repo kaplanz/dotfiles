@@ -68,32 +68,26 @@ main() {
     echo 'Dependencies satisfied. May proceed.'
     echo
 
-    # Check if already installed
-    echo 'Checking installation path...'
-    echo "DOTFILES = $DOTFILES"
-    [ -f "$DOTFILES" ] || {
-        echo "Installation cancelled. Path not empty."
-        return 1
-    }
-    echo 'Path is empty. May proceed.'
-    echo
-
     # Confirm installation
     echo "This will install dotfiles at: $DOTFILES"
-    printf "Proceed with installation [Y/n]? "
-    read PROCEED
-    [ "$PROCEED" = 'N' ] || [ "$PROCEED" = 'n' ] && {
-        return 1
-    }
+    read -p "Proceed with installation? [Y/n] " PROCEED
+    case "$PROCEED" in
+        [Yy]* ) ;;
+        ''    ) ;;
+        *     ) echo 'Installation cancelled.'; return 1;;
+    esac
+    echo
 
     # Clone dotfiles repository
     echo 'Cloning dotfiles repo...'
     clone_dotfiles_repo
+    echo 'Done!'
     echo
 
     # Run Makefile
     echo 'Running Makefile...'
     make --directory=~/.dotfiles install
+    echo 'Done!'
     echo
 
     # Complete installation
