@@ -29,8 +29,6 @@ fpath+="$HOME/.zfunc"
 [ -f "$ALIASES" ] && source "$ALIASES"
 [ -f "$EXPORTS" ] && source "$EXPORTS"
 [ -f "$FUNCTIONS" ] && source "$FUNCTIONS"
-[ -f "$HOME/.localrc" ] && source "$HOME/.localrc"
-[ -f "$HOME/.profile" ] && source "$HOME/.profile"
 
 
 # --------------------------------
