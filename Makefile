@@ -185,7 +185,7 @@ plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_COC) $(VIM_PLUGINS)
 
 .PHONY: $(VIM)
 $(VIM):
-	@bash -c "$(MKDIR) $(VIM)/{after,colors,ftplugin,pack,plugin,swap}"
+	@bash -c "$(MKDIR) $(VIM)/{after,colors,pack,plugin,swap,undo}"
 
 .PHONY: $(VIM_COLOURS)
 $(VIM_COLOURS): REPO = $(VIM)/pack/colors/start/$(patsubst vim-%,%.vim,$(notdir $@))

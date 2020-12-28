@@ -102,6 +102,8 @@ set directory=~/.vim/swap
 set hidden
 set shell+=\ -l
 set ttimeoutlen=0
+set undofile
+set undodir=~/.vim/undo
 set updatetime=300
 " }}}
 
