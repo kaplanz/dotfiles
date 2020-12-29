@@ -153,7 +153,7 @@ endfunction
 function! LightlineFilename()
   let fname = expand('%:t')
   return fname ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname =~# '^__Tagbar__\|__Gundo\|NERD_tree' ? '' :
+        \ fname =~# '^__Tagbar__\|__Mundo\|NERD_tree' ? '' :
         \ &ft ==# 'vimfiler' ? vimfiler#get_status_string() :
         \ &ft ==# 'unite' ? unite#get_status_string() :
         \ &ft ==# 'vimshell' ? vimshell#get_status_string() :
@@ -161,7 +161,7 @@ function! LightlineFilename()
 endfunction
 function! LightlineFugitive()
   try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*FugitiveHead')
+    if expand('%:t') !~? 'Tagbar\|Mundo\|NERD' && &ft !~? 'vimfiler' && exists('*FugitiveHead')
       let mark = ''  " edit here for cool mark
       let branch = FugitiveHead()
       return branch !=# '' ? mark.branch : ''
@@ -183,14 +183,19 @@ function! LightlineMode()
   let fname = expand('%:t')
   return fname =~# '^__Tagbar__' ? 'Tagbar' :
         \ fname ==# 'ControlP' ? 'CtrlP' :
-        \ fname ==# '__Gundo__' ? 'Gundo' :
-        \ fname ==# '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname ==# '__Mundo__' ? 'Mundo' :
+        \ fname ==# '__Mundo_Preview__' ? 'Mundo Preview' :
         \ fname =~# 'NERD_tree' ? 'NERDTree' :
         \ &ft ==# 'unite' ? 'Unite' :
         \ &ft ==# 'vimfiler' ? 'VimFiler' :
         \ &ft ==# 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+" }}}
+
+" Mundo: {{{
+let g:mundo_width = s:sidebar_width
+nnoremap <silent> <Leader>m :MundoToggle<CR>
 " }}}
 
 " NERDTree: {{{
@@ -204,8 +209,8 @@ nnoremap <silent> <Leader>N :NERDTree<CR>
 " Tagbar: {{{
 let g:tagbar_sort = 0
 let g:tagbar_width = s:sidebar_width
-nnoremap <silent> <Leader>m :TagbarToggle<CR>
-nnoremap <silent> <Leader>M :TagbarOpenAutoClose<CR>
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <silent> <Leader>B :TagbarOpenAutoClose<CR>
 " }}}
 
 " vim:fdl=0:fdm=marker:

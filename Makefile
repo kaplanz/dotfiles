@@ -65,6 +65,7 @@ VIM_PLUGINS += junegunn/vim-peekaboo
 VIM_PLUGINS += mg979/vim-visual-multi
 VIM_PLUGINS += preservim/nerdtree
 VIM_PLUGINS += preservim/tagbar
+VIM_PLUGINS += simnalamburt/vim-mundo
 VIM_PLUGINS += tpope/vim-abolish
 VIM_PLUGINS += tpope/vim-commentary
 VIM_PLUGINS += tpope/vim-fugitive
