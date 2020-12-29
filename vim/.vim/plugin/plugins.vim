@@ -206,6 +206,10 @@ nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>N :NERDTree<CR>
 " }}}
 
+" Rooter: {{{
+let g:rooter_silent_chdir = 1
+" }}}
+
 " Tagbar: {{{
 let g:tagbar_sort = 0
 let g:tagbar_width = s:sidebar_width

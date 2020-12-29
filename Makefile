@@ -57,6 +57,7 @@ TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 VIM_COC = $(VIM_PACK)/coc.nvim
 VIM_PLUGINS += AndrewRadev/splitjoin.vim
 VIM_PLUGINS += AndrewRadev/switch.vim
+VIM_PLUGINS += airblade/vim-rooter
 VIM_PLUGINS += easymotion/vim-easymotion
 VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += itchyny/lightline.vim
