@@ -17,7 +17,7 @@ LN='ln -s'
 MKDIR='mkdir -p'
 
 # Directories
-CRON="$(dirname $0)"
+CRON="$(dirname "$0")"
 
 # Files
 LOCK="$CRON/locks/$1.lock"
@@ -36,12 +36,12 @@ main() {
         exit 1 # cannot acquire lock
     else
         # Lock job
-        $MKDIR "$(dirname $LOCK)"
+        $MKDIR "$(dirname "$LOCK")"
         $LN "$LOG" "$LOCK" # lock points to log
     fi
 
     # Create directory for log
-    $MKDIR "$(dirname $LOG)"
+    $MKDIR "$(dirname "$LOG")"
 
     # Call job script to run
     "$SCRIPT" |& tee "$LOG"
@@ -51,7 +51,7 @@ main() {
 
     # Remove log file (and directory) if empty
     [ ! -s "$LOG" ] && rm "$LOG"
-    rmdir "$(dirname $LOG)" &> /dev/null
+    rmdir "$(dirname "$LOG")" &> /dev/null
 
     # Release lock for job
     rm "$LOCK"
