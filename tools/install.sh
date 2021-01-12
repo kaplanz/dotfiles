@@ -53,6 +53,16 @@ main() {
     echo 'Dofiles Installer'
     echo
 
+    # Get options
+    while getopts ":y" opt; do
+        case ${opt} in
+            y )
+                YES=1
+            ;;
+        esac
+    done
+    shift $((OPTIND -1))
+
     # Check for dependencies
     echo "Checking dependencies..."
     check_dependencies || {
@@ -70,7 +80,7 @@ main() {
 
     # Confirm installation
     echo "This will install dotfiles at: $DOTFILES"
-    read -p "Proceed with installation? [Y/n] " PROCEED
+    [ -z "$YES" ] && read -p "Proceed with installation? [Y/n] " PROCEED
     case "$PROCEED" in
         [Yy]* ) ;;
         ''    ) ;;
