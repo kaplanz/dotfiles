@@ -62,6 +62,7 @@ VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += junegunn/fzf.vim
 VIM_PLUGINS += junegunn/vim-peekaboo
+VIM_PLUGINS += ludovicchabant/vim-gutentags
 VIM_PLUGINS += mg979/vim-visual-multi
 VIM_PLUGINS += preservim/nerdtree
 VIM_PLUGINS += preservim/tagbar
