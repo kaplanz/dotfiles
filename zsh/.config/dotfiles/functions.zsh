@@ -52,6 +52,6 @@ function _fzf_compgen_dir() { fd --hidden --follow --type d . "$1"; }
 # tmux
 function tas() { tmux attach-session ${1:+"-t$1"}; }
 function tkss() { tmux kill-session ${1:+"-t$1"}; }
-function tns() { tmux new-session ${1:+"-s$1"}; }
+function tns() { tmux new-session -s ${1:-"${${PWD##*/}//.}"}; }
 
 # vim:ft=sh:
