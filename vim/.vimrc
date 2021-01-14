@@ -48,10 +48,6 @@ set cursorline
 set whichwrap+=<,>,[,]
 " }}}
 
-" Encoding: {{{
-scriptencoding utf-8
-" }}}
-
 " Indentation: {{{
 filetype indent on
 set autoindent
@@ -72,6 +68,10 @@ set mouse=a
 set ttymouse=xterm2
 " }}}
 
+" Path: {{{
+set path+=**
+" }}}
+
 " Runtimepath: {{{
 set runtimepath+=/usr/local/opt/fzf,~/.fzf
 " }}}
@@ -85,10 +85,11 @@ set smartcase
 
 " User Interface: {{{
 set display+=lastline
-set fillchars+=vert:│
+set fillchars=vert:│,fold:-
 set laststatus=2
 set noshowmode
 set number
+set scrolloff=5
 set showcmd
 if has('patch-8.1.1564')
   set signcolumn=number

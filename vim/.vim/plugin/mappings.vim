@@ -33,6 +33,8 @@ nnoremap <Leader>P :set paste!<CR>
 nnoremap <Leader>R :source $MYVIMRC<CR>
 " Sort Visual mode selection
 vnoremap <Leader>o :sort<CR>
+" Start a shell
+nnoremap <silent> <Leader>s :shell<CR>
 " Open a new terminal window
 nnoremap <silent> <Leader>t :terminal<CR>
 " Clear last used search pattern
