@@ -109,6 +109,34 @@ nnoremap <C-p> :FZF<CR>
 nnoremap <leader>h :Helptags<CR>
 " }}}
 
+" Goyo: {{{
+let g:goyo_width = '70%'
+nnoremap <Leader>y :Goyo<CR>
+" Custom routine upon GoyoEnter
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowcmd
+  Limelight
+  " ...
+endfunction
+" Custom routine upon GoyoLeave
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showcmd
+  Limelight!
+  " ...
+endfunction
+" Set autocmds to trigger custom routines
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" }}}
+
 " Gutentags: {{{
 let g:gutentags_enabled = filereadable('tags')
 let g:gutentags_generate_on_missing = 0
@@ -178,6 +206,10 @@ function! LightlineMode()
         \ &ft ==# 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+" }}}
+
+" Limelight: {{{
+nnoremap <Leader>l :Limelight!!<CR>
 " }}}
 
 " Mundo: {{{
