@@ -213,6 +213,7 @@ plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
 	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="$(THEME)"/' $(ZSHRC)
 	@$(SED) 's/^plugins=(.*)$$/plugins=($(PLUGINS))/' $(ZSHRC)
 	@$(SED) 's/^\(# \)\(DISABLE_UPDATE_PROMPT="true"\)/\2/' $(ZSHRC)
+	@$(SED) 's/^\(# \)\(DISABLE_AUTO_UPDATE="true"\)/\2/' $(ZSHRC)
 
 .PHONY: $(ZSH)
 $(ZSH): $(ZSH)/.git
