@@ -97,6 +97,22 @@ nnoremap <silent><nowait> <Space>j :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <Space>k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <Space>p :<C-u>CocListResume<CR>
+" coc-git
+" Navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" Navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+" Show chunk diff at current position
+nmap <Leader>gs <Plug>(coc-git-chunkinfo)
+" Show commit contains current position
+nmap <Leader>gc <Plug>(coc-git-commit)
+" Create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
 " }}}
 
 " EasyMotion: {{{
