@@ -239,6 +239,7 @@ autocmd BufEnter *
   \ if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()
   \ |   quit
   \ | endif
+let g:NERDTreeIgnore = ['.git']
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = s:sidebar_width
 nnoremap <silent> <Leader>n :NERDTreeToggle<CR>
