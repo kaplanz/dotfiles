@@ -48,6 +48,10 @@ set cursorline
 set whichwrap+=<,>,[,]
 " }}}
 
+" Formatting: {{{
+set formatoptions+=j
+" }}}
+
 " Indentation: {{{
 filetype indent on
 set autoindent
@@ -91,9 +95,11 @@ set noshowmode
 set number
 set scrolloff=5
 set showcmd
+set sidescrolloff=5
 if has('patch-8.1.1564')
   set signcolumn=number
 endif
+set tabpagemax=50
 set wildmenu
 " }}}
 
@@ -101,6 +107,7 @@ set wildmenu
 set confirm
 set directory=~/.vim/swap
 set hidden
+set history=1000
 set shell+=\ -l
 set ttimeoutlen=0
 set undofile
@@ -112,6 +119,13 @@ set updatetime=300
 set splitbelow
 set splitright
 " }}}
+
+
+" --------------------------------
+"             Packadds
+" --------------------------------
+
+packadd! matchit
 
 
 " --------------------------------
