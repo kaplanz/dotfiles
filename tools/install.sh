@@ -17,9 +17,9 @@ check_dependencies() {
         test "$(command -v brew)"
     } || {
         # Check if individual dependencies are installed
-        test "$(command -v git)" && \
-        test "$(command -v make)" && \
-        test "$(command -v stow)" && \
+        test "$(command -v git)" &&
+        test "$(command -v make)" &&
+        test "$(command -v stow)" &&
         test "$(command -v zsh)"
     }
 }
@@ -58,17 +58,17 @@ main() {
         case ${opt} in
             y )
                 YES=1
-            ;;
+                ;;
         esac
     done
-    shift $((OPTIND -1))
+    shift $((OPTIND - 1))
 
     # Check for dependencies
     echo "Checking dependencies..."
     check_dependencies || {
         # If dependencies not found, do not install
         echo 'Installation cancelled. Please install missing dependencies and try again.'
-        [ "$(uname)" = 'Darwin' ] && \
+        [ "$(uname)" = 'Darwin' ] &&
             echo 'Note: Homebrew could be used to satisfy all dependencies.'
         echo
         print_dependencies
@@ -84,7 +84,10 @@ main() {
     case "$PROCEED" in
         [Yy]* ) ;;
         ''    ) ;;
-        *     ) echo 'Installation cancelled.'; return 1;;
+        *     )
+            echo 'Installation cancelled.'
+            return 1
+            ;;
     esac
     echo
 
