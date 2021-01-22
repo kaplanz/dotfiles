@@ -25,6 +25,7 @@ alias cp='cp -R'
 alias l1='ls -1'
 alias lh='ls -A'
 alias rm='rm -d'
+alias rsynced='rsync -azhP --delete --stats'
 alias scp='scp -r'
 alias tree='tree -C -I "$TREE_IGNORE"'
 for i in {1..9}; do
