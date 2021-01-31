@@ -24,6 +24,10 @@ nnoremap gm :marks<CR>:norm<Space>`
 nnoremap gr :registers<CR>:norm<Space>"
 " }}}
 
+" Control: {{{
+nnoremap <C-w><C-f> <C-w>vgf
+" }}}
+
 " Mapleader: {{{
 " Generate helptags
 nnoremap <Leader>H :helptags ALL<CR>
