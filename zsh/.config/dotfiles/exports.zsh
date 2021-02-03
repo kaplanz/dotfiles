@@ -21,6 +21,10 @@ export PAGER="$(command -v less)"
 export LS_COLORS="$(cat $DOTFILES/colors/jellybeans.lscolors | tr '\n' ':')"
 export TREE_IGNORE='.git'
 
+# -- Path --
+# XDG
+export PATH="$HOME/.local/bin:$PATH"
+
 # -- Utilities --
 # bat
 export BAT_THEME='Nord'
