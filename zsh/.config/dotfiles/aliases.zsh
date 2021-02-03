@@ -32,6 +32,9 @@ for i in {1..9}; do
     alias tree$i="tree -L $i"
 done
 
+# -- Unix --
+alias please='sudo $(fc -ln -1)'
+
 # -- Utilities --
 # docker
 alias dcha='cat ~/.oh-my-zsh/plugins/docker-compose/docker-compose.plugin.zsh | grep'
