@@ -160,6 +160,10 @@ let g:gutentags_generate_on_new = 0
 let g:gutentags_define_advanced_commands = 1
 " }}}
 
+" IndentLine: {{{
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" }}}
+
 " Lightline: {{{
 let g:lightline = {
       \ 'colorscheme': g:colors_name,
