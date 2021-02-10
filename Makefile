@@ -44,6 +44,7 @@ OH_MY_ZSH_INSTALL = https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # -- Colours --
 # Vim
+VIM_COLOURS += ayu-theme/ayu-vim
 VIM_COLOURS += cocopon/iceberg.vim
 VIM_COLOURS += haishanh/night-owl.vim
 VIM_COLOURS += morhetz/gruvbox
