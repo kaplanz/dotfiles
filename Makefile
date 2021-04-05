@@ -30,7 +30,6 @@ TIC = tic
 # May not exist
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 CURL := $(notdir $(shell command -v curl 2> /dev/null))
-WGET := $(notdir $(shell command -v wget 2> /dev/null))
 # System dependent
 ifeq ($(shell uname),Darwin)
 	SED = sed -i ''
@@ -177,7 +176,6 @@ plug: plug-tmux plug-vim plug-zsh
 .PHONY: plug-tmux
 plug-tmux: $(TMUX) $(TMUX_PLUGINS)
 
-.PHONY: $(TMUX)
 $(TMUX):
 	@bash -c "$(MKDIR) $(TMUX)/{plugins,themes}"
 
@@ -190,7 +188,6 @@ $(TMUX_PLUGINS): $(TMUX)
 .PHONY: plug-vim
 plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_COC) $(VIM_PLUGINS)
 
-.PHONY: $(VIM)
 $(VIM):
 	@bash -c "$(MKDIR) $(VIM)/{after,colors,pack,plugin,swap,undo}"
 
@@ -220,14 +217,9 @@ plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
 	@$(SED) 's/^\(# \)\(DISABLE_UPDATE_PROMPT="true"\)/\2/' $(ZSHRC)
 	@$(SED) 's/^\(# \)\(DISABLE_AUTO_UPDATE="true"\)/\2/' $(ZSHRC)
 
-.PHONY: $(ZSH)
 $(ZSH): $(ZSH)/.git
 $(ZSH)/.git: # use oh-my-zsh as base directory
-ifdef CURL
 	@sh -c "$$($(CURL) -fsSL $(OH_MY_ZSH_INSTALL))" "" --unattended
-else ifdef WGET
-	@sh -c "$$($(WGET) -O- $(OH_MY_ZSH_INSTALL))" "" --unattended
-endif
 
 $(ZSHRC): | $(ZSH)
 	cp $(ZSH)/templates/zshrc.zsh-template $(ZSHRC)
@@ -246,7 +238,6 @@ utils: cron fzf terminfo
 .PHONY: cron
 cron: $(CRON) stow-utils
 
-.PHONY: $(CRON)
 $(CRON):
 	@bash -c "$(MKDIR) $(CRON)/{locks,logs,scripts}"
 
@@ -254,7 +245,6 @@ $(CRON):
 .PHONY: fzf
 fzf: $(FZF) $(FZF_SCRIPTS)
 
-.PHONY: $(FZF)
 $(FZF): $(FZF)/.git
 $(FZF)/.git: # if not using brew, install fzf using git
 ifndef BREW
@@ -270,13 +260,12 @@ endif
 
 # terminfo
 .PHONY: terminfo
-terminfo: $(TERMINFO) $(TERMINFO_FILES)
+terminfo: $(TERMINFO) $(TERMINFO_FILES) stow-utils
 
-.PHONY: $(TERMINFO)
 $(TERMINFO):
 	@bash -c "$(MKDIR) $(TERMINFO)"
 
-utils/.terminfo/%.terminfo: $(TERMINFO) stow-utils
+utils/.terminfo/%.terminfo: $(TERMINFO)
 	@$(TIC) -o $(TERMINFO) $@
 
 
