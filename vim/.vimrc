@@ -48,6 +48,10 @@ set cursorline
 set whichwrap+=<,>,[,]
 " }}}
 
+" Encoding: {{{
+set encoding=utf-8
+" }}}
+
 " Formatting: {{{
 set formatoptions+=j
 " }}}
