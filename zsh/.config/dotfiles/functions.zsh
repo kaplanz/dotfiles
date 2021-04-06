@@ -31,19 +31,19 @@ function sourcecode() {
     cat $1
 }
 
+# -- Dotfiles --
+function upgrade_dotfiles() { bash "$DOTFILES/tools/upgrade.sh" "$@"; }
+
 # -- Filesystem --
 function mv!() {
-    mkdir -p $(dirname $2)
-    mv $1 $2
+    [ -e "$1" ] && mkdir -p "$(dirname $2)"
+    mv "$1" "$2"
 }
 function cp!() {
-    mkdir -p $(dirname $2)
-    cp -R $1 $2
+    [ -e "$1" ] && mkdir -p "$(dirname $2)"
+    cp -R "$1" "$2"
 }
 function trash() { mv -f $@ ~/.Trash; }
-
-# -- General --
-function upgrade_dotfiles() { bash "$DOTFILES/tools/upgrade.sh" "$@"; }
 
 # -- Utilities --
 # fzf

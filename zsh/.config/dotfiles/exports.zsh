@@ -40,7 +40,8 @@ export FZF_DEFAULT_OPTS="
     --info=inline
     --multi
     --prompt='~ '
-    --select-1"
+    --select-1
+"
 export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
 export FZF_CTRL_T_OPTS="
     --preview '([[ -d {} ]] && (tree -C {})) ||
@@ -49,11 +50,13 @@ export FZF_CTRL_T_OPTS="
                    bat --style=numbers --color=always {} ||
                    cat {}
                ) ||
-               (echo {} 2> /dev/null | head -200)'"
+               (echo {} 2> /dev/null | head -200)'
+"
 export FZF_CTRL_R_OPTS="
     --sort
     --preview 'echo {}'
-    --preview-window down:3:hidden:wrap"
+    --preview-window down:3:hidden:wrap
+"
 export FZF_ALT_C_COMMAND='$FZF_DEFAULT_COMMAND --type d'
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
