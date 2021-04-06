@@ -27,6 +27,7 @@ alias lh='ls -A'
 alias rm='rm -d'
 alias rsynced='rsync -azhP --delete --stats'
 alias scp='scp -r'
+alias takenow='take $(date +"%Y/%m/%d")'
 alias tree='tree -C -I "$TREE_IGNORE"'
 for i in {1..9}; do
     alias tree$i="tree -L $i"
