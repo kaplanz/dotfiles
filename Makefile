@@ -11,22 +11,23 @@
 # --------------------------------
 
 # -- Directories --
-CRON=$(HOME)/.cron
-DOTFILES = $(HOME)/.dotfiles
-FZF = $(HOME)/.fzf
-TERMINFO = $(HOME)/.terminfo
-TMUX = $(HOME)/.config/tmux
-VIM = $(HOME)/.vim
-VIM_PACK = $(VIM)/pack/plugins/start
-ZSH = $(HOME)/.oh-my-zsh
-ZSHRC = $(HOME)/.zshrc
+CRON      = $(HOME)/.cron
+DOTFILES  = $(HOME)/.dotfiles
+FZF       = $(HOME)/.fzf
+TERMINFO  = $(HOME)/.terminfo
+TMUX      = $(HOME)/.config/tmux
+VIM       = $(HOME)/.vim
+VIM_PACK  = $(VIM)/pack/plugins/start
+VIM_CPACK = $(VIM)/pack/colors/start
+ZSH       = $(HOME)/.oh-my-zsh
+ZSHRC     = $(HOME)/.zshrc
 
 # -- Commands --
-GIT_CLONE = git clone --depth 1
-LN = ln -s
+CLONE = git clone --depth 1
+LN    = ln -s
 MKDIR = mkdir -p
-STOW = stow --dir=$(DOTFILES) --target=$(HOME)
-TIC = tic
+STOW  = stow --dir=$(DOTFILES) --target=$(HOME)
+TIC   = tic
 # May not exist
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 CURL := $(notdir $(shell command -v curl 2> /dev/null))
@@ -38,8 +39,8 @@ else ifeq ($(shell uname),Linux)
 endif
 
 # -- URLs --
-GITHUB = https://github.com
-OH_MY_ZSH_INSTALL = https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+GITHUB      = https://github.com
+OMZ_INSTALL = https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 
 # -- Colours --
 # Vim
@@ -182,30 +183,28 @@ $(TMUX):
 .PHONY: $(TMUX_PLUGINS)
 $(TMUX_PLUGINS): PLUGIN = $(TMUX)/plugins/$(notdir $@)
 $(TMUX_PLUGINS): $(TMUX)
-	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(CLONE) $(GITHUB)/$@.git $(PLUGIN))
 
 # Vim
 .PHONY: plug-vim
-plug-vim: $(VIM) $(VIM_COLOURS) $(VIM_COC) $(VIM_PLUGINS)
+plug-vim: $(VIM) $(VIM_COC) $(VIM_COLOURS) $(VIM_PLUGINS)
 
 $(VIM):
-	@bash -c "$(MKDIR) $(VIM)/{after,colors,pack,plugin,swap,undo}"
-
-.PHONY: $(VIM_COLOURS)
-$(VIM_COLOURS): REPO = $(VIM)/pack/colors/start/$(patsubst vim-%,%.vim,$(notdir $@))
-$(VIM_COLOURS): COLOUR = $(VIM)/colors/$(basename $(notdir $(REPO))).vim
-$(VIM_COLOURS): $(VIM)
-	$(if $(wildcard $(REPO)),,$(GIT_CLONE) $(GITHUB)/$@.git $(REPO))
-	$(if $(wildcard $(COLOUR)),,$(LN) $(REPO)/colors/$(notdir $(COLOUR)) $(COLOUR))
-
-.PHONY: $(VIM_PLUGINS)
-$(VIM_PLUGINS): PLUGIN = $(VIM_PACK)/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
-$(VIM_PLUGINS): $(VIM)
-	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
+	@bash -c "$(MKDIR) $(VIM)/{after,pack,plugin,swap,undo}"
 
 $(VIM_COC): | $(VIM)
 	git clone $(GITHUB)/neoclide/coc.nvim.git $(VIM_COC)
 	cd $(VIM_COC); git checkout release
+
+.PHONY: $(VIM_COLOURS)
+$(VIM_COLOURS): REPO = $(VIM_CPACK)/$(patsubst vim-%,%.vim,$(notdir $@))
+$(VIM_COLOURS): $(VIM)
+	$(if $(wildcard $(REPO)),,$(CLONE) $(GITHUB)/$@.git $(REPO))
+
+.PHONY: $(VIM_PLUGINS)
+$(VIM_PLUGINS): REPO = $(VIM_PACK)/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
+$(VIM_PLUGINS): $(VIM)
+	$(if $(wildcard $(REPO)),,$(CLONE) $(GITHUB)/$@.git $(REPO))
 
 # Zsh
 .PHONY: plug-zsh
@@ -219,7 +218,7 @@ plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
 
 $(ZSH): $(ZSH)/.git
 $(ZSH)/.git: # use oh-my-zsh as base directory
-	@sh -c "$$($(CURL) -fsSL $(OH_MY_ZSH_INSTALL))" "" --unattended
+	@sh -c "$$($(CURL) -fsSL $(OMZ_INSTALL))" "" --unattended
 
 $(ZSHRC): | $(ZSH)
 	cp $(ZSH)/templates/zshrc.zsh-template $(ZSHRC)
@@ -227,7 +226,7 @@ $(ZSHRC): | $(ZSH)
 .PHONY: $(ZSH_PLUGINS)
 $(ZSH_PLUGINS): PLUGIN = $(ZSH)/custom/plugins/$(notdir $@)
 $(ZSH_PLUGINS): $(ZSH)
-	$(if $(wildcard $(PLUGIN)),,$(GIT_CLONE) $(GITHUB)/$@.git $(PLUGIN))
+	$(if $(wildcard $(PLUGIN)),,$(CLONE) $(GITHUB)/$@.git $(PLUGIN))
 
 
 # -- Configure utilities --
@@ -248,7 +247,7 @@ fzf: $(FZF) $(FZF_SCRIPTS)
 $(FZF): $(FZF)/.git
 $(FZF)/.git: # if not using brew, install fzf using git
 ifndef BREW
-	$(GIT_CLONE) $(GITHUB)/junegunn/fzf.git $(FZF)
+	$(CLONE) $(GITHUB)/junegunn/fzf.git $(FZF)
 endif
 
 $(FZF_SCRIPTS): | $(FZF)
