@@ -44,9 +44,9 @@ OMZ_INSTALL = https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/ins
 
 # -- Colours --
 # Vim
-VIM_COLOURS += ayu-theme/ayu-vim
 VIM_COLOURS += cocopon/iceberg.vim
-VIM_COLOURS += haishanh/night-owl.vim
+VIM_COLOURS += drewtempelmeyer/palenight.vim
+VIM_COLOURS += jacoborus/tender.vim
 VIM_COLOURS += morhetz/gruvbox
 VIM_COLOURS += nanotech/jellybeans.vim
 VIM_COLOURS += xero/sourcerer.vim
