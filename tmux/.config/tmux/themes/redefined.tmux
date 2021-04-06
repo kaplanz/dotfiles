@@ -1,13 +1,13 @@
 #
-#  jellybeans.tmux
-#  Jellybeans inspired tmux theme.
+#  redefined.tmux
+#  Redefined tmux theme.
 #
 #  Created by Zakhary Kaplan on 2019-06-25.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.
 #
 
 # --------------------------------
-#            Jellybeans
+#            Redefined
 # --------------------------------
 
 # -- Clock --
@@ -46,14 +46,5 @@ set -g status-right '#[fg=colour244,bg=colour236] #H #[fg=colour248,bg=colour239
 set -g window-status-format '#[fg=colour244,bg=colour236] #I | #W '
 set -g window-status-current-format '#[fg=colour252,bg=colour239] #I | #W '
 set -g window-status-separator ''
-
-
-# --------------------------------
-#            References
-# --------------------------------
-#
-# basic.tmuxtheme: <https://github.com/jimeh/tmux-themepack>
-# jellybeans.tmux: <https://github.com/atweiden/dotfiles>
-# jellybeans.vim: <https://github.com/nanotech/jellybeans.vim>
 
 # vim:ft=tmux:
