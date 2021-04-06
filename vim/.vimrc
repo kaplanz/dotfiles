@@ -18,8 +18,10 @@ syntax enable
 " }}}
 
 " Colours: {{{
-colorscheme iceberg
+packadd! palenight.vim
+colorscheme palenight
 set background=dark
+set termguicolors
 " }}}
 
 " Commands: {{{
