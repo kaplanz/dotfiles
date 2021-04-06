@@ -25,7 +25,11 @@ nnoremap gr :registers<CR>:norm<Space>"
 " }}}
 
 " Control: {{{
+" Open file in vertical split
 nnoremap <C-w><C-f> <C-w>vgf
+" Enable scrollback in terminal
+tnoremap <ScrollWheelUp> <C-w>N
+tnoremap <ScrollWheelDown> <C-w>N
 " }}}
 
 " Mapleader: {{{
