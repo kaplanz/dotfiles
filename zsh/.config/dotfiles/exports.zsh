@@ -18,7 +18,7 @@ export EDITOR="$(command -v vim)"
 export PAGER="$(command -v less)"
 
 # -- Filesystem --
-export LS_COLORS="$(cat $DOTFILES/colors/jellybeans.lscolors | tr '\n' ':')"
+export LS_COLORS="$(cat $DOTFILES/colors/ls/jellybeans.lscolors | tr '\n' ':')"
 export TREE_IGNORE='.git'
 
 # -- Path --
