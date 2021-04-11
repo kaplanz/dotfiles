@@ -32,7 +32,6 @@ zsh_prompt_yellow_fg='222'
 # Prompt blocks
 exit_status_block='%(?,,%F{$zsh_prompt_red_fg}%K{$zsh_prompt_primary_bg} $? %f%k)'
 command_time_block='${command_time:+"%F{$zsh_prompt_primary_fg}%K{$zsh_prompt_primary_bg} $command_time %f%k"}'
-conda_env_block='${CONDA_DEFAULT_ENV:+"%F{$zsh_prompt_green_fg}%K{$zsh_prompt_primary_bg} $CONDA_DEFAULT_ENV "}'
 hostname_block='${SSH_TTY:+"%F{$zsh_prompt_blue_fg}%K{$zsh_prompt_primary_bg} %n@%m "}'
 time_block='%F{$zsh_prompt_secondary_fg}%K{$zsh_prompt_secondary_bg} %D{%X}' # Use ZLE_RPROMPT_INDENT as final whitespace
 
@@ -40,7 +39,7 @@ time_block='%F{$zsh_prompt_secondary_fg}%K{$zsh_prompt_secondary_bg} %D{%X}' # U
 PROMPT='%k%F{$zsh_prompt_main}%~$(git_prompt_info) %F{$zsh_prompt_arrow}%(!.#.»)%f '
 
 # Right prompt
-RPROMPT="${exit_status_block}${command_time_block}${conda_env_block}${hostname_block}${time_block}%E"
+RPROMPT="${exit_status_block}${command_time_block}${hostname_block}${time_block}%E"
 
 # git settings
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{$zsh_prompt_main}(%F{$zsh_prompt_git}"
