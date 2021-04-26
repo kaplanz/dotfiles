@@ -43,7 +43,6 @@ function cp!() {
     [ -e "$1" ] && mkdir -p "$(dirname $2)"
     cp -R "$1" "$2"
 }
-function trash() { mv -f $@ ~/.Trash; }
 
 # -- Utilities --
 # fzf
