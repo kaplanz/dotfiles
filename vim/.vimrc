@@ -58,6 +58,17 @@ set encoding=utf-8
 set formatoptions+=j
 " }}}
 
+" Highlight: {{{
+" highlight ExtraWhitespace ctermbg=38 guibg=#89ddff
+" highlight ExtraWhitespace ctermbg=59 guibg=#697098
+" highlight ExtraWhitespace ctermbg=115 guibg=#c3e88d
+" highlight ExtraWhitespace ctermbg=170 guibg=#c792ea
+highlight ExtraWhitespace ctermbg=204 guibg=#ff5370
+" match ExtraWhitespace /\s\+$/               " highlight all trailing whitespace
+" match ExtraWhitespace /\v(.*%#)@!\s+$/      " don't highlight before including the cursor
+match ExtraWhitespace /\v((.*%#)@!|%#)\s+$/ " don't highlight before the cursor
+" }}}
+
 " Indentation: {{{
 filetype indent on
 set autoindent
