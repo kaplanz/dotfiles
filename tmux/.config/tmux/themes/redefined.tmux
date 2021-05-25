@@ -1,6 +1,6 @@
 #
 #  redefined.tmux
-#  Redefined tmux theme.
+#  Redefined Tmux theme.
 #
 #  Created by Zakhary Kaplan on 2019-06-25.
 #  Copyright © 2019 Zakhary Kaplan. All rights reserved.

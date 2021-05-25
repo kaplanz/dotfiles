@@ -93,10 +93,6 @@ set ttymouse=xterm2
 set path+=**
 " }}}
 
-" Runtimepath: {{{
-set runtimepath+=/usr/local/opt/fzf,~/.fzf
-" }}}
-
 " Search: {{{
 set hlsearch
 set ignorecase
@@ -125,10 +121,11 @@ set confirm
 set directory=~/.vim/swap
 set hidden
 set history=1000
+set sessionoptions-=options
 set shell+=\ -l
 set ttimeoutlen=0
-set undofile
 set undodir=~/.vim/undo
+set undofile
 set updatetime=300
 " }}}
 

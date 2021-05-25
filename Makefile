@@ -13,34 +13,28 @@
 # -- Directories --
 CRON      = $(HOME)/.cron
 DOTFILES  = $(HOME)/.dotfiles
-FZF       = $(HOME)/.fzf
+FZF       = $(HOME)/.cache/fzf
 TERMINFO  = $(HOME)/.terminfo
 TMUX      = $(HOME)/.config/tmux
 VIM       = $(HOME)/.vim
 VIM_PACK  = $(VIM)/pack/plugins/start
 VIM_CPACK = $(VIM)/pack/colors/start
-ZSH       = $(HOME)/.oh-my-zsh
-ZSHRC     = $(HOME)/.zshrc
+ZSH       = $(HOME)/.zsh
+ZPACK     = $(ZSH)/pack
+ZPLUG     = $(ZSH)/before
 
 # -- Commands --
 CLONE = git clone --depth 1
-LN    = ln -s
+LN    = ln -sf
 MKDIR = mkdir -p
-STOW  = stow --dir=$(DOTFILES) --target=$(HOME)
+STOW  = stow --no-folding --dir=$(DOTFILES) --target=$(HOME)
 TIC   = tic
 # May not exist
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 CURL := $(notdir $(shell command -v curl 2> /dev/null))
-# System dependent
-ifeq ($(shell uname),Darwin)
-	SED = sed -i ''
-else ifeq ($(shell uname),Linux)
-	SED = sed -i
-endif
 
 # -- URLs --
-GITHUB      = https://github.com
-OMZ_INSTALL = https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+GITHUB = https://github.com
 
 # -- Colours --
 # Vim
@@ -49,13 +43,14 @@ VIM_COLOURS += drewtempelmeyer/palenight.vim
 VIM_COLOURS += jacoborus/tender.vim
 VIM_COLOURS += morhetz/gruvbox
 VIM_COLOURS += nanotech/jellybeans.vim
+VIM_COLOURS += wojciechkepka/bogster
 VIM_COLOURS += xero/sourcerer.vim
 
 # -- Plugins --
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
-VIM_COC = $(VIM_PACK)/coc.nvim
+VIM_COC      = $(VIM_PACK)/coc.nvim
 VIM_PLUGINS += AndrewRadev/linediff.vim
 VIM_PLUGINS += AndrewRadev/sideways.vim
 VIM_PLUGINS += AndrewRadev/switch.vim
@@ -86,13 +81,22 @@ VIM_PLUGINS += wsdjeg/vim-fetch
 VIM_PLUGINS += zakharykaplan/vim-parry
 VIM_PLUGINS += zakharykaplan/vim-relatable
 # Zsh
-OH_MY_ZSH_PLUGINS += git docker docker-compose
-ZSH_PLUGINS += akarzim/zsh-docker-aliases
 ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
+# Oh My Zsh
+OHMYZSH       = $(ZPACK)/ohmyzsh
+OMZ_REPO      = ohmyzsh/ohmyzsh
+ZSH_PLUGINS  += $(OMZ_REPO)
+OMZ_LIB       = $(OHMYZSH)/lib
+OMZ_LIBS     += $(ZPLUG)/completion.zsh
+OMZ_LIBS     += $(ZPLUG)/git.zsh
+OMZ_LIBS     += $(ZPLUG)/key-bindings.zsh
+OMZ_PLUG      = $(OHMYZSH)/plugins
+OMZ_PLUGINS  += $(ZPACK)/docker
+OMZ_PLUGINS  += $(ZPACK)/git
 
 # -- Utilities --
-FZF_SCRIPTS = $(addprefix $(FZF),.bash .zsh)
+FZF_CONFIG     = $(HOME)/.config/fzf/fzf.zsh
 TERMINFO_FILES = $(wildcard utils/.terminfo/*.terminfo)
 
 
@@ -114,7 +118,7 @@ tmux: $(TMUX) plug-tmux stow-tmux
 vim: $(VIM) plug-vim stow-vim
 
 .PHONY: zsh
-zsh: $(ZSH) $(ZSHRC) plug-zsh stow-zsh
+zsh: $(ZSH) plug-zsh stow-zsh
 
 
 # -- Create all directories --
@@ -178,6 +182,7 @@ plug: plug-tmux plug-vim plug-zsh
 .PHONY: plug-tmux
 plug-tmux: $(TMUX) $(TMUX_PLUGINS)
 
+.PHONY: $(TMUX)
 $(TMUX):
 	@bash -c "$(MKDIR) $(TMUX)/{plugins,themes}"
 
@@ -190,6 +195,7 @@ $(TMUX_PLUGINS): $(TMUX)
 .PHONY: plug-vim
 plug-vim: $(VIM) $(VIM_COC) $(VIM_COLOURS) $(VIM_PLUGINS)
 
+.PHONY: $(VIM)
 $(VIM):
 	@bash -c "$(MKDIR) $(VIM)/{after,pack,plugin,swap,undo}"
 
@@ -209,25 +215,28 @@ $(VIM_PLUGINS): $(VIM)
 
 # Zsh
 .PHONY: plug-zsh
-plug-zsh: PLUGINS = $(OH_MY_ZSH_PLUGINS) $(notdir $(ZSH_PLUGINS))
-plug-zsh: THEME = redefined
-plug-zsh: $(ZSH) $(ZSHRC) $(ZSH_PLUGINS)
-	@$(SED) 's/ZSH_THEME=".*"/ZSH_THEME="$(THEME)"/' $(ZSHRC)
-	@$(SED) 's/^plugins=(.*)$$/plugins=($(PLUGINS))/' $(ZSHRC)
-	@$(SED) 's/^\(# \)\(DISABLE_UPDATE_PROMPT="true"\)/\2/' $(ZSHRC)
-	@$(SED) 's/^\(# \)\(DISABLE_AUTO_UPDATE="true"\)/\2/' $(ZSHRC)
+plug-zsh: $(ZSH) $(ZSH_PLUGINS) $(OHMYZSH)
 
-$(ZSH): $(ZSH)/.git
-$(ZSH)/.git: # use oh-my-zsh as base directory
-	@sh -c "$$($(CURL) -fsSL $(OMZ_INSTALL))" "" --unattended
-
-$(ZSHRC): | $(ZSH)
-	cp $(ZSH)/templates/zshrc.zsh-template $(ZSHRC)
+.PHONY: $(ZSH)
+$(ZSH):
+	@bash -c "$(MKDIR) $(ZSH)/{after,before,functions,pack,plugin,themes}"
 
 .PHONY: $(ZSH_PLUGINS)
-$(ZSH_PLUGINS): PLUGIN = $(ZSH)/custom/plugins/$(notdir $@)
+$(ZSH_PLUGINS): PLUGIN = $(ZSH)/pack/$(notdir $@)
 $(ZSH_PLUGINS): $(ZSH)
 	$(if $(wildcard $(PLUGIN)),,$(CLONE) $(GITHUB)/$@.git $(PLUGIN))
+
+# Oh My Zsh
+.PHONY: $(OHMYZSH)
+$(OHMYZSH): $(OMZ_REPO) $(OMZ_LIBS) $(OMZ_PLUGINS)
+
+$(OMZ_LIBS): $(ZPLUG)/%: $(OMZ_LIB)/%
+	$(LN) $< $@
+
+$(OMZ_PLUGINS): $(ZPACK)/%: $(OMZ_PLUG)/%
+	$(LN) $< $@
+
+$(OHMYZSH)/%: $(OMZ_REPO) ;
 
 
 # -- Configure utilities --
@@ -242,21 +251,26 @@ $(CRON):
 	@bash -c "$(MKDIR) $(CRON)/{locks,logs,scripts}"
 
 # fzf
-.PHONY: fzf
-fzf: $(FZF) $(FZF_SCRIPTS)
+ifdef BREW
+FZF     = $(shell $(BREW) --prefix fzf)
+endif
+FZF_VIM = $(VIM_PACK)/fzf
 
-$(FZF): $(FZF)/.git
-$(FZF)/.git: # if not using brew, install fzf using git
+.PHONY: fzf
+fzf: $(FZF) $(FZF_CONFIG) $(FZF_VIM)
+
+$(FZF): # if not using brew, install fzf using git
 ifndef BREW
 	$(CLONE) $(GITHUB)/junegunn/fzf.git $(FZF)
 endif
 
-$(FZF_SCRIPTS): | $(FZF)
-ifdef BREW
-	$$($(BREW) --prefix)/opt/fzf/install --all
-else
-	$(FZF)/install --all
-endif
+$(FZF_CONFIG): INSTALL = $(FZF)/install
+$(FZF_CONFIG): FLAGS = --all --xdg --no-update-rc --no-bash
+$(FZF_CONFIG): | $(FZF)
+	$(INSTALL) $(FLAGS)
+
+$(FZF_VIM): $(FZF) | $(VIM)
+	$(LN) $< $@
 
 # terminfo
 .PHONY: terminfo
@@ -270,7 +284,12 @@ utils/.terminfo/%.terminfo: $(TERMINFO)
 
 
 # --------------------------------
-#             Includes
+#              Extras
 # --------------------------------
 
+.SECONDARY: # do not remove secondary files
+
+.SUFFIXES: # delete the default suffixes
+
+# Includes
 -include ./local/Makefile

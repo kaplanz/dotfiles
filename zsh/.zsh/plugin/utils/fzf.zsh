@@ -1,34 +1,19 @@
 #
-#  exports.zsh
-#  Zsh exports.
+#  fzf.zsh
+#  Zsh FZF plugin.
 #
-#  Created by Zakhary Kaplan on 2019-06-04.
-#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
+#  Created by Zakhary Kaplan on 2021-05-16.
+#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
 #
 
-# --------------------------------
-#             Exports
-# --------------------------------
+# Source fzf configuration files
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
-# -- Directories --
-export DOTFILES="$HOME/.dotfiles"
+# Configure completion
+function _fzf_compgen_path() { fd --hidden --follow . "$1"; }
+function _fzf_compgen_dir() { fd --hidden --follow --type d . "$1"; }
 
-# -- Environment --
-export EDITOR="$(command -v vim)"
-export PAGER="$(command -v less)"
-
-# -- Filesystem --
-export LS_COLORS="$(cat $DOTFILES/colors/ls/jellybeans.lscolors | tr '\n' ':')"
-export TREE_IGNORE='.git'
-
-# -- Path --
-# XDG
-export PATH="$HOME/.local/bin:$PATH"
-
-# -- Utilities --
-# bat
-export BAT_THEME='Nord'
-# fzf
+# Configure environment variables
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS="
     --bind '?:toggle-preview'
@@ -59,5 +44,3 @@ export FZF_CTRL_R_OPTS="
 "
 export FZF_ALT_C_COMMAND='$FZF_DEFAULT_COMMAND --type d'
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
-
-# vim:ft=sh:
