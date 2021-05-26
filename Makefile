@@ -80,6 +80,7 @@ VIM_PLUGINS += wellle/targets.vim
 VIM_PLUGINS += wsdjeg/vim-fetch
 VIM_PLUGINS += zakharykaplan/vim-parry
 VIM_PLUGINS += zakharykaplan/vim-relatable
+VIM_PLUGINS += zakharykaplan/vim-trailblazer
 # Zsh
 ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting

@@ -42,8 +42,6 @@ augroup vimrc
     \ |   exe "normal! g`\""
     \ | endif
 
-  " Trim trailing whitespace on write
-  autocmd BufWritePre * %s/\s\+$//e
   " Replace tabs with spaces on write
   autocmd BufWritePre * retab
 
