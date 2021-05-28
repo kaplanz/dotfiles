@@ -60,6 +60,7 @@ function prompt_redefined_setup() {
     local main='$ZSH_PROMPT_COLOUR_MAIN'
     # Variables
     local cmdtime='$ZSH_PROMPT_VAR_CMDTIME'
+    local vimode='$ZSH_PROMPT_VAR_VIMODE'
 
     # Prompt
     local directory="%F{$main}%2~%f"
@@ -75,7 +76,9 @@ function prompt_redefined_setup() {
     local upjobs="%(1j,%F{$yellow}%K{$grey1_bg} %j %f%k,)"
     local userhost="%F{$blue}%K{$grey1_bg} %n@%m %f%k"
           userhost="\${SSH_TTY:+\"$userhost\"}" # hide if unset
-    RPS1="${cmdtime}${exitstatus}${upjobs}${userhost}${datetime}"
+    local vimode="%F{$grey1_fg}%K{$grey1_bg} $vimode %f%k"
+          vimode="\${ZSH_PROMPT_VAR_VIMODE:+\"$vimode\"}"
+    RPS1="${cmdtime}${exitstatus}${upjobs}${userhost}${vimode}${datetime}"
 
     # Hooks
     add-zsh-hook precmd prompt_redefined_precmd
@@ -91,6 +94,8 @@ function prompt_redefined_precmd() {
     ZSH_PROMPT_VAR_GITINFO="${ZSH_PROMPT_VAR_GITINFO:-$(prompt_redefined_gitinfo)}"
     # Unset the previous command timestamp
     unset ZSH_PROMPT_VAR_TIMESTAMP
+    # Unset the previous vi-mode
+    unset ZSH_PROMPT_VAR_VIMODE
 }
 
 function prompt_redefined_preexec() {
@@ -139,6 +144,26 @@ function prompt_redefined_gitinfo() {
     # Return formatted gitinfo
     echo "${prefix}${branch}${icon}${suffix}"
 }
+
+# Determine the current vi-mode
+function prompt_redefined_vimode() {
+    local vimode
+    case $KEYMAP in
+        main|viins) vimode='%F{$ZSH_PROMPT_COLOUR_CYAN}INSERT%f' ;;
+        vicmd)      vimode='%F{$ZSH_PROMPT_COLOUR_MAGENTA}NORMAL%f' ;;
+    esac
+    echo -n "$vimode"
+}
+# }}}
+
+# -- Widgets -- {{{
+# Executed every time the keymap changes
+function zle-keymap-select() {
+    # Get the current vi-mode
+    ZSH_PROMPT_VAR_VIMODE="$(prompt_redefined_vimode)"
+    zle reset-prompt
+}
+zle -N zle-keymap-select
 # }}}
 
 prompt_redefined_setup "$@"
