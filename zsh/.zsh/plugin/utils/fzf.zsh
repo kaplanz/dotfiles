@@ -42,5 +42,5 @@ export FZF_CTRL_R_OPTS="
     --preview 'echo {}'
     --preview-window down:3:hidden:wrap
 "
-export FZF_ALT_C_COMMAND='$FZF_DEFAULT_COMMAND --type d'
+export FZF_ALT_C_COMMAND='$FZF_DEFAULT_COMMAND --type d --follow'
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"

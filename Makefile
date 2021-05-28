@@ -82,6 +82,7 @@ VIM_PLUGINS += zakharykaplan/vim-parry
 VIM_PLUGINS += zakharykaplan/vim-relatable
 VIM_PLUGINS += zakharykaplan/vim-trailblazer
 # Zsh
+ZSH_PLUGINS += akarzim/zsh-docker-aliases
 ZSH_PLUGINS += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
 # Oh My Zsh

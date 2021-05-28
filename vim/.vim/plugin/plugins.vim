@@ -155,8 +155,6 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Gutentags: {{{
 let g:gutentags_enabled = filereadable('tags')
-let g:gutentags_generate_on_missing = 0
-let g:gutentags_generate_on_new = 0
 let g:gutentags_define_advanced_commands = 1
 " }}}
 
