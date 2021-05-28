@@ -63,19 +63,19 @@ function prompt_redefined_setup() {
 
     # Prompt
     local directory="%F{$main}%2~%f"
-    local gitinfo='$(prompt_redefined_gitinfo)'
+    local gitinfo='$ZSH_PROMPT_VAR_GITINFO'
     local symbol="%F{$cyan}%(!.#.»)%f"
     PS1="${directory}${gitinfo} ${symbol} "
 
     # Right Prompt
-    local command_time="%F{$grey1_fg}%K{$grey1_bg} $cmdtime %f%k"
-    command_time="\${ZSH_PROMPT_VAR_CMDTIME:+\"$command_time\"}" # hide if unset
-    local exit_status="%(?,,%F{$red}%K{$grey1_bg} %? %f%k)"
-    local jobs="%(1j,%F{$yellow}%K{$grey1_bg} %j %f%k,)"
-    local userhost="%F{$blue}%K{$grey1_bg} %n@%m %f%k"
-    userhost="\${SSH_TTY:+\"$userhost\"}" # hide if unset
+    local cmdtime="%F{$grey1_fg}%K{$grey1_bg} $cmdtime %f%k"
+          cmdtime="\${ZSH_PROMPT_VAR_CMDTIME:+\"$cmdtime\"}" # hide if unset
     local datetime="%F{$grey2_fg}%K{$grey2_bg} %D{%X}%E%f%k"
-    RPS1="${command_time}${exit_status}${jobs}${userhost}${datetime}"
+    local exitstatus="%(?,,%F{$red}%K{$grey1_bg} %? %f%k)"
+    local upjobs="%(1j,%F{$yellow}%K{$grey1_bg} %j %f%k,)"
+    local userhost="%F{$blue}%K{$grey1_bg} %n@%m %f%k"
+          userhost="\${SSH_TTY:+\"$userhost\"}" # hide if unset
+    RPS1="${cmdtime}${exitstatus}${upjobs}${userhost}${datetime}"
 
     # Hooks
     add-zsh-hook precmd prompt_redefined_precmd
@@ -86,24 +86,36 @@ function prompt_redefined_setup() {
 # -- Hooks -- {{{
 function prompt_redefined_precmd() {
     # Get the elapsed command execution time
-    ZSH_PROMPT_VAR_CMDTIME="$(prompt_redefined_cmdtime)"
+    ZSH_PROMPT_VAR_CMDTIME="${ZSH_PROMPT_VAR_TIMESTAMP:+$(prompt_redefined_cmdtime)}"
+    # Get the gitinfo for the current directory
+    ZSH_PROMPT_VAR_GITINFO="${ZSH_PROMPT_VAR_GITINFO:-$(prompt_redefined_gitinfo)}"
+    # Unset the previous command timestamp
     unset ZSH_PROMPT_VAR_TIMESTAMP
 }
 
 function prompt_redefined_preexec() {
     # Get the initial command timestamp
     ZSH_PROMPT_VAR_TIMESTAMP="$EPOCHREALTIME"
+    # Unset the previous gitinfo
+    unset ZSH_PROMPT_VAR_GITINFO
 }
 # }}}
 
 # -- Functions -- {{{
+# Calculate command execution time
+function prompt_redefined_cmdtime() {
+    local stop="$EPOCHREALTIME"
+    local start="${ZSH_PROMPT_VAR_TIMESTAMP:-$stop}"
+    let local elapsed="$stop - $start"
+    (( $elapsed > 0 )) && printf '%.2fs' $elapsed
+}
+
+# Determine gitinfo for the current directory
 function prompt_redefined_gitinfo() {
     # Nothing to print if not inside a git diretory
     git rev-parse --is-inside-work-tree &> /dev/null || return
-
     # Format the prefix
     local prefix="%F{$ZSH_PROMPT_COLOUR_MAIN}$ZSH_PROMPT_ICON_GIT_PREFIX%f"
-
     # Get the current ref
     local ref
     ref="$(git symbolic-ref --short HEAD 2> /dev/null)" \
@@ -111,7 +123,6 @@ function prompt_redefined_gitinfo() {
         || return
     # Format the branch
     local branch="%F{$ZSH_PROMPT_COLOUR_GIT_BRANCH}$ref%f"
-
     # Get the git directory status
     local gstatus=$(git status --porcelain)
     # Check if the working tree is dirty
@@ -123,23 +134,13 @@ function prompt_redefined_gitinfo() {
     fi
     # Format the icon
     icon="%F{$ZSH_PROMPT_COLOUR_GIT_STATUS}$icon%f"
-
     # Format the suffix
     local suffix="%F{$ZSH_PROMPT_COLOUR_MAIN}$ZSH_PROMPT_ICON_GIT_SUFFIX%f"
-
     # Return formatted gitinfo
     echo "${prefix}${branch}${icon}${suffix}"
-}
-
-function prompt_redefined_cmdtime() {
-    # Calculate command execution time
-    local stop="$EPOCHREALTIME"
-    local start="${ZSH_PROMPT_VAR_TIMESTAMP:-$stop}"
-    let local elapsed="$stop - $start"
-    (( $elapsed > 0 )) && printf '%.2fs' $elapsed
 }
 # }}}
 
 prompt_redefined_setup "$@"
 
-# vim:fdl=0:fdm=marker:
+# vim:ft=zsh:fdl=0:fdm=marker:
