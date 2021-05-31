@@ -115,11 +115,6 @@ omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 " }}}
 
-" EasyMotion: {{{
-" Change leader key
-map s <Plug>(easymotion-prefix)
-" }}}
-
 " FZF: {{{
 nnoremap <C-p> :FZF<CR>
 nnoremap <leader>h :Helptags<CR>
