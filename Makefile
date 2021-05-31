@@ -74,7 +74,6 @@ VIM_PLUGINS += tpope/vim-fugitive
 VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += tpope/vim-sleuth
 VIM_PLUGINS += tpope/vim-speeddating
-VIM_PLUGINS += tpope/vim-surround
 VIM_PLUGINS += tpope/vim-unimpaired
 VIM_PLUGINS += wellle/targets.vim
 VIM_PLUGINS += wsdjeg/vim-fetch
