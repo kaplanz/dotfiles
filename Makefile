@@ -64,6 +64,7 @@ VIM_PLUGINS += junegunn/goyo.vim
 VIM_PLUGINS += junegunn/limelight.vim
 VIM_PLUGINS += junegunn/vim-peekaboo
 VIM_PLUGINS += ludovicchabant/vim-gutentags
+VIM_PLUGINS += machakann/vim-sandwich
 VIM_PLUGINS += mg979/vim-visual-multi
 VIM_PLUGINS += preservim/nerdtree
 VIM_PLUGINS += preservim/tagbar
