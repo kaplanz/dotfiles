@@ -63,7 +63,7 @@ function prompt_redefined_setup() {
     local vimode='$ZSH_PROMPT_VAR_VIMODE'
 
     # Prompt
-    local directory="%F{$main}%2~%f"
+    local directory="%F{$main}%3~%f"
     local gitinfo='$ZSH_PROMPT_VAR_GITINFO'
     local symbol="%F{$cyan}%(!.#.»)%f"
     PS1="${directory}${gitinfo} ${symbol} "
