@@ -14,7 +14,8 @@ esac
 
 # -- Before -- {{{
 # Source "before" plugins.
-for plugin in "$ZDOTDIR/before"/**/*.zsh; do
+ZSH_PLUGINS_BEFORE=("$ZDOTDIR/before"/**/*.zsh(N))
+for plugin in $ZSH_PLUGINS_BEFORE; do
     source "$plugin"
     unset plugin
 done
@@ -105,16 +106,18 @@ fpath=("$ZDOTDIR/themes" $fpath)
 # }}}
 
 # -- Plugins -- {{{
-# Use "pack" plugins.
-for plugin in "$ZDOTDIR/pack"/*; do
-    local name="$plugin:t"
-    [ -f "$plugin/$name.plugin.zsh" ] && source "$plugin/$name.plugin.zsh"
-    [ -f "$plugin/_$name" ]           && fpath=("$plugin" $fpath)
-    unset name plugin
+# Source packs.
+ZSH_PACKS=("$ZDOTDIR/pack"/*(N))
+for pack in $ZSH_PACKS; do
+    local name="$pack:t"
+    [ -f "$pack/$name.plugin.zsh" ] && source "$pack/$name.plugin.zsh"
+    [ -f "$pack/_$name" ]           && fpath=("$pack" $fpath)
+    unset name pack
 done
 
-# Use "single-source" plugins.
-for plugin in "$ZDOTDIR/plugin"/**/*.zsh; do
+# Source plugins.
+ZSH_PLUGINS=("$ZDOTDIR/plugin"/**/*.zsh(N))
+for plugin in $ZSH_PLUGINS; do
     source "$plugin"
     unset plugin
 done
@@ -142,7 +145,8 @@ umask 022
 
 # -- After -- {{{
 # Source "after" plugins.
-for plugin in "$ZDOTDIR/after"/**/*.zsh; do
+ZSH_PLUGINS_AFTER=("$ZDOTDIR/after"/**/*.zsh(N))
+for plugin in $ZSH_PLUGINS_AFTER; do
     source "$plugin"
     unset plugin
 done
