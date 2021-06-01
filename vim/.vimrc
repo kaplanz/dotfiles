@@ -91,7 +91,7 @@ set smartcase
 
 " User Interface: {{{
 set display+=lastline
-set fillchars=vert:│,fold:-
+set fillchars=vert:│,fold:─
 set laststatus=2
 set noshowmode
 set number
@@ -115,7 +115,7 @@ set shell+=\ -l
 set ttimeoutlen=0
 set undodir=~/.vim/undo
 set undofile
-set updatetime=300
+set updatetime=100
 " }}}
 
 " Window: {{{
