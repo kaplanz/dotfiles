@@ -166,6 +166,9 @@ let g:lightline = {
       \ 'active': {
       \   'left': [['mode', 'paste'], ['fugitive', 'readonly', 'filename', 'modified']],
       \ },
+      \ 'component': {
+      \   'close': '%999X ⌧ '
+      \  },
       \ 'component_function': {
       \   'fugitive': 'LightlineFugitive',
       \   'filename': 'LightlineFilename',

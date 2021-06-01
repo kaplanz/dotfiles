@@ -91,7 +91,7 @@ set smartcase
 
 " User Interface: {{{
 set display+=lastline
-set fillchars=vert:│,fold:─
+set fillchars=vert:│,fold:─,foldopen:▼,foldclose:▶,foldsep:┆,diff:╳,eob:~
 set laststatus=2
 set noshowmode
 set number
