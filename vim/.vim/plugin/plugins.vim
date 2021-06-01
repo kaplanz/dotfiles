@@ -104,6 +104,25 @@ nnoremap <C-p> :FZF<CR>
 nnoremap <leader>h :Helptags<CR>
 " }}}
 
+" GitGutter: {{{
+" Disable default mappings
+let g:gitgutter_map_keys = 0
+" Hunk operations
+nmap ghp <Plug>(GitGutterPreviewHunk)
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+" Hunk jumping
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+" Hunk text objects
+omap ic <Plug>(GitGutterTextObjectInnerPending)
+omap ac <Plug>(GitGutterTextObjectOuterPending)
+xmap ic <Plug>(GitGutterTextObjectInnerVisual)
+xmap ac <Plug>(GitGutterTextObjectOuterVisual)
+" Use floating/popup windows for hunk previews
+let g:gitgutter_preview_win_floating = 1
+" }}}
+
 " Goyo: {{{
 let g:goyo_width = '70%'
 nnoremap <Leader>y :Goyo<CR>
