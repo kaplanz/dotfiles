@@ -55,7 +55,6 @@ VIM_PLUGINS += AndrewRadev/linediff.vim
 VIM_PLUGINS += AndrewRadev/sideways.vim
 VIM_PLUGINS += AndrewRadev/switch.vim
 VIM_PLUGINS += Yggdroot/indentLine
-VIM_PLUGINS += airblade/vim-rooter
 VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += itchyny/lightline.vim
 VIM_PLUGINS += junegunn/fzf.vim
