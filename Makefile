@@ -13,7 +13,7 @@
 # -- Directories --
 CRON      = $(HOME)/.cron
 DOTFILES  = $(HOME)/.dotfiles
-FZF       = $(HOME)/.cache/fzf
+FZF       = $(HOME)/.local/src/fzf
 TERMINFO  = $(HOME)/.terminfo
 TMUX      = $(HOME)/.config/tmux
 VIM       = $(HOME)/.vim
