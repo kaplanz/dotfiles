@@ -14,7 +14,7 @@ alias path='echo ${PATH//:/\\n}'
 function reload() { clear && exec "$SHELL" -l; }
 
 # Re-run the last command as sudo.
-function please() { sudo "$(fc -ln -1)"; }
+function please() { sudo $(fc -ln -1); }
 
 # Copy remote files.
 alias rsync='rsync -azhP --delete --stats'
