@@ -134,12 +134,7 @@ install: brew all
 
 #  -- Uninstall stowed dotfiles --
 .PHONY: uninstall
-uninstall:
-	@$(STOW) -v --delete local
-	@$(STOW) -v --delete tmux
-	@$(STOW) -v --delete utils
-	@$(STOW) -v --delete vim
-	@$(STOW) -v --delete zsh
+uninstall: unstow
 
 
 # -- Install Brewfile dependencies --
@@ -173,6 +168,14 @@ stow-vim: $(VIM)
 .PHONY: stow-zsh
 stow-zsh: $(ZSH)
 	$(STOW) --restow zsh
+
+.PHONY: unstow
+unstow:
+	@$(STOW) -v --delete local
+	@$(STOW) -v --delete tmux
+	@$(STOW) -v --delete utils
+	@$(STOW) -v --delete vim
+	@$(STOW) -v --delete zsh
 
 
 # -- Install plugins --

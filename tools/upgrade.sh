@@ -35,6 +35,9 @@ upgrade_oh_my_zsh() {
 
 # Run script
 main() {
+    # Unstow all dotfiles before stowing
+    make --directory="$DOTFILES" unstow
+
     # Upgrade programs
     upgrade_dotfiles_repo
     [ "$1" = '--all' ] && {
@@ -42,7 +45,7 @@ main() {
         upgrade_oh_my_zsh
     }
 
-    # Run Makefile
+    # Continue installation in Makefile
     make --directory="$DOTFILES" install
 }
 
