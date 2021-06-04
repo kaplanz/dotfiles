@@ -60,7 +60,7 @@ setopt share_history
 #   -e, for Emacs keymap (recommended unless you are vi user)
 #   -v, for Vi keymap
 # Comment not to set a keymap (allow shell to choose).
-bindkey -e
+bindkey -v
 # }}}
 
 # -- Exports -- {{{

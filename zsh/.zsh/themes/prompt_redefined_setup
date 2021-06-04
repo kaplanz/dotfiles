@@ -150,20 +150,37 @@ function prompt_redefined_vimode() {
     local vimode
     case $KEYMAP in
         main|viins) vimode='%F{$ZSH_PROMPT_COLOUR_CYAN}INSERT%f' ;;
-        vicmd)      vimode='%F{$ZSH_PROMPT_COLOUR_MAGENTA}NORMAL%f' ;;
+             vicmd) vimode='%F{$ZSH_PROMPT_COLOUR_MAGENTA}NORMAL%f' ;;
     esac
     echo -n "$vimode"
 }
 # }}}
 
 # -- Widgets -- {{{
-# Executed every time the keymap changes
+# Executed every time the keymap changes.
 function zle-keymap-select() {
+    # Change cursor shape for different vi-modes
+    case $KEYMAP in
+        main|viins) echo -ne '\e[6 q' ;;
+             vicmd) echo -ne '\e[2 q' ;;
+    esac
     # Get the current vi-mode
     ZSH_PROMPT_VAR_VIMODE="$(prompt_redefined_vimode)"
     zle reset-prompt
 }
 zle -N zle-keymap-select
+# Executed every time the line editor is started to read a new line of input.
+function zle-line-init() {
+    # Change cursor at line init for vi-mode
+    case $(bindkey -lL "$KEYMAP") in
+        *viins*) echo -ne '\e[6 q' ;;
+              *) ;;
+    esac
+    # Make sure that the terminal is in application mode when zle is active, since
+    # only then values from $terminfo are valid
+    (( ${+terminfo[smkx]} )) && echoti smkx
+}
+zle -N zle-line-init
 # }}}
 
 prompt_redefined_setup "$@"
