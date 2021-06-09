@@ -12,9 +12,7 @@ case "$(bindkey -lL main)" in
           *) return;;
 esac
 
-# Shorten delay when switching to `vicmd` keymap.
-export KEYTIMEOUT=1
-
+# -- Bindkeys -- {{{
 # Edit the command line using your visual editor, as in ksh.
 autoload -Uz edit-command-line
 zle -N edit-command-line
@@ -45,3 +43,59 @@ bindkey "^Q" push-line
 bindkey '^[b' vi-backward-word
 # Move forward one word, vi-style.
 bindkey '^[f' vi-forward-word
+# }}}
+
+# -- Exports -- {{{
+# Shorten delay when switching to `vicmd` keymap.
+export KEYTIMEOUT=1
+# }}}
+
+# -- Functions -- {{{
+function _zsh_set_cursor_shape_for_keymap() {
+    # https://vt100.net/docs/vt510-rm/DECSCUSR
+    local shape=0
+    case "${1:-${KEYMAP:-main}}" in
+        main)    shape=6 ;; # vi insert: line
+        viins)   shape=6 ;; # vi insert: line
+        isearch) shape=6 ;; # inc search: line
+        command) shape=6 ;; # read a command name
+        vicmd)   shape=2 ;; # vi cmd: block
+        visual)  shape=2 ;; # vi visual mode: block
+        viopp)   shape=0 ;; # vi operation pending: blinking block
+        *)       shape=0 ;;
+    esac
+    printf $'\e[%d q' "${shape}"
+}
+# }}}
+
+# -- Widgets -- {{{
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+    # Set the prompt variable
+    ZSH_PROMPT_VAR_VIMODE="$(prompt_redefined_vimode)"
+    # Set the cursor shape for the keymap
+    _zsh_set_cursor_shape_for_keymap "${KEYMAP}"
+    # Reset the prompt on a mode change
+    zle reset-prompt
+    zle -R
+}
+zle -N zle-keymap-select
+
+# These "echoti" statements were originally set in lib/key-bindings.zsh
+# Not sure the best way to extend without overriding.
+function zle-line-init() {
+    local prev_keymap="${KEYMAP:-}"
+    [[ "$prev_keymap" != 'main' ]] && zle reset-prompt
+    (( ! ${+terminfo[smkx]} )) || echoti smkx
+    _zsh_set_cursor_shape_for_keymap "${KEYMAP}"
+}
+zle -N zle-line-init
+
+function zle-line-finish() {
+    (( ! ${+terminfo[rmkx]} )) || echoti rmkx
+    _zsh_set_cursor_shape_for_keymap default
+}
+zle -N zle-line-finish
+# }}}
+
+# vim:fdl=0:fdm=marker:
