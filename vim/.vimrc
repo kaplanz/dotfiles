@@ -91,7 +91,9 @@ set smartcase
 
 " User Interface: {{{
 set display+=lastline
-set fillchars=vert:│,fold:─,foldopen:▼,foldclose:▶,foldsep:┆,diff:╳,eob:~
+if has('patch-8.2.2524')
+  set fillchars=vert:│,fold:─,foldopen:▼,foldclose:▶,foldsep:┆,diff:╳,eob:~
+endif
 set laststatus=2
 set noshowmode
 set number
