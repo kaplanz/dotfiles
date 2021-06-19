@@ -19,3 +19,6 @@ function please() { sudo $(fc -ln -1); }
 # Copy remote files.
 alias rsync='rsync -azhP --delete --stats'
 alias scp='scp -r'
+
+# Launch info with vi-keys
+alias info='info --vi-keys'
