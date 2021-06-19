@@ -7,7 +7,7 @@
 #
 
 # Build tools
-alias make='make -j$(nproc)'
+export MAKEFLAGS="-k -j$(nproc)"
 
 # Interpreters
 alias py='python'
