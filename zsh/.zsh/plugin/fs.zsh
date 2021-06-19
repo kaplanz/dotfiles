@@ -82,7 +82,7 @@ alias rm='rm -d'
 # -- Filesystem -- {{{
 # List contents of directories in a tree-like format.
 export TREE_IGNORE='.git'
-alias tree='tree -C -I "$TREE_IGNORE"'
+alias tree='tree -I "$TREE_IGNORE"'
 for i in {1..9}; do
     alias tree$i="tree -L $i"
 done
