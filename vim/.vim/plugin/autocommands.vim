@@ -50,11 +50,14 @@ augroup vimrc
   " screwing up folding when switching between windows.
   autocmd InsertEnter *
     \ if !exists('w:foldmethod')
-    \ |   let w:foldmethod=&foldmethod | setlocal foldmethod=manual
+    \ |   let w:foldmethod=&foldmethod
+    \ |   setlocal foldmethod=manual
     \ | endif
   autocmd InsertLeave,WinLeave *
     \ if exists('w:foldmethod')
     \ |   let &l:foldmethod=w:foldmethod
+    \ |   unlet w:foldmethod
+    \ | endif
 
   " Disable line numbers in terminal buffers
   if exists('##TerminalWinOpen')
