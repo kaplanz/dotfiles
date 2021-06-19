@@ -70,6 +70,7 @@ VIM_PLUGINS += preservim/tagbar
 VIM_PLUGINS += simnalamburt/vim-mundo
 VIM_PLUGINS += tpope/vim-abolish
 VIM_PLUGINS += tpope/vim-commentary
+VIM_PLUGINS += tpope/vim-eunuch
 VIM_PLUGINS += tpope/vim-fugitive
 VIM_PLUGINS += tpope/vim-repeat
 VIM_PLUGINS += tpope/vim-sleuth
@@ -235,9 +236,11 @@ $(ZSH_PLUGINS): $(ZSH)
 $(OHMYZSH): $(OMZ_REPO) $(OMZ_LIBS) $(OMZ_PLUGINS)
 
 $(OMZ_LIBS): $(ZPLUG)/%: $(OMZ_LIB)/%
+	$(MKDIR) $(@D)
 	$(LN) $< $@
 
 $(OMZ_PLUGINS): $(ZPACK)/%: $(OMZ_PLUG)/%
+	$(MKDIR) $(@D)
 	$(LN) $< $@
 
 $(OHMYZSH)/%: $(OMZ_REPO) ;
@@ -274,6 +277,7 @@ $(FZF_CONFIG): | $(FZF)
 	$(INSTALL) $(FLAGS)
 
 $(FZF_VIM): $(FZF) | $(VIM)
+	$(MKDIR) $(@D)
 	$(LN) $< $@
 
 # terminfo
