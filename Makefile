@@ -1,6 +1,6 @@
 #
 #  Makefile
-#  My dotfiles Makefile.
+#  Dotfiles build system.
 #
 #  Created by Zakhary Kaplan on 2020-02-23.
 #  Copyright © 2020 Zakhary Kaplan. All rights reserved.
@@ -10,7 +10,8 @@
 #            Variables
 # --------------------------------
 
-# -- Directories --
+# {{{
+# -- Directories -- {{{
 CRON      = $(HOME)/.cron
 DOTFILES  = $(HOME)/.dotfiles
 FZF       = $(HOME)/.local/src/fzf
@@ -22,8 +23,9 @@ VIM_CPACK = $(VIM)/pack/colors/start
 ZSH       = $(HOME)/.zsh
 ZPACK     = $(ZSH)/pack
 ZPLUG     = $(ZSH)/before
+# }}}
 
-# -- Commands --
+# -- Commands -- {{{
 CLONE = git clone --depth 1
 LN    = ln -sf
 MKDIR = mkdir -p
@@ -32,11 +34,13 @@ TIC   = tic
 # May not exist
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 CURL := $(notdir $(shell command -v curl 2> /dev/null))
+# }}}
 
-# -- URLs --
+# -- URLs -- {{{
 GITHUB = https://github.com
+# }}}
 
-# -- Colours --
+# -- Colours -- {{{
 # Vim
 VIM_COLOURS += cocopon/iceberg.vim
 VIM_COLOURS += drewtempelmeyer/palenight.vim
@@ -45,8 +49,9 @@ VIM_COLOURS += morhetz/gruvbox
 VIM_COLOURS += nanotech/jellybeans.vim
 VIM_COLOURS += wojciechkepka/bogster
 VIM_COLOURS += xero/sourcerer.vim
+# }}}
 
-# -- Plugins --
+# -- Plugins -- {{{
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Vim
@@ -96,19 +101,23 @@ OMZ_LIBS     += $(ZPLUG)/key-bindings.zsh
 OMZ_PLUG      = $(OHMYZSH)/plugins
 OMZ_PLUGINS  += $(ZPACK)/docker
 OMZ_PLUGINS  += $(ZPACK)/git
+# }}}
 
-# -- Utilities --
+# -- Utilities -- {{{
 FZF_CONFIG     = $(HOME)/.config/fzf/fzf.zsh
-TERMINFO_FILES = $(wildcard utils/.terminfo/*.terminfo)
+TERMINFO_FILES = $(wildcard etc/.terminfo/*.terminfo)
+# }}}
+# }}}
 
 
 # --------------------------------
 #             Targets
 # --------------------------------
 
-# -- Make all programs --
+# {{{
+# -- Make all programs -- {{{
 .PHONY: all
-all: dirs local plug stow utils
+all: dirs etc local plug stow
 
 .PHONY: local
 local: stow-local
@@ -121,34 +130,38 @@ vim: $(VIM) plug-vim stow-vim
 
 .PHONY: zsh
 zsh: $(ZSH) plug-zsh stow-zsh
+# }}}
 
-
-# -- Create all directories --
+# -- Create all directories -- {{{
 .PHONY: dirs
 dirs: $(CRON) $(TERMINFO) $(TMUX) $(VIM) $(ZSH)
+# }}}
 
-
-# -- Install all --
+# -- Install all -- {{{
 .PHONY: install
 install: brew all
+# }}}
 
-
-#  -- Uninstall stowed dotfiles --
+#  -- Uninstall stowed dotfiles -- {{{
 .PHONY: uninstall
 uninstall: unstow
+# }}}
 
-
-# -- Install Brewfile dependencies --
+# -- Install Brewfile dependencies -- {{{
 .PHONY: brew
 brew:
 ifdef BREW
 	$(BREW) bundle --file=$(DOTFILES)/tools/Brewfile
 endif
+# }}}
 
-
-# -- Stow dotfiles --
+# -- Stow dotfiles -- {{{
 .PHONY: stow
-stow: stow-local stow-tmux stow-utils stow-vim stow-zsh
+stow: stow-etc stow-local stow-tmux stow-vim stow-zsh
+
+.PHONY: stow-etc
+stow-etc:
+	$(STOW) --restow etc
 
 .PHONY: stow-local
 stow-local:
@@ -157,10 +170,6 @@ stow-local:
 .PHONY: stow-tmux
 stow-tmux: $(TMUX)
 	$(STOW) --restow tmux
-
-.PHONY: stow-utils
-stow-utils:
-	$(STOW) --restow utils
 
 .PHONY: stow-vim
 stow-vim: $(VIM)
@@ -172,14 +181,14 @@ stow-zsh: $(ZSH)
 
 .PHONY: unstow
 unstow:
+	@$(STOW) -v --delete etc
 	@$(STOW) -v --delete local
 	@$(STOW) -v --delete tmux
-	@$(STOW) -v --delete utils
 	@$(STOW) -v --delete vim
 	@$(STOW) -v --delete zsh
+# }}}
 
-
-# -- Install plugins --
+# -- Install plugins -- {{{
 .PHONY: plug
 plug: plug-tmux plug-vim plug-zsh
 
@@ -244,15 +253,15 @@ $(OMZ_PLUGINS): $(ZPACK)/%: $(OMZ_PLUG)/%
 	$(LN) $< $@
 
 $(OHMYZSH)/%: $(OMZ_REPO) ;
+# }}}
 
-
-# -- Configure utilities --
-.PHONY: utils
-utils: cron fzf terminfo
+# -- Configure utilities -- {{{
+.PHONY: etc
+etc: cron fzf terminfo
 
 # cron
 .PHONY: cron
-cron: $(CRON) stow-utils
+cron: $(CRON) stow-etc
 
 $(CRON):
 	@bash -c "$(MKDIR) $(CRON)/{locks,logs,scripts}"
@@ -282,22 +291,28 @@ $(FZF_VIM): $(FZF) | $(VIM)
 
 # terminfo
 .PHONY: terminfo
-terminfo: $(TERMINFO) $(TERMINFO_FILES) stow-utils
+terminfo: $(TERMINFO) $(TERMINFO_FILES) stow-etc
 
 $(TERMINFO):
 	@bash -c "$(MKDIR) $(TERMINFO)"
 
-utils/.terminfo/%.terminfo: $(TERMINFO)
+etc/.terminfo/%.terminfo: $(TERMINFO)
 	@$(TIC) -o $(TERMINFO) $@
+# }}}
+# }}}
 
 
 # --------------------------------
 #              Extras
 # --------------------------------
 
+# {{{
 .SECONDARY: # do not remove secondary files
 
 .SUFFIXES: # delete the default suffixes
 
 # Includes
 -include ./local/Makefile
+# }}}
+
+# vim:fdl=0:fdm=marker:
