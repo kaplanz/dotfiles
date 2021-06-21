@@ -1,0 +1,4 @@
+__FILE__ - __DESCRIPTION__
+Maintainer:   __AUTHOR <__HOMEPAGE__>
+Version:      __VERSION__
+SPDX-License-Identifier: __LICENSE__
