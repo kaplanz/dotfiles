@@ -1,10 +1,7 @@
-#
-#  Brewfile
-#  Homebrew bundle.
-#
-#  Created by Zakhary Kaplan on 2019-07-18.
-#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-#
+# File:        Brewfile
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     18 Jul 2019
+# SPDX-License-Identifier: MIT
 
 tap "homebrew/bundle"
 tap "homebrew/cask"

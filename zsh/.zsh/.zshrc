@@ -1,10 +1,7 @@
-#
-#  .zshrc
-#  Zsh run commands.
-#
-#  Created by Zakhary Kaplan on 2021-05-12.
-#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
-#
+# File:        .zshrc
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     12 May 2021
+# SPDX-License-Identifier: MIT
 
 # If not running interactively, don't do anything.
 case $- in

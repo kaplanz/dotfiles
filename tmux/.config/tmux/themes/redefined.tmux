@@ -1,10 +1,7 @@
-#
-#  redefined.tmux
-#  Redefined Tmux theme.
-#
-#  Created by Zakhary Kaplan on 2019-06-25.
-#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-#
+# File:        redefined.tmux
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     25 Jun 2019
+# SPDX-License-Identifier: MIT
 
 # --------------------------------
 #            Redefined

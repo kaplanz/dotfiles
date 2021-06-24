@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-#
-#  upgrade_dotfiles.sh
-#  Cron script to upgrade dotfiles.
-#
-#  Created by Zakhary Kaplan on 2020-06-13.
-#  Copyright © 2020 Zakhary Kaplan. All rights reserved.
-#
+# File:        upgrade_dotfiles.sh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     13 Jun 2020
+# SPDX-License-Identifier: MIT
 
 # Set environment variable DOTFILES
 DOTFILES=${DOTFILES:-"$HOME/.dotfiles"}

@@ -1,10 +1,7 @@
-#
-#  Makefile
-#  Dotfiles build system.
-#
-#  Created by Zakhary Kaplan on 2020-02-23.
-#  Copyright © 2020 Zakhary Kaplan. All rights reserved.
-#
+# File:        Makefile
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     23 Feb 2020
+# SPDX-License-Identifier: MIT
 
 # --------------------------------
 #            Variables

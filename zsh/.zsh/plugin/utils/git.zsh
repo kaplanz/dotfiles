@@ -1,10 +1,7 @@
-#
-#  git.zsh
-#  Zsh Git plugin.
-#
-#  Created by Zakhary Kaplan on 2021-05-16.
-#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
-#
+# File:        git.zsh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     16 May 2021
+# SPDX-License-Identifier: MIT
 
 alias gci='git checkout-index'
 alias gci!='git checkout-index --all --force'

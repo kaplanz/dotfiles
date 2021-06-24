@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-#
-#  job.sh
-#  Cron script manager.
-#
-#  Created by Zakhary Kaplan on 2020-06-13.
-#  Copyright © 2020 Zakhary Kaplan. All rights reserved.
-#
+# File:        job.sh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     13 Jun 2020
+# SPDX-License-Identifier: MIT
 
 # Ensure valid bash version
 if [ ! "${BASH_VERSINFO[0]}" -ge 4 ]; then

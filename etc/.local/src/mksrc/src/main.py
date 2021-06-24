@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# File:        main.py
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     21 Jun 2021
+# SPDX-License-Identifier: MIT
 
 import argparse
 from datetime import date

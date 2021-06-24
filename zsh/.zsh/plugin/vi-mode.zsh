@@ -1,10 +1,7 @@
-#
-#  vi-mode.zsh
-#  Zsh vi-mode plugin.
-#
-#  Created by Zakhary Kaplan on 2021-05-27.
-#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
-#
+# File:        vi-mode.zsh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     27 May 2021
+# SPDX-License-Identifier: MIT
 
 # If not in vi-mode, don't do anything.
 case "$(bindkey -lL main)" in

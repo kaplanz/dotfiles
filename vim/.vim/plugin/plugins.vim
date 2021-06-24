@@ -1,10 +1,7 @@
-"
-"  plugins.vim
-"  Vim plugins configuration.
-"
-"  Created by Zakhary Kaplan on 2020-04-24.
-"  Copyright © 2020 Zakhary Kaplan. All rights reserved.
-"
+" File:        plugins.vim
+" Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+" Created:     24 Apr 2020
+" SPDX-License-Identifier: MIT
 
 " --------------------------------
 "             Options

@@ -1,10 +1,7 @@
-"
-"  mappings.vim
-"  Vim mappings.
-"
-"  Created by Zakhary Kaplan on 2020-09-12.
-"  Copyright © 2020 Zakhary Kaplan. All rights reserved.
-"
+" File:        mappings.vim
+" Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+" Created:     12 Sep 2020
+" SPDX-License-Identifier: MIT
 
 " --------------------------------
 "             Mappings

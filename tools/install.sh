@@ -1,11 +1,8 @@
-#!/bin/sh
-#
-#  install.sh
-#  Install script.
-#
-#  Created by Zakhary Kaplan on 2019-06-05.
-#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-#
+#!/usr/bin/env bash
+# File:        install.sh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     05 Jun 2019
+# SPDX-License-Identifier: MIT
 
 # Installation settings
 DOTFILES=~/.dotfiles

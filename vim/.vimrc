@@ -1,10 +1,7 @@
-"
-"  .vimrc
-"  Vim configuration.
-"
-"  Created by Zakhary Kaplan on 2019-06-05.
-"  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-"
+" File:        .vimrc
+" Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+" Created:     05 Jun 2019
+" SPDX-License-Identifier: MIT
 
 " --------------------------------
 "             Options

@@ -1,10 +1,7 @@
-#
-#  highlight.zsh
-#  Zsh highlight plugin.
-#
-#  Created by Zakhary Kaplan on 2021-05-19.
-#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
-#
+# File:        highlight.zsh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     19 May 2021
+# SPDX-License-Identifier: MIT
 
 # Define syntax highlighting colurs.
 red="$ZSH_PROMPT_COLOUR_RED"

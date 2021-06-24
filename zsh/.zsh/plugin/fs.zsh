@@ -1,10 +1,7 @@
-#
-#  fs.zsh
-#  Zsh filesystem plugin.
-#
-#  Created by Zakhary Kaplan on 2021-05-13.
-#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-#
+# File:        fs.zsh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     13 May 2021
+# SPDX-License-Identifier: MIT
 
 # -- Options -- {{{
 setopt auto_pushd

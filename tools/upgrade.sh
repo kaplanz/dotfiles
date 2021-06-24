@@ -1,11 +1,8 @@
-#!/bin/sh
-#
-#  upgrade.sh
-#  Upgrade script.
-#
-#  Created by Zakhary Kaplan on 2019-12-10.
-#  Copyright © 2019 Zakhary Kaplan. All rights reserved.
-#
+#!/usr/bin/env bash
+# File:        upgrade.sh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     10 Dec 2019
+# SPDX-License-Identifier: MIT
 
 # Upgrade dotfiles repo
 upgrade_dotfiles_repo() {

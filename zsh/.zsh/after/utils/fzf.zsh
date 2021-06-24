@@ -1,10 +1,7 @@
-#
-#  fzf.zsh
-#  Zsh FZF plugin.
-#
-#  Created by Zakhary Kaplan on 2021-05-16.
-#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
-#
+# File:        fzf.zsh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     16 May 2021
+# SPDX-License-Identifier: MIT
 
 # Source fzf configuration files
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh

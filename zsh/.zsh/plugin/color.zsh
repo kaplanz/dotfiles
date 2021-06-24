@@ -1,10 +1,7 @@
-#
-#  color.zsh
-#  Zsh colours plugin.
-#
-#  Created by Zakhary Kaplan on 2021-05-19.
-#  Copyright © 2021 Zakhary Kaplan. All rights reserved.
-#
+# File:        color.zsh
+# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Created:     19 May 2021
+# SPDX-License-Identifier: MIT
 
 # Override default utils with GNU coreutils
 [ "$(command -v gdircolors)" ] && alias dircolors='gdircolors'
