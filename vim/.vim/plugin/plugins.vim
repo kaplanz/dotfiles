@@ -47,6 +47,9 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming
 nmap <Leader>rn <Plug>(coc-rename)
+" Import organizing
+nnoremap <silent> <Plug>(coc-organize-import) :<C-u>call CocActionAsync('organizeImport')<CR>
+nmap <Leader>oi <Plug>(coc-organize-import)
 " Formatting selected code
 nmap <Leader>f <Plug>(coc-format-selected)
 xmap <Leader>f <Plug>(coc-format-selected)
