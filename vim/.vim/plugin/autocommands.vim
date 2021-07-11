@@ -14,13 +14,6 @@ augroup vimrc
   " Override formatoptions upon entering a new buffer
   autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=cro
 
-  " For very long files, set foldmethod to indent to avoid long folding times
-  autocmd BufNewFile,BufRead *
-    \ if line('$') < 1000
-    \ |   setlocal foldmethod=syntax
-    \ | else
-    \ |   setlocal foldmethod=indent
-    \ | endif
   " Tier foldlevel depending on how many lines are in the buffer
   autocmd BufNewFile,BufRead *
     \ if line('$') < 100

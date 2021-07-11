@@ -51,6 +51,10 @@ set whichwrap+=<,>,[,]
 set encoding=utf-8
 " }}}
 
+" Folding: {{{
+set foldmethod=indent
+" }}}
+
 " Formatting: {{{
 set formatoptions+=j
 " }}}
