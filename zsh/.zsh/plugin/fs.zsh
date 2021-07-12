@@ -73,6 +73,7 @@ function mv!() {
     [ -e "$1" ] && mkdir -p "$(dirname $2)"
     mv "$1" "$2"
 }
+function mvall() { mv {^,}"$1"; }
 alias rm='rm -d'
 # }}}
 
