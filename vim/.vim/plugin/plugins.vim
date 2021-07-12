@@ -21,7 +21,7 @@ filetype plugin on
 
 " Coc: {{{
 " Global extension names to install when they aren't installed
-let g:coc_global_extensions = ['coc-highlight', 'coc-snippets'] +
+let g:coc_global_extensions = ['coc-highlight', 'coc-json', 'coc-snippets'] +
   \ get(g:, 'coc_global_extensions', [])
 " Use `[d` and `]d` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
