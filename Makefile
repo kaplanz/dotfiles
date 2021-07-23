@@ -56,7 +56,6 @@ VIM_COC      = $(VIM_PACK)/coc.nvim
 VIM_PLUGINS += AndrewRadev/linediff.vim
 VIM_PLUGINS += AndrewRadev/sideways.vim
 VIM_PLUGINS += AndrewRadev/switch.vim
-VIM_PLUGINS += Yggdroot/indentLine
 VIM_PLUGINS += airblade/vim-gitgutter
 VIM_PLUGINS += honza/vim-snippets
 VIM_PLUGINS += itchyny/lightline.vim

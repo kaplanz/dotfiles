@@ -156,10 +156,6 @@ let g:gutentags_enabled = filereadable('tags')
 let g:gutentags_define_advanced_commands = 1
 " }}}
 
-" IndentLine: {{{
-let g:indentLine_char = '│'
-" }}}
-
 " Lightline: {{{
 let g:lightline = {
       \ 'colorscheme': g:colors_name,
