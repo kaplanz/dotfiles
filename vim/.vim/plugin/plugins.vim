@@ -11,9 +11,6 @@
 let s:sidebar_width = 32
 " }}}
 
-" Options: {{{
-filetype plugin on
-" }}}
 
 " --------------------------------
 "             Plugins

@@ -83,6 +83,10 @@ set ttymouse=xterm2
 set path+=**
 " }}}
 
+" Plugin: {{{
+filetype plugin on
+" }}}
+
 " Search: {{{
 set hlsearch
 set ignorecase
