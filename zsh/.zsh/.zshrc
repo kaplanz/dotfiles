@@ -19,6 +19,9 @@ done
 # }}}
 
 # -- Completion -- {{{
+# Add local functions directory to fpath.
+export fpath=("$ZDOTDIR/functions" $fpath)
+
 # The following lines were added by compinstall.
 zstyle :compinstall filename '$HOME/.zsh/.zshrc'
 
@@ -91,15 +94,8 @@ setopt notify
 # }}}
 
 # -- Path -- {{{
-# Local binaries.
-export PATH="$HOME/.local/bin:$PATH"
-# }}}
-
-# -- Fpath -- {{{
-# Functions directory.
-fpath=("$ZDOTDIR/functions" $fpath)
-# Themes directory.
-fpath=("$ZDOTDIR/themes" $fpath)
+# Use local binaries.
+export path=("$HOME/.local/bin" $path)
 # }}}
 
 # -- Plugins -- {{{
@@ -121,6 +117,9 @@ done
 # }}}
 
 # -- Themes -- {{{
+# Add themes directory to fpath.
+export fpath=("$ZDOTDIR/themes" $fpath)
+
 # Initialize the prompt system.
 autoload -U promptinit
 promptinit
