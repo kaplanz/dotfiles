@@ -9,84 +9,49 @@
 
 # {{{
 # -- Directories -- {{{
+XDG_CONFIG_HOME ?= $(HOME)/.config
+XDG_DATA_HOME   ?= $(HOME)/.local/share
 CRON      = $(HOME)/.cron
 DOTFILES  = $(HOME)/.dotfiles
-FZF       = $(HOME)/.local/src/fzf
+FZF       = $(XDG_DATA_HOME)/fzf
+NVIM      = $(XDG_CONFIG_HOME)/nvim
+PACKER    = $(XDG_DATA_HOME)/nvim/site/pack/packer
 TERMINFO  = $(HOME)/.terminfo
-TMUX      = $(HOME)/.config/tmux
-VIM       = $(HOME)/.vim
-VIM_PACK  = $(VIM)/pack/plugins/start
-VIM_CPACK = $(VIM)/pack/colors/start
-ZSH       = $(HOME)/.zsh
+TMUX      = $(XDG_CONFIG_HOME)/tmux
 ZPACK     = $(ZSH)/pack
 ZPLUG     = $(ZSH)/before
+ZSH       = $(HOME)/.zsh
+# }}}
+
+# -- Files -- {{{
+TERMINFO.SRC = $(TERMINFO)/terminfo.src
 # }}}
 
 # -- Commands -- {{{
-CLONE = git clone --depth 1
-LN    = ln -sf
-MKDIR = mkdir -p
-STOW  = stow --no-folding --dir=$(DOTFILES) --target=$(HOME)
-TIC   = tic
-# May not exist
+CLONE  = git clone --depth 1
+GUNZIP = gunzip
+LN     = ln -sf
+MKDIR  = mkdir -p
+STOW   = stow --no-folding --dir=$(DOTFILES) --target=$(HOME)
+TIC    = tic
+WGET   = wget
+# Optional
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
-CURL := $(notdir $(shell command -v curl 2> /dev/null))
 # }}}
 
 # -- URLs -- {{{
 GITHUB = https://github.com
-# }}}
-
-# -- Colours -- {{{
-# Vim
-VIM_COLOURS += cocopon/iceberg.vim
-VIM_COLOURS += drewtempelmeyer/palenight.vim
-VIM_COLOURS += jacoborus/tender.vim
-VIM_COLOURS += morhetz/gruvbox
-VIM_COLOURS += nanotech/jellybeans.vim
-VIM_COLOURS += wojciechkepka/bogster
-VIM_COLOURS += xero/sourcerer.vim
+TERMINFO.SRC.GZ = http://invisible-island.net/datafiles/current/terminfo.src.gz
 # }}}
 
 # -- Plugins -- {{{
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
-# Vim
-VIM_COC      = $(VIM_PACK)/coc.nvim
-VIM_PLUGINS += AndrewRadev/linediff.vim
-VIM_PLUGINS += AndrewRadev/sideways.vim
-VIM_PLUGINS += AndrewRadev/switch.vim
-VIM_PLUGINS += airblade/vim-gitgutter
-VIM_PLUGINS += honza/vim-snippets
-VIM_PLUGINS += itchyny/lightline.vim
-VIM_PLUGINS += junegunn/fzf.vim
-VIM_PLUGINS += junegunn/goyo.vim
-VIM_PLUGINS += junegunn/limelight.vim
-VIM_PLUGINS += junegunn/vim-peekaboo
-VIM_PLUGINS += ludovicchabant/vim-gutentags
-VIM_PLUGINS += machakann/vim-sandwich
-VIM_PLUGINS += mg979/vim-visual-multi
-VIM_PLUGINS += preservim/nerdtree
-VIM_PLUGINS += preservim/tagbar
-VIM_PLUGINS += simnalamburt/vim-mundo
-VIM_PLUGINS += tpope/vim-abolish
-VIM_PLUGINS += tpope/vim-commentary
-VIM_PLUGINS += tpope/vim-eunuch
-VIM_PLUGINS += tpope/vim-fugitive
-VIM_PLUGINS += tpope/vim-repeat
-VIM_PLUGINS += tpope/vim-sleuth
-VIM_PLUGINS += tpope/vim-speeddating
-VIM_PLUGINS += tpope/vim-unimpaired
-VIM_PLUGINS += wellle/targets.vim
-VIM_PLUGINS += wsdjeg/vim-fetch
-VIM_PLUGINS += zakharykaplan/vim-parry
-VIM_PLUGINS += zakharykaplan/vim-relatable
-VIM_PLUGINS += zakharykaplan/vim-trailblazer
 # Zsh
-ZSH_PLUGINS += akarzim/zsh-docker-aliases
-ZSH_PLUGINS += zsh-users/zsh-autosuggestions
-ZSH_PLUGINS += zsh-users/zsh-syntax-highlighting
-# Oh My Zsh
+ZSH_PLUGINS  += akarzim/zsh-docker-aliases
+ZSH_PLUGINS  += zsh-users/zsh-autosuggestions
+ZSH_PLUGINS  += zsh-users/zsh-syntax-highlighting
+# Zsh: Oh My Zsh
 OHMYZSH       = $(ZPACK)/ohmyzsh
 OMZ_REPO      = ohmyzsh/ohmyzsh
 ZSH_PLUGINS  += $(OMZ_REPO)
@@ -100,8 +65,8 @@ OMZ_PLUGINS  += $(ZPACK)/git
 # }}}
 
 # -- Utilities -- {{{
-FZF_CONFIG     = $(HOME)/.config/fzf/fzf.zsh
-TERMINFO_FILES = $(wildcard etc/.terminfo/*.terminfo)
+FZF_CONFIG = $(HOME)/.config/fzf/fzf.zsh
+TERMINFOS  = tmux-256color
 # }}}
 # }}}
 
@@ -111,39 +76,42 @@ TERMINFO_FILES = $(wildcard etc/.terminfo/*.terminfo)
 # --------------------------------
 
 # {{{
-# -- Make all programs -- {{{
+# -- Top-level Goals -- {{{
 .PHONY: all
-all: dirs etc local plug stow
+all: apps
+# }}}
+
+# -- Application Goals -- {{{
+.PHONY: apps
+apps: etc local nvim tmux zsh
+
+.PHONY: etc
+etc: cron fzf terminfo
 
 .PHONY: local
 local: stow-local
 
+.PHONY: nvim
+nvim: $(NVIM) plug-nvim stow-nvim
+
 .PHONY: tmux
 tmux: $(TMUX) plug-tmux stow-tmux
-
-.PHONY: vim
-vim: $(VIM) plug-vim stow-vim
 
 .PHONY: zsh
 zsh: $(ZSH) plug-zsh stow-zsh
 # }}}
 
-# -- Create all directories -- {{{
-.PHONY: dirs
-dirs: $(CRON) $(TERMINFO) $(TMUX) $(VIM) $(ZSH)
-# }}}
-
-# -- Install all -- {{{
+# -- Install Goals -- {{{
 .PHONY: install
-install: brew all
-# }}}
+install: all brew
 
-#  -- Uninstall stowed dotfiles -- {{{
 .PHONY: uninstall
 uninstall: unstow
 # }}}
 
-# -- Install Brewfile dependencies -- {{{
+# -- Dependency Goals -- {{{
+%: brew
+
 .PHONY: brew
 brew:
 ifdef BREW
@@ -151,9 +119,9 @@ ifdef BREW
 endif
 # }}}
 
-# -- Stow dotfiles -- {{{
+# -- Stow Goals -- {{{
 .PHONY: stow
-stow: stow-etc stow-local stow-tmux stow-vim stow-zsh
+stow: stow-etc stow-local stow-nvim stow-tmux stow-zsh
 
 .PHONY: stow-etc
 stow-etc:
@@ -163,13 +131,13 @@ stow-etc:
 stow-local:
 	$(STOW) --restow local
 
+.PHONY: stow-nvim
+stow-nvim: $(NVIM)
+	$(STOW) --restow nvim
+
 .PHONY: stow-tmux
 stow-tmux: $(TMUX)
 	$(STOW) --restow tmux
-
-.PHONY: stow-vim
-stow-vim: $(VIM)
-	$(STOW) --restow vim
 
 .PHONY: stow-zsh
 stow-zsh: $(ZSH)
@@ -180,15 +148,27 @@ unstow:
 	@$(STOW) -v --delete etc
 	@$(STOW) -v --delete local
 	@$(STOW) -v --delete tmux
-	@$(STOW) -v --delete vim
 	@$(STOW) -v --delete zsh
 # }}}
 
-# -- Install plugins -- {{{
+# -- Plugins Goals -- {{{
 .PHONY: plug
-plug: plug-tmux plug-vim plug-zsh
+plug: plug-nvim plug-tmux plug-zsh
 
-# tmux
+plug-%: stow-% # always plug after stow
+
+# Nvim {{{
+.PHONY: plug-nvim
+plug-nvim: $(NVIM) $(PACKER)
+
+$(NVIM):
+	@$(MKDIR) $@
+
+$(PACKER): | stow-nvim
+	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+# }}}
+
+# tmux {{{
 .PHONY: plug-tmux
 plug-tmux: $(TMUX) $(TMUX_PLUGINS)
 
@@ -200,30 +180,9 @@ $(TMUX):
 $(TMUX_PLUGINS): PLUGIN = $(TMUX)/plugins/$(notdir $@)
 $(TMUX_PLUGINS): $(TMUX)
 	$(if $(wildcard $(PLUGIN)),,$(CLONE) $(GITHUB)/$@.git $(PLUGIN))
+# }}}
 
-# Vim
-.PHONY: plug-vim
-plug-vim: $(VIM) $(VIM_COC) $(VIM_COLOURS) $(VIM_PLUGINS)
-
-.PHONY: $(VIM)
-$(VIM):
-	@bash -c "$(MKDIR) $(VIM)/{after,pack,plugin,swap,undo}"
-
-$(VIM_COC): | $(VIM)
-	git clone $(GITHUB)/neoclide/coc.nvim.git $(VIM_COC)
-	cd $(VIM_COC); git checkout release
-
-.PHONY: $(VIM_COLOURS)
-$(VIM_COLOURS): REPO = $(VIM_CPACK)/$(patsubst vim-%,%.vim,$(notdir $@))
-$(VIM_COLOURS): $(VIM)
-	$(if $(wildcard $(REPO)),,$(CLONE) $(GITHUB)/$@.git $(REPO))
-
-.PHONY: $(VIM_PLUGINS)
-$(VIM_PLUGINS): REPO = $(VIM_PACK)/$(patsubst vim-%,%.vim,$(patsubst nvim-%,%.nvim,$(notdir $@)))
-$(VIM_PLUGINS): $(VIM)
-	$(if $(wildcard $(REPO)),,$(CLONE) $(GITHUB)/$@.git $(REPO))
-
-# Zsh
+# Zsh {{{
 .PHONY: plug-zsh
 plug-zsh: $(ZSH) $(ZSH_PLUGINS) $(OHMYZSH)
 
@@ -250,26 +209,25 @@ $(OMZ_PLUGINS): $(ZPACK)/%: $(OMZ_PLUG)/%
 
 $(OHMYZSH)/%: $(OMZ_REPO) ;
 # }}}
+# }}}
 
-# -- Configure utilities -- {{{
-.PHONY: etc
-etc: cron fzf terminfo
-
-# cron
+# -- Utility Goals -- {{{
+# cron {{{
 .PHONY: cron
 cron: $(CRON) stow-etc
 
+.PHONY: $(CRON)
 $(CRON):
 	@bash -c "$(MKDIR) $(CRON)/{locks,logs,scripts}"
+# }}}
 
-# fzf
+# fzf {{{
 ifdef BREW
-FZF     = $(shell $(BREW) --prefix fzf)
+FZF = $(shell $(BREW) --prefix fzf)
 endif
-FZF_VIM = $(VIM_PACK)/fzf
 
 .PHONY: fzf
-fzf: $(FZF) $(FZF_CONFIG) $(FZF_VIM)
+fzf: $(FZF) $(FZF_CONFIG)
 
 $(FZF): # if not using brew, install fzf using git
 ifndef BREW
@@ -280,20 +238,17 @@ $(FZF_CONFIG): INSTALL = $(FZF)/install
 $(FZF_CONFIG): FLAGS = --all --xdg --no-update-rc --no-bash
 $(FZF_CONFIG): | $(FZF)
 	$(INSTALL) $(FLAGS)
-
-$(FZF_VIM): $(FZF) | $(VIM)
-	$(MKDIR) $(@D)
-	$(LN) $< $@
+# }}}
 
 # terminfo
 .PHONY: terminfo
-terminfo: $(TERMINFO) $(TERMINFO_FILES) stow-etc
+terminfo: $(TERMINFO.SRC)
 
-$(TERMINFO):
-	@bash -c "$(MKDIR) $(TERMINFO)"
-
-etc/.terminfo/%.terminfo: $(TERMINFO)
-	@$(TIC) -o $(TERMINFO) $@
+$(TERMINFO.SRC):
+	@$(MKDIR) $(@D)
+	$(WGET) -P $(@D) $(TERMINFO.SRC.GZ)
+	$(GUNZIP) $@.gz
+	$(TIC) -xe tmux-256color $@
 # }}}
 # }}}
 
