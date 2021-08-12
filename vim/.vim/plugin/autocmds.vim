@@ -1,4 +1,4 @@
-" File:        autocommands.vim
+" File:        autocmds.vim
 " Author:      Zakhary Kaplan <https://zakharykaplan.ca>
 " Created:     12 Sep 2020
 " SPDX-License-Identifier: MIT
@@ -7,8 +7,27 @@
 "           Autocommands
 " --------------------------------
 
+" Hexmode: {{{
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  autocmd!
+  autocmd BufReadPre   *.bin setlocal binary
+  autocmd BufReadPost  * if &binary
+  autocmd BufReadPost  *   %!xxd
+  autocmd BufReadPost  *   set ft=xxd
+  autocmd BufReadPost  * endif
+  autocmd BufWritePre  * if &binary
+  autocmd BufWritePre  *   %!xxd -r
+  autocmd BufWritePre  * endif
+  autocmd BufWritePost * if &binary
+  autocmd BufWritePost *   %!xxd
+  autocmd BufWritePost *   set nomod
+  autocmd BufWritePost * endif
+augroup END
+" }}}
+
 " Vimrc: {{{
-augroup vimrc
+augroup Vimrc
   autocmd!
 
   " Override formatoptions upon entering a new buffer
