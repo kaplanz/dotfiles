@@ -9,7 +9,7 @@ case $- in
       *) return;;
 esac
 
-# -- Before -- {{{
+# -- Pre-Initializion -- {{{
 # Source "before" plugins.
 ZSH_PLUGINS_BEFORE=("$ZDOTDIR/before"/**/*.zsh(N))
 for plugin in $ZSH_PLUGINS_BEFORE; do
@@ -66,8 +66,8 @@ bindkey -v
 # -- Exports -- {{{
 # EDITOR and VISUAL determine the editor that programs such as less.
 # and mail clients invoke when asked to edit a file.
-export EDITOR='vi'
-export VISUAL='vi'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # PAGER is the default text file viewer for programs such as man.
 export PAGER='less'
@@ -139,7 +139,7 @@ alias help='run-help'
 umask 022
 # }}}
 
-# -- After -- {{{
+# -- Post-Initializion -- {{{
 # Source "after" plugins.
 ZSH_PLUGINS_AFTER=("$ZDOTDIR/after"/**/*.zsh(N))
 for plugin in $ZSH_PLUGINS_AFTER; do

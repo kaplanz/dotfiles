@@ -15,7 +15,7 @@ export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS="
     --bind '?:toggle-preview'
     --bind 'ctrl-a:toggle-all'
-    --bind 'ctrl-v:execute(echo {+} | xargs -o vim)'
+    --bind 'ctrl-v:execute(echo {+} | xargs -o "$EDITOR")'
     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
     --color='prompt:25,pointer:110,marker:222'
     --exit-0
