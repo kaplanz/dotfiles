@@ -17,6 +17,7 @@ check_dependencies() {
         test "$(command -v git)" &&
         test "$(command -v make)" &&
         test "$(command -v stow)" &&
+        test "$(command -v wget)" &&
         test "$(command -v zsh)"
     }
 }
@@ -38,16 +39,17 @@ print_dependencies() {
     printf '  ' && print_dependency git
     printf '  ' && print_dependency make
     printf '  ' && print_dependency stow
+    printf '  ' && print_dependency wget
     printf '  ' && print_dependency zsh
     echo 'Recommended:'
+    printf '  ' && print_dependency nvim
     printf '  ' && print_dependency tmux
-    printf '  ' && print_dependency vim
 }
 
 # Run script
 main() {
     # Begin installation
-    echo 'Dofiles Installer'
+    echo 'Install `zakharykaplan/dotfiles`'
     echo
 
     # Get options
