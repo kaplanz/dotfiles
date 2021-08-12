@@ -9,4 +9,7 @@ vim.cmd [[runtime! viml/vimrc]]
 -- load plugins
 require('plugins')
 
+-- load custom
+pcall(require, 'local')
+
 -- vim:fdl=0:fdm=marker:
