@@ -88,6 +88,13 @@ return require('packer').startup({function()
 
   -- UI {{{
   use {
+    'akinsho/nvim-bufferline.lua',     -- snazzy bufferline
+    config = function()
+      require('plugins.bufferline')
+    end,
+    requires = 'kyazdani42/nvim-web-devicons',
+  }
+  use {
     'hoob3rt/lualine.nvim',            -- blazing fast statusline
     config = function()
       require('plugins.lualine')
