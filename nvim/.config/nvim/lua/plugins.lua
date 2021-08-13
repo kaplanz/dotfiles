@@ -56,6 +56,19 @@ return require('packer').startup({function()
   use 'tpope/vim-fugitive'             -- Git wrapper
   -- }}}
 
+  -- LSP {{{
+  use {
+    {
+      'neovim/nvim-lspconfig',         -- LSP common configurations
+      config = function()
+        require('plugins.lspconfig')
+      end,
+    },
+    'kabouzeid/nvim-lspinstall',       -- conveniently install language servers
+    'onsails/lspkind-nvim',            -- add pictograms to LSP
+  }
+  -- }}}
+
   -- Tags {{{
   use {
     'ludovicchabant/vim-gutentags',    -- automatic ctags management
