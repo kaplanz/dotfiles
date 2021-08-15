@@ -27,8 +27,7 @@ set termguicolors
 " }}}
 
 " Completion: {{{
-set completeopt+=menuone
-set completeopt-=preview
+set completeopt=menuone,noselect
 set shortmess+=c " shut off completion messages
 " }}}
 

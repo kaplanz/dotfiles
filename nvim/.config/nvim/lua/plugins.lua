@@ -29,8 +29,21 @@ return require('packer').startup({function()
   -- }}}
 
   -- Completion {{{
-  use 'zakharykaplan/vim-parry'        -- automatic pair handling
-  use 'zakharykaplan/vim-relatable'    -- tab completion
+  use {
+    'hrsh7th/nvim-compe',              -- auto completion plugin
+    after = 'vim-parry',
+    config = function()
+      require('plugins.compe')
+    end,
+  }
+  use {
+    'zakharykaplan/vim-parry',         -- automatic pair handling
+    event = 'InsertEnter',
+  }
+  use {
+    'zakharykaplan/vim-relatable',     -- tab completion
+    event = 'InsertEnter',
+  }
   -- }}}
 
   -- Extensions {{{
