@@ -17,6 +17,7 @@ return require('packer').startup({function()
 
   -- Colours {{{
   use {
+    'EdenEast/nightfox.nvim',
     'cocopon/iceberg.vim',
     'drewtempelmeyer/palenight.vim',
     'folke/tokyonight.nvim',
