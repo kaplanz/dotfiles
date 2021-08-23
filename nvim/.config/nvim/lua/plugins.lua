@@ -24,6 +24,7 @@ return require('packer').startup({function()
     'jacoborus/tender.vim',
     'morhetz/gruvbox',
     'nanotech/jellybeans.vim',
+    'sainnhe/everforest',
     'wojciechkepka/bogster',
     'xero/sourcerer.vim',
   }

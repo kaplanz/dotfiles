@@ -22,7 +22,7 @@ set updatetime=100
 " }}}
 
 " Colours: {{{
-silent! colorscheme palenight
+silent! colorscheme everforest
 set termguicolors
 " }}}
 
