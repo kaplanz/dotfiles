@@ -3,4 +3,4 @@
 # Created:     16 May 2021
 # SPDX-License-Identifier: MIT
 
-alias dkha='cat ~/.zsh/plugin/zsh-docker-aliases/alias.zsh | grep'
+alias dkha='cat ~/.zsh/pack/zsh-docker-aliases/alias.zsh | grep'
