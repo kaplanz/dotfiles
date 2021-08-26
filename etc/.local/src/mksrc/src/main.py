@@ -157,15 +157,18 @@ def main():
 
 def commentstrings() -> Dict[str, str]:
     cms = dict()
-    # '//'
-    for ft in [".c", ".cc", ".cpp", ".h", ".java", ".rs"]:
-        cms[ft] = "// %s"
-    # '#'
-    for ft in [".py", ".sh"]:
-        cms[ft] = "# %s"
     # '"'
     for ft in [".vim"]:
         cms[ft] = '" %s'
+    # '#'
+    for ft in [".py", ".sh"]:
+        cms[ft] = "# %s"
+    # '--'
+    for ft in [".lua"]:
+        cms[ft] = "-- %s"
+    # '//'
+    for ft in [".c", ".cc", ".cpp", ".h", ".java", ".rs"]:
+        cms[ft] = "// %s"
     # '<!-- -->'
     for ft in [".html", ".md"]:
         cms[ft] = "<!-- %s -->"
