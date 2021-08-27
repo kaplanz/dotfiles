@@ -32,11 +32,20 @@ return require('packer').startup({function()
 
   -- Completion {{{
   use {
-    'hrsh7th/nvim-compe',              -- auto completion plugin
-    after = 'vim-parry',
+    'hrsh7th/nvim-cmp',                -- auto completion plugin
     config = function()
-      require('plugins.compe')
+      require('plugins.cmp')
     end,
+    requires = {
+      -- Common
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-calc',
+      -- Neovim-specific
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      -- External plugins
+    },
   }
   use {
     'zakharykaplan/vim-parry',         -- automatic pair handling
