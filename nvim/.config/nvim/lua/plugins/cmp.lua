@@ -23,6 +23,7 @@ cmp.setup {
         nvim_lsp = '[LSP]',
         nvim_lua = '[Lua]',
         -- External plugins
+        cmp_tabnine = '[TN]',
       })[entry.source.name]
       -- Return the formatted item
       return vim_item
@@ -50,6 +51,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     -- External plugins
+    { name = 'cmp_tabnine' },
     -- Common
     { name = 'path' },
     { name = 'buffer' },
