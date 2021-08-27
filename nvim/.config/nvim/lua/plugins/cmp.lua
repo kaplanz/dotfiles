@@ -19,6 +19,7 @@ cmp.setup {
         path   = '[Path]',
         buffer = '[Buffer]',
         calc   = '[Calc]',
+        spell  = '[Spell]',
         -- Neovim-specific
         nvim_lsp = '[LSP]',
         nvim_lua = '[Lua]',
@@ -56,5 +57,6 @@ cmp.setup {
     { name = 'path' },
     { name = 'buffer' },
     { name = 'calc' },
+    { name = 'spell' },
   },
 }
