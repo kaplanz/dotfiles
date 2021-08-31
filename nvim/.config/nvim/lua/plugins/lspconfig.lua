@@ -7,6 +7,10 @@ require('lspconfig')
 require('lspinstall').setup()
 require('lspkind').init {}
 
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- Use an `on_attach` function to only map the following keys...
 -- ... after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -44,6 +48,7 @@ end
 local servers = require('lspinstall').installed_servers()
 for _, server in pairs(servers) do
   require('lspconfig')[server].setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,

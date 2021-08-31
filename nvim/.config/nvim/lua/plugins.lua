@@ -95,6 +95,10 @@ return require('packer').startup({function()
   }
   -- }}}
 
+  -- Snippets: {{{
+  use 'L3MON4D3/LuaSnip'               -- snippet engine
+  -- }}}
+
   -- Tags {{{
   use {
     'ludovicchabant/vim-gutentags',    -- automatic ctags management
