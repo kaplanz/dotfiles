@@ -146,13 +146,23 @@ return require('packer').startup({function()
   use 'junegunn/vim-peekaboo'          -- peek at the contents of the registers
   use {
     'kyazdani42/nvim-tree.lua',        -- file explorer written in lua
-    config = function()
+    setup = function()
       vim.cmd [[runtime! viml/plugins/tree.vim]]
     end,
+    cmd = 'NvimTreeToggle',
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
     'nvim-telescope/telescope.nvim',   -- fuzzy finder over lists
+    cmd = 'Telescope',
+    keys = {
+      {'n', '<Leader>F'},
+      {'n', '<Leader>ff'},
+      {'n', '<Leader>fg'},
+      {'n', '<Leader>fb'},
+      {'n', '<Leader>fh'},
+      {'n', '<C-p>'},
+    },
     config = function()
       require('plugins.telescope')
     end,
