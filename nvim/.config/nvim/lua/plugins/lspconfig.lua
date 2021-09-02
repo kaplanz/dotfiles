@@ -7,12 +7,34 @@ require('lspconfig')
 require('lspinstall').setup()
 require('lspkind').init {}
 
+-- UI customization
+-- {{{
+-- Change diagnostic symbols in the sign column (gutter)
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
+-- Disable source in diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- Disable virtual_text
+    virtual_text = false,
+  }
+)
+-- }}}
+
 -- Add additional capabilities supported by nvim-cmp
+-- {{{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- }}}
 
 -- Use an `on_attach` function to only map the following keys...
 -- ... after the language server attaches to the current buffer
+-- {{{
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -42,9 +64,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<Space>q', '<Cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<Space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
+-- }}}
 
 -- Use a loop to conveniently call 'setup' on multiple servers and...
 -- ... map buffer local keybindings when the language server attaches
+-- {{{
 local servers = require('lspinstall').installed_servers()
 for _, server in pairs(servers) do
   require('lspconfig')[server].setup {
@@ -55,3 +79,6 @@ for _, server in pairs(servers) do
     }
   }
 end
+-- }}}
+
+-- vim:fdl=0:fdm=marker:
