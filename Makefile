@@ -103,7 +103,7 @@ zsh: $(ZSH) plug-zsh stow-zsh
 
 # -- Install Goals -- {{{
 .PHONY: install
-install: all brew
+install: brew all
 
 .PHONY: uninstall
 uninstall: unstow
