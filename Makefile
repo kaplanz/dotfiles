@@ -159,12 +159,13 @@ plug-%: stow-% # always plug after stow
 
 # Nvim {{{
 .PHONY: plug-nvim
-plug-nvim: $(NVIM) $(PACKER)
+plug-nvim: $(NVIM)
 
 $(NVIM):
 	@$(MKDIR) $@
 
-$(PACKER): | stow-nvim
+.PHONY: packer
+packer: $(NVIM)
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 # }}}
 
