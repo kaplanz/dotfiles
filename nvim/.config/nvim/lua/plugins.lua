@@ -25,7 +25,7 @@ return require('packer').startup({function()
     'morhetz/gruvbox',
     'nanotech/jellybeans.vim',
     'sainnhe/everforest',
-    'wojciechkepka/bogster',
+    'vv9k/bogster',
     'xero/sourcerer.vim',
   }
   -- }}}
@@ -131,14 +131,14 @@ return require('packer').startup({function()
 
   -- UI {{{
   use {
-    'akinsho/nvim-bufferline.lua',     -- snazzy bufferline
+    'akinsho/bufferline.nvim',         -- snazzy bufferline
     config = function()
       require('plugins.bufferline')
     end,
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
-    'hoob3rt/lualine.nvim',            -- blazing fast statusline
+    'shadmansaleh/lualine.nvim',       -- blazing fast statusline
     config = function()
       require('plugins.lualine')
     end,
