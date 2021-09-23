@@ -3,8 +3,8 @@
 # Created:     16 May 2021
 # SPDX-License-Identifier: MIT
 
-alias v='nvim'
+alias v='$VISUAL'
 alias vd='vimdiff'
-alias view='nvim -R'
-alias vimdiff='nvim -d'
+alias view='v -R'
+alias vimdiff='v -d'
 alias vr='view'
