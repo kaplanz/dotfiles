@@ -19,6 +19,8 @@ nnoremap gb :buffers<CR>:b<Space>
 nnoremap gm :marks<CR>:norm<Space>`
 " Register overview
 nnoremap gr :registers<CR>:norm<Space>"
+" Undolist overview
+nnoremap gu :undolist<CR>:u<Space>
 " }}}
 
 " Special: {{{
