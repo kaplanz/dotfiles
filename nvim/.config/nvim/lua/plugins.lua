@@ -182,11 +182,6 @@ return require('packer').startup({function()
     end,
   }
   -- }}}
-end,
-config = {
-  display = {
-    open_fn = require('packer.util').float,
-  }
-}})
+end})
 
 -- vim:fdl=0:fdm=marker:
