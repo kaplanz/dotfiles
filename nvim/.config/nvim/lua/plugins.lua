@@ -50,7 +50,11 @@ return require('packer').startup({function()
     },
   }
   use {
-    'zakharykaplan/vim-parry',         -- automatic pair handling
+    'windwp/nvim-autopairs',           -- super powerful autopairs
+    after = 'nvim-cmp',
+    config = function()
+      require('plugins.autopairs')
+    end,
     event = 'InsertEnter',
   }
   use {
