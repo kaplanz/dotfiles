@@ -57,10 +57,6 @@ return require('packer').startup({function()
     end,
     event = 'InsertEnter',
   }
-  use {
-    'zakharykaplan/vim-relatable',     -- tab completion
-    event = 'InsertEnter',
-  }
   -- }}}
 
   -- Extensions {{{
