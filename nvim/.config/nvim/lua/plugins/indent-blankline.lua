@@ -3,12 +3,12 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
-require("indent_blankline").setup {
+require('indent_blankline').setup {
   filetype_exclude = {
-    "NvimTree",
-    "help",
-    "packer",
-    "tagbar",
-    "terminal",
+    'NvimTree',
+    'help',
+    'packer',
+    'tagbar',
+    'terminal',
   }
 }
