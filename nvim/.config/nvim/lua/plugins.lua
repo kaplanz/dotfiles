@@ -150,10 +150,14 @@ return require('packer').startup {function()
   use 'junegunn/vim-peekaboo'          -- peek at the contents of the registers
   use {
     'kyazdani42/nvim-tree.lua',        -- file explorer written in lua
-    setup = function()
-      vim.cmd [[runtime! viml/plugins/tree.vim]]
+    config = function()
+      require('plugins.nvim-tree')
     end,
     cmd = 'NvimTreeToggle',
+    keys = {
+      {'n', '<Leader>n'},
+      {'n', '<Leader>N'},
+    },
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
