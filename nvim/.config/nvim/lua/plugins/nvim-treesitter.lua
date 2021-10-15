@@ -1,4 +1,4 @@
--- File:        treesitter.lua
+-- File:        nvim-treesitter.lua
 -- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT

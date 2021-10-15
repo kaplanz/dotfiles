@@ -1,4 +1,4 @@
--- File:        lspconfig.lua
+-- File:        nvim-lspconfig.lua
 -- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT

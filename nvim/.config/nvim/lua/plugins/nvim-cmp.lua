@@ -1,4 +1,4 @@
--- File:        compe.lua
+-- File:        nvim-cmp.lua
 -- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
 -- Created:     08 Aug 2021
 -- SPDX-License-Identifier: MIT

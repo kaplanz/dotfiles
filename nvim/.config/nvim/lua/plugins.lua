@@ -34,7 +34,7 @@ return require('packer').startup {function()
   use {
     'hrsh7th/nvim-cmp',                -- auto completion plugin
     config = function()
-      require('plugins.cmp')
+      require('plugins.nvim-cmp')
     end,
     requires = {
       -- Common
@@ -53,7 +53,7 @@ return require('packer').startup {function()
     'windwp/nvim-autopairs',           -- super powerful autopairs
     after = 'nvim-cmp',
     config = function()
-      require('plugins.autopairs')
+      require('plugins.nvim-autopairs')
     end,
     event = 'InsertEnter',
   }
@@ -87,7 +87,7 @@ return require('packer').startup {function()
     {
       'neovim/nvim-lspconfig',         -- LSP common configurations
       config = function()
-        require('plugins.lspconfig')
+        require('plugins.nvim-lspconfig')
       end,
     },
     'kabouzeid/nvim-lspinstall',       -- conveniently install language servers
@@ -123,7 +123,7 @@ return require('packer').startup {function()
   use {
     'nvim-treesitter/nvim-treesitter', -- treesitter configurations
     config = function()
-      require('plugins.treesitter')
+      require('plugins.nvim-treesitter')
     end,
     run = ':TSUpdate',
   }

@@ -1,4 +1,4 @@
--- File:        autopairs.lua
+-- File:        nvim-autopairs.lua
 -- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
 -- Created:     10 Oct 2021
 -- SPDX-License-Identifier: MIT
