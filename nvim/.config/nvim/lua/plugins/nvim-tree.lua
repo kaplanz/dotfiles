@@ -3,7 +3,25 @@
 -- Created:     08 Aug 2021
 -- SPDX-License-Identifier: MIT
 
--- following options are the default
+-- Run vim commands
+vim.cmd [[
+  let g:nvim_tree_add_trailing = 1
+  let g:nvim_tree_follow = 1
+  let g:nvim_tree_gitignore = 1
+  let g:nvim_tree_group_empty = 1
+  let g:nvim_tree_highlight_opened_files = 1
+  let g:nvim_tree_icons = {
+      \ 'default':        '',
+      \ 'symlink':        '',
+      \ }
+  let g:nvim_tree_ignore = ['.git', 'node_modules']
+  let g:nvim_tree_symlink_arrow = ' -> '
+
+  nnoremap <Leader>n <Cmd>NvimTreeToggle<CR>
+  nnoremap <Leader>N <Cmd>NvimTreeRefresh<CR>
+]]
+
+-- Require module setup
 require('nvim-tree').setup {
   -- disables netrw completely
   disable_netrw       = false,
@@ -31,20 +49,3 @@ require('nvim-tree').setup {
     ignore_list = {}
   },
 }
-
-vim.cmd [[
-  let g:nvim_tree_add_trailing = 1
-  let g:nvim_tree_follow = 1
-  let g:nvim_tree_gitignore = 1
-  let g:nvim_tree_group_empty = 1
-  let g:nvim_tree_highlight_opened_files = 1
-  let g:nvim_tree_icons = {
-      \ 'default':        '',
-      \ 'symlink':        '',
-      \ }
-  let g:nvim_tree_ignore = ['.git', 'node_modules']
-  let g:nvim_tree_symlink_arrow = ' -> '
-
-  nnoremap <Leader>n <Cmd>NvimTreeToggle<CR>
-  nnoremap <Leader>N <Cmd>NvimTreeRefresh<CR>
-]]

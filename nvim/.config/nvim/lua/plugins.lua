@@ -9,7 +9,7 @@
 require('plugins.packer')
 
 -- Automatically run `:PackerCompile` whenever plugins.lua is updated
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+vim.cmd [[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]]
 
 return require('packer').startup {function()
   -- Packer can manage itself
