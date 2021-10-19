@@ -80,7 +80,13 @@ return require('packer').startup {function()
   -- }}}
 
   -- Git {{{
-  use 'airblade/vim-gitgutter'         -- shows a git diff in the gutter
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('plugins.gitsigns')
+    end,
+    requires = 'nvim-lua/plenary.nvim',
+  }
   use 'tpope/vim-fugitive'             -- Git wrapper
   -- }}}
 
