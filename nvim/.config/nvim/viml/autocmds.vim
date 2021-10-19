@@ -77,4 +77,11 @@ augroup Vimrc
 augroup END
 " }}}
 
+" YankHighlight: {{{
+augroup YankHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+augroup end
+" }}}
+
 " vim:fdl=0:fdm=marker:

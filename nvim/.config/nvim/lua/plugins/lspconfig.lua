@@ -1,17 +1,19 @@
--- File:        nvim-lspconfig.lua
+-- File:        lspconfig.lua
 -- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
-require('lspconfig')
-require('lspinstall').setup()
-require('lspkind').init {}
+local lspconfig = require('lspconfig')
+local lspinstall = require('lspinstall')
+local lspkind = require('lspkind')
+
+lspinstall.setup()
+lspkind.init {}
 
 -- UI customization
 -- {{{
 -- Change diagnostic symbols in the sign column (gutter)
 local signs = { Error = ' ', Warning = ' ', Hint = ' ', Information = ' ' }
-
 for type, icon in pairs(signs) do
   local hl = 'LspDiagnosticsSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
@@ -35,7 +37,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Use an `on_attach` function to only map the following keys...
 -- ... after the language server attaches to the current buffer
 -- {{{
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -62,20 +64,32 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<Space>q', '<Cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<Space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.cmd [[command! Format execute 'lua vim.lsp.buf.formatting()']]
+  buf_set_keymap('n', '<Space>f', '<Cmd>Format<CR>', opts)
 end
 -- }}}
 
 -- Use a loop to conveniently call 'setup' on multiple servers and...
 -- ... map buffer local keybindings when the language server attaches
 -- {{{
-local servers = require('lspinstall').installed_servers()
-for _, server in pairs(servers) do
-  require('lspconfig')[server].setup {
+local servers = lspinstall.installed_servers()
+for _, server in ipairs(servers) do
+  lspconfig[server].setup {
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
+    },
+    settings = {
+      -- Override configs for specific languages
+      -- {{{
+      Lua = {
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+      }
+      -- }}}
     }
   }
 end

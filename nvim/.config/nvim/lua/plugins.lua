@@ -11,6 +11,8 @@ require('plugins.packer')
 -- Automatically run `:PackerCompile` whenever plugins.lua is updated
 vim.cmd [[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]]
 
+-- Packer startup
+local use = require('packer').use
 return require('packer').startup {function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'         -- Neovim plugin manager
@@ -34,7 +36,7 @@ return require('packer').startup {function()
   use {
     'hrsh7th/nvim-cmp',                -- auto completion plugin
     config = function()
-      require('plugins.nvim-cmp')
+      require('plugins.cmp')
     end,
     requires = {
       -- Common
@@ -87,7 +89,7 @@ return require('packer').startup {function()
     {
       'neovim/nvim-lspconfig',         -- LSP common configurations
       config = function()
-        require('plugins.nvim-lspconfig')
+        require('plugins.lspconfig')
       end,
     },
     'kabouzeid/nvim-lspinstall',       -- conveniently install language servers

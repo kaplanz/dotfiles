@@ -9,6 +9,9 @@ require('indent_blankline').setup {
     'help',
     'packer',
     'tagbar',
+  },
+  buftype_exclude = {
+    'nofile',
     'terminal',
-  }
+  },
 }
