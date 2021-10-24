@@ -146,7 +146,7 @@ return require('packer').startup {function()
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
-    'shadmansaleh/lualine.nvim',       -- blazing fast statusline
+    'nvim-lualine/lualine.nvim',       -- blazing fast statusline
     config = function()
       require('plugins.lualine')
     end,
