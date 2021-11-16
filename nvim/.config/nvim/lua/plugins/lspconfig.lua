@@ -3,12 +3,8 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
-local lspconfig = require('lspconfig')
-local lspinstall = require('lspinstall')
-local lspkind = require('lspkind')
-
-lspinstall.setup()
-lspkind.init {}
+require('lspconfig')
+require('lspkind').init {}
 
 -- UI customization
 -- {{{
@@ -69,30 +65,43 @@ local on_attach = function(_, bufnr)
 end
 -- }}}
 
--- Use a loop to conveniently call 'setup' on multiple servers and...
--- ... map buffer local keybindings when the language server attaches
+-- Register a handler that will be called for all installed servers
+-- Alternatively, you may also register handlers on specific server...
+-- ... instances instead (see example below)
 -- {{{
-local servers = lspinstall.installed_servers()
-for _, server in ipairs(servers) do
-  lspconfig[server].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      -- Override configs for specific languages
-      -- {{{
+require('nvim-lsp-installer').on_server_ready(function(server)
+  local opts = {}
+
+  -- Configure capabilities, on_attach, flags
+  opts.capabilities = capabilities
+  opts.on_attach = on_attach
+  opts.flags = {
+    debounce_text_changes = 150,
+  }
+
+  -- (optional) Customize the options passed to the server
+  -- if server.name == 'tsserver' then
+  --     opts.root_dir = function() ... end
+  -- end
+  if server.name == 'sumneko_lua' then
+    opts.settings = {
       Lua = {
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { 'vim' },
+          globals = {'vim'},
         },
-      }
-      -- }}}
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file('', true),
+        },
+      },
     }
-  }
-end
+  end
+
+  -- This setup() function is exactly the same as lspconfig's setup function.
+  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  server:setup(opts)
+end)
 -- }}}
 
 -- vim:fdl=0:fdm=marker:

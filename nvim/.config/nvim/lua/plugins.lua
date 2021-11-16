@@ -98,7 +98,7 @@ return require('packer').startup {function()
         require('plugins.lspconfig')
       end,
     },
-    'kabouzeid/nvim-lspinstall',       -- conveniently install language servers
+    'williamboman/nvim-lsp-installer', -- seamlessly install LSP servers
     'onsails/lspkind-nvim',            -- add pictograms to LSP
   }
   -- }}}
