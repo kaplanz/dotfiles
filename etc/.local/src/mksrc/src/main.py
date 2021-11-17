@@ -5,9 +5,9 @@
 # SPDX-License-Identifier: MIT
 
 import argparse
+import re
 from datetime import date
 from pathlib import Path
-import re
 from typing import Dict
 
 import toml
@@ -25,42 +25,25 @@ def main():
         "version": None,
     }
 
-    # Setup parser
+    # Initialize parser
     parser = argparse.ArgumentParser()
+    # fmt: off
     # Positional arguments
-    parser.add_argument(
-        "file",
-        type=str,
-        help="target file to create",
-    )
+    parser.add_argument("file", type=str, help="target file to create")
     # Optional arguments
-    parser.add_argument(
-        "-b",
-        "--box",
-        action="store_true",
-        help="apply a box decoration to the header",
-    )
-    parser.add_argument(
-        "-f",
-        "--force",
-        action="store_true",
-        help="force creation of the target file",
-    )
-    parser.add_argument(
-        "-t",
-        "--template",
-        type=str,
-        default="basic.txt",
-        help="source code header template",
-    )
-    parser.add_argument(
-        "--confdir",
-        type=str,
-        default="~/.config/mksrc",
-        help="mksrc config home directory (default: ~/.config/mksrc)",
-    )
+    parser.add_argument("-b", "--box", action="store_true",
+                        help="apply a box decoration to the header")
+    parser.add_argument("--box-style", type=str, default="round",
+                        help="box decoration style")
+    parser.add_argument("-f", "--force", action="store_true",
+                        help="force creation of the target file")
+    parser.add_argument("-t", "--template", type=str, default="basic.txt",
+                        help="source code header template")
+    parser.add_argument("--confdir", type=str, default="~/.config/mksrc",
+                        help="mksrc config home directory (default: ~/.config/mksrc)")
     for attr in attrs:  # add overrides for all attributes
         parser.add_argument(f"--{attr}", type=str, help=f"{attr} string attribute")
+    # fmt: on
     # Parse args
     args = parser.parse_args()
 
@@ -128,8 +111,38 @@ def main():
         header = date.today().strftime(header)
 
     # Perform any decorations
+    border = {
+        "ascii": {
+            "dl": "+",
+            "dr": "+",
+            "hh": "-",
+            "ul": "+",
+            "ur": "+",
+            "vv": "|",
+        },
+        "round": {
+            "dl": "╮",
+            "dr": "╭",
+            "ul": "╯",
+            "ur": "╰",
+        },
+        "sharp": {
+            "dl": "┐",
+            "dr": "┌",
+            "ul": "┘",
+            "ur": "└",
+        },
+        "star": {
+            "dl": "*",
+            "dr": "*",
+            "hh": "*",
+            "ul": "*",
+            "ur": "*",
+            "vv": "*",
+        },
+    }[args.box_style]
     if args.box:
-        header = box(attrs, header)
+        header = box(attrs, header, border)
 
     # Split the header into lines
     header = header.splitlines()
@@ -157,40 +170,49 @@ def main():
 
 def commentstrings() -> Dict[str, str]:
     cms = dict()
+    # "//"
+    for ft in [".c", ".cc", ".cpp", ".h", ".java", ".rs"]:
+        cms[ft] = "// %s"
+    # "#"
+    for ft in [".py", ".sh"]:
+        cms[ft] = "# %s"
     # '"'
     for ft in [".vim"]:
         cms[ft] = '" %s'
-    # '#'
-    for ft in [".py", ".sh"]:
-        cms[ft] = "# %s"
-    # '--'
-    for ft in [".lua"]:
-        cms[ft] = "-- %s"
-    # '//'
-    for ft in [".c", ".cc", ".cpp", ".h", ".java", ".rs"]:
-        cms[ft] = "// %s"
-    # '<!-- -->'
+    # "<!-- -->"
     for ft in [".html", ".md"]:
         cms[ft] = "<!-- %s -->"
     # Return commentstrings
     return cms
 
 
-def box(attrs, header: str) -> str:
+def box(attrs, header: str, chars: Dict[str, str] = None) -> str:
+    # Define the charset if not defined
+    dchars = {
+        "dl": "┐",
+        "dr": "┌",
+        "hh": "─",
+        "ul": "┘",
+        "ur": "└",
+        "vv": "│",
+    }
+    dchars.update(chars or {})
+    chars = dchars
     # Split lines from the header
     lines = header.splitlines()
     # Extract the comment string
     comment = attrs["comment"]
     # Determine the box horizontal length
-    length = 80 - len(comment % "│  │")
+    length = 80 - len(comment % f"{chars['vv']}  {chars['vv']}")
     # Insert vertical box borders
     for i, line in enumerate(lines):
-        lines[i] = f"│ {line:{length}} │\n"
+        lines[i] = f"{chars['vv']} {line:{length}} {chars['vv']}\n"
     # Insert horizontal box borders
-    top = f"┌─{'─' * length}─┐\n"
-    bottom = f"└─{'─' * length}─┘\n"
+    lfill = f"{chars['hh'] * length}"
+    top = f"{chars['dr']}{lfill[0]}{lfill}{lfill[0]}{chars['dl']}\n"
+    btm = f"{chars['ur']}{lfill[0]}{lfill}{lfill[0]}{chars['ul']}\n"
     lines.insert(0, top)
-    lines.append(bottom)
+    lines.append(btm)
     # Rejoin and return the modified header
     return "".join(lines)
 
