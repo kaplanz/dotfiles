@@ -29,28 +29,6 @@ autoload -Uz compinit
 compinit
 # }}}
 
-# -- History -- {{{
-# (1) Number of lines of history kept within the shell.
-HISTSIZE=10000
-# (2) File where history is saved.
-HISTFILE="$ZDOTDIR/.zsh_history"
-# (3) Number of lines of history to save to $HISTFILE.
-SAVEHIST=10000
-
-# Record timestamp of command in HISTFILE
-setopt extended_history
-# Delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_expire_dups_first
-# Ignore duplicated commands history list
-setopt hist_ignore_dups
-# Ignore commands that start with space
-setopt hist_ignore_space
-# Show command with history expansion to user before running it
-setopt hist_verify
-# Share command history data
-setopt share_history
-# }}}
-
 # -- Editing -- {{{
 # The keys in the shell's line editor can be made to behave either
 # like Emacs or like Vi, two common Unix editors.  If you have no
@@ -74,6 +52,28 @@ export PAGER='less'
 
 # These are some handy options for less.
 export LESS='-MRi'
+# }}}
+
+# -- History -- {{{
+# (1) Number of lines of history kept within the shell.
+HISTSIZE=10000
+# (2) File where history is saved.
+HISTFILE="$ZDOTDIR/.zsh_history"
+# (3) Number of lines of history to save to $HISTFILE.
+SAVEHIST=10000
+
+# Record timestamp of command in HISTFILE
+setopt extended_history
+# Delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_expire_dups_first
+# Ignore duplicated commands history list
+setopt hist_ignore_dups
+# Ignore commands that start with space
+setopt hist_ignore_space
+# Show command with history expansion to user before running it
+setopt hist_verify
+# Share command history data
+setopt share_history
 # }}}
 
 # -- Options -- {{{
