@@ -14,7 +14,7 @@ function reload() { clear && exec "$SHELL" -l; }
 function please() { sudo $(fc -ln -1); }
 
 # Copy remote files.
-alias rsync='rsync -azhP --delete --stats'
+alias rsync='rsync -azhP --stats'
 alias scp='scp -r'
 
 # Launch info with vi-keys
