@@ -74,14 +74,12 @@ augroup Vimrc
   " Enter Terminal-mode automaticall
   autocmd TermOpen * startinsert
 
-augroup END
-" }}}
+  " Highlight text on yank
+  if has('nvim')
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  endif
 
-" YankHighlight: {{{
-augroup YankHighlight
-  autocmd!
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-augroup end
+augroup END
 " }}}
 
 " vim:fdl=0:fdm=marker:
