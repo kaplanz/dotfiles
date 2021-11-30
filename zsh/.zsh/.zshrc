@@ -76,6 +76,12 @@ setopt hist_verify
 setopt share_history
 # }}}
 
+# -- Homebrew -- {{{
+local HOMEBREW="/opt/homebrew/bin/brew"
+[ -x "$HOMEBREW" ] && eval "$($HOMEBREW shellenv)"
+unset HOMEBREW
+# }}}
+
 # -- Options -- {{{
 # Change directory given just path.
 setopt autocd
