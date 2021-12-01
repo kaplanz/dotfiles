@@ -75,9 +75,7 @@ augroup Vimrc
   autocmd TermOpen * startinsert
 
   " Highlight text on yank
-  if has('nvim')
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  endif
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
 augroup END
 " }}}

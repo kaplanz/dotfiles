@@ -8,27 +8,27 @@ require('lspkind').init {}
 
 -- UI customization
 -- {{{
+-- Highlights
+vim.cmd [[autocmd ColorScheme * highlight link FloatBorder NormalFloat]]
+
 -- Borders
-local border = {
-  {"╭", "FloatBorder"},
-  {"─", "FloatBorder"},
-  {"╮", "FloatBorder"},
-  {"│", "FloatBorder"},
-  {"╯", "FloatBorder"},
-  {"─", "FloatBorder"},
-  {"╰", "FloatBorder"},
-  {"│", "FloatBorder"},
-}
+local border = 'rounded'
 
 -- LSP settings (for overriding per client)
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  {border = border}
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  {border = border}
-)
+local handlers = {
+  ['textDocument/hover'] =  vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      -- Use a sharp border with `FloatBorder` highlights
+      border = border,
+    }
+  ),
+  ['textDocument/signatureHelp'] =  vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+      -- Use a sharp border with `FloatBorder` highlights
+      border = border,
+    }
+  ),
+}
 
 -- To instead override globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -38,23 +38,13 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
--- Change diagnostic symbols in the sign column (gutter)
-local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+-- Customize how diagnostics are displayed
+vim.diagnostic.config({
+  virtual_text = false,
+})
 
--- Disable source in diagnostics
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- Disable virtual_text
-    virtual_text = false,
-  }
-)
-
--- You will likely want to reduce updatetime which affects CursorHold
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_position_diagnostics({focusable=false})]]
+-- Show line diagnostics automatically in hover window
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor'})]]
 -- }}}
 
 -- Add additional capabilities supported by nvim-cmp
@@ -110,6 +100,7 @@ require('nvim-lsp-installer').on_server_ready(function(server)
 
   -- Configure capabilities, on_attach, flags
   opts.capabilities = capabilities
+  opts.handlers = handlers
   opts.on_attach = on_attach
   opts.flags = {
     debounce_text_changes = 150,
