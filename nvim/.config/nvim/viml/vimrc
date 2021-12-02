@@ -16,7 +16,6 @@ syntax enable
 
 " Buffers: {{{
 set confirm
-set hidden
 set undofile
 set updatetime=100
 " }}}
@@ -37,11 +36,9 @@ set whichwrap+=<,>,[,]
 " }}}
 
 " Indentation: {{{
-set autoindent
 set expandtab
 set shiftround
 set shiftwidth=4
-set smarttab
 set softtabstop=-1
 " }}}
 
@@ -54,9 +51,7 @@ set path+=**
 " }}}
 
 " Search: {{{
-set hlsearch
 set ignorecase
-set incsearch
 set smartcase
 " }}}
 
@@ -69,7 +64,6 @@ set number
 set fillchars+=foldopen:▼,foldclose:▶,foldsep:┆,diff:╳
 set noshowmode
 set scrolloff=5
-set showcmd
 set sidescrolloff=5
 set signcolumn=number
 " }}}
