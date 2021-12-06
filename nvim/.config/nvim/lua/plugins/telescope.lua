@@ -18,3 +18,6 @@ vim.cmd [[
 
 -- Require module setup
 require('telescope').setup {}
+
+-- Load extensions
+require('telescope').load_extension('notify')
