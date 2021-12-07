@@ -85,6 +85,15 @@ return require('packer').startup {function()
   use 'wellle/targets.vim'             -- additional text objects
   -- }}}
 
+  -- Formatting: {{{
+  use {
+    'mhartington/formatter.nvim',      -- format runner
+    config = function()
+      require('plugins.formatter')
+    end
+  }
+  -- }}}
+
   -- Git {{{
   use {
     'lewis6991/gitsigns.nvim',

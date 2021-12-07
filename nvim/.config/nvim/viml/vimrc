@@ -80,5 +80,6 @@ set splitright
 
 runtime! viml/autocmds.vim
 runtime! viml/maps.vim
+runtime! viml/plugins.vim
 
 " vim:fdl=0:fdm=marker:
