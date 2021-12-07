@@ -22,7 +22,7 @@ augroup Hexmode
   autocmd BufWritePost *   %!xxd
   autocmd BufWritePost *   set nomod
   autocmd BufWritePost * endif
-augroup END
+augroup end
 " }}}
 
 " Vimrc: {{{
@@ -77,7 +77,7 @@ augroup Vimrc
   " Highlight text on yank
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
-augroup END
+augroup end
 " }}}
 
 " vim:fdl=0:fdm=marker:
