@@ -40,13 +40,14 @@ return require('packer').startup {function()
     end,
     requires = {
       -- Common
-      'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-path',
       'f3fora/cmp-spell',
       -- Neovim-specific
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
+      'ray-x/cmp-treesitter',
       -- External plugins
       { 'tzachar/cmp-tabnine', run='./install.sh', }
     },
