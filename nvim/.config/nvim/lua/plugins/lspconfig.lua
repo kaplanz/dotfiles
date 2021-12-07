@@ -101,7 +101,13 @@ require('nvim-lsp-installer').on_server_ready(function(server)
   -- if server.name == 'tsserver' then
   --     opts.root_dir = function() ... end
   -- end
-  if server.name == 'sumneko_lua' then
+  if server.name == 'clangd' then
+    opts.cmd = {
+      "clangd",
+      "--background-index",
+      "--header-insertion-decorators=false", -- don't prepend a dot or space before the completion label
+    }
+  elseif server.name == 'sumneko_lua' then
     opts.settings = {
       Lua = {
         diagnostics = {
