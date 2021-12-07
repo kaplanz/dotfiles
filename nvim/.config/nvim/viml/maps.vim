@@ -9,16 +9,8 @@
 
 " Letter: {{{
 " Write to file
-nnoremap <silent> ZW :update<CR>
-nnoremap <silent> <C-s> :update<CR>
-" Buffer overview
-nnoremap gb :buffers<CR>:b<Space>
-" Mark overview
-nnoremap gm :marks<CR>:norm<Space>`
-" Register overview
-nnoremap gr :registers<CR>:norm<Space>"
-" Undolist overview
-nnoremap gu :undolist<CR>:u<Space>
+nnoremap <silent> ZW <Cmd>update<CR>
+nnoremap <silent> <C-s> <Cmd>update<CR>
 " }}}
 
 " Special: {{{
@@ -31,14 +23,10 @@ nnoremap <C-w><C-f> <C-w>vgf
 let mapleader = ','
 " Bypass mapleader action
 nnoremap <Leader><Leader> <Leader>
-" Toggle Paste mode
-nnoremap <Leader>P :set paste!<CR>
-" Reload .vimrc
-nnoremap <Leader>R :source $MYVIMRC<CR>
 " Sort Visual mode selection
 vnoremap <Leader>o :sort<CR>
 " Open a new terminal window
-nnoremap <silent> <Leader>t :split +terminal<CR>
+nnoremap <silent> <Leader>t <Cmd>split +terminal<CR>
 " }}}
 
 " vim:fdl=0:fdm=marker:
