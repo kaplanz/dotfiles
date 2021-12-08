@@ -3,23 +3,15 @@
 -- Created:     08 Aug 2021
 -- SPDX-License-Identifier: MIT
 
--- Run vim commands
-vim.cmd [[
-  let g:nvim_tree_add_trailing = 1
-  let g:nvim_tree_follow = 1
-  let g:nvim_tree_gitignore = 1
-  let g:nvim_tree_group_empty = 1
-  let g:nvim_tree_highlight_opened_files = 1
-  let g:nvim_tree_icons = {
-      \ 'default':        '',
-      \ 'symlink':        '',
-      \ }
-  let g:nvim_tree_ignore = ['.git', 'node_modules']
-  let g:nvim_tree_symlink_arrow = ' -> '
-
-  nnoremap <Leader>n <Cmd>NvimTreeToggle<CR>
-  nnoremap <Leader>N <Cmd>NvimTreeRefresh<CR>
-]]
+-- Set global options
+vim.g.nvim_tree_add_trailing           = 1
+vim.g.nvim_tree_follow                 = 1
+vim.g.nvim_tree_gitignore              = 1
+vim.g.nvim_tree_group_empty            = 1
+vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_icons = { default = '', symlink = '', }
+vim.g.nvim_tree_ignore = {'.git', 'node_modules'}
+vim.g.nvim_tree_symlink_arrow = ' -> '
 
 -- Require module setup
 require('nvim-tree').setup {
@@ -49,3 +41,13 @@ require('nvim-tree').setup {
     ignore_list = {}
   },
 }
+
+-- Configure mappings
+do
+  local function map(...) vim.api.nvim_set_keymap(...) end
+  local opts = { noremap = true, silent = true }
+
+  -- Leader mappings
+  map('n', '<Leader>n', '<Cmd>NvimTreeToggle<CR>', opts)
+  map('n', '<Leader>N', '<Cmd>NvimTreeRefresh<CR>', opts)
+end
