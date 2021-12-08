@@ -3,21 +3,61 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
--- Run vim commands
-vim.cmd [[
-  " Find files using Telescope command-line sugar.
-  nnoremap <Leader>F  <Cmd>Telescope<CR>
-  nnoremap <Leader>ff <Cmd>Telescope find_files<CR>
-  nnoremap <Leader>fg <Cmd>Telescope live_grep<CR>
-  nnoremap <Leader>fb <Cmd>Telescope buffers<CR>
-  nnoremap <Leader>fh <Cmd>Telescope help_tags<CR>
-
-  " Remap <C-p> to emulate ctrlp.vim
-  nmap <C-p> <Leader>ff
-]]
-
 -- Require module setup
-require('telescope').setup {}
+require('telescope').setup {
+  defaults = {
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    mappings = {
+      i = {
+        -- map actions.which_key to <C-h> (default: <C-/>)
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        -- ['<C-h>'] = 'which_key',
+      },
+    },
+  },
+  pickers = {
+    -- Default configuration for builtin pickers goes here:
+    -- picker_name = {
+    --   picker_config_key = value,
+    --   ...
+    -- }
+    -- Now the picker_config_key will be applied every time you call this
+    -- builtin picker
+  },
+  extensions = {
+    -- Your extension configuration goes here:
+    -- extension_name = {
+    --   extension_config_key = value,
+    -- }
+    -- please take a look at the readme of the extension you want to configure
+  },
+}
 
--- Load extensions
+-- Configure mappings
+do
+  local function map(...) vim.api.nvim_set_keymap(...) end
+  local opts = { noremap = true, silent = true }
+
+  -- Prefix mappings
+  local prefix = '<C-h>'
+  map('n', prefix .. '<CR>', '<Cmd>Telescope<CR>', opts)
+  map('n', prefix .. 'a', '<Cmd>lua require("telescope.builtin").find_files({ hidden = true })<CR>', opts)
+  map('n', prefix .. 'b', '<Cmd>lua require("telescope.builtin").buffers()<CR>', opts)
+  map('n', prefix .. 'f', '<Cmd>lua require("telescope.builtin").find_files()<CR>', opts)
+  map('n', prefix .. 'g', '<Cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
+  map('n', prefix .. 'h', '<Cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
+  map('n', prefix .. 'o', '<Cmd>lua require("telescope.builtin").oldfiles()<CR>', opts)
+  map('n', prefix .. 's', '<Cmd>lua require("telescope.builtin").git_status()<CR>', opts)
+
+  -- Shortcuts
+  map('n', prefix, prefix .. '<CR>', { silent = true }) -- Telescope
+  map('n', '<C-p>', prefix .. 'f', { silent = true })   -- find_files
+  map('n', 'gb', prefix .. 'b', { silent = true })      -- buffers
+end
+
+-- To get extensions loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
 require('telescope').load_extension('notify')

@@ -185,21 +185,12 @@ return require('packer').startup {function()
   }
   use {
     'nvim-telescope/telescope.nvim',   -- fuzzy finder over lists
-    cmd = 'Telescope',
-    keys = {
-      {'n', '<Leader>F'},
-      {'n', '<Leader>ff'},
-      {'n', '<Leader>fg'},
-      {'n', '<Leader>fb'},
-      {'n', '<Leader>fh'},
-      {'n', '<C-p>'},
-    },
     config = function()
       require('plugins.telescope')
     end,
     requires = {
-      'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     },
   }
   use {
