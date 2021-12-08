@@ -37,6 +37,22 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   opts.border = opts.border or border
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
+
+--- Customize how diagnostics are displayed
+vim.diagnostic.config {
+  virtual_text = {
+    format = function(diagnostic)
+      local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+      if diagnostic.lnum <= lnum and lnum <= diagnostic.end_lnum then
+        return diagnostic.message
+      end
+    end,
+  },
+  severity_sort = true,
+}
+
+-- Show line diagnostics in virtual text
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.show()]]
 -- }}}
 
 -- Add additional capabilities supported by nvim-cmp
