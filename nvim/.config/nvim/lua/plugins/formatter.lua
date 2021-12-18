@@ -9,7 +9,7 @@ require('formatter').setup {
       -- Configuration for psf/black
       function()
         return {
-          exe = "black", -- this should be available on your $PATH
+          exe = 'black', -- this should be available on your $PATH
           args = { '-' },
           stdin = true,
         }

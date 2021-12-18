@@ -118,9 +118,9 @@ require('nvim-lsp-installer').on_server_ready(function(server)
   -- end
   if server.name == 'clangd' then
     opts.cmd = {
-      "clangd",
-      "--background-index",
-      "--header-insertion-decorators=false", -- don't prepend a dot or space before the completion label
+      'clangd',
+      '--background-index',
+      '--header-insertion-decorators=false', -- don't prepend a dot or space before the completion label
     }
   elseif server.name == 'sumneko_lua' then
     opts.settings = {

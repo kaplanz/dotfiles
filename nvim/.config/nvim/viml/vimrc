@@ -60,9 +60,9 @@ set foldmethod=indent
 " }}}
 
 " UI: {{{
-set number
 set fillchars+=foldopen:▼,foldclose:▶,foldsep:┆,diff:╳
 set noshowmode
+set number
 set pumblend=10
 set scrolloff=5
 set sidescrolloff=5
