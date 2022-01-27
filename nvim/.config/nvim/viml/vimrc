@@ -21,7 +21,7 @@ set updatetime=100
 " }}}
 
 " Colours: {{{
-silent! colorscheme everforest
+silent! colorscheme nordfox
 set termguicolors
 " }}}
 
