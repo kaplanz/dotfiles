@@ -108,6 +108,12 @@ return require('packer').startup {function()
 
   -- LSP {{{
   use {
+    'j-hui/fidget.nvim',               -- UI for nvim-lsp progress
+    config = function()
+      require('fidget').setup()
+    end,
+  }
+  use {
     {
       'neovim/nvim-lspconfig',         -- LSP common configurations
       config = function()
