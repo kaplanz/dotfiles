@@ -206,12 +206,6 @@ return require('packer').startup {function()
       vim.cmd [[runtime! viml/plugins/tagbar.vim]]
     end,
   }
-  use {
-    'rcarriga/nvim-notify',            -- notification manager
-    config = function()
-      vim.notify = require('notify')
-    end,
-  }
   use 'stevearc/dressing.nvim'         -- improve the default vim.ui interfaces
   -- }}}
 end}
