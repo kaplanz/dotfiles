@@ -69,6 +69,7 @@ return require('packer').startup {function()
   -- }}}
 
   -- Extensions {{{
+  use 'AndrewRadev/sideways.vim'       -- move function arguments
   use 'AndrewRadev/switch.vim'         -- switch text segments
   use 'machakann/vim-sandwich'         -- edit sandwiched textobjects
   use {
