@@ -66,6 +66,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- ... after the language server attaches to the current buffer
 -- {{{
 local on_attach = function(_, bufnr)
+  -- TODO: Update to Nvim 0.7.0
   local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function set(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 

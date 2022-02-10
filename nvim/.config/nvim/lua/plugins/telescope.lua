@@ -40,6 +40,7 @@ require('telescope').setup {
 
 -- Configure mappings
 do
+  -- TODO: Update to Nvim 0.7.0
   local function map(...) vim.api.nvim_set_keymap(...) end
   local opts = { noremap = true, silent = true }
 
