@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # File:        upgrade.sh
-# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     10 Dec 2019
 # SPDX-License-Identifier: MIT
 

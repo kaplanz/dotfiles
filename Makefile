@@ -1,5 +1,5 @@
 # File:        Makefile
-# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     23 Feb 2020
 # SPDX-License-Identifier: MIT
 
