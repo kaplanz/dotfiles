@@ -9,21 +9,21 @@ This repository could be installed by running [`install.sh`](tools/install.sh) u
 
 ### via curl
 
-```shell
+```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
 ```
 
 ### via wget
 
-```shell
-bash -c "$(wget -O-  https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
+```sh
+bash -c "$(wget -O -  https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
 ```
 
 ## Manual Installation
 
 Start by cloning this repository to your home directory:
 
-```shell
+```sh
 git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
 ```
 
@@ -33,8 +33,8 @@ Some features of this repository have dependencies as listed in the [`Brewfile`]
 
 **Homebrew**:
 
-```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 For more information on installation, see [website](https://brew.sh).
@@ -43,7 +43,7 @@ For more information on installation, see [website](https://brew.sh).
 
 The dotfiles are installed through symlinks to various directories. To use my configuration, setup  directories and link all dotfiles using the [`Makefile`](Makefile):
 
-```shell
+```sh
 make --directory=~/.dotfiles
 ```
 
@@ -51,6 +51,6 @@ make --directory=~/.dotfiles
 
 To unlink all dotfiles, use the [`Makefile`](Makefile):
 
-```shell
+```sh
 make --directory=~/.dotfiles uninstall
 ```
