@@ -62,7 +62,7 @@ cmp.setup {
   -- Snippet expansion function
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      require('snippy').expand_snippet(args.body)
     end,
   },
 
@@ -74,17 +74,21 @@ cmp.setup {
 
       -- Item menu
       item.menu = ({
-        -- Common
-        buffer      = '﬘',
-        calc        = '',
-        path        = 'ﱮ',
+        -- Internal Sources
         spell       = '暈',
-        -- Neovim-specific
-        nvim_lsp    = '',
+        buffer      = '',
+        calc        = '',
+        cmdline     = '',
+        path        = 'ﱮ',
+        -- Language Server Protocol
+        nvim_lsp    = 'ﮒ',
         nvim_lua    = '',
-        treesitter  = '',
-        -- External plugins
-        cmp_tabnine = 'ﮧ',
+        -- Extensions
+        snippy      = '',
+        treesitter  = '',
+        -- External Sources
+        cmp_tabnine = 'ﲴ',
+        crates      = '',
       })[entry.source.name]
 
       -- Special menu details
@@ -101,15 +105,19 @@ cmp.setup {
   -- Array of the source configuration to use
   -- (The order will be used to the completion menu's sort order)
   sources = {
-    -- Neovim-specific
+    -- Language Server Protocol
     { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
+    -- Extensions
+    { name = 'snippy '},
     { name = 'treesitter' },
-    -- External plugins
+    -- External Sources
     { name = 'cmp_tabnine' },
-    -- Common
+    -- Internal Sources
     { name = 'path' },
     { name = 'buffer' },
+    { name = 'cmdline' },
     { name = 'calc' },
     { name = 'spell' },
   },
@@ -119,3 +127,17 @@ cmp.setup {
     ghost_text = true,
   }
 }
+
+-- Completions for command mode
+cmp.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' }
+  }
+})
+
+-- Completions for `/` search based on current buffer
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})

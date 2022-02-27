@@ -45,17 +45,21 @@ return require('packer').startup {function()
       require('plugins.cmp')
     end,
     requires = {
-      -- Common
+      -- Internal Sources
+      'f3fora/cmp-spell',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
-      'f3fora/cmp-spell',
-      -- Neovim-specific
+      -- Language Server Protocol
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-nvim-lua',
+      -- Extensions
+      'dcampos/cmp-snippy',
       'ray-x/cmp-treesitter',
-      -- External plugins
-      { 'tzachar/cmp-tabnine', run='./install.sh', }
+      -- External Sources
+      { 'tzachar/cmp-tabnine', run='./install.sh', },
     },
   }
   use {
@@ -127,7 +131,10 @@ return require('packer').startup {function()
   -- }}}
 
   -- Snippets: {{{
-  use 'L3MON4D3/LuaSnip'               -- snippet engine
+  use {
+    'dcampos/nvim-snippy',             -- snippet engine
+    requires = 'honza/vim-snippets',
+  }
   -- }}}
 
   -- Tags {{{
