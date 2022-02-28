@@ -91,6 +91,17 @@ return require('packer').startup {function()
   use 'wellle/targets.vim'             -- additional text objects
   -- }}}
 
+  -- Filetype {{{
+  use {
+      'saecki/crates.nvim',
+      config = function()
+          require('crates').setup()
+      end,
+      event = 'BufRead Cargo.toml',
+      requires = 'nvim-lua/plenary.nvim',
+  }
+  -- }}}
+
   -- Formatting: {{{
   use {
     'mhartington/formatter.nvim',      -- format runner

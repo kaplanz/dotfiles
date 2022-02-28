@@ -114,6 +114,7 @@ cmp.setup {
     { name = 'treesitter' },
     -- External Sources
     { name = 'cmp_tabnine' },
+    { name = 'crates' },
     -- Internal Sources
     { name = 'path' },
     { name = 'buffer' },
