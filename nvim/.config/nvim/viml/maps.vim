@@ -1,5 +1,5 @@
 " File:        maps.vim
-" Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+" Author:      Zakhary Kaplan <https://zakhary.dev>
 " Created:     12 Sep 2020
 " SPDX-License-Identifier: MIT
 

@@ -1,44 +1,55 @@
 -- File:        nvim-tree.vim
--- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+-- Author:      Zakhary Kaplan <https://zakhary.dev>
 -- Created:     08 Aug 2021
 -- SPDX-License-Identifier: MIT
 
 -- Set global options
 vim.g.nvim_tree_add_trailing           = 1
-vim.g.nvim_tree_follow                 = 1
-vim.g.nvim_tree_gitignore              = 1
 vim.g.nvim_tree_group_empty            = 1
 vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_icons = { default = '', symlink = '', }
-vim.g.nvim_tree_ignore = {'.git', 'node_modules'}
 vim.g.nvim_tree_symlink_arrow = ' -> '
 
 -- Require module setup
 require('nvim-tree').setup {
-  -- disables netrw completely
+  -- completely disable netrw
   disable_netrw       = false,
-  -- hijack netrw window on startup
+  -- hijack netrw windows
   hijack_netrw        = false,
-  -- closes neovim automatically when the tree is the last **WINDOW** in the view
+  -- force closing neovim when the tree is the last window in the view
   auto_close          = true,
-  -- hijack the cursor in the tree to put it at the start of the filename
+  -- keeps the cursor on the first letter of the filename when moving in the tree
   hijack_cursor       = true,
-  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
+  -- changes the tree root directory on `DirChanged` and refreshes the tree
   update_cwd          = true,
+  -- update the focused file on `BufEnter`, un-collapses the folders recursively
+  -- until it finds the file
+  update_focused_file = {
+    -- enable this feature
+    enable      = true,
+    -- update the root directory of the tree to the one of the folder containing
+    -- the file if the file is not under the current root directory. Only
+    -- relevant when `update_focused_file.enable` is `true`
+    update_cwd  = false,
+    -- list of buffer names and filetypes that will not update the root dir of
+    -- the tree if the file isn't found under the current root directory. Only
+    -- relevant when `update_focused_file.update_cwd` is `true` and
+    -- `update_focused_file.enable` is `true`
+    ignore_list = {}
+  },
   -- show lsp diagnostics in the signcolumn
   diagnostics = {
     enable = true,
   },
-  -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
-  update_focused_file = {
-    -- enables the feature
-    enable      = true,
-    -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
-    -- only relevant when `update_focused_file.enable` is true
-    update_cwd  = false,
-    -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
-    -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
-    ignore_list = {}
+  -- git integration with icons and colors
+  git = {
+    -- ignore files based on `.gitignore`
+    ignore = true,
+  },
+  -- filtering options
+  filters = {
+    -- custom list of string that will not be shown
+    custom = {'.git', 'node_modules'},
   },
 }
 

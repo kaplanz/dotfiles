@@ -1,5 +1,5 @@
 # File:        .zshenv
-# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     09 May 2021
 # SPDX-License-Identifier: MIT
 

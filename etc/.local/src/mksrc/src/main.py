@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # File:        main.py
-# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     21 Jun 2021
 # SPDX-License-Identifier: MIT
 

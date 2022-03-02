@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # File:        job.sh
-# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     13 Jun 2020
 # SPDX-License-Identifier: MIT
 

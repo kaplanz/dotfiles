@@ -1,5 +1,5 @@
 -- File:        formatter.lua
--- Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+-- Author:      Zakhary Kaplan <https://zakhary.dev>
 -- Created:     06 Dec 2021
 -- SPDX-License-Identifier: MIT
 

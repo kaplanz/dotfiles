@@ -1,5 +1,5 @@
 # File:        color.zsh
-# Author:      Zakhary Kaplan <https://zakharykaplan.ca>
+# Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     19 May 2021
 # SPDX-License-Identifier: MIT
 
