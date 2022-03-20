@@ -3,4 +3,4 @@
 # Created:     16 May 2021
 # SPDX-License-Identifier: MIT
 
-alias nv='$VISUAL'
+alias v='$VISUAL'
