@@ -57,6 +57,7 @@ set smartcase
 
 " Text: {{{
 set foldmethod=indent
+set nowrap
 " }}}
 
 " UI: {{{
