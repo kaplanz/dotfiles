@@ -51,6 +51,8 @@ return require('packer').startup {function()
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
+      -- External Sources
+      { 'tzachar/cmp-tabnine', run='./install.sh', },
       -- Language Server Protocol
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -58,8 +60,8 @@ return require('packer').startup {function()
       -- Extensions
       'dcampos/cmp-snippy',
       'ray-x/cmp-treesitter',
-      -- External Sources
-      { 'tzachar/cmp-tabnine', run='./install.sh', },
+      -- Filetype
+      'saecki/crates.nvim',
     },
   }
   use {

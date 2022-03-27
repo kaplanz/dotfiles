@@ -13,7 +13,7 @@ cmp.setup {
   -- Mappings for completions
   mapping = {
     -- Scroll docs
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     -- Popup behaviour
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -26,13 +26,13 @@ cmp.setup {
       behavior = cmp.SelectBehavior.Select
     }),
     ['<C-p>'] = cmp.mapping.select_prev_item({
-      behavior = cmp.SelectBehavior.Insert
+      behavior = cmp.SelectBehavior.Select
     }),
     ['<Down>'] = cmp.mapping.select_next_item({
       behavior = cmp.SelectBehavior.Insert
     }),
     ['<Up>'] = cmp.mapping.select_prev_item({
-      behavior = cmp.SelectBehavior.Select
+      behavior = cmp.SelectBehavior.Insert
     }),
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
@@ -80,14 +80,15 @@ cmp.setup {
         calc        = '',
         cmdline     = '',
         path        = 'ﱮ',
+        -- External Sources
+        cmp_tabnine = 'ﲴ',
         -- Language Server Protocol
         nvim_lsp    = 'ﮒ',
         nvim_lua    = '',
         -- Extensions
         snippy      = '',
         treesitter  = '',
-        -- External Sources
-        cmp_tabnine = 'ﲴ',
+        -- Filetype
         crates      = '',
       })[entry.source.name]
 
@@ -105,16 +106,18 @@ cmp.setup {
   -- Array of the source configuration to use
   -- (The order will be used to the completion menu's sort order)
   sources = {
+    -- Extensions
+    { name = 'snippy' },
     -- Language Server Protocol
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
+    -- Filetype
+    { name = 'crates' },
     -- Extensions
-    { name = 'snippy' },
     { name = 'treesitter' },
     -- External Sources
     { name = 'cmp_tabnine' },
-    { name = 'crates' },
     -- Internal Sources
     { name = 'path' },
     { name = 'buffer' },
