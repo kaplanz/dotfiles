@@ -16,8 +16,6 @@ require('nvim-tree').setup {
   disable_netrw       = false,
   -- hijack netrw windows
   hijack_netrw        = false,
-  -- force closing neovim when the tree is the last window in the view
-  auto_close          = true,
   -- keeps the cursor on the first letter of the filename when moving in the tree
   hijack_cursor       = true,
   -- changes the tree root directory on `DirChanged` and refreshes the tree
