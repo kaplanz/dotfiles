@@ -110,7 +110,7 @@ cmp.setup {
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
     -- Extensions
-    { name = 'snippy '},
+    { name = 'snippy' },
     { name = 'treesitter' },
     -- External Sources
     { name = 'cmp_tabnine' },

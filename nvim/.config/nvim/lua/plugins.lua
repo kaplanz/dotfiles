@@ -144,6 +144,9 @@ return require('packer').startup {function()
   -- Snippets: {{{
   use {
     'dcampos/nvim-snippy',             -- snippet engine
+    config = function()
+      require('plugins.snippy')
+    end,
     requires = 'honza/vim-snippets',
   }
   -- }}}
