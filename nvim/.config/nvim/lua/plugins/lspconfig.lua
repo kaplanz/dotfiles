@@ -57,7 +57,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Use an `on_attach` function to only map the following keys...
 -- ... after the language server attaches to the current buffer
 -- {{{
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- TODO: Update to Nvim 0.7.0
   local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function set(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -86,7 +86,14 @@ local on_attach = function(_, bufnr)
   map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   map('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   map('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.cmd [[command! -nargs=0 Format execute 'lua vim.lsp.buf.formatting()']]
+
+  -- Set some key bindings conditional on server capabilities
+  if client.resolved_capabilities.document_formatting then
+    map('n', '<Space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
+  if client.resolved_capabilities.document_range_formatting then
+    map('x', '<Space>f', '<Cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+  end
 end
 -- }}}
 
