@@ -57,42 +57,38 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Use an `on_attach` function to only map the following keys...
 -- ... after the language server attaches to the current buffer
 -- {{{
-local on_attach = function(client, bufnr)
-  -- TODO: Update to Nvim 0.7.0
-  local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function set(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
+local on_attach = function(client, _)
   -- Enable completion triggered by <C-x><C-o>
-  set('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  -- Mappings
+  -- Set up keymaps
   local opts = { noremap = true, silent = true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  map('n', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  map('n', '<Space>D', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  map('n', '<Space>ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  map('n', '<Space>e', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  map('n', '<Space>q', '<Cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  map('n', '<Space>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  map('n', '<Space>so', [[<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  map('n', '<Space>wa', '<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  map('n', '<Space>wl', '<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  map('n', '<Space>wr', '<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  map('n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  map('n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  map('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  map('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.keymap.set('n', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.keymap.set('n', '<Space>D', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.keymap.set('n', '<Space>ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.keymap.set('n', '<Space>e', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.keymap.set('n', '<Space>q', '<Cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  vim.keymap.set('n', '<Space>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.keymap.set('n', '<Space>so', [[<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+  vim.keymap.set('n', '<Space>wa', '<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.keymap.set('n', '<Space>wl', '<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.keymap.set('n', '<Space>wr', '<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.keymap.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.keymap.set('n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  vim.keymap.set('n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  vim.keymap.set('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.keymap.set('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.keymap.set('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.keymap.set('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
 
   -- Set some key bindings conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    map('n', '<Space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.keymap.set('n', '<Space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
   if client.resolved_capabilities.document_range_formatting then
-    map('x', '<Space>f', '<Cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+    vim.keymap.set('x', '<Space>f', '<Cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end
 end
 -- }}}

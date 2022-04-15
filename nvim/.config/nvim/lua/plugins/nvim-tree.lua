@@ -53,11 +53,10 @@ require('nvim-tree').setup {
 
 -- Configure mappings
 do
-  -- TODO: Update to Nvim 0.7.0
-  local function map(...) vim.api.nvim_set_keymap(...) end
+  -- Set up keymaps
   local opts = { noremap = true, silent = true }
 
   -- Leader mappings
-  map('n', '<Leader>n', '<Cmd>NvimTreeToggle<CR>', opts)
-  map('n', '<Leader>N', '<Cmd>NvimTreeRefresh<CR>', opts)
+  vim.keymap.set('n', '<Leader>n', '<Cmd>NvimTreeToggle<CR>', opts)
+  vim.keymap.set('n', '<Leader>N', '<Cmd>NvimTreeRefresh<CR>', opts)
 end
