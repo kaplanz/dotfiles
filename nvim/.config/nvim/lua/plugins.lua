@@ -60,8 +60,6 @@ return require('packer').startup {function()
       -- Extensions
       'dcampos/cmp-snippy',
       'ray-x/cmp-treesitter',
-      -- Filetype
-      'saecki/crates.nvim',
     },
   }
   use {
@@ -91,17 +89,6 @@ return require('packer').startup {function()
   use 'tpope/vim-speeddating'          -- increment dates, times, and more
   use 'tpope/vim-unimpaired'           -- handy bracket mappings
   use 'wellle/targets.vim'             -- additional text objects
-  -- }}}
-
-  -- Filetype {{{
-  use {
-      'saecki/crates.nvim',
-      config = function()
-          require('crates').setup()
-      end,
-      event = 'BufRead Cargo.toml',
-      requires = 'nvim-lua/plenary.nvim',
-  }
   -- }}}
 
   -- Formatting: {{{
