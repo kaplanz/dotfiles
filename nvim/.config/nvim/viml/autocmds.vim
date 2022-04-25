@@ -30,7 +30,7 @@ augroup Vimrc
   autocmd!
 
   " Override formatoptions upon entering a new buffer
-  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=ro
+  autocmd BufNewFile,BufWinEnter * setlocal formatoptions-=o
 
   " Tier foldlevel depending on how many lines are in the buffer
   autocmd BufNewFile,BufRead *
