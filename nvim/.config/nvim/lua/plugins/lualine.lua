@@ -6,11 +6,7 @@
 require('lualine').setup {
   options = {
     component_separators = '|',
-    disabled_filetypes = {
-      'NvimTree',
-      'packer',
-      'tagbar',
-    },
     section_separators = '',
+    globalstatus = true,
   },
 }
