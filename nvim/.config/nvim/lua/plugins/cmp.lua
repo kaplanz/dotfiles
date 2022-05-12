@@ -35,8 +35,11 @@ cmp.setup {
       behavior = cmp.SelectBehavior.Insert
     }),
     ['<Tab>'] = function(fallback)
+      local copilot = vim.fn['copilot#Accept']()
       if cmp.visible() then
         cmp.select_next_item()
+      elseif copilot ~= '' then
+        vim.api.nvim_feedkeys(copilot, 'i', false)
       else
         fallback()
       end
