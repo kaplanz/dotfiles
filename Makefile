@@ -92,13 +92,13 @@ etc: cron fzf terminfo
 local: stow-local
 
 .PHONY: nvim
-nvim: $(NVIM) plug-nvim stow-nvim
+nvim: $(NVIM) plug-nvim stow
 
 .PHONY: tmux
-tmux: $(TMUX) plug-tmux stow-tmux
+tmux: $(TMUX) plug-tmux stow
 
 .PHONY: zsh
-zsh: $(ZSH) plug-zsh stow-zsh
+zsh: $(ZSH) plug-zsh stow
 # }}}
 
 # -- Install Goals -- {{{
@@ -121,41 +121,27 @@ endif
 
 # -- Stow Goals -- {{{
 .PHONY: stow
-stow: stow-etc stow-local stow-nvim stow-tmux stow-zsh
-
-.PHONY: stow-etc
-stow-etc:
-	$(STOW) --restow etc
+stow: stow-local
+	$(STOW) --restow home
 
 .PHONY: stow-local
 stow-local:
 	$(STOW) --restow local
 
-.PHONY: stow-nvim
-stow-nvim: $(NVIM)
-	$(STOW) --restow nvim
-
-.PHONY: stow-tmux
-stow-tmux: $(TMUX)
-	$(STOW) --restow tmux
-
-.PHONY: stow-zsh
-stow-zsh: $(ZSH)
-	$(STOW) --restow zsh
-
 .PHONY: unstow
-unstow:
-	@$(STOW) -v --delete etc
+unstow: unstow-local
+	@$(STOW) -v --delete home
+
+.PHONY: unstow-local
+unstow-local:
 	@$(STOW) -v --delete local
-	@$(STOW) -v --delete tmux
-	@$(STOW) -v --delete zsh
 # }}}
 
 # -- Plugins Goals -- {{{
 .PHONY: plug
 plug: plug-nvim plug-tmux plug-zsh
 
-plug-%: stow-% # always plug after stow
+plug-%: stow # always plug after stow
 
 # Nvim {{{
 .PHONY: plug-nvim
@@ -215,7 +201,7 @@ $(OHMYZSH)/%: $(OMZ_REPO) ;
 # -- Utility Goals -- {{{
 # cron {{{
 .PHONY: cron
-cron: $(CRON) stow-etc
+cron: $(CRON) stow
 
 .PHONY: $(CRON)
 $(CRON):
