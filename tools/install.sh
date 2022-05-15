@@ -4,49 +4,9 @@
 # Created:     05 Jun 2019
 # SPDX-License-Identifier: MIT
 
-# Installation settings
-DOTFILES=~/.dotfiles
+# Parameters
+DOTFILES=${DOTFILES:-~/.dotfiles}
 
-# Check if minimum dependencies are installed
-check_dependencies() {
-    {
-        # Check if Homebrew is installed
-        test "$(command -v brew)"
-    } || {
-        # Check if individual dependencies are installed
-        test "$(command -v git)" &&
-        test "$(command -v make)" &&
-        test "$(command -v stow)" &&
-        test "$(command -v wget)" &&
-        test "$(command -v zsh)"
-    }
-}
-
-# Clone dotfiles repository
-clone_dotfiles_repo() {
-    [ ! -d "$DOTFILES" ] && {
-        git clone https://github.com/zakharykaplan/dotfiles.git "$DOTFILES"
-    }
-}
-
-# Helpers
-print_dependency() {
-    printf "%s $1\n" "$(test $(command -v $1) && echo '✓' || echo '✗')"
-}
-
-print_dependencies() {
-    echo 'Required:'
-    printf '  ' && print_dependency git
-    printf '  ' && print_dependency make
-    printf '  ' && print_dependency stow
-    printf '  ' && print_dependency wget
-    printf '  ' && print_dependency zsh
-    echo 'Recommended:'
-    printf '  ' && print_dependency nvim
-    printf '  ' && print_dependency tmux
-}
-
-# Run script
 main() {
     # Begin installation
     echo 'Install `zakharykaplan/dotfiles`'
@@ -64,21 +24,21 @@ main() {
 
     # Check for dependencies
     echo "Checking dependencies..."
-    check_dependencies || {
+    dep-check || {
         # If dependencies not found, do not install
         echo 'Installation cancelled. Please install missing dependencies and try again.'
         [ "$(uname)" = 'Darwin' ] &&
             echo 'Note: Homebrew could be used to satisfy all dependencies.'
         echo
-        print_dependencies
+        dep-printall
         return 1
     }
-    print_dependencies
+    dep-printall
     echo 'Dependencies satisfied. May proceed.'
     echo
 
     # Confirm installation
-    echo "This will install dotfiles at: $DOTFILES"
+    echo "This will install at: \`$DOTFILES\`"
     [ -z "$YES" ] && read -p "Proceed with installation? [Y/n] " PROCEED
     case "$PROCEED" in
         [Yy]* ) ;;
@@ -92,7 +52,7 @@ main() {
 
     # Clone dotfiles repository
     echo 'Cloning dotfiles repo...'
-    clone_dotfiles_repo
+    dots-clone
     echo 'Done!'
     echo
 
@@ -104,6 +64,48 @@ main() {
 
     # Complete installation
     echo 'Installation complete. Please use responsibly!'
+}
+
+# Check if minimal dependencies are installed
+dep-check() {
+    {
+        # Check if Homebrew is installed
+        test "$(command -v brew)"
+    } || {
+        # Check if individual dependencies are installed
+        test "$(command -v git)" &&
+        test "$(command -v make)" &&
+        test "$(command -v stow)" &&
+        test "$(command -v wget)" &&
+        test "$(command -v zsh)"
+    }
+}
+
+# Print all dependencies
+dep-printall() {
+    echo 'Required:'
+    printf '  ' && dep-print git
+    printf '  ' && dep-print make
+    printf '  ' && dep-print stow
+    printf '  ' && dep-print wget
+    printf '  ' && dep-print zsh
+    echo 'Recommended:'
+    printf '  ' && dep-print nvim
+    printf '  ' && dep-print tmux
+}
+
+# Print a single dependency
+dep-print() {
+    printf "%s $1\n" "$(command -v $1 &> /dev/null && echo '✓' || echo '✗')"
+}
+
+# Clone dotfiles repository
+dots-clone() {
+    [ ! -d "$DOTFILES" ] && {
+        git clone https://github.com/zakharykaplan/dotfiles.git "$DOTFILES"
+    } || {
+        echo "Ditectory already exists at path: \`$DOTFILES\`"
+    }
 }
 
 main "$@"

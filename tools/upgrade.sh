@@ -4,8 +4,23 @@
 # Created:     10 Dec 2019
 # SPDX-License-Identifier: MIT
 
+main() {
+    # Unstow all dotfiles before stowing
+    make --directory="$DOTFILES" unstow
+
+    # Upgrade programs
+    dots-upgrade
+    [ "$1" = '--all' ] && {
+        brew-upgrade
+        omz-upgrade
+    }
+
+    # Continue installation in Makefile
+    make --directory="$DOTFILES" install
+}
+
 # Upgrade dotfiles repo
-upgrade_dotfiles_repo() {
+dots-upgrade() {
     ( # Run in subshell
         cd "$DOTFILES"
         [ -n "$(git status -s)" ] && {
@@ -17,33 +32,17 @@ upgrade_dotfiles_repo() {
 }
 
 # Homebrew
-upgrade_homebrew() {
+brew-upgrade() {
     test "$(command -v brew)" && {
         brew update && brew upgrade && brew cleanup
     }
 }
 
 # Oh My Zsh
-upgrade_oh_my_zsh() {
+omz-upgrade() {
     [ -d "$ZSH" ] && {
         env ZSH="$ZSH" sh "$ZSH/tools/upgrade.sh"
     }
-}
-
-# Run script
-main() {
-    # Unstow all dotfiles before stowing
-    make --directory="$DOTFILES" unstow
-
-    # Upgrade programs
-    upgrade_dotfiles_repo
-    [ "$1" = '--all' ] && {
-        upgrade_homebrew
-        upgrade_oh_my_zsh
-    }
-
-    # Continue installation in Makefile
-    make --directory="$DOTFILES" install
 }
 
 main "$@"
