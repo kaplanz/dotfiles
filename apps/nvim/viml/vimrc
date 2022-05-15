@@ -1,0 +1,88 @@
+" File:        vimrc
+" Author:      Zakhary Kaplan <https://zakhary.dev>
+" Created:     05 Jun 2019
+" SPDX-License-Identifier: MIT
+
+" --------------------------------
+"             Options
+" --------------------------------
+
+" Pre-Initialization: {{{
+" Enable file type detection
+filetype plugin indent on
+" Switch on syntax highlighting
+syntax enable
+" }}}
+
+" Buffers: {{{
+set confirm
+set undofile
+set updatetime=100
+" }}}
+
+" Colours: {{{
+silent! colorscheme nordfox
+set termguicolors
+" }}}
+
+" Completion: {{{
+set completeopt=menuone,noselect
+set shortmess+=c " shut off completion messages
+" }}}
+
+" Cursor: {{{
+set cursorline
+set whichwrap+=<,>,[,]
+" }}}
+
+" Indentation: {{{
+set expandtab
+set shiftround
+set shiftwidth=4
+set softtabstop=-1
+" }}}
+
+" Input: {{{
+set mouse=a
+" }}}
+
+" Path: {{{
+set path+=**
+" }}}
+
+" Search: {{{
+set ignorecase
+set smartcase
+" }}}
+
+" Text: {{{
+set foldmethod=indent
+set nowrap
+" }}}
+
+" UI: {{{
+set fillchars+=foldopen:▼,foldclose:▶,foldsep:┆,diff:╳
+set noshowmode
+set number
+set pumblend=10
+set scrolloff=5
+set sidescrolloff=5
+set signcolumn=number
+set winblend=10
+" }}}
+
+" Window: {{{
+set splitbelow
+set splitright
+" }}}
+
+
+" --------------------------------
+"             Runtimes
+" --------------------------------
+
+runtime! viml/autocmds.vim
+runtime! viml/maps.vim
+runtime! viml/plugins.vim
+
+" vim:fdl=0:fdm=marker:

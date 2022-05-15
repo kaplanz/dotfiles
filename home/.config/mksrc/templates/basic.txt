@@ -1,0 +1,6 @@
+File:        __FILE__
+Author:      __AUTHOR__ <__HOMEPAGE__>
+Created:     %d %b %Y
+Version:     __VERSION__
+Description: __DESCRIPTION__
+SPDX-License-Identifier: __LICENSE__

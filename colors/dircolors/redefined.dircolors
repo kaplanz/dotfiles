@@ -1,0 +1,562 @@
+# Configuration file for dircolors, a utility to help you set the
+# LS_COLORS environment variable used by GNU ls with the --color option.
+# Copyright (C) 1996-2020 Free Software Foundation, Inc.
+# Copying and distribution of this file, with or without modification,
+# are permitted provided the copyright notice and this notice are preserved.
+# The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the
+# slackware version of dircolors) are recognized but ignored.
+# Below are TERM entries, which can be a glob patterns, to match
+# against the TERM environment variable to determine if it is colorizable.
+TERM Eterm
+TERM ansi
+TERM *color*
+TERM con[0-9]*x[0-9]*
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM gnome
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mlterm
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM st
+TERM terminator
+TERM tmux*
+TERM vt100
+TERM xterm*
+
+# Below are the color init strings for the basic file types.
+# One can use codes for 256 or more colors supported by modern terminals.
+# The default color codes use the capabilities of an 8 color terminal
+# with some additional attributes as per the following codes:
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+#NORMAL 00 # no color code at all
+#FILE 00 # regular file: use no color at all
+RESET 0 # reset to "normal" color
+DIR 1;38;2;13;97;172 # directory
+LINK 0;38;2;250;208;122 # symbolic link. (If you set this to 'target' instead of a
+ # numerical value, the color is as for the file pointed to.)
+MULTIHARDLINK 00 # regular file with more than one link
+FIFO 0;38;2;240;160;192 # pipe
+SOCK 0;38;2;240;160;192 # socket
+#DOOR 01;35 # door
+BLK 0;38;2;207;106;76 # block device driver
+CHR 0;38;2;207;106;76 # character device driver
+ORPHAN 0;38;2;250;208;122;48;2;144;32;32 # symlink to nonexistent file, or non-stat'able file ...
+MISSING 0;38;2;250;208;122;48;2;144;32;32 # ... and the files they point to
+#SETUID 37;41 # file that is setuid (u+s)
+#SETGID 30;43 # file that is setgid (g+s)
+#CAPABILITY 30;41 # file with capability
+STICKY_OTHER_WRITABLE 00 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 00 # dir that is other-writable (o+w) and not sticky
+STICKY 00 # dir with the sticky bit set (+t) and not other-writable
+# This is for files with execute permission:
+EXEC 1;38;2;255;185;100
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+# If you use DOS-style suffixes, you may want to uncomment the following:
+#.cmd 01;32 # executables (bright green)
+#.exe 01;32
+#.com 01;32
+#.btm 01;32
+#.bat 01;32
+# Or if you want to colorize scripts even if they do not have the
+# executable bit actually set.
+#.sh 01;32
+#.csh 01;32
+
+# text
+  # special
+  *CONTRIBUTORS 1;38;2;101;194;84
+  *CONTRIBUTORS.md 1;38;2;101;194;84
+  *CONTRIBUTORS.txt 1;38;2;101;194;84
+  *INSTALL 1;38;2;101;194;84
+  *INSTALL.md 1;38;2;101;194;84
+  *INSTALL.md.txt 1;38;2;101;194;84
+  *README 1;38;2;101;194;84
+  *README.md 1;38;2;101;194;84
+  *README.txt 1;38;2;101;194;84
+
+  # todo
+  *TODO 0;38;2;112;185;80
+  *TODO.md 0;38;2;112;185;80
+  *TODO.txt 0;38;2;112;185;80
+
+  # licenses
+  *COPYING 3;38;2;153;173;106
+  *COPYRIGHT 3;38;2;153;173;106
+  *LICENSE 3;38;2;153;173;106
+  *LICENSE-APACHE 3;38;2;153;173;106
+  *LICENSE-MIT 3;38;2;153;173;106
+
+  # configuration
+    # generic
+    *.cfg 0;38;2;153;173;106
+    *.conf 0;38;2;153;173;106
+    *.config 0;38;2;153;173;106
+    *.ini 0;38;2;153;173;106
+    *.json 0;38;2;153;173;106
+    *.tml 0;38;2;153;173;106
+    *.toml 0;38;2;153;173;106
+    *.yaml 0;38;2;153;173;106
+    *.yml 0;38;2;153;173;106
+
+    # metadata
+    *.xmp 0;38;2;153;173;106
+
+    # bibtex
+    *.bib 0;38;2;153;173;106
+    *.bst 0;38;2;153;173;106
+
+    # dockerfile
+    *Dockerfile 0;38;2;153;173;106
+
+    # nix
+    *.nix 0;38;2;153;173;106
+
+    # qt
+    *.ui 0;38;2;153;173;106
+
+    # desktop
+    *.desktop 0;38;2;153;173;106
+
+    # system
+    *passwd 0;38;2;153;173;106
+    *shadow 0;38;2;153;173;106
+
+    # other
+    *.txt 0;38;2;121;157;106
+
+# markup
+  # web
+  *.htm 0;38;2;102;135;153
+  *.html 0;38;2;102;135;153
+  *.shtml 0;38;2;102;135;153
+  *.xhtml 0;38;2;102;135;153
+
+  # other
+  *.csv 0;38;2;102;135;153
+  *.markdown 0;38;2;102;135;153
+  *.md 0;38;2;102;135;153
+  *.mdown 0;38;2;102;135;153
+  *.rst 0;38;2;102;135;153
+  *.xml 0;38;2;102;135;153
+
+# programming
+  # source
+    # actionscript
+    *.as 0;38;2;129;151;191
+    # applescript
+    *.applescript 0;38;2;129;151;191
+    # asp
+    *.asa 0;38;2;129;151;191
+    # awk
+    *.awk 0;38;2;129;151;191
+    # basic
+    *.vb 0;38;2;129;151;191
+    # cabal
+    *.cabal 0;38;2;129;151;191
+    # clojure
+    *.clj 0;38;2;129;151;191
+    # crystal
+    *.cr 0;38;2;129;151;191
+    # csharp
+    *.cs 0;38;2;129;151;191
+    *.csx 0;38;2;129;151;191
+    # css
+    *css 0;38;2;129;151;191
+    # cxx
+    *.c 0;38;2;129;151;191
+    *.cpp 0;38;2;129;151;191
+    *.cc 0;38;2;129;151;191
+    *.cp 0;38;2;129;151;191
+    *.cxx 0;38;2;129;151;191
+    *.c++ 0;38;2;129;151;191
+    *.h 0;38;2;129;151;191
+    *.hh 0;38;2;129;151;191
+    *.hpp 0;38;2;129;151;191
+    *.hxx 0;38;2;129;151;191
+    *.h++ 0;38;2;129;151;191
+    *.inc 0;38;2;129;151;191
+    *.inl 0;38;2;129;151;191
+    *.ipp 0;38;2;129;151;191
+    *.def 0;38;2;129;151;191
+    # d
+    *.d 0;38;2;129;151;191
+    *.di 0;38;2;129;151;191
+    # dart
+    *.dart 0;38;2;129;151;191
+    # diff
+    *.diff 0;38;2;129;151;191
+    *.patch 0;38;2;129;151;191
+    # elixir
+    *.ex 0;38;2;129;151;191
+    *.exs 0;38;2;129;151;191
+    # elm
+    *.elm 0;38;2;129;151;191
+    # erlang
+    *.erl 0;38;2;129;151;191
+    # fsharp
+    *.fs 0;38;2;129;151;191
+    *.fsi 0;38;2;129;151;191
+    *.fsx 0;38;2;129;151;191
+    # go
+    *.go 0;38;2;129;151;191
+    # graphviz
+    *.dot 0;38;2;129;151;191
+    *.gv 0;38;2;129;151;191
+    # groovy
+    *.groovy 0;38;2;129;151;191
+    *.gvy 0;38;2;129;151;191
+    *.gradle 0;38;2;129;151;191
+    # haskell
+    *.hs 0;38;2;129;151;191
+    # ipython
+    *.ipynb 0;38;2;129;151;191
+    # java
+    *.java 0;38;2;129;151;191
+    *.bsh 0;38;2;129;151;191
+    # javascript
+    *.js 0;38;2;129;151;191
+    *.htc 0;38;2;129;151;191
+    # julia
+    *.jl 0;38;2;129;151;191
+    # kotlin
+    *.kt 0;38;2;129;151;191
+    *.kts 0;38;2;129;151;191
+    # latex
+    *.tex 0;38;2;129;151;191
+    *.ltx 0;38;2;129;151;191
+    # less
+    *.less 0;38;2;129;151;191
+    # llvm
+    *.ll 0;38;2;129;151;191
+    *.mir 0;38;2;129;151;191
+    # lisp
+    *.lisp 0;38;2;129;151;191
+    *.el 0;38;2;129;151;191
+    # lua
+    *.lua 0;38;2;129;151;191
+    # mathematica
+    *.nb 0;38;2;129;151;191
+    # matlab
+    *.matlab 0;38;2;129;151;191
+    *.m 0;38;2;129;151;191
+    *.mn 0;38;2;129;151;191
+    # ocaml
+    *.ml 0;38;2;129;151;191
+    *.mli 0;38;2;129;151;191
+    # pascal
+    *.pas 0;38;2;129;151;191
+    *.p 0;38;2;129;151;191
+    *.dpr 0;38;2;129;151;191
+    # perl
+    *.pl 0;38;2;129;151;191
+    *.pm 0;38;2;129;151;191
+    *.pod 0;38;2;129;151;191
+    *.t 0;38;2;129;151;191
+    *.cgi 0;38;2;129;151;191
+    # php
+    *.php 0;38;2;129;151;191
+    # powershell
+    *.ps1 0;38;2;129;151;191
+    *.psm1 0;38;2;129;151;191
+    *.psd1 0;38;2;129;151;191
+    # puppet
+    *.pp 0;38;2;129;151;191
+    *.epp 0;38;2;129;151;191
+    # purescript
+    *.purs 0;38;2;129;151;191
+    # python
+    *.py 0;38;2;129;151;191
+    # r
+    *.r 0;38;2;129;151;191
+    # ruby
+    *.rb 0;38;2;129;151;191
+    # rust
+    *.rs 0;38;2;129;151;191
+    # scala
+    *.scala 0;38;2;129;151;191
+    *.sbt 0;38;2;129;151;191
+    # shell
+    *.sh 0;38;2;129;151;191
+    *.bash 0;38;2;129;151;191
+    *.zsh 0;38;2;129;151;191
+    *.fish 0;38;2;129;151;191
+    # sql
+    *.sql 0;38;2;129;151;191
+    # swift
+    *.swift 0;38;2;129;151;191
+    # tablegen
+    *.td 0;38;2;129;151;191
+    # tcl
+    *.tcl 0;38;2;129;151;191
+    # typescript
+    *.ts 0;38;2;129;151;191
+    *.tsx 0;38;2;129;151;191
+    # viml
+    *.vim 0;38;2;129;151;191
+
+  # tooling
+    # vcs
+      # git
+      *.gitignore 0;38;2;118;151;214
+      *.gitmodules 0;38;2;118;151;214
+      *.gitattributes 0;38;2;118;151;214
+      *.gitconfig 0;38;2;118;151;214
+
+      # hg
+      *.hgrc 0;38;2;118;151;214
+      *hgrc 0;38;2;118;151;214
+
+      # other
+      *CODEOWNERS 0;38;2;118;151;214
+      *.ignore 0;38;2;118;151;214
+      *.fdignore 0;38;2;118;151;214
+      *.rgignore 0;38;2;118;151;214
+
+    # build
+      # cmake
+      *.cmake 0;38;2;118;151;214
+      *CMakeLists.txt 0;38;2;118;151;214
+      *.cmake.in 0;38;2;118;151;214
+
+      # make
+      *Makefile 0;38;2;118;151;214
+      *.make 0;38;2;118;151;214
+
+      # automake
+      *Makefile.am 0;38;2;118;151;214
+
+      # configure
+      *configure 0;38;2;118;151;214
+      *configure.ac 0;38;2;118;151;214
+
+      # scons
+      *SConscript 0;38;2;118;151;214
+      *SConstruct 0;38;2;118;151;214
+
+      # pip
+      *requirements.txt 0;38;2;118;151;214
+
+    # packaging
+      # python
+      *MANIFEST.in 0;38;2;118;151;214
+      *setup.py 0;38;2;118;151;214
+      # ruby
+      *.gemspec 0;38;2;118;151;214
+
+    # code-style
+      # python
+      *.flake8 0;38;2;118;151;214
+
+      # cxx
+      *.clang-format 0;38;2;118;151;214
+
+    # editors
+      # qt
+      *.pro 0;38;2;118;151;214
+      # kdevelop
+      *.kdevelop 0;38;2;118;151;214
+
+    # documentation
+      # doxygen
+      *Doxyfile 0;38;2;118;151;214
+      *.dox 0;38;2;118;151;214
+
+    # continuous-integration
+    *appveyor.yml 0;38;2;143;191;220
+    *.travis.yml 0;38;2;143;191;220
+
+# media
+  # image
+  *.bmp 0;38;2;218;208;133
+  *.gif 0;38;2;218;208;133
+  *.ico 0;38;2;218;208;133
+  *.jpeg 0;38;2;218;208;133
+  *.jpg 0;38;2;218;208;133
+  *.pbm 0;38;2;218;208;133
+  *.pgm 0;38;2;218;208;133
+  *.png 0;38;2;218;208;133
+  *.ppm 0;38;2;218;208;133
+  *.svg 0;38;2;218;208;133
+  *.tif 0;38;2;218;208;133
+  *.xcf 0;38;2;218;208;133
+
+  # audio
+  *.aif 0;38;2;218;208;133
+  *.flac 0;38;2;218;208;133
+  *.mid 0;38;2;218;208;133
+  *.mp3 0;38;2;218;208;133
+  *.ogg 0;38;2;218;208;133
+  *.wav 0;38;2;218;208;133
+  *.wma 0;38;2;218;208;133
+
+  # video
+  *.avi 0;38;2;218;208;133
+  *.flv 0;38;2;218;208;133
+  *.h264 0;38;2;218;208;133
+  *.m4v 0;38;2;218;208;133
+  *.mkv 0;38;2;218;208;133
+  *.mov 0;38;2;218;208;133
+  *.mp4 0;38;2;218;208;133
+  *.mpeg 0;38;2;218;208;133
+  *.mpg 0;38;2;218;208;133
+  *.rm 0;38;2;218;208;133
+  *.swf 0;38;2;218;208;133
+  *.vob 0;38;2;218;208;133
+  *.wmv 0;38;2;218;208;133
+
+  # fonts
+  *.fnt 0;38;2;218;208;133
+  *.fon 0;38;2;218;208;133
+  *.otf 0;38;2;218;208;133
+  *.ttf 0;38;2;218;208;133
+
+# office
+  # document
+  *.doc 0;38;2;102;135;153
+  *.docx 0;38;2;102;135;153
+  *.epub 0;38;2;102;135;153
+  *.odt 0;38;2;102;135;153
+  *.pdf 0;38;2;102;135;153
+  *.ps 0;38;2;102;135;153
+  *.rtf 0;38;2;102;135;153
+  *.sxw 0;38;2;102;135;153
+
+  # spreadsheet
+  *.xls 0;38;2;102;135;153
+  *.xlsx 0;38;2;102;135;153
+  *.ods 0;38;2;102;135;153
+  *.xlr 0;38;2;102;135;153
+
+  # presentation
+  *.ppt 0;38;2;102;135;153
+  *.pptx 0;38;2;102;135;153
+  *.odp 0;38;2;102;135;153
+  *.sxi 0;38;2;102;135;153
+  *.kex 0;38;2;102;135;153
+  *.pps 0;38;2;102;135;153
+
+  # calendar
+  *.ics 0;38;2;102;135;153
+
+# archives
+  # packages
+  *.apk 4;38;2;250;208;122
+  *.deb 4;38;2;250;208;122
+  *.rpm 4;38;2;250;208;122
+
+  # ros
+  *.bag 4;38;2;250;208;122
+
+  # images
+  *.bin 4;38;2;250;208;122
+  *.dmg 4;38;2;250;208;122
+  *.img 4;38;2;250;208;122
+  *.iso 4;38;2;250;208;122
+  *.toast 4;38;2;250;208;122
+  *.vcd 4;38;2;250;208;122
+
+  # other
+  *.7z 4;38;2;250;208;122
+  *.arj 4;38;2;250;208;122
+  *.bz 4;38;2;250;208;122
+  *.bz2 4;38;2;250;208;122
+  *.gz 4;38;2;250;208;122
+  *.jar 4;38;2;250;208;122
+  *.pkg 4;38;2;250;208;122
+  *.rar 4;38;2;250;208;122
+  *.tar 4;38;2;250;208;122
+  *.tbz 4;38;2;250;208;122
+  *.tbz2 4;38;2;250;208;122
+  *.tgz 4;38;2;250;208;122
+  *.xz 4;38;2;250;208;122
+  *.z 4;38;2;250;208;122
+  *.zip 4;38;2;250;208;122
+
+# executable
+  # windows
+  *.bat 1;38;2;255;185;100
+  *.com 1;38;2;255;185;100
+  *.exe 1;38;2;255;185;100
+
+  # library
+  *.so 1;38;2;255;185;100
+  *.a 1;38;2;255;185;100
+  *.dll 1;38;2;255;185;100
+
+  # linux
+  *.ko 1;38;2;255;185;100
+
+# unimportant
+  # build_artifacts
+    # cxx
+    *.o 3;38;2;136;136;136
+    *.la 3;38;2;136;136;136
+    *.lo 3;38;2;136;136;136
+    # cmake
+    *CMakeCache.txt 3;38;2;136;136;136
+    # automake
+    *Makefile.in 3;38;2;136;136;136
+    # rust
+    *.rlib 3;38;2;136;136;136
+    # python
+    *.pyc 3;38;2;136;136;136
+    # haskell
+    *.dyn_hi 3;38;2;136;136;136
+    *.dyn_o 3;38;2;136;136;136
+    *.cache 3;38;2;136;136;136
+    *.hi 3;38;2;136;136;136
+    # java
+    *.class 3;38;2;136;136;136
+    # scons
+    *.scons_opt 3;38;2;136;136;136
+    *.sconsign.dblite 3;38;2;136;136;136
+    # latex
+    *.aux 3;38;2;136;136;136
+    *.bbl 3;38;2;136;136;136
+    *.bcf 3;38;2;136;136;136
+    *.blg 3;38;2;136;136;136
+    *.fdb_latexmk 3;38;2;136;136;136
+    *.fls 3;38;2;136;136;136
+    *.idx 3;38;2;136;136;136
+    *.ilg 3;38;2;136;136;136
+    *.ind 3;38;2;136;136;136
+    *.out 3;38;2;136;136;136
+    *.sty 3;38;2;136;136;136
+    *.synctex.gz 3;38;2;136;136;136
+    *.toc 3;38;2;136;136;136
+    # llvm
+    *.bc 3;38;2;136;136;136
+
+  # macos
+  *.CFUserTextEncoding 3;38;2;136;136;136
+  *.DS_Store 3;38;2;136;136;136
+  *.localized 3;38;2;136;136;136
+
+  # other
+  *~ 3;38;2;136;136;136
+  *.bak 3;38;2;136;136;136
+  *.git 3;38;2;136;136;136 # only works for '.git' files (submodules)
+  *.lock 3;38;2;136;136;136
+  *.log 3;38;2;136;136;136
+  *.orig 3;38;2;136;136;136
+  *.pid 3;38;2;136;136;136
+  *.swp 3;38;2;136;136;136
+  *.tmp 3;38;2;136;136;136
+  *package-lock.json 3;38;2;136;136;136

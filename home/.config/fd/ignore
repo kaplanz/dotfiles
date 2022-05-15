@@ -1,0 +1,17 @@
+# File:        .ignore
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     19 Jul 2019
+# SPDX-License-Identifier: MIT
+
+# -- macOS --
+# Media
+/Library/
+/Movies/
+/Music/
+/Pictures/
+
+# General
+.DS_Store
+
+# -- VCS --
+.git/

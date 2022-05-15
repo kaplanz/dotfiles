@@ -1,0 +1,23 @@
+# File:        Brewfile
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     18 Jul 2019
+# SPDX-License-Identifier: MIT
+
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+
+brew "bash"
+brew "bat"
+brew "coreutils"
+brew "ctags"
+brew "fd"
+brew "fzf"
+brew "htop"
+brew "neovim"
+brew "ripgrep"
+brew "stow"
+brew "tmux"
+brew "tree"
+brew "wget"
+brew "zsh"
