@@ -60,30 +60,33 @@ def main():
     args.file = args.opath.name
 
     # Read the config file
-    config = toml.load(args.config)
+    try:
+        config = toml.load(args.config)
+    except:
+        config = dict()
 
     # Ensure the output file does not exist
     if args.opath.exists() and not args.force:
         raise FileExistsError
 
     # Update commentstrings from defaults
-    cms = commentstrings()
-    cms.update(config.get("commentstrings") or {})
-    config["commentstrings"] = cms
+    langs = LANGS()
+    langs.update(config.get("languages") or {})
+    config["languages"] = langs
 
     # Update attributes from config
-    attrs.update(config["attributes"])
+    if attr := config.get("attributes"):
+        attrs.update(attr)
     # Autofill any missing attributes
     for attr in attrs:
         if args.__dict__.get(attr):
             attrs[attr] = args.__dict__[attr]
     # Set any missing mandatory attributes
     if not attrs.get("comment"):
-        attrs["comment"] = (
-            cms[args.opath.suffix]
-            if cms.get(args.opath.suffix)
-            else (input("Comment: ") or "#")
-        )
+        if comment := langs.get(args.opath.suffix[1:]):
+            attrs["comment"] = comment
+        else:
+            attrs["comment"] = input("Comment: ") or "#"
     attrs["comment"] += " %s" if "%s" not in attrs["comment"] else ""
     if not attrs.get("file"):
         attrs["file"] = args.opath.name
@@ -150,7 +153,7 @@ def main():
     header = map(str.strip, header)
     # Filter out missing attributes
     header = filter(lambda line: not re.search("__([A-Z]+)__", line), header)
-    # Insert commentstrings
+    # Insert language commentstrings
     header = map(lambda line: attrs["comment"] % line, header)
     # Add back newlines
     header = map(lambda line: "%s\n" % line, header)
@@ -168,25 +171,25 @@ def main():
         f.write(header)
 
 
-def commentstrings() -> Dict[str, str]:
-    cms = dict()
+def LANGS() -> Dict[str, str]:
+    langs = dict()
     # "//"
     for ft in [".c", ".cc", ".cpp", ".h", ".java", ".rs"]:
-        cms[ft] = "// %s"
+        langs[ft] = "// %s"
     # "#"
     for ft in [".py", ".sh"]:
-        cms[ft] = "# %s"
+        langs[ft] = "# %s"
     # '"'
     for ft in [".vim"]:
-        cms[ft] = '" %s'
+        langs[ft] = '" %s'
     # "<!-- -->"
     for ft in [".html", ".md"]:
-        cms[ft] = "<!-- %s -->"
-    # Return commentstrings
-    return cms
+        langs[ft] = "<!-- %s -->"
+    # Return language commentstrings
+    return langs
 
 
-def box(attrs, header: str, chars: Dict[str, str] = None) -> str:
+def box(attrs, header: str, chars: Dict[str, str] | None = None) -> str:
     # Define the charset if not defined
     dchars = {
         "dl": "┐",
