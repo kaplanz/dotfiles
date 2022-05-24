@@ -79,20 +79,20 @@ cmp.setup {
       item.menu = ({
         -- Internal Sources
         spell       = '暈',
-        buffer      = '',
-        calc        = '',
-        cmdline     = '',
-        path        = 'ﱮ',
+        buffer      = ' ' ,
+        calc        = ' ' ,
+        cmdline     = ' ',
+        path        = 'ﱮ ',
         -- External Sources
-        cmp_tabnine = 'ﲴ',
+        cmp_tabnine = 'ﲴ ',
         -- Language Server Protocol
-        nvim_lsp    = 'ﮒ',
-        nvim_lua    = '',
+        nvim_lsp    = 'ﮒ ',
+        nvim_lua    = ' ',
         -- Extensions
-        snippy      = '',
-        treesitter  = '',
+        snippy      = ' ',
+        treesitter  = ' ',
         -- Filetype
-        crates      = '',
+        crates      = ' ',
       })[entry.source.name]
 
       -- Special menu details
