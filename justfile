@@ -3,13 +3,15 @@
 # Created:     31 May 2022
 # SPDX-License-Identifier: MIT
 
-# forward to make
-make *args:
-    @make {{args}}
+_ *args: (make args)
 
 # install dotfiles
 install:
     ./tools/install.sh
+
+# forward to make
+make *args:
+    @make {{args}}
 
 # upgrade dotfiles
 upgrade:
