@@ -218,12 +218,6 @@ return require('packer').startup {function()
     end,
   }
   use 'stevearc/dressing.nvim'         -- improve the default vim.ui interfaces
-  use {
-    'sunjon/shade.nvim',               -- dim inactive windows
-    config = function()
-      require('shade').setup()
-    end,
-  }
   -- }}}
 end}
 
