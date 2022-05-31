@@ -36,6 +36,10 @@ return {
   use_cap_height_to_scale_fallback_fonts = true,
   -- }}}
 
+  -- OS: {{{
+  native_macos_fullscreen_mode = true,
+  -- }}}
+
   -- Shell: {{{
   exit_behavior = "Close",
   -- }}}
