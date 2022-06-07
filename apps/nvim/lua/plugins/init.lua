@@ -168,6 +168,7 @@ return require('packer').startup {function()
     end,
     run = ':TSUpdate',
   }
+  use 'nvim-treesitter/nvim-treesitter-context' -- show code context
   -- }}}
 
   -- UI {{{
