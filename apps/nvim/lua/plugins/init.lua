@@ -190,6 +190,15 @@ return require('packer').startup {function()
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
+    'kevinhwang91/nvim-ufo',           -- ultra fold in Neovim
+    config = function()
+      require('ufo').setup {
+        open_fold_hl_timeout = 0,
+      }
+    end,
+    requires = 'kevinhwang91/promise-async'
+  }
+  use {
     'nvim-lualine/lualine.nvim',       -- blazing fast statusline
     config = function()
       require('plugins.lualine')
