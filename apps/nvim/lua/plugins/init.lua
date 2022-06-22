@@ -115,13 +115,6 @@ return require('packer').startup(function(use)
       vim.cmd [[runtime! viml/plugins/visual-multi.vim]]
     end,
   }
-  use {
-    -- Display tags of a file
-    'preservim/tagbar',
-    config = function()
-      vim.cmd [[runtime! viml/plugins/tagbar.vim]]
-    end,
-  }
   -- Searches, substitutions, and abbreviations
   use 'tpope/vim-abolish'
   -- Comment stuff out

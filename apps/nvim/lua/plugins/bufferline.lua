@@ -14,11 +14,6 @@ require('bufferline').setup {
         text = 'NvimTree',
         highlight = 'Directory',
       },
-      {
-        filetype = 'tagbar',
-        text = 'Tagbar',
-        highlight = 'Directory',
-      },
     },
   },
 }

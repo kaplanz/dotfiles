@@ -8,7 +8,6 @@ require('indent_blankline').setup {
     'NvimTree',
     'help',
     'packer',
-    'tagbar',
   },
   buftype_exclude = {
     'nofile',
