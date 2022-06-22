@@ -72,6 +72,16 @@ return require('packer').startup {function()
   }
   -- }}}
 
+  -- Diagnostics: {{{
+  use {
+    'folke/trouble.nvim',              -- pretty diagnostics
+    config = function()
+      require('plugins.trouble')
+    end,
+    requires = 'kyazdani42/nvim-web-devicons',
+  }
+  -- }}}
+
   -- Extensions {{{
   use 'AndrewRadev/sideways.vim'       -- move function arguments
   use 'AndrewRadev/switch.vim'         -- switch text segments
