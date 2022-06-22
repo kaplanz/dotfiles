@@ -3,13 +3,6 @@
 -- Created:     08 Aug 2021
 -- SPDX-License-Identifier: MIT
 
--- Set global options
-vim.g.nvim_tree_add_trailing           = 1
-vim.g.nvim_tree_group_empty            = 1
-vim.g.nvim_tree_highlight_opened_files = 1
-vim.g.nvim_tree_icons = { default = '', symlink = '', }
-vim.g.nvim_tree_symlink_arrow = ' -> '
-
 -- Require module setup
 require('nvim-tree').setup {
   -- completely disable netrw
@@ -43,6 +36,21 @@ require('nvim-tree').setup {
   git = {
     -- ignore files based on `.gitignore`
     ignore = true,
+  },
+  -- UI rendering setup
+  renderer = {
+    -- Appends a trailing slash to folder names
+    add_trailing = true,
+    -- Compact folders that only contain a single folder into one node in the
+    -- file tree
+    group_empty = true,
+    -- Highlight icons and/or names for opened files
+    highlight_opened_files = "icon",
+    -- Configuration options for icons
+    icons = {
+      -- Used as a separator between symlinks' source and target
+      symlink_arrow = ' -> ',
+    },
   },
   -- filtering options
   filters = {
