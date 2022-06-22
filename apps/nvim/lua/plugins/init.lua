@@ -1,26 +1,40 @@
--- File:        plugins.lua
+-- File:        init.lua
 -- Author:      Zakhary Kaplan <https://zakhary.dev>
 -- Created:     05 Aug 2021
 -- SPDX-License-Identifier: MIT
 
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
+-- This file can be loaded by calling `lua require('plugins')` from your init.lua
+-- Bootstrap {{{
 -- Install packer if not currently installed
-require('plugins.packer')
+local bootstrap
+do
+  local fn = vim.fn
+  local path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(path)) > 0 then
+    bootstrap = fn.system({
+      'git',
+      'clone',
+      '--depth=1',
+      'https://github.com/wbthomason/packer.nvim',
+      path })
+    vim.cmd [[packadd packer.nvim]]
+  end
+end
 
--- Automatically run `:PackerCompile` whenever plugins.lua is updated
-vim.cmd([[
+-- Automatically run `:PackerCompile` whenever this file is updated
+vim.cmd [[
   augroup PackerUserConfig
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost init.lua source <afile> | PackerCompile
   augroup end
-]])
+]]
+-- }}}
 
 -- Packer startup
-local use = require('packer').use
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'         -- Neovim plugin manager
+  -- Neovim plugin manager
+  use 'wbthomason/packer.nvim'
 
   -- Colours {{{
   use {
@@ -40,7 +54,8 @@ return require('packer').startup(function()
 
   -- Completion {{{
   use {
-    'hrsh7th/nvim-cmp',                -- auto completion plugin
+    -- Auto completion plugin
+    'hrsh7th/nvim-cmp',
     config = function()
       require('plugins.cmp')
     end,
@@ -52,7 +67,7 @@ return require('packer').startup(function()
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
       -- External Sources
-      { 'tzachar/cmp-tabnine', run='./install.sh', },
+      { 'tzachar/cmp-tabnine', run = './install.sh', },
       -- Language Server Protocol
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -63,7 +78,8 @@ return require('packer').startup(function()
     },
   }
   use {
-    'windwp/nvim-autopairs',           -- super powerful autopairs
+    -- Super powerful autopairs
+    'windwp/nvim-autopairs',
     after = 'nvim-cmp',
     config = function()
       require('plugins.nvim-autopairs')
@@ -74,7 +90,8 @@ return require('packer').startup(function()
 
   -- Diagnostics: {{{
   use {
-    'folke/trouble.nvim',              -- pretty diagnostics
+    -- Pretty diagnostics
+    'folke/trouble.nvim',
     config = function()
       require('plugins.trouble')
     end,
@@ -83,34 +100,48 @@ return require('packer').startup(function()
   -- }}}
 
   -- Extensions {{{
-  use 'AndrewRadev/sideways.vim'       -- move function arguments
-  use 'AndrewRadev/switch.vim'         -- switch text segments
-  use 'junegunn/vim-peekaboo'          -- peek at the contents of the registers
-  use 'machakann/vim-sandwich'         -- edit sandwiched textobjects
+  -- Move function arguments
+  use 'AndrewRadev/sideways.vim'
+  -- Switch text segments
+  use 'AndrewRadev/switch.vim'
+  -- Peek at the contents of the registers
+  use 'junegunn/vim-peekaboo'
+  -- Edit sandwiched textobjects
+  use 'machakann/vim-sandwich'
   use {
-    'mg979/vim-visual-multi',          -- modal multiple cursors
+    -- Modal multiple cursors
+    'mg979/vim-visual-multi',
     config = function()
       vim.cmd [[runtime! viml/plugins/visual-multi.vim]]
     end,
   }
   use {
-    'preservim/tagbar',                -- display tags of a file
+    -- Display tags of a file
+    'preservim/tagbar',
     config = function()
       vim.cmd [[runtime! viml/plugins/tagbar.vim]]
     end,
   }
-  use 'tpope/vim-abolish'              -- searches, substitutions, and abbreviations
-  use 'tpope/vim-commentary'           -- comment stuff out
-  use 'tpope/vim-eunuch'               -- UNIX file manipulation
-  use 'tpope/vim-repeat'               -- repeat plugin maps
-  use 'tpope/vim-speeddating'          -- increment dates, times, and more
-  use 'tpope/vim-unimpaired'           -- handy bracket mappings
-  use 'wellle/targets.vim'             -- additional text objects
+  -- Searches, substitutions, and abbreviations
+  use 'tpope/vim-abolish'
+  -- Comment stuff out
+  use 'tpope/vim-commentary'
+  -- Unix file manipulation
+  use 'tpope/vim-eunuch'
+  -- Repeat plugin maps
+  use 'tpope/vim-repeat'
+  -- Increment dates, times, and more
+  use 'tpope/vim-speeddating'
+  -- Handy bracket mappings
+  use 'tpope/vim-unimpaired'
+  -- Additional text objects
+  use 'wellle/targets.vim'
   -- }}}
 
   -- Formatting: {{{
   use {
-    'mhartington/formatter.nvim',      -- format runner
+    -- Format runner
+    'mhartington/formatter.nvim',
     config = function()
       require('plugins.formatter')
     end
@@ -119,37 +150,44 @@ return require('packer').startup(function()
 
   -- Git {{{
   use {
-    'lewis6991/gitsigns.nvim',         -- Git integration for buffers
+    -- Git integration for buffers
+    'lewis6991/gitsigns.nvim',
     config = function()
       require('plugins.gitsigns')
     end,
     requires = 'nvim-lua/plenary.nvim',
   }
-  use 'tpope/vim-fugitive'             -- Git wrapper
+  -- Git wrapper
+  use 'tpope/vim-fugitive'
   -- }}}
 
   -- LSP {{{
   use {
-    'j-hui/fidget.nvim',               -- UI for nvim-lsp progress
+    -- Ui for nvim-lsp progress
+    'j-hui/fidget.nvim',
     config = function()
       require('fidget').setup()
     end,
   }
   use {
     {
-      'neovim/nvim-lspconfig',         -- LSP common configurations
+      -- Lsp common configurations
+      'neovim/nvim-lspconfig',
       config = function()
         require('plugins.lspconfig')
       end,
     },
-    'williamboman/nvim-lsp-installer', -- seamlessly install LSP servers
-    'onsails/lspkind-nvim',            -- add pictograms to LSP
+    -- Seamlessly install LSP servers
+    'williamboman/nvim-lsp-installer',
+    -- Add pictograms to LSP
+    'onsails/lspkind-nvim',
   }
   -- }}}
 
   -- Snippets: {{{
   use {
-    'dcampos/nvim-snippy',             -- snippet engine
+    -- Snippet engine
+    'dcampos/nvim-snippy',
     config = function()
       require('plugins.snippy')
     end,
@@ -159,7 +197,8 @@ return require('packer').startup(function()
 
   -- Tags {{{
   use {
-    'ludovicchabant/vim-gutentags',    -- automatic ctags management
+    -- Automatic ctags management
+    'ludovicchabant/vim-gutentags',
     config = function()
       vim.cmd [[runtime! viml/plugins/gutentags.vim]]
     end,
@@ -168,36 +207,43 @@ return require('packer').startup(function()
 
   -- Text {{{
   use {
-    'lukas-reineke/indent-blankline.nvim', -- show vertical lines for indent
+    -- Show vertical lines for indent
+    'lukas-reineke/indent-blankline.nvim',
     config = function()
       require('plugins.indent-blankline')
     end,
   }
-  use 'tpope/vim-sleuth'               -- heuristically set buffer options
-  use 'zakharykaplan/vim-trailblazer'  -- whitespace management
+  -- Heuristically set buffer options
+  use 'tpope/vim-sleuth'
+  -- Whitespace management
+  use 'zakharykaplan/vim-trailblazer'
   -- }}}
 
   -- Treesitter {{{
   use {
-    'nvim-treesitter/nvim-treesitter', -- treesitter configurations
+    -- Treesitter configurations
+    'nvim-treesitter/nvim-treesitter',
     config = function()
       require('plugins.nvim-treesitter')
     end,
     run = ':TSUpdate',
   }
-  use 'nvim-treesitter/nvim-treesitter-context' -- show code context
+  -- Show code context
+  use 'nvim-treesitter/nvim-treesitter-context'
   -- }}}
 
   -- User Interface {{{
   use {
-    'akinsho/bufferline.nvim',         -- snazzy bufferline
+    -- Snazzy bufferline
+    'akinsho/bufferline.nvim',
     config = function()
       require('plugins.bufferline')
     end,
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
-    'kevinhwang91/nvim-ufo',           -- ultra fold in Neovim
+    -- Ultra fold in Neovim
+    'kevinhwang91/nvim-ufo',
     config = function()
       require('ufo').setup {
         open_fold_hl_timeout = 0,
@@ -206,7 +252,8 @@ return require('packer').startup(function()
     requires = 'kevinhwang91/promise-async'
   }
   use {
-    'nvim-lualine/lualine.nvim',       -- blazing fast statusline
+    -- Blazing fast statusline
+    'nvim-lualine/lualine.nvim',
     config = function()
       require('plugins.lualine')
     end,
@@ -216,19 +263,21 @@ return require('packer').startup(function()
     },
   }
   use {
-    'kyazdani42/nvim-tree.lua',        -- file explorer written in lua
+    -- File explorer written in lua
+    'kyazdani42/nvim-tree.lua',
     config = function()
       require('plugins.nvim-tree')
     end,
     cmd = 'NvimTreeToggle',
     keys = {
-      {'n', '<Leader>n'},
-      {'n', '<Leader>N'},
+      { 'n', '<Leader>n' },
+      { 'n', '<Leader>N' },
     },
     requires = 'kyazdani42/nvim-web-devicons',
   }
   use {
-    'nvim-telescope/telescope.nvim',   -- fuzzy finder over lists
+    -- Fuzzy finder over lists
+    'nvim-telescope/telescope.nvim',
     config = function()
       require('plugins.telescope')
     end,
@@ -237,8 +286,15 @@ return require('packer').startup(function()
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     },
   }
-  use 'stevearc/dressing.nvim'         -- improve the default vim.ui interfaces
+  -- Improve the default vim.ui interfaces
+  use 'stevearc/dressing.nvim'
   -- }}}
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- (Put this at the end after all plugins)
+  if bootstrap then
+    require('packer').sync()
+  end
 end)
 
 -- vim:fdl=0:fdm=marker:
