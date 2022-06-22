@@ -8,3 +8,5 @@ require('nvim-treesitter.configs').setup {
     enable = true,
   },
 }
+
+vim.cmd [[set fdm=expr fde=nvim_treesitter#foldexpr()]]
