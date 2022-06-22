@@ -55,20 +55,16 @@ set ignorecase
 set smartcase
 " }}}
 
-" Text: {{{
-set nowrap
-" }}}
-
-" UI: {{{
+" User Interface: {{{
 set fillchars+=foldopen:▼,foldclose:▶,diff:╳
 set foldcolumn=auto:1
-set noshowmode
 set number
 set pumblend=10
 set scrolloff=5
+set noshowmode
 set sidescrolloff=5
-set signcolumn=number
 set winblend=10
+set nowrap
 " }}}
 
 " Window: {{{

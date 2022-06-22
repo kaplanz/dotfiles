@@ -76,8 +76,8 @@ cmp.setup {
       item.menu = ({
         -- Internal Sources
         spell       = '暈',
-        buffer      = ' ' ,
-        calc        = ' ' ,
+        buffer      = ' ',
+        calc        = ' ',
         cmdline     = ' ',
         path        = 'ﱮ ',
         -- External Sources

@@ -18,7 +18,7 @@ vim.cmd([[
 
 -- Packer startup
 local use = require('packer').use
-return require('packer').startup {function()
+return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'         -- Neovim plugin manager
 
@@ -85,11 +85,18 @@ return require('packer').startup {function()
   -- Extensions {{{
   use 'AndrewRadev/sideways.vim'       -- move function arguments
   use 'AndrewRadev/switch.vim'         -- switch text segments
+  use 'junegunn/vim-peekaboo'          -- peek at the contents of the registers
   use 'machakann/vim-sandwich'         -- edit sandwiched textobjects
   use {
     'mg979/vim-visual-multi',          -- modal multiple cursors
     config = function()
       vim.cmd [[runtime! viml/plugins/visual-multi.vim]]
+    end,
+  }
+  use {
+    'preservim/tagbar',                -- display tags of a file
+    config = function()
+      vim.cmd [[runtime! viml/plugins/tagbar.vim]]
     end,
   }
   use 'tpope/vim-abolish'              -- searches, substitutions, and abbreviations
@@ -112,7 +119,7 @@ return require('packer').startup {function()
 
   -- Git {{{
   use {
-    'lewis6991/gitsigns.nvim',
+    'lewis6991/gitsigns.nvim',         -- Git integration for buffers
     config = function()
       require('plugins.gitsigns')
     end,
@@ -181,7 +188,7 @@ return require('packer').startup {function()
   use 'nvim-treesitter/nvim-treesitter-context' -- show code context
   -- }}}
 
-  -- UI {{{
+  -- User Interface {{{
   use {
     'akinsho/bufferline.nvim',         -- snazzy bufferline
     config = function()
@@ -208,7 +215,6 @@ return require('packer').startup {function()
       opt = true
     },
   }
-  use 'junegunn/vim-peekaboo'          -- peek at the contents of the registers
   use {
     'kyazdani42/nvim-tree.lua',        -- file explorer written in lua
     config = function()
@@ -231,14 +237,8 @@ return require('packer').startup {function()
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     },
   }
-  use {
-    'preservim/tagbar',                -- display tags of a file
-    config = function()
-      vim.cmd [[runtime! viml/plugins/tagbar.vim]]
-    end,
-  }
   use 'stevearc/dressing.nvim'         -- improve the default vim.ui interfaces
   -- }}}
-end}
+end)
 
 -- vim:fdl=0:fdm=marker:
