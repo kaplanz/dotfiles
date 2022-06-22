@@ -133,7 +133,26 @@ do
 end
 
 -- 1. Set up nvim-lsp-installer first!
-lsp_installer.setup {}
+lsp_installer.setup {
+  -- Automatically detect which servers to install (based on which servers are
+  -- set up via lspconfig).
+  automatic_installation = true,
+
+  ui = {
+    -- The border to use for the UI window. Accepts same border values as
+    -- |nvim_open_win()|.
+    border = "rounded",
+
+    icons = {
+      -- The list icon to use for installed servers.
+      server_installed = "✓",
+      -- The list icon to use for servers that are pending installation.
+      server_pending = "➜",
+      -- The list icon to use for servers that are not installed.
+      server_uninstalled = "✗"
+    }
+  },
+}
 
 -- 2. (optional) Override the default configuration to be applied to all servers
 lspconfig.util.default_config = vim.tbl_extend(
