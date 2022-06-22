@@ -11,6 +11,7 @@ return {
   -- }}}
 
   -- Font: {{{
+  allow_square_glyphs_to_overflow_width = "Never",
   font = wezterm.font_with_fallback {
     "Fira Code",
   },
