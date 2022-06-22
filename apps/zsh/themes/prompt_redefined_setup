@@ -72,13 +72,13 @@ function prompt_redefined_setup() {
     local exitstatus="%(?,,%F{$red}%K{$grey1_bg} %? %f%k)"
     local upjobs="%(1j,%F{$yellow}%K{$grey1_bg} %j %f%k,)"
     local userhost="%F{$blue}%K{$grey1_bg} %n@%m %f%k"
-          userhost="\${SSH_TTY:+\"$userhost\"}" # hide if unset
+          userhost="\${SSH_TTY:+\"$userhost\"}"              # hide if unset
     local vimode="%F{$grey1_fg}%K{$grey1_bg} $vimode %f%k"
-          vimode="\${KEYMAP:+\"$vimode\"}"
+          vimode="\${KEYMAP:+\"$vimode\"}"                   # hide if unset
     RPS1="${cmdtime}${exitstatus}${upjobs}${userhost}${vimode}${datetime}"
 
     # Hooks
-    add-zsh-hook precmd prompt_redefined_precmd
+    add-zsh-hook precmd  prompt_redefined_precmd
     add-zsh-hook preexec prompt_redefined_preexec
 }
 # }}}
