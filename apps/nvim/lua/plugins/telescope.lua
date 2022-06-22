@@ -70,25 +70,30 @@ require('telescope').setup {
 
 -- Configure mappings
 do
-  -- Set up keymaps
-  local opts = { noremap = true, silent = true }
+  local ts = require('telescope.builtin')
 
-  -- Prefix mappings
+  -- Set up keymaps
+  local function map(mode, lhs, rhs, opts)
+    opts = opts or { noremap = true, silent = true }
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+
+  -- Actions
   local prefix = '<C-j>'
-  vim.keymap.set('n', prefix, '<Cmd>lua require("telescope.builtin").builtin()<CR>', opts)
-  vim.keymap.set('n', prefix .. 'a', '<Cmd>lua require("telescope.builtin").find_files({ hidden = true })<CR>', opts)
-  vim.keymap.set('n', prefix .. 'b', '<Cmd>lua require("telescope.builtin").buffers()<CR>', opts)
-  vim.keymap.set('n', prefix .. 'f', '<Cmd>lua require("telescope.builtin").find_files()<CR>', opts)
-  vim.keymap.set('n', prefix .. 'g', '<Cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
-  vim.keymap.set('n', prefix .. 'h', '<Cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
-  vim.keymap.set('n', prefix .. 'o', '<Cmd>lua require("telescope.builtin").oldfiles()<CR>', opts)
-  vim.keymap.set('n', prefix .. 's', '<Cmd>lua require("telescope.builtin").git_status()<CR>', opts)
-  vim.keymap.set('n', prefix .. '<CR>', '<Cmd>lua require("telescope.builtin").builtin()<CR>', opts)
-  vim.keymap.set('n', prefix .. prefix, '<Cmd>lua require("telescope.builtin").resume()<CR>', opts)
+  map('n', prefix, ts.builtin)
+  map('n', prefix .. 'a', function() ts.find_files({ hidden = true }) end)
+  map('n', prefix .. 'b', ts.buffers)
+  map('n', prefix .. 'f', ts.find_files)
+  map('n', prefix .. 'g', ts.live_grep)
+  map('n', prefix .. 'h', ts.help_tags)
+  map('n', prefix .. 'o', ts.oldfiles)
+  map('n', prefix .. 's', ts.git_status)
+  map('n', prefix .. '<CR>', ts.builtin)
+  map('n', prefix .. prefix, ts.resume)
 
   -- Shortcuts
-  vim.keymap.set('n', '<C-p>', prefix .. 'f', { remap = true, silent = true })   -- find_files
-  vim.keymap.set('n', 'gb', prefix .. 'b', { remap = true, silent = true })      -- buffers
+  map('n', '<C-p>', prefix .. 'f', { remap = true, silent = true })   -- find_files
+  map('n', 'gb', prefix .. 'b', { remap = true, silent = true })      -- buffers
 end
 
 -- To get extensions loaded and working with telescope, you need to call

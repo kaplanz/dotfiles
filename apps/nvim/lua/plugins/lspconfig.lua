@@ -3,140 +3,166 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
-require('lspconfig')
-require('lspkind').init {}
+local lsp_installer = require("nvim-lsp-installer")
+local lspconfig = require("lspconfig")
 
--- UI customization
--- {{{
--- Highlights
-vim.cmd [[autocmd ColorScheme * highlight link FloatBorder NormalFloat]]
+-- 0. Preliminary set up
+local capabilities, handlers, on_attach
+do
+  -- Completion kinds
+  require('lspkind').init {}
 
--- Borders
-local border = 'rounded'
+  -- Highlights
+  vim.cmd [[autocmd ColorScheme * highlight link FloatBorder NormalFloat]]
 
--- LSP settings (for overriding per client)
-local handlers = {
-  ['textDocument/hover'] =  vim.lsp.with(
-    vim.lsp.handlers.hover, {
-      -- Use a sharp border with `FloatBorder` highlights
-      border = border,
-    }
-  ),
-  ['textDocument/signatureHelp'] =  vim.lsp.with(
-    vim.lsp.handlers.signature_help, {
-      -- Use a sharp border with `FloatBorder` highlights
-      border = border,
-    }
-  ),
-}
+  -- Borders
+  local border = 'rounded'
 
---- Customize how diagnostics are displayed
-vim.diagnostic.config {
-  virtual_text = {
-    format = function(diagnostic)
-      local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-      if diagnostic.lnum <= lnum and lnum <= diagnostic.end_lnum then
-        return diagnostic.message
-      end
-    end,
-  },
-  severity_sort = true,
-}
-
--- Show line diagnostics in virtual text
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.show()]]
--- }}}
-
--- Add additional capabilities supported by nvim-cmp
--- {{{
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
--- }}}
-
--- Use an `on_attach` function to only map the following keys...
--- ... after the language server attaches to the current buffer
--- {{{
-local on_attach = function(client, _)
-  -- Enable completion triggered by <C-x><C-o>
-  vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-  -- Set up keymaps
-  local opts = { noremap = true, silent = true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', '<C-k>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.keymap.set('n', '<Space>D', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.keymap.set('n', '<Space>ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.keymap.set('n', '<Space>e', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.keymap.set('n', '<Space>q', '<Cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  vim.keymap.set('n', '<Space>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.keymap.set('n', '<Space>so', [[<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  vim.keymap.set('n', '<Space>wa', '<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.keymap.set('n', '<Space>wl', '<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.keymap.set('n', '<Space>wr', '<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.keymap.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.keymap.set('n', '[d', '<Cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  vim.keymap.set('n', ']d', '<Cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  vim.keymap.set('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.keymap.set('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.keymap.set('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.keymap.set('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
-
-  -- Set some key bindings conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    vim.keymap.set('n', '<Space>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  end
-  if client.resolved_capabilities.document_range_formatting then
-    vim.keymap.set('x', '<Space>f', '<Cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
-  end
-end
--- }}}
-
--- Register a handler that will be called for all installed servers
--- Alternatively, you may also register handlers on specific server...
--- ... instances instead (see example below)
--- {{{
-require('nvim-lsp-installer').on_server_ready(function(server)
-  local opts = {}
-
-  -- Configure capabilities, on_attach, flags
-  opts.capabilities = capabilities
-  opts.handlers = handlers
-  opts.on_attach = on_attach
-  opts.flags = {
-    debounce_text_changes = 150,
+  -- LSP settings (for overriding per client)
+  handlers = {
+    ['textDocument/hover'] =  vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        -- Use a sharp border with `FloatBorder` highlights
+        border = border,
+      }
+    ),
+    ['textDocument/signatureHelp'] =  vim.lsp.with(
+      vim.lsp.handlers.signature_help, {
+        -- Use a sharp border with `FloatBorder` highlights
+        border = border,
+      }
+    ),
   }
 
-  -- (optional) Customize the options passed to the server
-  -- if server.name == 'tsserver' then
-  --     opts.root_dir = function() ... end
-  -- end
-  if server.name == 'clangd' then
-    opts.cmd = {
-      'clangd',
-      '--background-index',
-      '--header-insertion-decorators=false', -- don't prepend a dot or space before the completion label
-    }
-  elseif server.name == 'sumneko_lua' then
-    opts.settings = {
-      Lua = {
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file('', true),
-        },
-      },
-    }
+  -- Customize how diagnostics are displayed
+  vim.diagnostic.config {
+    virtual_text = {
+      format = function(diagnostic)
+        local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+        if diagnostic.lnum <= lnum and lnum <= diagnostic.end_lnum then
+          return diagnostic.message
+        end
+      end,
+    },
+    severity_sort = true,
+  }
+
+  -- Change diagnostic symbols in the sign column (gutter)
+  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
-  -- This setup() function is exactly the same as lspconfig's setup function.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(opts)
-end)
--- }}}
+  -- Show line diagnostics in virtual text
+  vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.show()]]
 
--- vim:fdl=0:fdm=marker:
+  -- Add additional capabilities supported by nvim-cmp
+  capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  -- Use an `on_attach` function to only map the following keys...
+  -- ... after the language server attaches to the current buffer
+  on_attach = function(client, bufnr)
+    -- Highlight symbol under cursor
+    -- TODO: update to Neovim v0.8
+    -- if client.server_capabilities.documentHighlightProvider then
+    if client.resolved_capabilities.document_highlight then
+      vim.cmd [[
+        hi! LspReferenceRead cterm=bold
+        hi! LspReferenceText cterm=bold
+        hi! LspReferenceWrite cterm=bold
+      ]]
+      vim.api.nvim_create_augroup('lsp_document_highlight', {
+        clear = false,
+      })
+      vim.api.nvim_clear_autocmds({
+        buffer = bufnr,
+        group = 'lsp_document_highlight',
+      })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        group = 'lsp_document_highlight',
+        buffer = bufnr,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd('CursorMoved', {
+        group = 'lsp_document_highlight',
+        buffer = bufnr,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+
+    -- Enable completion triggered by <C-x><C-o>
+    vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Set up keymaps
+    local function map(mode, lhs, rhs, opts)
+      opts = opts or { noremap = true, silent = true }
+      opts.buffer = bufnr
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    map('n', '<C-k>', vim.lsp.buf.signature_help)
+    map('n', '<Space>D', vim.lsp.buf.type_definition)
+    map('n', '<Space>ca', vim.lsp.buf.code_action)
+    map('n', '<Space>e', vim.diagnostic.open_float)
+    map('n', '<Space>q', vim.diagnostic.setloclist)
+    map('n', '<Space>rn', vim.lsp.buf.rename)
+    map('n', '<Space>so', function() require('telescope.builtin').lsp_document_symbols() end)
+    map('n', '<Space>wa', vim.lsp.buf.add_workspace_folder)
+    map('n', '<Space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end)
+    map('n', '<Space>wr', vim.lsp.buf.remove_workspace_folder)
+    map('n', 'K', vim.lsp.buf.hover)
+    map('n', '[d', vim.diagnostic.goto_prev)
+    map('n', ']d', vim.diagnostic.goto_next)
+    map('n', 'gD', vim.lsp.buf.declaration)
+    map('n', 'gd', vim.lsp.buf.definition)
+    map('n', 'gi', vim.lsp.buf.implementation)
+    map('n', 'gr', vim.lsp.buf.references)
+
+    -- Set some key bindings conditional on server capabilities
+    if client.resolved_capabilities.document_formatting then
+      map('n', '<Space>f', vim.lsp.buf.formatting)
+    end
+    if client.resolved_capabilities.document_range_formatting then
+      map('x', '<Space>f', vim.lsp.buf.range_formatting)
+    end
+  end
+end
+
+-- 1. Set up nvim-lsp-installer first!
+lsp_installer.setup {}
+
+-- 2. (optional) Override the default configuration to be applied to all servers
+lspconfig.util.default_config = vim.tbl_extend(
+    "force",
+    lspconfig.util.default_config,
+    {
+        capabilities = capabilities,
+        handlers = handlers,
+        on_attach = on_attach,
+    }
+)
+
+-- 3. Loop through all of the installed servers and set it up via lspconfig
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+  lspconfig[server.name].setup {}
+end
+
+-- 4. Override the setup for specific servers
+lspconfig['sumneko_lua'].setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file('', true),
+      },
+    },
+  },
+}

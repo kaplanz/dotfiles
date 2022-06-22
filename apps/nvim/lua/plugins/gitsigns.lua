@@ -4,44 +4,43 @@
 -- SPDX-License-Identifier: MIT
 
 require('gitsigns').setup {
-  signs = {
-    add = { hl = 'GitGutterAdd', text = '+' },
-    change = { hl = 'GitGutterChange', text = '~' },
-    delete = { hl = 'GitGutterDelete', text = '_' },
-    topdelete = { hl = 'GitGutterDelete', text = '‾' },
-    changedelete = { hl = 'GitGutterChange', text = '~' },
-  },
-  on_attach = function(_)
-    -- if vim.api.nvim_buf_get_name(bufnr):match(<PATTERN>) then
-    --   -- Don't attach to specific buffers whose name matches a pattern
-    --   return false
-    -- end
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
 
     -- Set up keymaps
-    local opts = { noremap = true, silent = true }
-    local prefix = '<Leader>h'
+    local prefix = '<Leader>'
+    local function map(mode, lhs, rhs, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
 
     -- Navigation
-    vim.keymap.set('n', ']c', [[&diff ? ']c' : '<Cmd>lua require("gitsigns").next_hunk()<CR>']], { expr = true })
-    vim.keymap.set('n', '[c', [[&diff ? '[c' : '<Cmd>lua require("gitsigns").prev_hunk()<CR>']], { expr = true })
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, { expr=true })
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, { expr = true })
 
     -- Actions
-    vim.keymap.set('n', prefix .. 's',  '<Cmd>lua require("gitsigns").stage_hunk()<CR>', opts)
-    vim.keymap.set('v', prefix .. 's',  '<Cmd>lua require("gitsigns").stage_hunk()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'r',  '<Cmd>lua require("gitsigns").reset_hunk()<CR>', opts)
-    vim.keymap.set('v', prefix .. 'r',  '<Cmd>lua require("gitsigns").reset_hunk()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'S',  '<Cmd>lua require("gitsigns").stage_buffer()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'u',  '<Cmd>lua require("gitsigns").undo_stage_hunk()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'R',  '<Cmd>lua require("gitsigns").reset_buffer()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'p',  '<Cmd>lua require("gitsigns").preview_hunk()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'b',  '<Cmd>lua require("gitsigns").blame_line{full=true}<CR><CR>', opts)
-    vim.keymap.set('n', prefix .. 'tb', '<Cmd>lua require("gitsigns").toggle_current_line_blame()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'd',  '<Cmd>lua require("gitsigns").diffthis()<CR>', opts)
-    vim.keymap.set('n', prefix .. 'D',  '<Cmd>lua require("gitsigns").diffthis("~")<CR>', opts)
-    vim.keymap.set('n', prefix .. 'td', '<Cmd>lua require("gitsigns").toggle_deleted<CR>', opts)
+    map({'n', 'v'}, prefix .. 'hs', gs.stage_hunk)
+    map({'n', 'v'}, prefix .. 'hr', gs.reset_hunk)
+    map('n', prefix .. 'hS', gs.stage_buffer)
+    map('n', prefix .. 'hu', gs.undo_stage_hunk)
+    map('n', prefix .. 'hR', gs.reset_buffer)
+    map('n', prefix .. 'hp', gs.preview_hunk)
+    map('n', prefix .. 'hb', function() gs.blame_line { full = true } end)
+    map('n', prefix .. 'tb', gs.toggle_current_line_blame)
+    map('n', prefix .. 'hd', gs.diffthis)
+    map('n', prefix .. 'hD', function() gs.diffthis('~') end)
+    map('n', prefix .. 'td', gs.toggle_deleted)
 
     -- Text object
-    vim.keymap.set('o', 'ih', ':<C-U>lua require("gitsigns").select_hunk()<CR>', opts)
-    vim.keymap.set('x', 'ih', ':<C-U>lua require("gitsigns").select_hunk()<CR>', opts)
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end,
 }
