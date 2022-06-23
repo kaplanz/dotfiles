@@ -5,13 +5,13 @@
 
 require('bufferline').setup {
   options = {
-    view = 'multiwindow',
-    numbers = function(opts) return string.format('%s', opts.id) end,
+    mode = 'tabs',
+    numbers = 'buffer_id',
     diagnostics = 'nvim_lsp',
     offsets = {
       {
         filetype = 'NvimTree',
-        text = 'NvimTree',
+        text = 'File Explorer',
         highlight = 'Directory',
       },
     },
