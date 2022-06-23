@@ -88,17 +88,6 @@ return require('packer').startup(function(use)
   }
   -- }}}
 
-  -- Diagnostics: {{{
-  use {
-    -- Pretty diagnostics
-    'folke/trouble.nvim',
-    config = function()
-      require('plugins.trouble')
-    end,
-    requires = 'kyazdani42/nvim-web-devicons',
-  }
-  -- }}}
-
   -- Extensions {{{
   -- Move function arguments
   use 'AndrewRadev/sideways.vim'
@@ -112,7 +101,7 @@ return require('packer').startup(function(use)
     -- Modal multiple cursors
     'mg979/vim-visual-multi',
     config = function()
-      vim.cmd [[runtime! viml/plugins/visual-multi.vim]]
+      vim.g.VM_leader = '\\'
     end,
   }
   -- Searches, substitutions, and abbreviations
@@ -193,7 +182,8 @@ return require('packer').startup(function(use)
     -- Automatic ctags management
     'ludovicchabant/vim-gutentags',
     config = function()
-      vim.cmd [[runtime! viml/plugins/gutentags.vim]]
+      vim.g.gutentags_enabled = vim.fn.filereadable('tags')
+      vim.g.gutentags_define_advanced_commands = true
     end,
   }
   -- }}}

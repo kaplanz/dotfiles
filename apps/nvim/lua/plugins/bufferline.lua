@@ -11,7 +11,7 @@ require('bufferline').setup {
     offsets = {
       {
         filetype = 'NvimTree',
-        text = 'File Explorer',
+        text = 'Finder',
         highlight = 'Directory',
       },
     },

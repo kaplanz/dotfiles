@@ -57,7 +57,7 @@ augroup Vimrc
 
   " When a terminal job is starting, configure the terminal buffer.
   autocmd TermOpen * set nonumber " Disable line numbers in terminal buffers
-  autocmd TermOpen * startinsert  " Enter Terminal-mode automaticall
+  autocmd TermOpen * startinsert  " Enter Terminal-mode automatically
 
   " Highlight text on yank
   autocmd TextYankPost * silent! lua vim.highlight.on_yank()

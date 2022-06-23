@@ -17,3 +17,5 @@ require('formatter').setup {
     }
   }
 }
+
+vim.keymap.set('n', '<Space>f', '<Cmd>Format<CR>', { noremap = true, silent = true })
