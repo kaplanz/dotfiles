@@ -3,8 +3,8 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
--- source vimrc
-vim.cmd [[runtime! viml/vimrc]]
+-- load vimrc
+require('vimrc')
 
 -- load plugins
 require('plugins')
