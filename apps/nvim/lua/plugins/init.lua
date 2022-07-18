@@ -93,6 +93,13 @@ return require('packer').startup(function(use)
   use 'AndrewRadev/sideways.vim'
   -- Switch text segments
   use 'AndrewRadev/switch.vim'
+  -- Create custom submodes and menus
+  use {
+    'anuvyklack/hydra.nvim',
+    config = function()
+      require('plugins.hydra')
+    end,
+  }
   -- Peek at the contents of the registers
   use 'junegunn/vim-peekaboo'
   -- Edit sandwiched textobjects
