@@ -80,8 +80,6 @@ cmp.setup {
         calc        = ' ',
         cmdline     = ' ',
         path        = 'ﱮ ',
-        -- External Sources
-        cmp_tabnine = 'ﲴ ',
         -- Language Server Protocol
         nvim_lsp    = 'ﮒ ',
         nvim_lua    = ' ',

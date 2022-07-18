@@ -66,8 +66,6 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
-      -- External Sources
-      { 'tzachar/cmp-tabnine', run = './install.sh', },
       -- Language Server Protocol
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
