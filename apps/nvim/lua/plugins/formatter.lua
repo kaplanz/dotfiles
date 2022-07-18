@@ -3,14 +3,14 @@
 -- Created:     06 Dec 2021
 -- SPDX-License-Identifier: MIT
 
-require('formatter').setup {
+require("formatter").setup {
   filetype = {
     python = {
       -- Configuration for psf/black
       function()
         return {
-          exe = 'black', -- this should be available on your $PATH
-          args = { '-' },
+          exe = "black", -- this should be available on your $PATH
+          args = { "-" },
           stdin = true,
         }
       end
@@ -18,4 +18,4 @@ require('formatter').setup {
   }
 }
 
-vim.keymap.set('n', '<Space>f', '<Cmd>Format<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<Space>f", "<Cmd>Format<CR>", { noremap = true, silent = true })

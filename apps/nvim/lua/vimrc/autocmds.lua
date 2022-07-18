@@ -37,7 +37,7 @@ vim.cmd [[
 
     " Tier foldlevel depending on how many lines are in the buffer
     autocmd BufNewFile,BufRead *
-      \ if line('$') < 100
+      \ if line("$") < 100
       \ |   setlocal foldlevel=99
       \ | else
       \ |   setlocal foldlevel=0
@@ -50,8 +50,8 @@ vim.cmd [[
     autocmd BufReadPost *
       \ if line("'\"") >= 1
       \ && line("'\"") <= line("$")
-      \ && &ft !~# 'commit'
-      \ && &ft !~# 'gitrebase'
+      \ && &ft !~# "commit"
+      \ && &ft !~# "gitrebase"
       \ |   exe "normal! g`\""
       \ | endif
 

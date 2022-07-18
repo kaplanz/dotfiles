@@ -4,12 +4,12 @@
 -- SPDX-License-Identifier: MIT
 
 -- load vimrc
-require('vimrc')
+require("vimrc")
 
 -- load plugins
-require('plugins')
+require("plugins")
 
 -- load custom
-pcall(require, 'local')
+pcall(require, "local")
 
 -- vim:fdl=0:fdm=marker:

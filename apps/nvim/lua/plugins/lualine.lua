@@ -3,10 +3,10 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
-require('lualine').setup {
+require("lualine").setup {
   options = {
-    component_separators = '|',
-    section_separators = '',
+    component_separators = "|",
+    section_separators = "",
     globalstatus = true,
   },
 }

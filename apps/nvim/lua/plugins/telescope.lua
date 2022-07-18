@@ -4,37 +4,37 @@
 -- SPDX-License-Identifier: MIT
 
 -- Require module setup
-require('telescope').setup {
+require("telescope").setup {
   defaults = {
     -- Default configuration for telescope goes here:
     -- config_key = value,
     -- Determines the direction "better" results are sorted towards.
-    sorting_strategy = 'ascending',
+    sorting_strategy = "ascending",
     -- Determines the default layout of Telescope pickers.
-    layout_strategy = 'flex',
+    layout_strategy = "flex",
     -- Determines the default configuration values for layout strategies.
     layout_config = {
       -- Horizontal layout has two columns, one for the preview and one for the
       -- prompt and results.
       horizontal = {
-        prompt_position = 'top',
+        prompt_position = "top",
       },
       -- Vertical layout stacks the items on top of each other.
       vertical = {
         mirror = true,
-        prompt_position = 'top',
+        prompt_position = "top",
       },
     },
     -- Configure winblend for telescope floating windows.
     winblend = 10,
     -- The character(s) that will be shown in front of Telescope's prompt.
-    prompt_prefix = ' ',
+    prompt_prefix = " ",
     -- The character(s) that will be shown in front of the current selection.
-    selection_caret = '» ',
+    selection_caret = "» ",
     -- Prefix in front of each result entry. Current selection not included.
-    entry_prefix = '  ',
+    entry_prefix = "  ",
     -- Symbol to add in front of a multi-selected result entry.
-    multi_icon = '+',
+    multi_icon = "+",
     -- Boolean defining if borders are added to Telescope windows.
     border = true,
     -- Your mappings to override telescope's default mappings.
@@ -43,7 +43,7 @@ require('telescope').setup {
         -- map actions.which_key to <C-h> (default: <C-/>)
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        -- ['<C-h>'] = 'which_key',
+        -- ["<C-h>"] = "which_key",
       },
     },
   },
@@ -56,7 +56,7 @@ require('telescope').setup {
     -- Now the picker_config_key will be applied every time you call this
     -- builtin picker
     find_files = {
-      find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' }
+      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
     },
   },
   extensions = {
@@ -70,7 +70,7 @@ require('telescope').setup {
 
 -- Configure mappings
 do
-  local ts = require('telescope.builtin')
+  local ts = require("telescope.builtin")
 
   -- Set up keymaps
   local function map(mode, lhs, rhs, opts)
@@ -79,23 +79,23 @@ do
   end
 
   -- Actions
-  local prefix = '<C-j>'
-  map('n', prefix, ts.builtin)
-  map('n', prefix .. 'a', function() ts.find_files({ hidden = true }) end)
-  map('n', prefix .. 'b', ts.buffers)
-  map('n', prefix .. 'f', ts.find_files)
-  map('n', prefix .. 'g', ts.live_grep)
-  map('n', prefix .. 'h', ts.help_tags)
-  map('n', prefix .. 'o', ts.oldfiles)
-  map('n', prefix .. 's', ts.git_status)
-  map('n', prefix .. '<CR>', ts.builtin)
-  map('n', prefix .. prefix, ts.resume)
+  local prefix = "<C-j>"
+  map("n", prefix, ts.builtin)
+  map("n", prefix .. "a", function() ts.find_files({ hidden = true }) end)
+  map("n", prefix .. "b", ts.buffers)
+  map("n", prefix .. "f", ts.find_files)
+  map("n", prefix .. "g", ts.live_grep)
+  map("n", prefix .. "h", ts.help_tags)
+  map("n", prefix .. "o", ts.oldfiles)
+  map("n", prefix .. "s", ts.git_status)
+  map("n", prefix .. "<CR>", ts.builtin)
+  map("n", prefix .. prefix, ts.resume)
 
   -- Shortcuts
-  map('n', '<C-p>', prefix .. 'f', { remap = true, silent = true })   -- find_files
-  map('n', 'gb', prefix .. 'b', { remap = true, silent = true })      -- buffers
+  map("n", "<C-p>", prefix .. "f", { remap = true, silent = true })   -- find_files
+  map("n", "gb", prefix .. "b", { remap = true, silent = true })      -- buffers
 end
 
 -- To get extensions loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
+require("telescope").load_extension("fzf")

@@ -3,22 +3,22 @@
 -- Created:     18 Jul 2022
 -- SPDX-License-Identifier: MIT
 
-local Hydra = require('hydra')
+local Hydra = require("hydra")
 
 local function cmd(command)
-   return table.concat({ '<Cmd>', command, '<CR>' })
+   return table.concat({ "<Cmd>", command, "<CR>" })
 end
 
 -- Side scroll
 Hydra {
-   name = 'Side scroll',
-   mode = 'n',
-   body = 'z',
+   name = "Side scroll",
+   mode = "n",
+   body = "z",
    heads = {
-      { 'h', '5zh' },
-      { 'l', '5zl', { desc = '←/→' } },
-      { 'H', 'zH' },
-      { 'L', 'zL', { desc = 'half screen ←/→' } },
+      { "h", "5zh" },
+      { "l", "5zl", { desc = "←/→" } },
+      { "H", "zH" },
+      { "L", "zL", { desc = "half screen ←/→" } },
    }
 }
 
@@ -38,69 +38,69 @@ local hint = [[
 ]]
 
 Hydra {
-   name = 'Options',
+   name = "Options",
    hint = hint,
    config = {
-      color = 'amaranth',
+      color = "amaranth",
       invoke_on_body = true,
       hint = {
-         border = 'rounded',
-         position = 'middle'
+         border = "rounded",
+         position = "middle"
       }
    },
-   mode = {'n','x'},
-   body = '<Leader>o',
+   mode = {"n","x"},
+   body = "<Leader>o",
    heads = {
-      { 'n', function()
+      { "n", function()
          if vim.o.number == true then
             vim.o.number = false
          else
             vim.o.number = true
          end
-      end, { desc = 'number' } },
-      { 'r', function()
+      end, { desc = "number" } },
+      { "r", function()
          if vim.o.relativenumber == true then
             vim.o.relativenumber = false
          else
             vim.o.number = true
             vim.o.relativenumber = true
          end
-      end, { desc = 'relativenumber' } },
-      { 'v', function()
-         if vim.o.virtualedit == 'all' then
-            vim.o.virtualedit = 'block'
+      end, { desc = "relativenumber" } },
+      { "v", function()
+         if vim.o.virtualedit == "all" then
+            vim.o.virtualedit = "block"
          else
-            vim.o.virtualedit = 'all'
+            vim.o.virtualedit = "all"
          end
-      end, { desc = 'virtualedit' } },
-      { 'i', function()
+      end, { desc = "virtualedit" } },
+      { "i", function()
          if vim.o.list == true then
             vim.o.list = false
          else
             vim.o.list = true
          end
-      end, { desc = 'show invisible' } },
-      { 's', function()
+      end, { desc = "show invisible" } },
+      { "s", function()
          if vim.o.spell == true then
             vim.o.spell = false
          else
             vim.o.spell = true
          end
-      end, { exit = true, desc = 'spell' } },
-      { 'w', function()
+      end, { exit = true, desc = "spell" } },
+      { "w", function()
          if vim.o.wrap == true then
             vim.o.wrap = false
          else
             vim.o.wrap = true
          end
-      end, { desc = 'wrap' } },
-      { 'c', function()
+      end, { desc = "wrap" } },
+      { "c", function()
          if vim.o.cursorline == true then
             vim.o.cursorline = false
          else
             vim.o.cursorline = true
          end
-      end, { desc = 'cursor line' } },
-      { '<Esc>', nil, { exit = true } }
+      end, { desc = "cursor line" } },
+      { "<Esc>", nil, { exit = true } }
    }
 }

@@ -4,7 +4,7 @@
 -- SPDX-License-Identifier: MIT
 
 -- Require module setup
-require('nvim-tree').setup {
+require("nvim-tree").setup {
   -- completely disable netrw
   disable_netrw       = false,
   -- hijack netrw windows
@@ -49,26 +49,26 @@ require('nvim-tree').setup {
     -- Configuration options for icons
     icons = {
       -- Used as a separator between symlinks' source and target
-      symlink_arrow = ' -> ',
+      symlink_arrow = " -> ",
     },
   },
   -- filtering options
   filters = {
     -- custom list of string that will not be shown
-    custom = {'.git', 'node_modules'},
+    custom = {".git", "node_modules"},
   },
 }
 
 -- Configure mappings
 do
   -- Set up keymaps
-  local prefix = '<Leader>'
+  local prefix = "<Leader>"
   local function map(mode, lhs, rhs, opts)
     opts = opts or {}
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
   -- Actions
-  map('n', prefix .. 'n', '<Cmd>NvimTreeToggle<CR>')
-  map('n', prefix .. 'N', '<Cmd>NvimTreeRefresh<CR>')
+  map("n", prefix .. "n", "<Cmd>NvimTreeToggle<CR>")
+  map("n", prefix .. "N", "<Cmd>NvimTreeRefresh<CR>")
 end
