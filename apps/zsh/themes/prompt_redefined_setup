@@ -114,7 +114,7 @@ function prompt_redefined_cmdtime() {
 
 # Determine gitinfo for the current directory
 function prompt_redefined_gitinfo() {
-    # Nothing to print if not inside a git diretory
+    # Nothing to print if not inside a git directory
     git rev-parse --is-inside-work-tree &> /dev/null || return
     # Format the prefix
     local prefix="%F{$ZSH_PROMPT_COLOUR_MAIN}$ZSH_PROMPT_ICON_GIT_PREFIX%f"
