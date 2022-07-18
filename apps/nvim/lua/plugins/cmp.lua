@@ -68,15 +68,16 @@ cmp.setup {
 
   -- Customize completion menu appearance
   formatting = {
+    -- An array of completion fields to specify their order.
+    fields = {'kind', 'abbr', 'menu'},
+    -- The function used to customize the appearance of the completion menu.
     format = function(entry, item)
-      -- Icon and name of kind
-      item.kind = string.format('%s %s', lspkind.presets.default[item.kind], item.kind)
-
-      -- Item menu
-      item.menu = ({
+      local symbol = lspkind.symbol_map[item.kind]
+      local kind   = item.kind
+      local source = ({
         -- Internal Sources
         spell       = '暈',
-        buffer      = ' ',
+        buffer      = ' ',
         calc        = ' ',
         cmdline     = ' ',
         path        = 'ﱮ ',
@@ -85,17 +86,13 @@ cmp.setup {
         nvim_lua    = ' ',
         -- Extensions
         snippy      = ' ',
-        treesitter  = ' ',
+        treesitter  = 'פּ ',
         -- Filetype
         crates      = ' ',
-      })[entry.source.name]
+      })[entry.source.name] or '  '
 
-      -- Special menu details
-      if entry.source.name == 'cmp_tabnine' then
-        if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          item.menu = string.format('%s %s', item.menu, entry.completion_item.data.detail)
-        end
-      end
+      item.kind = symbol
+      item.menu = string.format(' %s (%s)', source, kind)
 
       return item
     end,
@@ -103,26 +100,43 @@ cmp.setup {
 
   -- Array of the source configuration to use
   -- (The order will be used to the completion menu's sort order)
-  sources = {
+  sources = cmp.config.sources(
     -- Extensions
-    { name = 'snippy' },
     -- Language Server Protocol
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'nvim_lua' },
+    {
+      { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'nvim_lua' },
+    },
     -- Filetype
-    { name = 'crates' },
+    {
+      { name = 'crates' },
+    },
     -- Extensions
-    { name = 'treesitter' },
-    -- External Sources
-    { name = 'cmp_tabnine' },
+    {
+      { name = 'snippy' },
+      { name = 'treesitter' },
+    },
     -- Internal Sources
-    { name = 'path' },
-    { name = 'buffer' },
-    { name = 'cmdline' },
-    { name = 'calc' },
-    { name = 'spell' },
+    {
+      { name = 'path' },
+      { name = 'buffer' },
+      { name = 'cmdline' },
+      { name = 'calc' },
+      { name = 'spell' },
+    }
+  ),
+
+  -- The view class used to customize nvim-cmp's appearance
+  view = {
+    entries = {
+      name = 'custom',
+      selection_order = 'near_cursor',
+    }
   },
+
+  -- Window appearance customization
+  window = {},
 
   -- Enable experimental features
   experimental = {
@@ -130,16 +144,19 @@ cmp.setup {
   }
 }
 
--- Completions for command mode
-cmp.setup.cmdline(':', {
-  sources = {
-    { name = 'cmdline' }
+-- Completions for `/` search based on current buffer
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources {
+    { name = 'nvim_lsp_document_symbol' },
+    { name = 'buffer' },
   }
 })
 
--- Completions for `/` search based on current buffer
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
+-- Completions for command mode
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources {
+    { name = 'cmdline' },
   }
 })
