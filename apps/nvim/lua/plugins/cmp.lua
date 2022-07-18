@@ -75,21 +75,25 @@ cmp.setup {
       local symbol = lspkind.symbol_map[item.kind]
       local kind   = item.kind
       local source = ({
-        -- Internal Sources
+        -- Vim-builtin
         spell       = '暈',
         buffer      = ' ',
         calc        = ' ',
-        cmdline     = ' ',
-        path        = 'ﱮ ',
+        omni        = ' ',
+        -- Neovim-builtin
+        nvim_lua    = ' ',
+        treesitter  = 'פּ ',
+        -- Snippets
+        snippy      = ' ',
         -- Language Server Protocol
         nvim_lsp    = 'ﮒ ',
-        nvim_lua    = ' ',
+        nvim_lsp_document_symbol = 'ﮒ ',
+        -- Filesystem
+        path        = 'ﱮ ',
+        rg          = ' ',
         -- Extensions
-        snippy      = ' ',
-        treesitter  = 'פּ ',
-        -- Filetype
-        crates      = ' ',
-      })[entry.source.name] or '  '
+        cmdline     = ' ',
+      })[entry.source.name] or ' '
 
       item.kind = symbol
       item.menu = string.format(' %s (%s)', source, kind)
@@ -101,30 +105,34 @@ cmp.setup {
   -- Array of the source configuration to use
   -- (The order will be used to the completion menu's sort order)
   sources = cmp.config.sources(
-    -- Extensions
+    -- Snippets
+    {
+      { name = 'snippy' },
+    },
     -- Language Server Protocol
     {
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
+    },
+    -- Neovim-builtin
+    {
       { name = 'nvim_lua' },
-    },
-    -- Filetype
-    {
-      { name = 'crates' },
-    },
-    -- Extensions
-    {
-      { name = 'snippy' },
       { name = 'treesitter' },
     },
-    -- Internal Sources
+    -- Vim-builtin
+    {
+      { name = 'spell' },
+      { name = 'buffer' },
+      { name = 'calc' },
+      { name = 'omni' },
+    },
+    -- Filesystem
     {
       { name = 'path' },
-      { name = 'buffer' },
-      { name = 'cmdline' },
-      { name = 'calc' },
-      { name = 'spell' },
-    }
+      { name = 'rg' },
+    },
+    -- Extra
+    {}
   ),
 
   -- The view class used to customize nvim-cmp's appearance

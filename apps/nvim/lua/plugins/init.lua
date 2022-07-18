@@ -60,20 +60,25 @@ return require('packer').startup(function(use)
       require('plugins.cmp')
     end,
     requires = {
-      -- Internal Sources
+      -- Vim-builtin
       'f3fora/cmp-spell',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-omni',
+      -- Neovim-builtin
+      'hrsh7th/cmp-nvim-lua',
+      'ray-x/cmp-treesitter',
+      -- Snippets
+      'dcampos/cmp-snippy',
       -- Language Server Protocol
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-document-symbol',
       'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-nvim-lua',
+      -- Filesystem
+      'hrsh7th/cmp-path',
+      'lukas-reineke/cmp-rg',
       -- Extensions
-      'dcampos/cmp-snippy',
-      'ray-x/cmp-treesitter',
+      'hrsh7th/cmp-cmdline',
     },
   }
   use {
