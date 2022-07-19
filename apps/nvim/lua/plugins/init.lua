@@ -129,6 +129,8 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired'
   -- Additional text objects
   use 'wellle/targets.vim'
+  -- Handle line numbers in file names
+  use 'wsdjeg/vim-fetch'
   -- }}}
 
   -- Formatting: {{{
@@ -150,8 +152,6 @@ return require('packer').startup(function(use)
     end,
     requires = 'nvim-lua/plenary.nvim',
   }
-  -- Git wrapper
-  use 'tpope/vim-fugitive'
   -- }}}
 
   -- LSP {{{
