@@ -16,7 +16,8 @@ do
       "clone",
       "--depth=1",
       "https://github.com/wbthomason/packer.nvim",
-      path })
+      path
+    })
     vim.cmd [[packadd packer.nvim]]
   end
 end
@@ -173,7 +174,7 @@ return require("packer").startup(function(use)
     -- Ui for nvim-lsp progress
     "j-hui/fidget.nvim",
     config = function()
-      require("fidget").setup()
+      require("fidget").setup {}
     end,
   }
   use {
@@ -260,17 +261,6 @@ return require("packer").startup(function(use)
     requires = "kevinhwang91/promise-async"
   }
   use {
-    -- Blazing fast statusline
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("plugins.lualine")
-    end,
-    requires = {
-      "kyazdani42/nvim-web-devicons",
-      opt = true
-    },
-  }
-  use {
     -- File explorer written in lua
     "kyazdani42/nvim-tree.lua",
     config = function()
@@ -282,6 +272,17 @@ return require("packer").startup(function(use)
       { "n", "<Leader>N" },
     },
     requires = "kyazdani42/nvim-web-devicons",
+  }
+  use {
+    -- Blazing fast statusline
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("plugins.lualine")
+    end,
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      opt = true
+    },
   }
   use {
     -- Fuzzy finder over lists
