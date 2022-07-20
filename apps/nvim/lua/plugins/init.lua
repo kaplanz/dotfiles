@@ -225,7 +225,12 @@ return require("packer").startup(function(use)
   -- Heuristically set buffer options
   use "tpope/vim-sleuth"
   -- Whitespace management
-  use "zakharykaplan/vim-trailblazer"
+  use {
+    "zakharykaplan/nvim-retrail",
+    config = function()
+      require("retrail").setup {}
+    end,
+  }
   -- }}}
 
   -- Treesitter {{{
