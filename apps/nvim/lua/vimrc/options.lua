@@ -48,7 +48,7 @@ vim.o.smartcase = true
 -- }}}
 
 -- User Interface {{{
-vim.o.fillchars = "foldopen:▼,foldclose:▶,diff:╳"
+vim.o.fillchars = "foldopen:▼,foldclose:▶,diff:╱"
 vim.o.foldcolumn = "auto:1"
 vim.o.number = true
 vim.o.pumblend = 10
