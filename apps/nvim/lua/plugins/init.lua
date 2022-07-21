@@ -107,8 +107,19 @@ return require("packer").startup(function(use)
   }
   -- Peek at the contents of the registers
   use "junegunn/vim-peekaboo"
-  -- Edit sandwiched textobjects
-  use "machakann/vim-sandwich"
+  -- Surround delimiter pairs with ease
+  use {
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup {
+        keymaps = {
+          normal = "sa",
+          delete = "sd",
+          change = "sr",
+        }
+      }
+    end,
+  }
   use {
     -- Modal multiple cursors
     "mg979/vim-visual-multi",
