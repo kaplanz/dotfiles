@@ -8,61 +8,65 @@
 ----------------
 
 -- Buffers {{{
-vim.o.confirm = true
-vim.o.undofile = true
-vim.o.updatetime = 100
+vim.opt.confirm    = true
+vim.opt.undofile   = true
+vim.opt.updatetime = 100
 -- }}}
 
 -- Colours {{{
 vim.cmd [[silent! colorscheme nordfox]]
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
 -- }}}
 
 -- Completion {{{
-vim.o.completeopt = "menuone,noselect"
+vim.opt.completeopt = { "menuone", "noselect" }
 -- }}}
 
 -- Cursor {{{
-vim.o.cursorline = true
-vim.o.whichwrap = "b,s,<,>,[,]"
+vim.opt.cursorline = true
+vim.opt.whichwrap  = "b,s,<,>,[,]"
 -- }}}
 
 -- Indentation {{{
-vim.o.expandtab = true
-vim.o.shiftround = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = -1
+vim.opt.expandtab   = true
+vim.opt.shiftround  = true
+vim.opt.shiftwidth  = 4
+vim.opt.softtabstop = -1
 -- }}}
 
 -- Input {{{
-vim.o.mouse = "ar"
+vim.opt.mouse = "ar"
 -- }}}
 
 -- Path {{{
-vim.o.path = vim.o.path .. ",**"
+vim.opt.path:append("**")
 -- }}}
 
 -- Search {{{
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase  = true
 -- }}}
 
 -- User Interface {{{
-vim.o.fillchars = "foldopen:▼,foldclose:▶,diff:╱"
-vim.o.foldcolumn = "auto:1"
-vim.o.number = true
-vim.o.pumblend = 10
-vim.o.scrolloff = 5
-vim.o.showmode = false
-vim.o.sidescrolloff = 5
-vim.o.winblend = 10
-vim.o.wrap = false
+vim.opt.fillchars:append {
+  diff      = "╱",
+  foldclose = "▶",
+  foldopen  = "▼",
+}
+vim.opt.foldcolumn    = "auto:1"
+vim.opt.list          = true
+vim.opt.number        = true
+vim.opt.pumblend      = 10
+vim.opt.scrolloff     = 5
+vim.opt.showmode      = false
+vim.opt.sidescrolloff = 5
+vim.opt.winblend      = 10
+vim.opt.wrap          = false
 -- }}}
 
 -- Window {{{
-vim.o.splitbelow = true
-vim.o.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 -- }}}
-
 
 -- vim:fdl=0:fdm=marker:
