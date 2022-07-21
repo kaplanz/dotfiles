@@ -55,9 +55,16 @@ vim.opt.fillchars:append {
 }
 vim.opt.foldcolumn    = "auto:1"
 vim.opt.list          = true
+vim.opt.listchars:append {
+  trail    = "·",
+  tab      = "--|",
+  extends  = "›",
+  precedes = "‹",
+}
 vim.opt.number        = true
 vim.opt.pumblend      = 10
 vim.opt.scrolloff     = 5
+vim.opt.showbreak     = "↪ "
 vim.opt.showmode      = false
 vim.opt.sidescrolloff = 5
 vim.opt.winblend      = 10
