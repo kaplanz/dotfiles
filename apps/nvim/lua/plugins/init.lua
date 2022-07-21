@@ -219,7 +219,7 @@ return require("packer").startup(function(use)
     -- Show vertical lines for indent
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("plugins.indent-blankline")
+      require("indent_blankline")
     end,
   }
   -- Heuristically set buffer options
