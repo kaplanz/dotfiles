@@ -47,6 +47,7 @@ return require("packer").startup(function(use)
     "jacoborus/tender.vim",
     "morhetz/gruvbox",
     "nanotech/jellybeans.vim",
+    "rebelot/kanagawa.nvim",
     "sainnhe/everforest",
     "vv9k/bogster",
     "xero/sourcerer.vim",
