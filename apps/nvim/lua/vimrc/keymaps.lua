@@ -25,7 +25,5 @@ map("n", "<Leader><Leader>", "<Leader>")
 
 -- Write to file
 map("n", "<C-s>", "<Cmd>update<CR>")
--- Open a new terminal window
-map("n", "<Leader>t", "<Cmd>split +terminal<CR>")
 
 -- vim:fdl=0:fdm=marker:
