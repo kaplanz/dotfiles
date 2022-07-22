@@ -88,7 +88,17 @@ return require("packer").startup(function(use)
     "windwp/nvim-autopairs",
     after = "nvim-cmp",
     config = function()
-      require("plugins.nvim-autopairs")
+      require("nvim-autopairs").setup {}
+
+      -- Interoperability with nvim-cmp
+      do
+        -- If you want insert `(` after select function or method item
+        local autopairs = require("nvim-autopairs.completion.cmp")
+        require("cmp").event:on(
+          "confirm_done",
+          autopairs.on_confirm_done {}
+        )
+      end
     end,
     event = "InsertEnter",
   }
