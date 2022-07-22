@@ -230,17 +230,6 @@ return require("packer").startup(function(use)
   }
   -- }}}
 
-  -- Tags {{{
-  use {
-    -- Automatic ctags management
-    "ludovicchabant/vim-gutentags",
-    config = function()
-      vim.g.gutentags_enabled = vim.fn.filereadable("tags")
-      vim.g.gutentags_define_advanced_commands = true
-    end,
-  }
-  -- }}}
-
   -- Text {{{
   use {
     -- Show vertical lines for indent
