@@ -14,7 +14,6 @@ vim.opt.updatetime = 100
 -- }}}
 
 -- Colours {{{
-vim.cmd [[silent! colorscheme nordfox]]
 vim.opt.termguicolors = true
 -- }}}
 
