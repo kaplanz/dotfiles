@@ -40,16 +40,8 @@ return require("packer").startup(function(use)
   -- Colours {{{
   use {
     "EdenEast/nightfox.nvim",
-    { "catppuccin/nvim", as = "catppuccin" },
-    "cocopon/iceberg.vim",
-    "drewtempelmeyer/palenight.vim",
-    "folke/tokyonight.nvim",
-    "jacoborus/tender.vim",
-    "morhetz/gruvbox",
-    "nanotech/jellybeans.vim",
     "rebelot/kanagawa.nvim",
     "sainnhe/everforest",
-    "vv9k/bogster",
     "xero/sourcerer.vim",
   }
   -- }}}
