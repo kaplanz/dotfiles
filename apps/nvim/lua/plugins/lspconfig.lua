@@ -20,14 +20,14 @@ do
 
   -- LSP settings (for overriding per client)
   handlers = {
-    ["textDocument/hover"] =  vim.lsp.with(
-      vim.lsp.handlers.hover, {
+    ["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover, {
         -- Use a sharp border with `FloatBorder` highlights
         border = border,
       }
     ),
-    ["textDocument/signatureHelp"] =  vim.lsp.with(
-      vim.lsp.handlers.signature_help, {
+    ["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help, {
         -- Use a sharp border with `FloatBorder` highlights
         border = border,
       }
@@ -156,13 +156,13 @@ lsp_installer.setup {
 
 -- 2. (optional) Override the default configuration to be applied to all servers
 lspconfig.util.default_config = vim.tbl_extend(
-    "force",
-    lspconfig.util.default_config,
-    {
-        capabilities = capabilities,
-        handlers = handlers,
-        on_attach = on_attach,
-    }
+  "force",
+  lspconfig.util.default_config,
+  {
+    capabilities = capabilities,
+    handlers = handlers,
+    on_attach = on_attach,
+  }
 )
 
 -- 3. Loop through all of the installed servers and set it up via lspconfig
@@ -176,7 +176,7 @@ lspconfig["sumneko_lua"].setup {
     Lua = {
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {"vim"},
+        globals = { "vim" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
