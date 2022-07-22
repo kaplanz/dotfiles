@@ -106,8 +106,13 @@ return require("packer").startup(function(use)
       require("plugins.hydra")
     end,
   }
-  -- Peek at the contents of the registers
-  use "junegunn/vim-peekaboo"
+  -- Create key bindings that stick
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {}
+    end,
+  }
   -- Surround delimiter pairs with ease
   use {
     "kylechui/nvim-surround",
