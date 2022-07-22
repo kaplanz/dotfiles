@@ -24,9 +24,9 @@ end
 
 -- Automatically run `:PackerCompile` whenever this file is updated
 vim.cmd [[
-  augroup PackerUserConfig
+  augroup Plugins
     autocmd!
-    autocmd BufWritePost init.lua source <afile> | PackerCompile
+    autocmd BufWritePost lua/**/*.lua source <afile> | PackerCompile
   augroup end
 ]]
 -- }}}
