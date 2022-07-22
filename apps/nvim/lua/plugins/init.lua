@@ -124,7 +124,12 @@ return require("packer").startup(function(use)
           normal = "sa",
           delete = "sd",
           change = "sr",
-        }
+        },
+        delimiters = {
+          pairs = {
+            [" "] = { " ", " " },
+          },
+        },
       }
     end,
   }
