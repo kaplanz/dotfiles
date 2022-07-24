@@ -1,2 +1,2 @@
-# Ignore generated files such as `Brewfile.lock.json`
-**/*.lock.json
+# Ignore generated files
+Brewfile.lock.json
