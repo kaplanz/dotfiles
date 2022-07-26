@@ -3,10 +3,10 @@
 -- Created:     06 Aug 2021
 -- SPDX-License-Identifier: MIT
 
-local lsp_installer = require("nvim-lsp-installer")
 local lspconfig = require("lspconfig")
+local mason     = require("mason-lspconfig")
 
--- 0. Preliminary set up
+-- Prepare capabilities, handlers, and on_attach
 local capabilities, handlers, on_attach
 do
   -- Completion kinds
@@ -21,16 +21,16 @@ do
   -- LSP settings (for overriding per client)
   handlers = {
     ["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover, {
-        -- Use a sharp border with `FloatBorder` highlights
-        border = border,
-      }
+      vim.lsp.handlers.hover, {
+      -- Use a sharp border with `FloatBorder` highlights
+      border = border,
+    }
     ),
     ["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help, {
-        -- Use a sharp border with `FloatBorder` highlights
-        border = border,
-      }
+      vim.lsp.handlers.signature_help, {
+      -- Use a sharp border with `FloatBorder` highlights
+      border = border,
+    }
     ),
   }
 
@@ -132,29 +132,7 @@ do
   end
 end
 
--- 1. Set up nvim-lsp-installer first!
-lsp_installer.setup {
-  -- Automatically detect which servers to install (based on which servers are
-  -- set up via lspconfig).
-  automatic_installation = true,
-
-  ui = {
-    -- The border to use for the UI window. Accepts same border values as
-    -- |nvim_open_win()|.
-    border = "rounded",
-
-    icons = {
-      -- The list icon to use for installed servers.
-      server_installed = "✓",
-      -- The list icon to use for servers that are pending installation.
-      server_pending = "➜",
-      -- The list icon to use for servers that are not installed.
-      server_uninstalled = "✗"
-    }
-  },
-}
-
--- 2. (optional) Override the default configuration to be applied to all servers
+-- Override the default configuration to be applied to all servers
 lspconfig.util.default_config = vim.tbl_extend(
   "force",
   lspconfig.util.default_config,
@@ -165,23 +143,31 @@ lspconfig.util.default_config = vim.tbl_extend(
   }
 )
 
--- 3. Loop through all of the installed servers and set it up via lspconfig
-for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  lspconfig[server.name].setup {}
-end
 
--- 4. Override the setup for specific servers
-lspconfig["sumneko_lua"].setup {
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-    },
-  },
+-- Registers the provided `handlers`, to be called by mason when an installed
+-- server supported by lspconfig is ready to be setup.
+mason.setup_handlers {
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function(server) -- default handler (optional)
+    lspconfig[server].setup {}
+  end,
+  -- Next, you can provide targeted overrides for specific servers.
+  ["sumneko_lua"] = function()
+    lspconfig.sumneko_lua.setup {
+      settings = {
+        Lua = {
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = { "vim" },
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+          },
+        },
+      }
+    }
+  end,
 }

@@ -209,10 +209,16 @@ return require("packer").startup(function(use)
         require("plugins.lspconfig")
       end,
     },
-    -- Seamlessly install LSP servers
-    "williamboman/nvim-lsp-installer",
     -- Add pictograms to LSP
     "onsails/lspkind-nvim",
+  }
+  -- Portable package manager for Neovim
+  use {
+    "williamboman/mason.nvim",
+    config = function()
+      require("plugins.mason")
+    end,
+    requires = "williamboman/mason-lspconfig.nvim",
   }
   -- }}}
 
