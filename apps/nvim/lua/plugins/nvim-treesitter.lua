@@ -4,6 +4,10 @@
 -- SPDX-License-Identifier: MIT
 
 require("nvim-treesitter.configs").setup {
+  -- Automatic close and rename for markup language tags.
+  autotag = {
+    enable = true,
+  },
   -- Consistent syntax highlighting.
   highlight = {
     enable = true,
