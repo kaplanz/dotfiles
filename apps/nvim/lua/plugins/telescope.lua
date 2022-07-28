@@ -73,27 +73,28 @@ do
   local ts = require("telescope.builtin")
 
   -- Set up keymaps
+  local prefix = "<C-j>"
   local function map(mode, lhs, rhs, opts)
     opts = opts or { noremap = true, silent = true }
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
   -- Actions
-  local prefix = "<C-j>"
-  map("n", prefix, ts.builtin)
+  map("n", prefix .. "<CR>", ts.builtin)
   map("n", prefix .. "a", function() ts.find_files({ hidden = true }) end)
   map("n", prefix .. "b", ts.buffers)
   map("n", prefix .. "f", ts.find_files)
   map("n", prefix .. "g", ts.live_grep)
   map("n", prefix .. "h", ts.help_tags)
   map("n", prefix .. "o", ts.oldfiles)
+  map("n", prefix .. "r", ts.resume)
   map("n", prefix .. "s", ts.git_status)
-  map("n", prefix .. "<CR>", ts.builtin)
-  map("n", prefix .. prefix, ts.resume)
 
   -- Shortcuts
-  map("n", "<C-p>", prefix .. "f", { remap = true, silent = true })   -- find_files
-  map("n", "gb", prefix .. "b", { remap = true, silent = true })      -- buffers
+  map("n", "<C-p>", prefix .. "f", { remap = true, silent = true }) -- find_files
+  map("n", "<F1>", prefix .. "h", { remap = true, silent = true }) -- help_tags
+  map("n", "gb", prefix .. "b", { remap = true, silent = true }) -- buffers
+  map("n", prefix, prefix .. "<CR>", { remap = true, silent = true }) -- builtin
 end
 
 -- To get extensions loaded and working with telescope, you need to call

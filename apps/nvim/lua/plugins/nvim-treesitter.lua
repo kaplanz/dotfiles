@@ -11,11 +11,16 @@ require("nvim-treesitter.configs").setup {
   -- Incremental selection based on the named nodes from the grammar.
   incremental_selection = {
     enable = true,
+    -- Mappings for incremental selection (visual mappings)
     keymaps = {
-      init_selection    = "gnn",
-      node_incremental  = "grn",
-      scope_incremental = "grc",
-      node_decremental  = "grm",
+      -- Init the note/scope selection
+      init_selection    = "<M-w>",
+      -- Increment to the upper named parent
+      node_incremental  = "<M-w>",
+      -- Increment to the upper scope (as defined in locals.scm)
+      scope_incremental = "<M-C-w>",
+      -- Decrement to the previous node
+      node_decremental  = "<M-e>",
     },
   },
   -- Indentation based on treesitter for the `=` operator.
@@ -29,20 +34,22 @@ require("nvim-treesitter.configs").setup {
       enable = true,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
+        ["aa"] = "@parameter.outer",
+        ["ia"] = "@parameter.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
       },
     },
     -- Swap text objects
     swap = {
       enable = true,
       swap_next = {
-        ["<Leader>a"] = {"@parameter.inner"},
+        ["<M-l>"] = { "@parameter.inner" },
       },
       swap_previous = {
-        ["<Leader>A"] = {"@parameter.inner"},
+        ["<M-h>"] = { "@parameter.inner" },
       },
     },
     -- Go to next/previous text object
@@ -67,8 +74,8 @@ require("nvim-treesitter.configs").setup {
       enable = true,
       border = "rounded",
       peek_definition_code = {
-        ["<Leader>df"] = "@function.outer",
-        ["<Leader>dF"] = "@class.outer",
+        ["<M-k>"]   = "@function.outer",
+        ["<M-C-k>"] = "@class.outer",
       },
     },
   },
