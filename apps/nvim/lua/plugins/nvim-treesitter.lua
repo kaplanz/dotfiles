@@ -32,6 +32,7 @@ require("nvim-treesitter.configs").setup {
     -- Text object selection
     select = {
       enable = true,
+      lookahead = true,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
         ["aa"] = "@parameter.outer",
