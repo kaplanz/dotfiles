@@ -20,7 +20,7 @@ Hydra {
     { "h", "5zh" },
     { "l", "5zl", { desc = "←/→" } },
     { "H", "zH" },
-    { "L", "zL", { desc = "half screen ←/→" } },
+    { "L", "zL",  { desc = "half screen ←/→" } },
   }
 }
 
@@ -42,7 +42,6 @@ Hydra {
   name = "Git",
   hint = hint,
   config = {
-    buffer = bufnr,
     color = "pink",
     invoke_on_body = true,
     hint = {
@@ -68,73 +67,50 @@ Hydra {
   mode = { "n", "x" },
   body = "<Leader>g",
   heads = {
-    {
-      "J",
-      function()
+    { "J", function()
         if vim.wo.diff then return "]c" end
         vim.schedule(function() gitsigns.next_hunk() end)
         return "<Ignore>"
       end,
       { expr = true, desc = "next hunk" }
     },
-    {
-      "K",
-      function()
+    { "K", function()
         if vim.wo.diff then return "[c" end
         vim.schedule(function() gitsigns.prev_hunk() end)
         return "<Ignore>"
       end,
       { expr = true, desc = "prev hunk" }
     },
-    {
-      "s",
-      gitsigns.stage_hunk,
+    { "s", gitsigns.stage_hunk,
       { silent = true, desc = "stage hunk" }
     },
-    {
-      "u",
-      gitsigns.undo_stage_hunk,
+    { "u", gitsigns.undo_stage_hunk,
       { desc = "undo last stage" }
     },
-    {
-      "S",
-      gitsigns.stage_buffer,
+    { "S", gitsigns.stage_buffer,
       { desc = "stage buffer" }
     },
-    {
-      "p",
-      gitsigns.preview_hunk,
+    { "p", gitsigns.preview_hunk,
       { desc = "preview hunk" }
     },
-    {
-      "d",
-      gitsigns.toggle_deleted,
+    { "d", gitsigns.toggle_deleted,
       { nowait = true, desc = "toggle deleted" }
     },
-    {
-      "b",
-      gitsigns.blame_line,
+    { "b", gitsigns.blame_line,
       { desc = "blame" }
     },
-    {
-      "B",
-      function() gitsigns.blame_line { full = true } end,
+    { "B", function() gitsigns.blame_line { full = true } end,
       { desc = "blame show full" }
     },
     { -- Show the base of the file
       "/", gitsigns.show,
       { exit = true, desc = "show base file" }
     },
-    {
-      "<Enter>",
-      neogit.open,
+    { "<Enter>", neogit.open,
       { exit = true, desc = "Neogit" }
     },
-    {
-      "q",
-      nil,
-      { exit = true, nowait = true, desc = "exit" }
-    },
+    { "q",     nil, { exit = true, nowait = true, desc = "exit" } },
+    { "<Esc>", nil, { exit = true, nowait = true, desc = false } },
   }
 }
 
