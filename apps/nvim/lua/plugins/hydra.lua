@@ -192,7 +192,7 @@ Hydra {
         else
           vim.o.spell = true
         end
-      end, { exit = true, desc = "spell" }
+      end, { desc = "spell" }
     },
     {
       "w",
