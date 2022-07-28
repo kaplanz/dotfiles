@@ -74,7 +74,7 @@ augroup("Vimrc", function(autocmd)
   -- When a terminal job is starting, configure the terminal buffer
   autocmd("TermOpen", nil, function()
     -- Disable line numbers in terminal buffers
-    vim.bo.number = true
+    vim.wo.number = false
     -- Enter Terminal-mode automatically
     vim.cmd [[startinsert]]
   end)
