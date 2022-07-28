@@ -4,7 +4,12 @@
 -- SPDX-License-Identifier: MIT
 
 require("gitsigns").setup {
-  on_attach = function(bufnr)
+  -- Set symbols in the sign column.
+  signcolumn = true,
+  -- Set line number highlights.
+  numhl      = false,
+  -- Callback called when attaching to a buffer.
+  on_attach  = function(bufnr)
     local gs = package.loaded.gitsigns
 
     -- Set up keymaps
