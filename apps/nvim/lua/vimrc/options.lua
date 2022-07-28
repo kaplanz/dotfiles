@@ -52,8 +52,8 @@ vim.opt.fillchars:append {
   foldclose = "▶",
   foldopen  = "▼",
 }
-vim.opt.foldcolumn    = "auto:1"
-vim.opt.list          = true
+vim.opt.foldcolumn = "auto:1"
+vim.opt.list       = true
 vim.opt.listchars:append {
   trail    = "·",
   tab      = "--|",

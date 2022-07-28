@@ -20,7 +20,7 @@ require("gitsigns").setup {
       if vim.wo.diff then return "]c" end
       vim.schedule(function() gs.next_hunk() end)
       return "<Ignore>"
-    end, { expr=true })
+    end, { expr = true })
     map("n", "[c", function()
       if vim.wo.diff then return "[c" end
       vim.schedule(function() gs.prev_hunk() end)
@@ -28,8 +28,8 @@ require("gitsigns").setup {
     end, { expr = true })
 
     -- Actions
-    map({"n", "v"}, prefix .. "hs", gs.stage_hunk)
-    map({"n", "v"}, prefix .. "hr", gs.reset_hunk)
+    map({ "n", "v" }, prefix .. "hs", gs.stage_hunk)
+    map({ "n", "v" }, prefix .. "hr", gs.reset_hunk)
     map("n", prefix .. "hS", gs.stage_buffer)
     map("n", prefix .. "hu", gs.undo_stage_hunk)
     map("n", prefix .. "hR", gs.reset_buffer)
@@ -41,6 +41,6 @@ require("gitsigns").setup {
     map("n", prefix .. "td", gs.toggle_deleted)
 
     -- Text object
-    map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
   end,
 }

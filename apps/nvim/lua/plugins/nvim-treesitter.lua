@@ -12,10 +12,10 @@ require("nvim-treesitter.configs").setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
+      init_selection    = "gnn",
+      node_incremental  = "grn",
       scope_incremental = "grc",
-      node_decremental = "grm",
+      node_decremental  = "grm",
     },
   },
   -- Indentation based on treesitter for the `=` operator.
@@ -50,16 +50,16 @@ require("nvim-treesitter.configs").setup {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        ["]m"] = {"@function.outer", "@class.outer"},
+        ["]m"] = { "@function.outer", "@class.outer" },
       },
       goto_next_end = {
-        ["]M"] = {"@function.outer", "@class.outer"},
+        ["]M"] = { "@function.outer", "@class.outer" },
       },
       goto_previous_start = {
-        ["[m"] = {"@function.outer", "@class.outer"},
+        ["[m"] = { "@function.outer", "@class.outer" },
       },
       goto_previous_end = {
-        ["[M"] = {"@function.outer", "@class.outer"},
+        ["[M"] = { "@function.outer", "@class.outer" },
       },
     },
     -- LSP interop
@@ -75,4 +75,4 @@ require("nvim-treesitter.configs").setup {
 }
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
