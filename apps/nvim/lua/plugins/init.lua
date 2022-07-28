@@ -212,8 +212,6 @@ return require("packer").startup(function(use)
 
   -- Text {{{
   do
-    -- Move function arguments
-    use "AndrewRadev/sideways.vim"
     -- Switch text segments
     use "AndrewRadev/switch.vim"
     -- Surround delimiter pairs with ease
@@ -274,6 +272,8 @@ return require("packer").startup(function(use)
     }
     -- Show code context
     use "nvim-treesitter/nvim-treesitter-context"
+    -- Syntax aware text-objects
+    use "nvim-treesitter/nvim-treesitter-textobjects"
   end
   -- }}}
 
