@@ -214,24 +214,8 @@ return require("packer").startup(function(use)
   do
     -- Switch text segments
     use "AndrewRadev/switch.vim"
-    -- Surround delimiter pairs with ease
-    use {
-      "kylechui/nvim-surround",
-      config = function()
-        require("nvim-surround").setup {
-          keymaps = {
-            normal = "sa",
-            delete = "sd",
-            change = "sr",
-          },
-          delimiters = {
-            pairs = {
-              [" "] = { " ", " " },
-            },
-          },
-        }
-      end,
-    }
+    -- Edit sandwiched textobjects
+    use "machakann/vim-sandwich"
     -- Super powerful autopairs
     use {
       "windwp/nvim-autopairs",
