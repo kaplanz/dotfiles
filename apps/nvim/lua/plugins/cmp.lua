@@ -6,6 +6,9 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 
+-- Nil check for LSP
+if not cmp then return end
+
 cmp.setup {
   -- Don't pre-select any item
   preselect = cmp.PreselectMode.None,
