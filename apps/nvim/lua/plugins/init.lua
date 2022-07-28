@@ -125,6 +125,23 @@ return require("packer").startup(function(use)
   end
   -- }}}
 
+  -- Filetype {{{
+  use {
+    { "rust-lang/rust.vim" },
+    {
+      "simrat39/rust-tools.nvim",
+      config = function()
+        require("rust-tools").setup {}
+      end,
+      requires = {
+        "mfussenegger/nvim-dap",
+        "nvim-lua/plenary.nvim",
+      },
+    },
+    ft = "rust",
+  }
+  -- }}}
+
   -- Git {{{
   do
     -- Git integration for buffers
