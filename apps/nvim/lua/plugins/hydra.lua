@@ -25,8 +25,9 @@ Hydra {
 }
 
 -- Git submode
-local gitsigns = require("gitsigns")
-local neogit   = require("neogit")
+local gitsigns  = require("gitsigns")
+gitsigns.config = require("gitsigns.config").config
+local neogit    = require("neogit")
 
 hint = [[
 ^  ^ ^              ^ ^                    ^ ^                 ^ ^                   ^
@@ -50,13 +51,18 @@ Hydra {
     on_enter = function()
       vim.cmd("silent! %foldopen!")
       vim.bo.modifiable = false
+      vim.b.gitsigns = {
+        signs = gitsigns.config.signcolumn,
+        linehl = gitsigns.config.linehl,
+      }
       gitsigns.toggle_signs(true)
       gitsigns.toggle_linehl(true)
     end,
     on_exit = function()
-      gitsigns.toggle_signs(false)
-      gitsigns.toggle_linehl(false)
       gitsigns.toggle_deleted(false)
+      gitsigns.toggle_signs(vim.b.gitsigns.signs)
+      gitsigns.toggle_linehl(vim.b.gitsigns.linehl)
+      vim.b.gitsigns = nil
     end,
   },
   mode = { "n", "x" },
