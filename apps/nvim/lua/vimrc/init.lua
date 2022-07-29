@@ -7,7 +7,7 @@
 require("vimrc.autocmds")
 
 -- Set colorscheme
-vim.cmd [[silent! colorscheme nightfox]]
+vim.cmd [[silent! colorscheme everforest]]
 
 -- Set keymaps
 require("vimrc.keymaps")
