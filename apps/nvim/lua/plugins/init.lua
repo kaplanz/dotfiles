@@ -255,19 +255,7 @@ return require("packer").startup(function(use)
     use {
       "zakharykaplan/nvim-retrail",
       config = function()
-        require("retrail").setup {
-          filetype = {
-            exclude = {
-              "",
-              "checkhealth",
-              "diff",
-              "help",
-              "man",
-              "mason.nvim",
-              "WhichKey",
-            },
-          },
-        }
+        require("retrail").setup {}
       end,
     }
   end
