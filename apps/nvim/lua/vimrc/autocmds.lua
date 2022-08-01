@@ -42,15 +42,6 @@ augroup("Vimrc", function(autocmd)
     vim.opt_local.formatoptions:remove("o")
   end)
 
-  --  Tier foldlevel depending on how many lines are in the buffer
-  autocmd({ "BufNewFile", "BufRead" }, nil, function()
-    if vim.fn.line("$") < 100 then
-      vim.wo.foldlevel = 99
-    else
-      vim.wo.foldlevel = 0
-    end
-  end)
-
   -- When editing a file, always jump to the last known cursor position. Don't
   -- do it when the position is invalid, when inside an event handler (happens
   -- when dropping a file on gvim) and for a commit message (it's likely a
