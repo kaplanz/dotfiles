@@ -19,12 +19,12 @@ CRON="$(dirname "$0")"
 # Files
 LOCK="$CRON/locks/$1.lock"
 LOG="$CRON/logs/$(date +%Y/%m/%d)/$1.$(date +%s).log"
-SCRIPT="$CRON/scripts/$1"
+JOB="$CRON/bin/$1"
 
-# Run script
+# Run job
 main() {
-    # Ensure job script exists and is an executable file
-    if [ ! -f "$SCRIPT" ] || [ ! -x "$SCRIPT" ]; then
+    # Ensure job exists and is an executable file
+    if [ ! -f "$JOB" ] || [ ! -x "$JOB" ]; then
         exit 127 # invalid job
     fi
 
@@ -40,10 +40,10 @@ main() {
     # Create directory for log
     $MKDIR "$(dirname "$LOG")"
 
-    # Call job script to run
-    "$SCRIPT" |& tee "$LOG"
+    # Call job to run
+    "$JOB" |& tee "$LOG"
 
-    # Save exit status from job script
+    # Save exit status from job
     EXIT="${PIPESTATUS[0]}"
 
     # Remove log file (and directory) if empty

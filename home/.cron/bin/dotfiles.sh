@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# File:        upgrade_dotfiles.sh
+# File:        dotfiles.sh
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     13 Jun 2020
 # SPDX-License-Identifier: MIT
