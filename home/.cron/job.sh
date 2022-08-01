@@ -6,7 +6,8 @@
 
 # Ensure valid bash version
 if [ ! "${BASH_VERSINFO[0]}" -ge 4 ]; then
-    exit 3 # unsupported bash version
+    echo "error: unsupported bash version (${BASH_VERSINFO[0]} > 4.0.0)" 1>&2
+    exit 1
 fi
 
 # Commands
@@ -25,12 +26,14 @@ JOB="$CRON/bin/$1"
 main() {
     # Ensure job exists and is an executable file
     if [ ! -f "$JOB" ] || [ ! -x "$JOB" ]; then
-        exit 127 # invalid job
+        echo "error: invalid job: $JOB" 1>&2
+        exit 127
     fi
 
     # Check if job is locked
     if [ -f "$LOCK" ] || [ -L "$LOCK" ]; then
-        exit 1 # cannot acquire lock
+        echo "error: cannot acquire lock: $LOCK" 1>&2
+        exit 127
     else
         # Lock job
         $MKDIR "$(dirname "$LOCK")"
