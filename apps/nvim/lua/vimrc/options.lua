@@ -29,7 +29,7 @@ vim.opt.whichwrap  = "b,s,<,>,[,]"
 -- Indentation {{{
 vim.opt.expandtab   = true
 vim.opt.shiftround  = true
-vim.opt.shiftwidth  = 4
+vim.opt.shiftwidth  =  4
 vim.opt.softtabstop = -1
 -- }}}
 
@@ -63,10 +63,11 @@ vim.opt.listchars:append {
 }
 vim.opt.number        = true
 vim.opt.pumblend      = 10
-vim.opt.scrolloff     = 5
+vim.opt.scrolloff     =  5
+vim.opt.signcolumn    =  "yes:1"
 vim.opt.showbreak     = "↪ "
 vim.opt.showmode      = false
-vim.opt.sidescrolloff = 5
+vim.opt.sidescrolloff =  5
 vim.opt.winblend      = 10
 vim.opt.wrap          = false
 -- }}}
