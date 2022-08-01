@@ -62,13 +62,12 @@ require("nvim-tree").setup {
 -- Configure mappings
 do
   -- Set up keymaps
-  local prefix = "<Leader>"
   local function map(mode, lhs, rhs, opts)
     opts = opts or {}
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
   -- Actions
-  map("n", prefix .. "n", "<Cmd>NvimTreeToggle<CR>")
-  map("n", prefix .. "N", "<Cmd>NvimTreeRefresh<CR>")
+  map("n", "<Leader>n", "<Cmd>NvimTreeToggle<CR>")
+  map("n", "<Leader>N", "<Cmd>NvimTreeRefresh<CR>")
 end
