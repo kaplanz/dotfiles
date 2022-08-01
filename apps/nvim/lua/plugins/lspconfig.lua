@@ -9,12 +9,6 @@ local mason     = require("mason-lspconfig")
 -- Prepare capabilities, handlers, and on_attach
 local capabilities, handlers, on_attach
 do
-  -- Completion kinds
-  require("lspkind").init {}
-
-  -- Highlights
-  vim.cmd [[autocmd ColorScheme * highlight link FloatBorder NormalFloat]]
-
   -- Style of (optional) window border. This can either be a string or
   -- an array.
   -- The string values are:
@@ -52,11 +46,23 @@ do
         end
       end,
     },
+    -- Options for floating windows.
+    float = {
+      -- Style of (optional) window border.
+      border = border,
+      -- Enable focus by user actions.
+      focusable = false,
+      -- Configure the appearance of the window.
+      style = "minimal",
+      -- Include the diagnostic source in the message.
+      source = "if_many",
+    },
+    -- Sort diagnostics by severity.
     severity_sort = true,
   }
 
   -- Change diagnostic symbols in the sign column (gutter)
-  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
