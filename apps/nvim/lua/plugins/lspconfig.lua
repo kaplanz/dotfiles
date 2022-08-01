@@ -15,28 +15,36 @@ do
   -- Highlights
   vim.cmd [[autocmd ColorScheme * highlight link FloatBorder NormalFloat]]
 
-  -- Borders
+  -- Style of (optional) window border. This can either be a string or
+  -- an array.
+  -- The string values are:
+  -- • "none": No border (default).
+  -- • "single": A single line box.
+  -- • "double": A double line box.
+  -- • "rounded": Like "single", but with rounded corners ("╭" etc.).
+  -- • "solid": Adds padding by a single whitespace cell.
+  -- • "shadow": A drop shadow effect by blending with the background.
   local border = "rounded"
 
   -- LSP settings (for overriding per client)
   handlers = {
     ["textDocument/hover"] = vim.lsp.with(
       vim.lsp.handlers.hover, {
-      -- Use a sharp border with `FloatBorder` highlights
+      -- Style of (optional) window border.
       border = border,
-    }
-    ),
+    }),
     ["textDocument/signatureHelp"] = vim.lsp.with(
       vim.lsp.handlers.signature_help, {
-      -- Use a sharp border with `FloatBorder` highlights
+      -- Style of (optional) window border.
       border = border,
-    }
-    ),
+    }),
   }
 
   -- Customize how diagnostics are displayed
   vim.diagnostic.config {
+    -- Use virtual text for diagnostics.
     virtual_text = {
+      -- Format a diagnostic as text used to display it.
       format = function(diagnostic)
         local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
         if diagnostic.lnum <= lnum and lnum <= diagnostic.end_lnum then
