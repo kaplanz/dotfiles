@@ -1,5 +1,18 @@
 # dotfiles
 
+<p align="center">
+  <q>
+    UNIX is basically a simple operating system, but you have to be a genius to
+    understand the simplicity.
+  </q>
+  &mdash;
+  <i>
+    Dennis Ritchie
+  </i>
+</p>
+
+---
+
 ![screenshot](doc/screenshot.png)
 
 ## Getting Started
