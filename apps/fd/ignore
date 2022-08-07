@@ -3,15 +3,20 @@
 # Created:     19 Jul 2019
 # SPDX-License-Identifier: MIT
 
-# -- macOS --
+# -- Developer -- {{{
+.git/
+# }}}
+
+# -- macOS -- {{{
+# Finder
+.DS_Store
+Icon
+
 # Media
 /Library/
 /Movies/
 /Music/
 /Pictures/
+# }}}
 
-# General
-.DS_Store
-
-# -- VCS --
-.git/
+# vim:fdl=0:fdm=marker:

@@ -13,8 +13,6 @@
 
 ---
 
-![screenshot](doc/screenshot.png)
-
 ## Getting Started
 
 This repository could be installed by running [`install.sh`](tools/install.sh) using either `curl` or `wget`.

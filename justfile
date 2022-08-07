@@ -7,7 +7,7 @@ _ *args: (make args)
 
 # install dotfiles
 install:
-    ./tools/install.sh
+    ./install.sh
 
 # forward to make
 make *args:
@@ -15,6 +15,6 @@ make *args:
 
 # upgrade dotfiles
 upgrade:
-    ./tools/upgrade.sh
+    ./upgrade.sh
 
 # vim:fdl=0:fdm=marker:ft=make:

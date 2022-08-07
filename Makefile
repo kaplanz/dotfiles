@@ -3,9 +3,9 @@
 # Created:     23 Feb 2020
 # SPDX-License-Identifier: MIT
 
-# --------------------------------
-#            Variables
-# --------------------------------
+# ----------------
+#    Variables
+# ----------------
 
 # {{{
 # -- Directories -- {{{
@@ -60,8 +60,6 @@ OMZ_LIBS     += $(ZPLUG)/completion.zsh
 OMZ_LIBS     += $(ZPLUG)/git.zsh
 OMZ_LIBS     += $(ZPLUG)/key-bindings.zsh
 OMZ_PLUG      = $(OHMYZSH)/plugins
-OMZ_PLUGINS  += $(ZPACK)/docker
-OMZ_PLUGINS  += $(ZPACK)/git
 # }}}
 
 # -- Utilities -- {{{
@@ -71,9 +69,9 @@ TERMINFOS  = tmux-256color
 # }}}
 
 
-# --------------------------------
-#             Targets
-# --------------------------------
+# ----------------
+#     Targets
+# ----------------
 
 # {{{
 # -- Top-level Goals -- {{{
@@ -240,9 +238,9 @@ $(TERMINFO.SRC):
 # }}}
 
 
-# --------------------------------
-#              Extras
-# --------------------------------
+# ----------------
+#      Extras
+# ----------------
 
 # {{{
 .SECONDARY: # do not remove secondary files
