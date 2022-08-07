@@ -1,4 +1,4 @@
-# File:        prompt_redefined_setup
+# File:        prompt_playtime_setup
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     13 May 2019
 # SPDX-License-Identifier: MIT
@@ -32,7 +32,7 @@ ZSH_PROMPT_ICON_GIT_SUFFIX=')'
 # }}}
 
 # -- Help -- {{{
-function prompt_redefined_help() {
+function prompt_playtime_help() {
     cat << EOF
 TODO: Write a help menu.
 EOF
@@ -40,7 +40,7 @@ EOF
 # }}}
 
 # -- Setup -- {{{
-function prompt_redefined_setup() {
+function prompt_playtime_setup() {
     # Colours
     local red='$ZSH_PROMPT_COLOUR_RED'
     local green='$ZSH_PROMPT_COLOUR_GREEN'
@@ -78,24 +78,24 @@ function prompt_redefined_setup() {
     RPS1="${cmdtime}${exitstatus}${upjobs}${userhost}${vimode}${datetime}"
 
     # Hooks
-    add-zsh-hook precmd  prompt_redefined_precmd
-    add-zsh-hook preexec prompt_redefined_preexec
+    add-zsh-hook precmd  prompt_playtime_precmd
+    add-zsh-hook preexec prompt_playtime_preexec
 }
 # }}}
 
 # -- Hooks -- {{{
-function prompt_redefined_precmd() {
+function prompt_playtime_precmd() {
     # Get the elapsed command execution time
-    ZSH_PROMPT_VAR_CMDTIME="${ZSH_PROMPT_VAR_TIMESTAMP:+$(prompt_redefined_cmdtime)}"
+    ZSH_PROMPT_VAR_CMDTIME="${ZSH_PROMPT_VAR_TIMESTAMP:+$(prompt_playtime_cmdtime)}"
     # Get the gitinfo for the current directory
-    ZSH_PROMPT_VAR_GITINFO="${ZSH_PROMPT_VAR_GITINFO:-$(prompt_redefined_gitinfo)}"
+    ZSH_PROMPT_VAR_GITINFO="${ZSH_PROMPT_VAR_GITINFO:-$(prompt_playtime_gitinfo)}"
     # Unset the previous command timestamp
     unset ZSH_PROMPT_VAR_TIMESTAMP
     # Unset the previous vi-mode
     unset ZSH_PROMPT_VAR_VIMODE
 }
 
-function prompt_redefined_preexec() {
+function prompt_playtime_preexec() {
     # Get the initial command timestamp
     ZSH_PROMPT_VAR_TIMESTAMP="$EPOCHREALTIME"
     # Unset the previous gitinfo
@@ -105,7 +105,7 @@ function prompt_redefined_preexec() {
 
 # -- Functions -- {{{
 # Calculate command execution time
-function prompt_redefined_cmdtime() {
+function prompt_playtime_cmdtime() {
     local stop="$EPOCHREALTIME"
     local start="${ZSH_PROMPT_VAR_TIMESTAMP:-$stop}"
     let local elapsed="$stop - $start"
@@ -113,7 +113,7 @@ function prompt_redefined_cmdtime() {
 }
 
 # Determine gitinfo for the current directory
-function prompt_redefined_gitinfo() {
+function prompt_playtime_gitinfo() {
     # Nothing to print if not inside a git directory
     git rev-parse --is-inside-work-tree &> /dev/null || return
     # Format the prefix
@@ -143,7 +143,7 @@ function prompt_redefined_gitinfo() {
 }
 
 # Determine the current vi-mode
-function prompt_redefined_vimode() {
+function prompt_playtime_vimode() {
     local vimode
     case $KEYMAP in
         main)  ;&
@@ -154,6 +154,6 @@ function prompt_redefined_vimode() {
 }
 # }}}
 
-prompt_redefined_setup "$@"
+prompt_playtime_setup "$@"
 
 # vim:ft=zsh:fdl=0:fdm=marker:

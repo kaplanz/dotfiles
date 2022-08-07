@@ -1,11 +1,11 @@
-# File:        redefined.tmux
+# File:        playtime.tmux
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     25 Jun 2019
 # SPDX-License-Identifier: MIT
 
-# --------------------------------
-#            Redefined
-# --------------------------------
+# ----------------
+# --  Playtime  --
+# ----------------
 
 # -- Clock --
 set -g clock-mode-colour colour110

@@ -129,7 +129,7 @@ autoload -U promptinit
 promptinit
 
 # Set the prompt theme.
-prompt redefined
+prompt playtime
 # }}}
 
 # -- Various -- {{{

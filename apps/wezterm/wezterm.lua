@@ -3,7 +3,7 @@
 -- Created:     23 May 2022
 -- SPDX-License-Identifier: MIT
 
-local wezterm = require('wezterm');
+local wezterm = require("wezterm");
 
 return {
   -- Colours: {{{
