@@ -2,6 +2,7 @@
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     13 May 2021
 # SPDX-License-Identifier: MIT
+# Vim:         set fdl=0 fdm=marker:
 
 # -- Options -- {{{
 setopt auto_pushd
@@ -55,11 +56,6 @@ function take() {
   mkdir -p $@ && cd ${@:$#}
 }
 alias takenow='take $(date +"%Y/%m/%d")'
-# List directory contents
-alias l='ls -lah'
-alias la='ls -lAh'
-alias ll='ls -lh'
-alias lsa='ls -lah'
 # }}}
 
 # -- Files -- {{{
@@ -78,12 +74,16 @@ alias rm='rm -d'
 # }}}
 
 # -- Filesystem -- {{{
+# Use `exa` instead of `ls`
+if command -v exa &> /dev/null; then
+    alias ls='exa --binary --git --icons'
+    alias tree='ls -T'
+fi
+# List aliases
+alias ll='ls -la'
+
 # List contents of directories in a tree-like format.
-export TREE_IGNORE='.git'
-alias tree='tree -I "$TREE_IGNORE"'
 for i in {1..9}; do
     alias tree$i="tree -L $i"
 done
 # }}}
-
-# vim:fdl=0:fdm=marker:

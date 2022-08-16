@@ -2,6 +2,7 @@
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     25 Jun 2019
 # SPDX-License-Identifier: MIT
+# Vim:         set ft=tmux:
 
 # ----------------
 # --  Playtime  --
@@ -43,5 +44,3 @@ set -g status-right '#[fg=colour59,bg=colour235] #H #[fg=colour110,bg=colour237]
 set -g window-status-format '#[fg=colour110,bg=colour235] #I | #W '
 set -g window-status-current-format '#[fg=colour110,bg=colour237] #I | #W '
 set -g window-status-separator ''
-
-# vim:ft=tmux:

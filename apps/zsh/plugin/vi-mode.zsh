@@ -2,6 +2,7 @@
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     27 May 2021
 # SPDX-License-Identifier: MIT
+# Vim:         set fdl=0 fdm=marker:
 
 # If not in vi-mode, don't do anything.
 case "$(bindkey -lL main)" in
@@ -94,5 +95,3 @@ function zle-line-finish() {
 }
 zle -N zle-line-finish
 # }}}
-
-# vim:fdl=0:fdm=marker:

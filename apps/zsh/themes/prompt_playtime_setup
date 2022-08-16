@@ -2,6 +2,7 @@
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     13 May 2019
 # SPDX-License-Identifier: MIT
+# Vim:         set ft=zsh fdl=0 fdm=marker:
 
 # -- Modules -- {{{
 zmodload zsh/datetime
@@ -155,5 +156,3 @@ function prompt_playtime_vimode() {
 # }}}
 
 prompt_playtime_setup "$@"
-
-# vim:ft=zsh:fdl=0:fdm=marker:

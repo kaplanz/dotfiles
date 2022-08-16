@@ -2,6 +2,7 @@
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     23 Feb 2020
 # SPDX-License-Identifier: MIT
+# Vim:         set fdl=0 fdm=marker:
 
 # ----------------
 #    Variables
@@ -20,7 +21,7 @@ TERMINFO  = $(HOME)/.terminfo
 TMUX      = $(XDG_CONFIG_HOME)/tmux
 ZPACK     = $(ZSH)/pack
 ZPLUG     = $(ZSH)/before
-ZSH       = $(HOME)/.zsh
+ZSH       = $(XDG_CONFIG_HOME)/zsh
 # }}}
 
 # -- Files -- {{{
@@ -250,5 +251,3 @@ $(TERMINFO.SRC):
 # Includes
 -include ./local/Makefile
 # }}}
-
-# vim:fdl=0:fdm=marker:
