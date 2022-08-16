@@ -2,6 +2,7 @@
 -- Author:      Zakhary Kaplan <https://zakhary.dev>
 -- Created:     23 May 2022
 -- SPDX-License-Identifier: MIT
+-- Vim:         set fdl=0 fdm=marker:
 
 local wezterm = require("wezterm");
 
@@ -65,5 +66,3 @@ return {
   },
   -- }}}
 }
-
--- vim:fdl=0:fdm=marker:
