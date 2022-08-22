@@ -1,0 +1,9 @@
+#!/bin/sh
+# File:        bootstrap
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     22 Aug 2022
+# Version:     0.1.0
+# SPDX-License-Identifier: MIT
+# Vim:         set ft=sh:
+
+"${0%/*}/dots" -xy install

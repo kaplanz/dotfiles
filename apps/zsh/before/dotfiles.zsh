@@ -5,6 +5,3 @@
 
 # Set the path to the dotfiles repo.
 export DOTFILES="$HOME/.dotfiles"
-
-# Upgrade the dotfiles repo
-function upgrade_dotfiles() { "$DOTFILES/tools/upgrade.sh" "$@"; }

@@ -8,7 +8,7 @@ _ *args: (make args)
 
 # install dotfiles
 install:
-    ./install.sh
+    ./script/dots -i
 
 # forward to make
 make *args:
@@ -16,4 +16,4 @@ make *args:
 
 # upgrade dotfiles
 upgrade:
-    ./upgrade.sh
+    ./script/dots -u
