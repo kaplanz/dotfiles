@@ -15,18 +15,13 @@
 
 ## Getting Started
 
-This repository could be installed by running [`install.sh`](tools/install.sh) using either `curl` or `wget`.
+This repository could be installed using the provided [`install`][install]
+script.
 
 ### via curl
 
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
-```
-
-### via wget
-
-```sh
-bash -c "$(wget -O -  https://raw.githubusercontent.com/zakharykaplan/dotfiles/master/tools/install.sh)"
+curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | bash
 ```
 
 ## Manual Installation
@@ -39,7 +34,9 @@ git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
 
 ### Dependencies
 
-Some features of this repository have dependencies as listed in the [`Brewfile`](tools/Brewfile). Before installing, ensure `Homebrew` and `zsh` are installed.
+Some features of this repository have dependencies as listed in the
+[`Brewfile`][brewfile]. Before installing, ensure `brew` and `zsh` are
+installed.
 
 **Homebrew**:
 
@@ -47,11 +44,12 @@ Some features of this repository have dependencies as listed in the [`Brewfile`]
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-For more information on installation, see [website](https://brew.sh).
+For more information on installation, see [website][homebrew].
 
 ### Dotfiles
 
-The dotfiles are installed through symlinks to various directories. To use my configuration, setup  directories and link all dotfiles using the [`Makefile`](Makefile):
+The dotfiles are installed through symlinks to various directories. To set up
+directories and link all dotfiles using the [`Makefile`][makefile]:
 
 ```sh
 make --directory=~/.dotfiles
@@ -59,8 +57,14 @@ make --directory=~/.dotfiles
 
 ## Uninstallation
 
-To unlink all dotfiles, use the [`Makefile`](Makefile):
+All managed dotfiles can be uninstalled using the [`Makefile`][makefile] with:
 
 ```sh
 make --directory=~/.dotfiles uninstall
 ```
+
+<!-- Reference-style links -->
+[brewfile]: ./Brewfile
+[homebrew]: https://brew.sh
+[install]:  ./install.sh
+[makefile]: ./Makefile
