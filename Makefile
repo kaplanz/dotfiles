@@ -10,8 +10,10 @@
 
 # {{{
 # -- Directories -- {{{
+# XDG
 XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_DATA_HOME   ?= $(HOME)/.local/share
+# Home
 CRON      = $(HOME)/.cron
 DOTFILES  = $(HOME)/.dotfiles
 FZF       = $(XDG_DATA_HOME)/fzf
@@ -25,6 +27,7 @@ ZSH       = $(XDG_CONFIG_HOME)/zsh
 # }}}
 
 # -- Files -- {{{
+BREWFILE     = $(DOTFILES)/Brewfile
 TERMINFO.SRC = $(TERMINFO)/terminfo.src
 # }}}
 
@@ -114,7 +117,7 @@ uninstall: unstow
 .PHONY: brew
 brew:
 ifdef BREW
-	$(BREW) bundle --file=$(DOTFILES)/tools/Brewfile
+	$(BREW) bundle --file=$(BREWFILE)
 endif
 # }}}
 

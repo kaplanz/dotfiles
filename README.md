@@ -21,7 +21,7 @@ script.
 ### via curl
 
 ```sh
-curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | bash
+curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | sh
 ```
 
 ## Manual Installation
@@ -66,5 +66,5 @@ make --directory=~/.dotfiles uninstall
 <!-- Reference-style links -->
 [brewfile]: ./Brewfile
 [homebrew]: https://brew.sh
-[install]:  ./install.sh
+[install]:  ./script/setup
 [makefile]: ./Makefile
