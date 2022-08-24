@@ -1,0 +1,148 @@
+# File:        aliases
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     24 Aug 2022
+# SPDX-License-Identifier: MIT
+# Vim:         set fdl=0 fdm=indent ft=gitconfig:
+
+# Command aliases for the git(1) command wrapper
+[alias]
+        # add
+        a     = add
+        aa    = add --all
+        an    = add --all --intent-to-add
+        ap    = add --patch
+        # apply
+        ap    = apply
+        # branch
+        b     = branch
+        ba    = branch --all
+        bd    = branch --delete
+        bD    = branch --delete --force
+        bnm   = branch --no-merged
+        br    = branch --remote
+        # blame
+        bl    = blame -bw
+        # bisect
+        bs    = bisect
+        bsb   = bisect bad
+        bsg   = bisect good
+        bsr   = bisect reset
+        bss   = bisect start
+        # checkout
+        co    = checkout
+        cor   = checkout --recurse-submodules
+        com   = checkout main
+        # cherry-pick
+        cp    = cherry-pick
+        cpa   = cherry-pick --abort
+        cpc   = cherry-pick --continue
+        # clean
+        cl    = clean -d --interactive
+        cL    = clean -dffx
+        # clone
+        rc    = clone --recurse-submodules
+        # commit
+        c     = commit
+        cm    = commit --message
+        ci    = commit --patch
+        cx    = commit --amend
+        cxn   = commit --amend --no-edit
+        ca    = commit --all
+        cam   = commit --all --message
+        cax   = commit --all --amend
+        caxn  = commit --all --amend --no-edit
+        # config
+        cf    = config
+        cfl   = config --list
+        cfg   = config --global
+        cfgl  = config --global --list
+        # diff
+        d     = diff
+        dw    = diff --word-diff
+        dc    = diff --cached
+        dcw   = diff --cached --word-diff
+        ds    = diff --staged
+        dsw   = diff --staged --word-diff
+        # fetch
+        f     = fetch
+        fa    = fetch --all --prune
+        sync  = fetch --all --prune --prune-tags
+        # help
+        h     = help
+        # merge
+        m     = merge
+        ma    = merge --abort
+        # pull
+        l     = pull
+        up    = pull --rebase
+        upa   = pull --rebase --autostash
+        # push
+        p     = push
+        pa    = push --all
+        pf    = push --force-with-lease
+        pF    = push --force
+        pt    = push --tags
+        # log
+        lf    = log --pretty=fuller
+        lg    = log --stat
+        lgp   = log --stat --patch
+        lgg   = log --graph
+        lgga  = log --graph --decorate --all
+        lo    = log --graph --oneline --decorate
+        log   = log --graph --oneline --decorate --graph
+        loga  = log --graph --oneline --decorate --graph --all
+        lol   = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+        lols  = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --short
+        lola  = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
+        lp    = lola
+        # rebase
+        rb    = rebase
+        rba   = rebase --abort
+        rbc   = rebase --continue
+        rbd   = rebase --committer-date-is-author-date
+        rbi   = rebase --interactive
+        # remote
+        r     = remote
+        ra    = remote add
+        rrn   = remote rename
+        rrm   = remote remove
+        rset  = remote set-url
+        rup   = remote update
+        rv    = remote --verbose
+        # remove
+        rm    = remove
+        # reset
+        rs    = reset
+        rsh   = reset --hard
+        # restore
+        ro    = restore
+        ros   = restore --staged
+        # revert
+        rev   = revert
+        # show
+        sh    = show
+        # stash
+        z     = stash
+        za    = stash apply
+        zc    = stash clear
+        zd    = stash drop
+        zl    = stash list
+        zp    = stash pop
+        zsh   = stash show --text
+        zu    = stash apply --include-untracked
+        # status
+        st    = status
+        sb    = status --branch --short
+        ss    = status --short
+        # submodule
+        sub   = submodule
+        si    = submodule init
+        su    = submodule update --init
+        # switch
+        sw    = switch
+        swc   = switch --create
+        swC   = switch --force-create
+        # tag
+        t     = tag
+        ta    = tag --annotate
+        ts    = tag --sign
