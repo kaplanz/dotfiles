@@ -42,8 +42,8 @@ USAGE:
     dots [OPTIONS] [--] [SUBCOMMAND]
 
 OPTIONS:
+    -a            Run with animations enabled.
     -c <WHEN>     Coloring: auto, always, never
-    -f            Run in fast mode (disables animations).
     -x            Run in script mode (disables animations, color).
     -y            Disable confirmation prompt.
     -l <LEVEL>    Logging: none, error, warn, info, debug, trace
@@ -67,19 +67,19 @@ alias trace='log -t'
 
 main() {
     # Declare config, set defaults
-    local animate=1
+    local animate=
     local color=auto
     local proceed=
     local subcommand=
 
     # Parse opts
-    while getopts ":c:fxyl:vqhV" opt; do
+    while getopts ":ac:xyl:vqhV" opt; do
         case ${opt} in
+            a)
+                animate=1
+                ;;
             c)
                 color="${OPTARG}"
-                ;;
-            f)
-                animate=
                 ;;
             x)
                 animate=
