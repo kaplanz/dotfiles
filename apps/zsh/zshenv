@@ -5,4 +5,4 @@
 
 # The directory to search for shell startup files (.zshrc, etc).
 # If ZDOTDIR is unset, HOME is used instead.
-ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"

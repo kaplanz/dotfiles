@@ -10,7 +10,16 @@ case $- in
       *) return;;
 esac
 
-# -- Pre-sources -- {{{
+# -- Base -- {{{
+# The directory for for shell cache files (zhistory, zcompdump, etc).
+export ZCACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+mkdir -p $ZCACHEDIR
+
+# The root dotfiles directory.
+export DOTFILES="$HOME/.dotfiles"
+# }}}
+
+# -- Before-hooks -- {{{
 # Source `before` plugins.
 for plugin in "$ZDOTDIR/before"/**/*.zsh(N); do
     source "$plugin"
@@ -26,7 +35,7 @@ export fpath=("$ZDOTDIR/functions" $fpath)
 zstyle :compinstall filename '$ZDOTDIR/.zshrc'
 
 autoload -Uz compinit
-compinit -d "$ZDOTDIR/zcompdump"
+compinit -d "$ZCACHEDIR/zcompdump"
 # }}}
 
 # -- Editing -- {{{
@@ -54,11 +63,19 @@ export PAGER='less'
 export LESS='-MRi'
 # }}}
 
+# -- Help -- {{{
+# Tell run-help where to look for the help files.
+export HELPDIR="${HELPDIR:-/usr/local/share/zsh/help}"
+(( ${+aliases[run-help]} )) && unalias run-help
+autoload -Uz run-help
+alias help='run-help'
+# }}}
+
 # -- History -- {{{
 # (1) Number of lines of history kept within the shell.
 HISTSIZE=10000
 # (2) File where history is saved.
-HISTFILE="$ZDOTDIR/zhistory"
+HISTFILE="$ZCACHEDIR/zhistory"
 # (3) Number of lines of history to save to $HISTFILE.
 SAVEHIST=10000
 
@@ -78,7 +95,7 @@ setopt share_history
 # }}}
 
 # -- Homebrew -- {{{
-local HOMEBREW="/opt/homebrew/bin/brew"
+local HOMEBREW="${HOMEBREW:-/opt/homebrew/bin/brew}"
 [ -x "$HOMEBREW" ] && eval "$($HOMEBREW shellenv)"
 unset HOMEBREW
 # }}}
@@ -98,6 +115,8 @@ setopt no_clobber
 setopt no_match
 # Immediately report changes in background job status.
 setopt notify
+# By default, give other users read-only access to most new files.
+umask 022
 # }}}
 
 # -- Path -- {{{
@@ -105,7 +124,7 @@ setopt notify
 export path=("$HOME/.local/bin" $path)
 # }}}
 
-# -- Sources -- {{{
+# -- Plugins -- {{{
 # Source `pack`s.
 for pack in "$ZDOTDIR/pack"/*(N); do
     local name="$pack:t"
@@ -133,18 +152,7 @@ promptinit
 prompt playtime
 # }}}
 
-# -- Various -- {{{
-# Tell run-help where to look for the help files.
-export HELPDIR="${HELPDIR:-/usr/local/share/zsh/help}"
-(( ${+aliases[run-help]} )) && unalias run-help
-autoload -Uz run-help
-alias help='run-help'
-
-# By default, give other users read-only access to most new files.
-umask 022
-# }}}
-
-# -- Post-sources -- {{{
+# -- After-hooks -- {{{
 # Source `after` plugins.
 for plugin in "$ZDOTDIR/after"/**/*.zsh(N); do
     source "$plugin"
