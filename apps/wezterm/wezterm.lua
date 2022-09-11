@@ -31,7 +31,6 @@ return {
     "ss02", -- <= >=
     "ss04", -- $
     "ss06", -- \\
-    "ss07", -- =~ !~
     "ss10", -- Fl Tl fi fj fl ft
   },
   text_background_opacity = 0.85,
