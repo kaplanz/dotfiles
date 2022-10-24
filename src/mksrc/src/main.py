@@ -8,9 +8,67 @@ import argparse
 import re
 from datetime import date
 from pathlib import Path
-from typing import Dict
 
 import toml
+
+
+# fmt: off
+BORDERS: dict[str, dict[str, str]] = {
+        "ascii": {
+            "dl": "+",
+            "dr": "+",
+            "hh": "-",
+            "ul": "+",
+            "ur": "+",
+            "vv": "|",
+        },
+        "round": {
+            "dl": "╮",
+            "dr": "╭",
+            "ul": "╯",
+            "ur": "╰",
+        },
+        "sharp": {
+
+    "dl": "┐",
+    "dr": "┌",
+    "hh": "─",
+    "ul": "┘",
+    "ur": "└",
+    "vv": "│",
+            },
+        "star": {
+            "dl": "*",
+            "dr": "*",
+            "hh": "*",
+            "ul": "*",
+            "ur": "*",
+            "vv": "*",
+        },
+    }
+# fmt: on
+
+# fmt: off
+LANGS: dict[str, str] = {
+    # "
+    "vim":  '" %s',
+    # #
+    "py":   "# %s",
+    "sh":   "# %s",
+    # --
+    "lua":  "--",
+    # //
+    "c":    "// %s",
+    "cc":   "// %s",
+    "cpp":  "// %s",
+    "h":    "// %s",
+    "java": "// %s",
+    "rs":   "// %s",
+    # <!-- -->
+    "html": "<!-- %s -->",
+    "md":   "<!-- %s -->",
+}
+# fmt: on
 
 
 def main():
@@ -42,7 +100,7 @@ def main():
     parser.add_argument("--confdir", type=str, default="~/.config/mksrc",
                         help="mksrc config home directory (default: ~/.config/mksrc)")
     for attr in attrs:  # add overrides for all attributes
-        parser.add_argument(f"--{attr}", type=str, help=f"{attr} string attribute")
+        parser.add_argument(f"--{attr}", type=str, help=f"{attr} attribute")
     # fmt: on
     # Parse args
     args = parser.parse_args()
@@ -70,7 +128,8 @@ def main():
         raise FileExistsError
 
     # Update commentstrings from defaults
-    langs = LANGS()
+    langs = dict()
+    langs.update(LANGS)
     langs.update(config.get("languages") or {})
     config["languages"] = langs
 
@@ -114,36 +173,7 @@ def main():
         header = date.today().strftime(header)
 
     # Perform any decorations
-    border = {
-        "ascii": {
-            "dl": "+",
-            "dr": "+",
-            "hh": "-",
-            "ul": "+",
-            "ur": "+",
-            "vv": "|",
-        },
-        "round": {
-            "dl": "╮",
-            "dr": "╭",
-            "ul": "╯",
-            "ur": "╰",
-        },
-        "sharp": {
-            "dl": "┐",
-            "dr": "┌",
-            "ul": "┘",
-            "ur": "└",
-        },
-        "star": {
-            "dl": "*",
-            "dr": "*",
-            "hh": "*",
-            "ul": "*",
-            "ur": "*",
-            "vv": "*",
-        },
-    }[args.box_style]
+    border = args.box_style
     if args.box:
         header = box(attrs, header, border)
 
@@ -171,36 +201,18 @@ def main():
         f.write(header)
 
 
-def LANGS() -> Dict[str, str]:
-    langs = dict()
-    # "//"
-    for ft in [".c", ".cc", ".cpp", ".h", ".java", ".rs"]:
-        langs[ft] = "// %s"
-    # "#"
-    for ft in [".py", ".sh"]:
-        langs[ft] = "# %s"
-    # '"'
-    for ft in [".vim"]:
-        langs[ft] = '" %s'
-    # "<!-- -->"
-    for ft in [".html", ".md"]:
-        langs[ft] = "<!-- %s -->"
-    # Return language commentstrings
-    return langs
-
-
-def box(attrs, header: str, chars: Dict[str, str] | None = None) -> str:
+def box(attrs, header: str, chars: dict[str, str] | str | None = None) -> str:
     # Define the charset if not defined
-    dchars = {
-        "dl": "┐",
-        "dr": "┌",
-        "hh": "─",
-        "ul": "┘",
-        "ur": "└",
-        "vv": "│",
-    }
-    dchars.update(chars or {})
-    chars = dchars
+    match chars:
+        case dict():
+            pass
+        case str():
+            chars = BORDERS.get(chars)
+            if not chars: raise ValueError
+        case None:
+            chars = BORDERS["ascii"]
+        case _:
+            raise TypeError
     # Split lines from the header
     lines = header.splitlines()
     # Extract the comment string
