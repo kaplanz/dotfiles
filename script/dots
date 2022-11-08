@@ -38,23 +38,22 @@ usage() {
 ${NAME} ${VERSION}
 Zakhary's dotfiles manager
 
-USAGE:
-    dots [OPTIONS] [--] [SUBCOMMAND]
+Usage: dots [OPTIONS] [COMMAND]
 
-OPTIONS:
-    -a            Run with animations enabled.
-    -c <WHEN>     Coloring: auto, always, never
-    -x            Run in script mode (disables animations, color).
-    -y            Disable confirmation prompt.
-    -l <LEVEL>    Logging: none, error, warn, info, debug, trace
-    -q            Disable progress output.
-    -v            Enable verbose output.
-    -h            Prints help information.
-    -V            Prints version information.
+Commands:
+  i, install    Perform standard installation.
+  u, upgrade    Upgrade the current installation.
 
-SUBCOMMANDS:
-    install, i    Perform standard installation.
-    upgrade, u    Upgrade the current installation.
+Options:
+  -a            Run with animations enabled
+  -c <WHEN>     Coloring: auto, always, never
+  -x            Run in script mode (disables animations, color)
+  -y            Disable confirmation prompt
+  -l <LEVEL>    Logging: none, error, warn, info, debug, trace
+  -q            Disable progress output
+  -v            Enable verbose output
+  -h            Print help information
+  -V            Print version information
 EOF
 }
 
