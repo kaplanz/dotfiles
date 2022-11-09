@@ -6,10 +6,9 @@
 
 import argparse
 import re
+import tomllib
 from datetime import date
 from pathlib import Path
-
-import toml
 
 
 # fmt: off
@@ -119,7 +118,8 @@ def main():
 
     # Read the config file
     try:
-        config = toml.load(args.config)
+        with open(args.config, "rb") as f:
+            config = tomllib.load(f)
     except:
         config = dict()
 
