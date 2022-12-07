@@ -38,7 +38,7 @@ usage() {
 ${NAME} ${VERSION}
 Zakhary's dotfiles manager
 
-Usage: dots [OPTIONS] [COMMAND]
+Usage: ${NAME} [OPTIONS] [COMMAND]
 
 Commands:
   i, install    Perform standard installation.
