@@ -41,6 +41,6 @@ set -g status-left '#{prefix_highlight}#[fg=colour235,bg=colour110] #S '
 set -g status-right-length 150
 set -g status-right '#[fg=colour59,bg=colour235] #H #[fg=colour110,bg=colour237] %X #[fg=colour235,bg=colour110] %x '
 # Window status
-set -g window-status-format '#[fg=colour110,bg=colour235] #I | #W '
-set -g window-status-current-format '#[fg=colour110,bg=colour237] #I | #W '
+set -g window-status-format '#[fg=colour110,bg=colour235] #I ┃ #W '
+set -g window-status-current-format '#[fg=colour110,bg=colour237] #I ┃ #W '
 set -g window-status-separator ''
