@@ -18,8 +18,34 @@ return {
 
   -- Text: {{{
   allow_square_glyphs_to_overflow_width = "Never",
-  font = wezterm.font_with_fallback {
-    "Fira Code",
+  font = wezterm.font "Fira Code",
+  font_rules = {
+    {
+      intensity = "Bold",
+      italic = true,
+      font = wezterm.font {
+        family = "Victor Mono",
+        weight = "Bold",
+        style = "Italic",
+      },
+    },
+    {
+      italic = true,
+      intensity = "Half",
+      font = wezterm.font {
+        family = "Victor Mono",
+        weight = "DemiBold",
+        style = "Italic",
+      },
+    },
+    {
+      italic = true,
+      intensity = "Normal",
+      font = wezterm.font {
+        family = "Victor Mono",
+        style = "Italic",
+      },
+    },
   },
   harfbuzz_features = {
     -- character variants
