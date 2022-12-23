@@ -72,6 +72,7 @@
         # merge
         m     = merge
         ma    = merge --abort
+        mc    = merge --continue
         # pull
         l     = pull
         up    = pull --rebase
