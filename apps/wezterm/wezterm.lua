@@ -16,6 +16,39 @@ return {
   color_scheme = "iceberg-dark",
   -- }}}
 
+  -- Keymaps {{{
+  keys = {
+    {
+      key = "LeftArrow",
+      mods = "SUPER",
+      action = wezterm.action.SplitPane {
+        direction = "Left",
+      }
+    },
+    {
+      key = "RightArrow",
+      mods = "SUPER",
+      action = wezterm.action.SplitPane {
+        direction = "Right",
+      }
+    },
+    {
+      key = "UpArrow",
+      mods = "SUPER",
+      action = wezterm.action.SplitPane {
+        direction =  "Up",
+      }
+    },
+    {
+      key = "DownArrow",
+      mods = "SUPER",
+      action = wezterm.action.SplitPane {
+        direction =  "Down",
+      }
+    },
+  },
+  -- }}}
+
   -- Text: {{{
   allow_square_glyphs_to_overflow_width = "Never",
   font = wezterm.font "Fira Code",
