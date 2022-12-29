@@ -5,7 +5,7 @@
 # Vim:         set fdl=0 fdm=marker:
 
 # ----------------
-#    Variables
+# -- Variables  --
 # ----------------
 
 # {{{
@@ -74,7 +74,7 @@ TERMINFOS  = tmux-256color
 
 
 # ----------------
-#     Targets
+# --  Targets   --
 # ----------------
 
 # {{{
@@ -243,7 +243,7 @@ $(TERMINFO.SRC):
 
 
 # ----------------
-#      Extras
+# --   Extras   --
 # ----------------
 
 # {{{

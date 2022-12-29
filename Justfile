@@ -1,4 +1,4 @@
-# File:        justfile
+# File:        Justfile
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     31 May 2022
 # SPDX-License-Identifier: MIT
