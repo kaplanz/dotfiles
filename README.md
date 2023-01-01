@@ -29,7 +29,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | s
 Start by cloning this repository to your home directory:
 
 ```sh
-git clone https://github.com/zakharykaplan/dotfiles.git ~/.dotfiles
+git clone https://github.com/kaplanz/dotfiles.git ~/.dotfiles
 ```
 
 ### Dependencies
