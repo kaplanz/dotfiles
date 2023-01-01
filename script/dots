@@ -23,7 +23,7 @@ export NO_COLOR="${NO_COLOR}"
 # @env DOTFILES  Default dotfiles installation directory path.
 DOTFILES=${DOTFILES:-~/.dotfiles}
 # @env GIT_REPO  Remote URL to dotfiles repository.
-GIT_REPO=${GIT_REPO:-https://github.com/zakharykaplan/dotfiles.git}
+GIT_REPO=${GIT_REPO:-https://github.com/kaplanz/dotfiles.git}
 
 # @env GIT       Call git from the proper directory.
 GIT="git -C ${DOTFILES}"
