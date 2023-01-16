@@ -52,6 +52,7 @@ return {
   -- Text: {{{
   allow_square_glyphs_to_overflow_width = "Never",
   font = wezterm.font "Fira Code",
+  font_size = 13.2,
   font_rules = {
     {
       intensity = "Bold",
