@@ -93,9 +93,8 @@
         log   = log --graph --oneline --decorate --graph
         loga  = log --graph --oneline --decorate --graph --all
         lol   = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-        lols  = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --short
         lola  = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
-        lp    = lola
+        lp    = lol
         # rebase
         rb    = rebase
         rba   = rebase --abort
