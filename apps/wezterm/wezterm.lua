@@ -4,7 +4,7 @@
 -- SPDX-License-Identifier: MIT
 -- Vim:         set fdl=0 fdm=marker:
 
-local wezterm = require("wezterm");
+local wezterm = require("wezterm")
 
 return {
   -- Behaviour: {{{
