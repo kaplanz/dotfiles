@@ -185,14 +185,14 @@ main() {
     esac
 
     # Print banner
-    info 'Welcome to...'
-    info
+    info 'Welcome to...                              '
+    info '                                           '
     info ' /\/|  __   _       _    __ _ _            '
     info '|/\/  / /__| | ___ | |_ / _(_) | ___  ___  '
     info '     / // _` |/ _ \| __| |_| | |/ _ \/ __| '
     info '    / /| (_| | (_) | |_|  _| | |  __/\__ \ '
     info '   /_/(_)__,_|\___/ \__|_| |_|_|\___||___/ '
-    info
+    info '                                           '
     info '                        by: Zakhary Kaplan '
     info
     # Display the banner for a few seconds with an animated countdown
@@ -225,6 +225,7 @@ main() {
     debug 'Satisfied. May proceed.'
     debug
 
+    # Perform subcommand
     debug "Performing ${subcommand}."
     case "${subcommand}" in
         install)
@@ -439,7 +440,7 @@ dep_checkall() {
         dep_check brew
     } || {
         # Check if individual dependencies are installed
-        dep_check curl  &&
+        dep_check curl &&
         dep_check git  &&
         dep_check make &&
         dep_check stow &&
