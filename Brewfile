@@ -4,8 +4,6 @@
 # SPDX-License-Identifier: MIT
 
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
 
 brew "bash"
 brew "bat"
