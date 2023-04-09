@@ -10,8 +10,10 @@ local config = wezterm.config_builder()
 
 
 -- Behaviour: {{{
+config.check_for_updates = false
 config.exit_behavior = "Close"
 config.native_macos_fullscreen_mode = true
+config.show_update_window = false
 -- }}}
 
 -- Colour: {{{
@@ -47,6 +49,11 @@ config.keys = {
     action = wezterm.action.SplitPane {
       direction =  "Down",
     }
+  },
+  {
+    key = 'w',
+    mods = 'CMD',
+    action = wezterm.action.CloseCurrentTab { confirm = false },
   },
 }
 -- }}}
