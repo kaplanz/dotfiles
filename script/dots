@@ -31,7 +31,7 @@ GIT="git -C ${DOTFILES}"
 MAKE="make -C ${DOTFILES}"
 
 #
-# @desc Print help information.
+# @desc Print help.
 #
 usage() {
     cat 1>&2 <<EOF
@@ -52,8 +52,8 @@ Options:
   -l <LEVEL>    Logging: none, error, warn, info, debug, trace
   -q            Disable progress output
   -v            Enable verbose output
-  -h            Print help information
-  -V            Print version information
+  -h            Print help
+  -V            Print version
 EOF
 }
 
