@@ -66,5 +66,5 @@ make --directory=~/.dotfiles uninstall
 <!-- Reference-style links -->
 [brewfile]: ./Brewfile
 [homebrew]: https://brew.sh
-[install]:  ./script/setup
+[install]:  ./script/dots
 [makefile]: ./Makefile

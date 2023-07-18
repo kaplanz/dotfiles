@@ -8,4 +8,4 @@
 DOTFILES=${DOTFILES:-"$HOME/.dotfiles"}
 
 # Run dotfiles upgrade script
-env DOTFILES="$DOTFILES" "$DOTFILES/tools/upgrade.sh"
+env DOTFILES="$DOTFILES" "$DOTFILES/script/dots" upgrade
