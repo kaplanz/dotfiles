@@ -76,11 +76,13 @@ alias rm='rm -d'
 # -- Filesystem -- {{{
 # Use `exa` instead of `ls`
 if command -v exa &> /dev/null; then
-    alias ls='exa --binary --git --icons'
+    alias ls='exa --binary --classify --git --icons'
     alias tree='ls -T'
 fi
 # List aliases
-alias ll='ls -la'
+alias l='la'
+alias la='ls -la'
+alias ll='ls -l'
 
 # List contents of directories in a tree-like format.
 for i in {1..9}; do
