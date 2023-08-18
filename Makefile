@@ -88,7 +88,7 @@ all: apps
 apps: etc local nvim tmux zsh
 
 .PHONY: etc
-etc: cron fzf terminfo
+etc: fzf terminfo
 
 .PHONY: local
 local: stow-local
@@ -200,16 +200,7 @@ $(OHMYZSH)/%: $(OMZ_REPO) ;
 # }}}
 # }}}
 
-# -- Utility Goals -- {{{
-# cron {{{
-.PHONY: cron
-cron: $(CRON) stow
-
-.PHONY: $(CRON)
-$(CRON):
-	@bash -c "$(MKDIR) $(CRON)/{locks,logs,scripts}"
-# }}}
-
+# -- Application Goals -- {{{
 # fzf {{{
 ifdef BREW
 FZF = $(shell $(BREW) --prefix fzf)
@@ -229,7 +220,7 @@ $(FZF_CONFIG): | $(FZF)
 	$(INSTALL) $(FLAGS)
 # }}}
 
-# terminfo
+# terminfo {{{
 .PHONY: terminfo
 terminfo: $(TERMINFO.SRC)
 
@@ -238,6 +229,7 @@ $(TERMINFO.SRC):
 	$(WGET) -P $(@D) $(TERMINFO.SRC.GZ)
 	$(GUNZIP) $@.gz
 	$(TIC) -xe tmux-256color $@
+# }}}
 # }}}
 # }}}
 
