@@ -393,7 +393,7 @@ log() {
                 color=$(printf "\033[34m")
                 ;;
             trace )
-                color=$(printf "\033[36m")
+                color=$(printf "\033[35m")
                 ;;
         esac
     fi
