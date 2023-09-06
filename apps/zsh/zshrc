@@ -73,20 +73,24 @@ alias help='run-help'
 
 # -- History -- {{{
 # (1) Number of lines of history kept within the shell.
-HISTSIZE=10000
+HISTSIZE=100000
 # (2) File where history is saved.
 HISTFILE="$ZCACHEDIR/zhistory"
 # (3) Number of lines of history to save to $HISTFILE.
-SAVEHIST=10000
+SAVEHIST=100000
 
 # Record timestamp of command in HISTFILE
 setopt extended_history
 # Delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_expire_dups_first
+# Do not display duplicates of a line previously found
+setopt hist_find_no_dups
 # Ignore duplicated commands history list
 setopt hist_ignore_dups
 # Ignore commands that start with space
 setopt hist_ignore_space
+# Remove superfluous blanks from each command line
+setopt hist_reduce_blanks
 # Show command with history expansion to user before running it
 setopt hist_verify
 # Share command history data
