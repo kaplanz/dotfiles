@@ -24,7 +24,7 @@ script.
 curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | sh
 ```
 
-## Manual Installation
+### Manual Installation
 
 Start by cloning this repository to your home directory:
 
@@ -32,24 +32,24 @@ Start by cloning this repository to your home directory:
 git clone https://github.com/kaplanz/dotfiles.git ~/.dotfiles
 ```
 
-### Dependencies
+## Dependencies
 
 Some features of this repository have dependencies as listed in the
 [`Brewfile`][brewfile]. Before installing, ensure `brew` and `zsh` are
 installed.
 
-**Homebrew**:
+### Homebrew
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-For more information on installation, see [website][homebrew].
+For more information on using `brew`, see its [website][homebrew].
 
-### Dotfiles
+### Symlinks
 
-The dotfiles are installed through symlinks to various directories. To set up
-directories and link all dotfiles using the [`Makefile`][makefile]:
+Dotfiles are installed through symlinks to various home subdirectories. To set
+up directories and link all dotfiles, use the `[Makefile]`
 
 ```sh
 make --directory=~/.dotfiles
