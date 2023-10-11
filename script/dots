@@ -15,15 +15,18 @@ NAME="${0##*/}"
 # @env VERSION   Version number of this script.
 VERSION=0.1.0
 
+# @env LOG_FILE  Logging output file.
+export LOG_FILE="${LOG_FILE:-logs/dots.$(date +%s).log}"
+mkdir -p "$(dirname ${LOG_FILE})"
 # @env LOG_LEVEL Filter for logging.
 export LOG_LEVEL="${LOG_LEVEL:-info}"
 # @env NO_COLOR  Disable ANSI color escape codes.
 export NO_COLOR="${NO_COLOR}"
 
 # @env DOTS      Default dotfiles installation directory path.
-DOTS=${DOTS:-~/.dots}
+DOTS="${DOTS:-~/.dots}"
 # @env GIT_REPO  Remote URL to dotfiles repository.
-GIT_REPO=${GIT_REPO:-https://github.com/kaplanz/dotfiles.git}
+GIT_REPO="${GIT_REPO:-https://github.com/kaplanz/dotfiles.git}"
 
 # @env GIT       Call git from the proper directory.
 GIT="git -C ${DOTS}"
@@ -246,7 +249,7 @@ main() {
             # Download dotfiles
             info 'Downloading...'
             if [ ! -d "${DOTS}" ]; then
-                git clone "${GIT_REPO}" "${DOTS}"
+                monitor git clone "${GIT_REPO}" "${DOTS}"
             else
                 warn "File already exists at path: \`${DOTS}\`"
                 if ${GIT} rev-parse >/dev/null 2>&1; then
@@ -279,25 +282,35 @@ main() {
 
             # Unstow dotfiles
             info 'Unlinking installed files...'
-            ${MAKE} unstow
+            monitor ${MAKE} unstow
+            info "Success."
+            info
 
             # Update dotfiles repository
             info "Updating dotfiles..."
             {
+                # Check if repo is dirty
                 local dirty=
                 [ -n "$(${GIT} status -s)" ] && {
-                    ${GIT} stash push --all && dirty=1
+                    # Stash changes before pull
+                    monitor ${GIT} stash push --all && dirty=1
                 }
-                ${GIT} pull --rebase --recurse-submodules
-                [ -n "${dirty}" ] && ${GIT} stash pop
+                # Pull updates
+                monitor ${GIT} pull --rebase --recurse-submodules
+                # Restore changes if stashed
+                [ -n "${dirty}" ] && {
+                    monitor ${GIT} stash pop
+                }
             }
+            info "Success."
+            info
             ;;
     esac
 
     # Run Makefile
     info 'Running Makefile...'
-    ${MAKE} install
-    info 'Finished. May proceed.'
+    monitor ${MAKE} install
+    info "Success."
     info
 
     # Complete installation
@@ -422,6 +435,26 @@ bail() {
 #
 cancel() {
     bail 1 'Operation cancelled.'
+}
+
+#
+# @desc Run and monitor a command, logging output and exiting on failure.
+#
+monitor() {
+    # Execute monitored command, log output
+    $@ >> "${LOG_FILE}" 2>&1
+    # Extract status code
+    local code=$?
+    # Check for success
+    if [ ${code} -eq 0 ]; then
+        return  # no-op on success
+    fi
+    # Indicate failure
+    error "Failed with exit code: ${code}"
+    # Display last few lines of output
+    tail -10 "${LOG_FILE}" | while read line; do warn "${line}"; done
+    # Abort failed execution
+    cancel
 }
 
 #
