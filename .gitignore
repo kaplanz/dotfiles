@@ -1,2 +1,4 @@
-# Ignore generated files
+# Generated files
 Brewfile.lock.json
+# Ignore logfiles
+*.log
