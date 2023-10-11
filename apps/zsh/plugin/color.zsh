@@ -7,7 +7,7 @@
 [ "$(command -v gdircolors)" ] && alias dircolors='gdircolors'
 
 # Set colours used by ls, etc.
-export DIRCOLORS="$DOTFILES/share/dircolors/playtime.dircolors"
+export DIRCOLORS="$DOTS/share/dircolors/playtime.dircolors"
 eval $(dircolors "$DIRCOLORS")
 
 # Take advantage of $LS_COLORS for completion as well.

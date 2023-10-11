@@ -15,7 +15,7 @@ XDG_CONFIG_HOME ?= $(HOME)/.config
 XDG_DATA_HOME   ?= $(HOME)/.local/share
 # Home
 CRON      = $(HOME)/.cron
-DOTFILES  = $(HOME)/.dotfiles
+DOTS      = $(HOME)/.dots
 FZF       = $(XDG_DATA_HOME)/fzf
 NVIM      = $(XDG_CONFIG_HOME)/nvim
 PACKER    = $(XDG_DATA_HOME)/nvim/site/pack/packer
@@ -27,7 +27,7 @@ ZSH       = $(XDG_CONFIG_HOME)/zsh
 # }}}
 
 # -- Files -- {{{
-BREWFILE     = $(DOTFILES)/Brewfile
+BREWFILE     = $(DOTS)/Brewfile
 TERMINFO.SRC = $(TERMINFO)/terminfo.src
 # }}}
 
@@ -36,7 +36,7 @@ CLONE  = git clone --depth 1
 GUNZIP = gunzip
 LN     = ln -sf
 MKDIR  = mkdir -p
-STOW   = stow --no-folding --dir=$(DOTFILES) --target=$(HOME)
+STOW   = stow --no-folding --dir=$(DOTS) --target=$(HOME)
 TIC    = tic
 WGET   = wget
 # Optional
