@@ -288,7 +288,7 @@ main() {
                 [ -n "$(${GIT} status -s)" ] && {
                     ${GIT} stash push --all && dirty=1
                 }
-                ${GIT} pull --rebase
+                ${GIT} pull --rebase --recurse-submodules
                 [ -n "${dirty}" ] && ${GIT} stash pop
             }
             ;;
