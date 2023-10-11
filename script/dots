@@ -280,6 +280,12 @@ main() {
             esac
             info
 
+            # Abort early if repo is dirty
+            if [ -n "$(${GIT} status -s)" ]; then
+                error "Dotfiles repo is dirty."
+                cancel
+            fi
+
             # Unstow dotfiles
             info "Unlinking installed files..."
             monitor ${MAKE} unstow
@@ -288,20 +294,8 @@ main() {
 
             # Update dotfiles repository
             info "Updating dotfiles..."
-            {
-                # Check if repo is dirty
-                local dirty=
-                [ -n "$(${GIT} status -s)" ] && {
-                    # Stash changes before pull
-                    monitor ${GIT} stash push --all && dirty=1
-                }
-                # Pull updates
-                monitor ${GIT} pull --rebase --recurse-submodules
-                # Restore changes if stashed
-                [ -n "${dirty}" ] && {
-                    monitor ${GIT} stash pop
-                }
-            }
+            # Pull updates
+            monitor ${GIT} pull --rebase --recurse-submodules
             info "Success."
             info
             ;;
