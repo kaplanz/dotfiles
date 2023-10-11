@@ -61,11 +61,11 @@ EOF
 }
 
 # @alias log -<e|w|i|d|t>
-alias error='log -e'
-alias warn='log -w'
-alias info='log -i'
-alias debug='log -d'
-alias trace='log -t'
+alias error="log -e"
+alias warn="log -w"
+alias info="log -i"
+alias debug="log -d"
+alias trace="log -t"
 
 main() {
     # Declare config, set defaults
@@ -209,23 +209,23 @@ main() {
     fi
 
     # Check dependencies
-    debug 'Checking dependencies...'
+    debug "Checking dependencies..."
     dep_checkall || {
         # If dependencies not found, do not install
-        error 'Failed: missing dependencies.'
-        error 'Please install missing dependencies and try again.'
+        error "Failed: missing dependencies."
+        error "Please install missing dependencies and try again."
         error
         dep_logall -w
         warn
-        [ "$(uname)" = 'Darwin' ] && {
-            info 'NOTE: Homebrew could be used to satisfy all dependencies.'
-            info '      Follow the instructions at: https://brew.sh'
+        [ "$(uname)" = "Darwin" ] && {
+            info "NOTE: Homebrew could be used to satisfy all dependencies."
+            info "      Follow the instructions at: https://brew.sh"
             info
         }
         cancel
     }
     dep_logall -t
-    debug 'Satisfied. May proceed.'
+    debug "Satisfied. May proceed."
     debug
 
     # Perform subcommand
@@ -247,7 +247,7 @@ main() {
             info
 
             # Download dotfiles
-            info 'Downloading...'
+            info "Downloading..."
             if [ ! -d "${DOTS}" ]; then
                 monitor git clone "${GIT_REPO}" "${DOTS}"
             else
@@ -263,7 +263,7 @@ main() {
                 fi
                 warn "Using existing installation."
             fi
-            info 'Downloaded. May proceed.'
+            info "Downloaded. May proceed."
             info
             ;;
         upgrade)
@@ -281,7 +281,7 @@ main() {
             info
 
             # Unstow dotfiles
-            info 'Unlinking installed files...'
+            info "Unlinking installed files..."
             monitor ${MAKE} unstow
             info "Success."
             info
@@ -308,13 +308,13 @@ main() {
     esac
 
     # Run Makefile
-    info 'Running Makefile...'
+    info "Running Makefile..."
     monitor ${MAKE} install
     info "Success."
     info
 
     # Complete installation
-    info 'Completed. Please use responsibly :)'
+    info "Completed. Please use responsibly :)"
 }
 
 #
@@ -434,7 +434,7 @@ bail() {
 # @desc Exit early with a failure code.
 #
 cancel() {
-    bail 1 'Operation cancelled.'
+    bail 1 "Operation cancelled."
 }
 
 #
@@ -493,13 +493,13 @@ dep_print() {
 # @desc Print all dependencies.
 #
 dep_logall() {
-    log "$@" -- 'Required:'
+    log "$@" -- "Required:"
     log "$@" -- "  $(dep_print curl)"
     log "$@" -- "  $(dep_print git)"
     log "$@" -- "  $(dep_print make)"
     log "$@" -- "  $(dep_print stow)"
     log "$@" -- "  $(dep_print zsh)"
-    log "$@" -- 'Recommended:'
+    log "$@" -- "Recommended:"
     log "$@" -- "  $(dep_print nvim)"
     log "$@" -- "  $(dep_print tmux)"
 }
