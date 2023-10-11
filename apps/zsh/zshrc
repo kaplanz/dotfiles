@@ -16,7 +16,7 @@ export ZCACHEDIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 mkdir -p $ZCACHEDIR
 
 # The root dotfiles directory.
-export DOTFILES="$HOME/.dotfiles"
+export DOTS="$HOME/.dots"
 # }}}
 
 # -- Before-hooks -- {{{

@@ -20,15 +20,15 @@ export LOG_LEVEL="${LOG_LEVEL:-info}"
 # @env NO_COLOR  Disable ANSI color escape codes.
 export NO_COLOR="${NO_COLOR}"
 
-# @env DOTFILES  Default dotfiles installation directory path.
-DOTFILES=${DOTFILES:-~/.dotfiles}
+# @env DOTS      Default dotfiles installation directory path.
+DOTS=${DOTS:-~/.dots}
 # @env GIT_REPO  Remote URL to dotfiles repository.
 GIT_REPO=${GIT_REPO:-https://github.com/kaplanz/dotfiles.git}
 
 # @env GIT       Call git from the proper directory.
-GIT="git -C ${DOTFILES}"
+GIT="git -C ${DOTS}"
 # @env MAKE      Run the associated Makefile.
-MAKE="make -C ${DOTFILES}"
+MAKE="make -C ${DOTS}"
 
 #
 # @desc Print help.
@@ -175,7 +175,7 @@ main() {
             ;;
         "")
             # Check if we're already installed, if so, then perform an upgrade
-            [ -d "${DOTFILES}" ] && subcommand=upgrade || subcommand=install
+            [ -d "${DOTS}" ] && subcommand=upgrade || subcommand=install
             ;;
         *)
             printf "%s: illegal subcommand -- %s\n" "${NAME}" "${subcommand}"
@@ -230,7 +230,7 @@ main() {
     case "${subcommand}" in
         install)
             # Confirm installation
-            warn "Installation will occur at: \`${DOTFILES}\`"
+            warn "Installation will occur at: \`${DOTS}\`"
             [ -z "${proceed}" ] && warn -n && read -rp "Proceed with installation? [Y/n] " proceed
             case "${proceed}" in
                 [Yy]*)
@@ -245,10 +245,10 @@ main() {
 
             # Download dotfiles
             info 'Downloading...'
-            if [ ! -d "${DOTFILES}" ]; then
-                git clone "${GIT_REPO}" "${DOTFILES}"
+            if [ ! -d "${DOTS}" ]; then
+                git clone "${GIT_REPO}" "${DOTS}"
             else
-                warn "File already exists at path: \`${DOTFILES}\`"
+                warn "File already exists at path: \`${DOTS}\`"
                 if ${GIT} rev-parse >/dev/null 2>&1; then
                     if [ "$(${GIT} remote get-url origin)" != "${GIT_REPO}" ]; then
                         error "Path contains a foreign git repository."

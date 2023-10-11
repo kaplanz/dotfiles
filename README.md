@@ -29,7 +29,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | s
 Start by cloning this repository to your home directory:
 
 ```sh
-git clone https://github.com/kaplanz/dotfiles.git ~/.dotfiles
+git clone https://github.com/kaplanz/dotfiles.git ~/.dots
 ```
 
 ## Dependencies
@@ -52,7 +52,7 @@ Dotfiles are installed through symlinks to various home subdirectories. To set
 up directories and link all dotfiles, use the `[Makefile]`
 
 ```sh
-make --directory=~/.dotfiles
+make --directory=~/.dots
 ```
 
 ## Uninstallation
@@ -60,7 +60,7 @@ make --directory=~/.dotfiles
 All managed dotfiles can be uninstalled using the [`Makefile`][makefile] with:
 
 ```sh
-make --directory=~/.dotfiles uninstall
+make --directory=~/.dots uninstall
 ```
 
 <!-- Reference-style links -->
