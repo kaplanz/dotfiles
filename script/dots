@@ -19,14 +19,6 @@ NAME="${0##*/}"
 # @env VERSION   Version number of this script.
 VERSION=0.1.0
 
-# @env LOG_FILE  Logging output file.
-export LOG_FILE="${LOG_FILE:-logs/dots.$(date +%s).log}"
-mkdir -p "$(dirname ${LOG_FILE})"
-# @env LOG_LEVEL Filter for logging.
-export LOG_LEVEL="${LOG_LEVEL:-info}"
-# @env NO_COLOR  Disable ANSI color escape codes.
-export NO_COLOR="${NO_COLOR}"
-
 # @env DOTS      Default dotfiles installation directory path.
 DOTS="${DOTS:-~/.dots}"
 # @env REPO  Remote URL to dotfiles homepage.
@@ -39,6 +31,13 @@ GIT="git -C ${DOTS}"
 # @env MAKE      Run the associated Makefile.
 MAKE="make -C ${DOTS}"
 
+# @env LOG_FILE  Logging output file.
+export LOG_FILE="${LOG_FILE:-"${DOTS}logs/dots.$(date +%s).log"}"
+mkdir -p "$(dirname ${LOG_FILE})"
+# @env LOG_LEVEL Filter for logging.
+export LOG_LEVEL="${LOG_LEVEL:-info}"
+# @env NO_COLOR  Disable ANSI color escape codes.
+export NO_COLOR="${NO_COLOR}"
 
 # ----------------
 # -  Libraries   -
