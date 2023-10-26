@@ -53,9 +53,8 @@
         caxn  = commit --all --amend --no-edit
         # config
         cf    = config
-        cfl   = config --list
+        cfl   = config --local
         cfg   = config --global
-        cfgl  = config --global --list
         # diff
         d     = diff
         dw    = diff --word-diff
