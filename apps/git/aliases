@@ -80,7 +80,6 @@
         p     = push
         pa    = push --all
         pf    = push --force-with-lease
-        pF    = push --force
         pt    = push --tags
         # log
         lf    = log --pretty=fuller
