@@ -32,6 +32,12 @@ Start by cloning this repository to your home directory:
 git clone https://github.com/kaplanz/dotfiles.git ~/.dots
 ```
 
+Next, you should be able to run the installer locally:
+
+```sh
+~/.dots/bin/dots install
+```
+
 ## Dependencies
 
 Some features of this repository have dependencies as listed in the
@@ -49,7 +55,7 @@ For more information on using `brew`, see its [website][homebrew].
 ### Symlinks
 
 Dotfiles are installed through symlinks to various home subdirectories. To set
-up directories and link all dotfiles, use the `[Makefile]`
+up directories and link all dotfiles, use the [`Makefile`][makefile].
 
 ```sh
 make --directory=~/.dots
