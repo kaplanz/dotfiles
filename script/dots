@@ -32,7 +32,7 @@ GIT="git -C ${DOTS}"
 MAKE="make -C ${DOTS}"
 
 # @env LOG_FILE  Logging output file.
-export LOG_FILE="${LOG_FILE:-"${DOTS}logs/dots.$(date +%s).log"}"
+export LOG_FILE="${LOG_FILE:-"${DOTS}/logs/dots.$(date +%s).log"}"
 mkdir -p "$(dirname ${LOG_FILE})"
 # @env LOG_LEVEL Filter for logging.
 export LOG_LEVEL="${LOG_LEVEL:-info}"
