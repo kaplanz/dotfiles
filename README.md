@@ -13,18 +13,20 @@
 
 ---
 
+My macOS environment, profiles, setup, and various dotfiles
+
 ## Getting Started
 
 This repository could be installed using the provided [`install`][install]
 script.
 
-### via curl
+### via curl (Mac)
 
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/install.sh | sh
 ```
 
-### Manual Installation
+### Manual Installation (Mac)
 
 Start by cloning this repository to your home directory:
 
@@ -37,6 +39,42 @@ Next, you should be able to run the installer locally:
 ```sh
 ~/.dots/bin/dots install
 ```
+
+### Manual Installation (Ubuntu/Debian)
+
+First, ensure you have all dependencies installed:
+
+1. Install [`zsh`][zsh], for example: `sudo apt install zsh`
+1. Install [`fdfind`][fdfind] (ensure that you also symlink to `fd`, if applicable)
+1. Install [`eza`][eza]
+1. Install [`neovim`][neovim] (often the version in `apt` is out of date)
+1. Install all other dependencies in the [`Brewfile`][brewfile], for example: `sudo apt install bat coreutils fzf ripgrep stow tmux`
+
+Then clone the repository:
+
+```sh
+git clone https://github.com/kaplanz/dotfiles.git ~/.dots
+```
+
+Before you run the installation script, set the `DOTS` env:
+
+```sh
+export DOTS=~/.dots
+```
+
+Now you should be able to run the installer locally, as normal:
+
+```sh
+~/.dots/bin/dots install
+```
+
+Of course, don't forget to change your default shell to `zsh`:
+
+```sh
+chsh -s $(which zsh)
+```
+
+Log out and log in again, then open a terminal to confirm that `zsh` is now the default.
 
 ## Dependencies
 
@@ -74,3 +112,7 @@ make --directory=~/.dots uninstall
 [homebrew]: https://brew.sh
 [install]:  ./script/dots
 [makefile]: ./Makefile
+[zsh]: https://www.zsh.org/
+[fdfind]: https://github.com/sharkdp/fd
+[eza]: https://github.com/eza-community/eza
+[neovim]: https://github.com/neovim/neovim
