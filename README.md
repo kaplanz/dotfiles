@@ -13,6 +13,10 @@
 
 ---
 
+[![][issues.badge]][issues.hyper]
+[![][pulls.badge]][pulls.hyper]
+[![][works.badge]][works.hyper]
+
 ## About
 
 Contained within this repository is years' worth of configuration files for my
@@ -244,3 +248,11 @@ the project's [homepage][brew].
 [tmux.conf]: ./apps/tmux/tmux.conf
 [tmux]:      https://github.com/tmux/tmux/wiki
 [zsh]:       https://www.zsh.org/
+
+<!-- Reference-style badges -->
+[issues.badge]: https://img.shields.io/github/issues-raw/kaplanz/dotfiles
+[issues.hyper]: /../../issues
+[pulls.badge]:  https://img.shields.io/github/issues-pr/kaplanz/dotfiles
+[pulls.hyper]:  /../../pulls
+[works.badge]:  https://shields.io/badge/works-on_my_machine-blue
+[works.hyper]:  http://localhost:8080
