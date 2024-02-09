@@ -19,7 +19,6 @@ DOTS      = $(HOME)/.dots
 FZF       = $(XDG_DATA_HOME)/fzf
 NVIM      = $(XDG_CONFIG_HOME)/nvim
 PACKER    = $(XDG_DATA_HOME)/nvim/site/pack/packer
-TERMINFO  = $(HOME)/.terminfo
 TMUX      = $(XDG_CONFIG_HOME)/tmux
 ZPACK     = $(ZSH)/pack
 ZPLUG     = $(ZSH)/before
@@ -28,24 +27,19 @@ ZSH       = $(XDG_CONFIG_HOME)/zsh
 
 # -- Files -- {{{
 BREWFILE     = $(DOTS)/Brewfile
-TERMINFO.SRC = $(TERMINFO)/terminfo.src
 # }}}
 
 # -- Commands -- {{{
 CLONE  = git clone --depth 1
-GUNZIP = gunzip
 LN     = ln -sf
 MKDIR  = mkdir -p
 STOW   = stow --no-folding --dir=$(DOTS) --target=$(HOME)
-TIC    = tic
-WGET   = wget
 # Optional
 BREW := $(notdir $(shell command -v brew 2> /dev/null))
 # }}}
 
 # -- URLs -- {{{
 GITHUB = https://github.com
-TERMINFO.SRC.GZ = http://invisible-island.net/datafiles/current/terminfo.src.gz
 # }}}
 
 # -- Plugins -- {{{
@@ -68,7 +62,6 @@ OMZ_PLUG      = $(OHMYZSH)/plugins
 
 # -- Utilities -- {{{
 FZF_CONFIG = $(HOME)/.config/fzf/fzf.zsh
-TERMINFOS  = tmux-256color
 # }}}
 # }}}
 
@@ -88,7 +81,7 @@ all: apps
 apps: etc local nvim tmux zsh
 
 .PHONY: etc
-etc: fzf terminfo
+etc: fzf
 
 .PHONY: local
 local: stow-local
@@ -220,16 +213,6 @@ $(FZF_CONFIG): | $(FZF)
 	$(INSTALL) $(FLAGS)
 # }}}
 
-# terminfo {{{
-.PHONY: terminfo
-terminfo: $(TERMINFO.SRC)
-
-$(TERMINFO.SRC):
-	@$(MKDIR) $(@D)
-	$(WGET) -P $(@D) $(TERMINFO.SRC.GZ)
-	$(GUNZIP) $@.gz
-	$(TIC) -xe tmux-256color $@
-# }}}
 # }}}
 # }}}
 
