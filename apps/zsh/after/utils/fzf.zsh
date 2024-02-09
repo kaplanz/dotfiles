@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 # Source fzf configuration files
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.zsh" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/fzf/fzf.zsh"
 
 # Configure completion
 function _fzf_compgen_path() { fd --hidden --follow . "$1"; }
