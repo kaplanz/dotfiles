@@ -20,7 +20,7 @@ NAME="${0##*/}"
 VERSION=0.1.0
 
 # @env DOTS      Default dotfiles installation directory path.
-DOTS="${DOTS:-~/.dots}"
+DOTS="${DOTS:-$HOME/.dots}"
 # @env REPO  Remote URL to dotfiles homepage.
 LINK="${LINK:-https://zakhary.dev/dotfiles}"
 # @env REPO  Remote URL to dotfiles repository.
