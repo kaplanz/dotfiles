@@ -1,0 +1,153 @@
+# File:        prompt_century_setup
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     11 Feb 2024
+# SPDX-License-Identifier: MIT
+# Vim:         set ft=zsh:
+
+
+# ----------------
+# --    Help    --
+# ----------------
+
+prompt_century_help () {
+  cat <<EOF
+Usage: prompt century [OPTIONS]
+
+Options:
+  -1             Render as one line
+  -2             Render as two lines
+EOF
+}
+
+
+
+# ----------------
+# --   Prompt   --
+# ----------------
+
+function prompt_century_setup() {
+    # Parse opts
+    local nlines=2
+    while getopts "12" opt; do
+        case $opt in
+            1)
+                nlines=1
+                ;;
+            2)
+                nlines=2
+                ;;
+        esac
+    done
+
+    # Options
+    setopt prompt_subst
+
+    # Modules
+    zmodload zsh/datetime
+
+    # Chars
+    local -A schars
+    autoload -Uz prompt_special_chars
+    prompt_special_chars
+
+    # Colors
+    typeset -gA colors
+    # Primary
+    colors[RED]=167
+    colors[GRN]=107
+    colors[BLU]=025
+    colors[CYN]=110
+    colors[MGA]=183
+    colors[YLW]=222
+    # Secondary
+    colors[GR2]=071
+    colors[YL2]=215
+    # Greys
+    colors[BW1]=239
+    colors[BW2]=242
+
+    # Version control
+    local -A vcs
+    vcs[a]="%F{$colors[MGA]}%a%f"
+    vcs[b]="%F{$colors[GR2]}%b%f"
+    vcs[c]="%F{$colors[YL2]}%c%f"
+    vcs[r]="%F{$colors[BLU]}%r%f"
+    vcs[u]="%F{$colors[RED]}%u%f"
+    vcs[x]="%F{$colors[BLU]}(%f"
+    vcs[X]="%F{$colors[BLU]})%f"
+    vcs[action]="$vcs[x]$vcs[b]$vcs[c]$vcs[u]|$vcs[a]$vcs[X]"
+    vcs[format]="$vcs[x]$vcs[b]$vcs[c]$vcs[u]$vcs[X]"
+    autoload -Uz vcs_info
+    zstyle ":vcs_info:*" check-for-changes true
+    zstyle ":vcs_info:*"     stagedstr "*"
+    zstyle ":vcs_info:*"   unstagedstr "*"
+    zstyle ":vcs_info:*"       formats "$vcs[format]"
+    zstyle ":vcs_info:*" actionformats "$vcs[action]"
+
+    # Blocks
+    local CLK="%b%F{$colors[BW2]}[%D{%X}]"
+    local CTX="%b%F{$colors[YLW]}%_ "
+    local CWD="%B%F{$colors[BLU]}%2~"
+    local GIT='%b${vcs_info_msg_0_} '
+    local JOB="%b%F{$colors[YLW]}%(1j.%j! .)"
+    local RET="%b%F{$colors[RED]}%(0?..%? )"
+    local SYM="%B%F{%(0?.$colors[GRN].$colors[RED])}%(!.#.❯) "
+    local TMR="%b%F{$colors[BW1]}%(2V.%2v .)"
+    local USR="%b%F{$colors[CYN]}%n${SSH_TTY:+@%m} "
+
+    # Special
+    local BTM="%F{$colors[BW1]}┗ "
+    local PRE="%F{$colors[BW1]}= "
+    local SY2="%F{$colors[YLW]}» "
+    local TOP="%F{$colors[BW1]}┏ "
+    local RST="%b%f%k"
+
+    # Prompts
+    PS1=
+    PS2=
+    case $nlines in
+        1)
+            PS1+="${PRE}${USR}${JOB}${RET}${SYM}${RST}"
+            RPS1="${TMR}${CWD}${GIT}${CLK}${RST}"
+            ;;
+        2)
+            PS1+="${TOP}${CWD}${GIT}${prompt_newline}"
+            PS1+="${BTM}${USR}${JOB}${RET}${SYM}${RST}"
+            RPS1="${TMR}${CLK}${RST}"
+            ;;
+    esac
+    PS2+="${CTX}${SY2}${RST}"
+    ZLE_RPROMPT_INDENT=0
+
+    add-zsh-hook preexec prompt_century_preexec
+    add-zsh-hook precmd  prompt_century_precmd
+}
+
+
+# ----------------
+# --   Hooks    --
+# ----------------
+
+function prompt_century_preexec() {
+    psvar=()
+    psvar[1]=$EPOCHREALTIME
+}
+
+function prompt_century_precmd() {
+    vcs_info
+
+    let local timer="$EPOCHREALTIME-${psvar[1]:-$EPOCHREALTIME}"
+    psvar[1]=
+    (( $timer > 0 )) && {
+        psvar[2]="$(printf '%.2fs' $timer)"
+    } || {
+        psvar[2]=
+    }
+}
+
+
+# ----------------
+# --   Setup    --
+# ----------------
+
+prompt_century_setup "$@"

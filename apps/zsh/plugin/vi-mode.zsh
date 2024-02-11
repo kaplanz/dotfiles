@@ -69,8 +69,6 @@ function _zsh_set_cursor_shape_for_keymap() {
 # -- Widgets -- {{{
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {
-    # Set the prompt variable
-    ZSH_PROMPT_VAR_VIMODE="$(prompt_playtime_vimode)"
     # Set the cursor shape for the keymap
     _zsh_set_cursor_shape_for_keymap "${KEYMAP}"
     # Reset the prompt on a mode change

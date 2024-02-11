@@ -17,11 +17,11 @@ export FZF_DEFAULT_OPTS="
     --bind 'ctrl-a:toggle-all'
     --bind 'ctrl-v:execute(echo {+} | xargs -o "$EDITOR")'
     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-    --color='prompt:25,pointer:110,marker:222'
+    --color='prompt:183,pointer:110,marker:222'
     --exit-0
     --info=inline
     --multi
-    --prompt='~ '
+    --prompt='❯ '
     --select-1
 "
 export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND --strip-cwd-prefix'
