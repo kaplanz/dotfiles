@@ -4,6 +4,8 @@
 # SPDX-License-Identifier: MIT
 # Vim:         set fdl=0 fdm=marker:
 
+autoload -U colors && colors
+
 # If not running interactively, don't do anything.
 case $- in
     *i*) ;;
@@ -153,7 +155,7 @@ autoload -U promptinit
 promptinit
 
 # Set the prompt theme.
-prompt playtime
+prompt century
 # }}}
 
 # -- After-hooks -- {{{
