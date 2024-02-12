@@ -16,6 +16,7 @@ Usage: prompt century [OPTIONS]
 Options:
   -n <LINES>     Number of lines to render prompt
   -x             Exchange prompt segments
+  -h             Print help
 EOF
 }
 
@@ -28,7 +29,7 @@ EOF
 function prompt_century_setup() {
     # Parse opts
     local -A args
-    while getopts "n:x" opt; do
+    while getopts "n:xh" opt; do
         case $opt in
             n)
                 if [[ "$OPTARG" =~ "^[1-3]$" ]]; then
@@ -40,6 +41,10 @@ function prompt_century_setup() {
                 ;;
             x)
                 args[change]=true
+                ;;
+            h)
+                prompt_century_help
+                return 1
                 ;;
             \?)
                 return 1
