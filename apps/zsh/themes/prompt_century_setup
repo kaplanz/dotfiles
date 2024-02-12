@@ -28,17 +28,17 @@ EOF
 
 function prompt_century_setup() {
     # Parse opts
-    local nlines=2
+    local -A args
     while getopts "x12" opt; do
         case $opt in
             x)
-                local xchange=true
+                args[xchange]=true
                 ;;
             1)
-                nlines=1
+                args[nlines]=1
                 ;;
             2)
-                nlines=2
+                args[nlines]=2
                 ;;
         esac
     done
@@ -109,7 +109,7 @@ function prompt_century_setup() {
     # Segments
     local SEGMENT01="${USR}${JOB}${RET}"
     local SEGMENT02="${CWD}${GIT}"
-    if [ -v $xchange ]; then
+    if [ -v $args[xchange] ]; then
         local tmp="$SEGMENT01"
         SEGMENT01="$SEGMENT02"
         SEGMENT02="$tmp"
@@ -118,12 +118,14 @@ function prompt_century_setup() {
     # Prompts
     PS1=
     PS2=
-    case $nlines in
+    case $args[nlines] in
         1)
             PS1+="${PRE}${SEGMENT02}${SYM}${RST}"
             RPS1="${TMR}${SEGMENT01}${CLK}${RST}"
             ;;
         2)
+            ;&
+        "")
             PS1+="${TOP}${SEGMENT01}${prompt_newline}"
             PS1+="${BTM}${SEGMENT02}${SYM}${RST}"
             RPS1="${TMR}${CLK}${RST}"
