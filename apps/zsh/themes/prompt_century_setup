@@ -14,9 +14,8 @@ prompt_century_help () {
 Usage: prompt century [OPTIONS]
 
 Options:
+  -n <LINES>     Number of lines to render prompt
   -x             Exchange prompt segments
-  -1             Render as one line
-  -2             Render as two lines
 EOF
 }
 
@@ -29,17 +28,21 @@ EOF
 function prompt_century_setup() {
     # Parse opts
     local -A args
-    while getopts "x12" opt; do
+    while getopts "n:x" opt; do
         case $opt in
+            n)
+                if [[ "$OPTARG" =~ "^[1-2]$" ]]; then
+                    args[nlines]="$OPTARG"
+                else
+                    echo "$0:$LINENO: bad argument for -$opt: $OPTARG"
+                    return 1
+                fi
+                ;;
             x)
-                args[xchange]=true
+                args[change]=true
                 ;;
-            1)
-                args[nlines]=1
-                ;;
-            2)
-                args[nlines]=2
-                ;;
+            \?)
+                return 1
         esac
     done
 
@@ -109,7 +112,7 @@ function prompt_century_setup() {
     # Segments
     local SEGMENT01="${USR}${JOB}${RET}"
     local SEGMENT02="${CWD}${GIT}"
-    if [ -v $args[xchange] ]; then
+    if [ -v $args[change] ]; then
         local tmp="$SEGMENT01"
         SEGMENT01="$SEGMENT02"
         SEGMENT02="$tmp"
@@ -123,9 +126,7 @@ function prompt_century_setup() {
             PS1+="${PRE}${SEGMENT02}${SYM}${RST}"
             RPS1="${TMR}${SEGMENT01}${CLK}${RST}"
             ;;
-        2)
-            ;&
-        "")
+        2|"")
             PS1+="${TOP}${SEGMENT01}${prompt_newline}"
             PS1+="${BTM}${SEGMENT02}${SYM}${RST}"
             RPS1="${TMR}${CLK}${RST}"
@@ -158,6 +159,24 @@ function prompt_century_precmd() {
     } || {
         psvar[2]=
     }
+}
+
+
+# ----------------
+# --  Preview   --
+# ----------------
+
+function prompt_century_preview() {
+    local cfg=("-n1" "-xn1" "-n2" "-xn2")
+
+    if (( ! $#* )); then
+        for opt in $cfg[@]; do
+            prompt_preview_theme century $opt
+            print
+        done
+    else
+        prompt_preview_theme century "$@"
+    fi
 }
 
 
