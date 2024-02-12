@@ -97,7 +97,7 @@ function prompt_century_setup() {
     local CWD="%B%F{$colors[BLU]}%2~"
     local GIT='%b${vcs_info_msg_0_} '
     local JOB="%b%F{$colors[YLW]}%(1j.%j! .)"
-    local RET="%b%F{$colors[RED]}%(0?..%? )"
+    local RET="%b%F{$colors[RED]}%(0?..%?? )"
     local SYM="%B%F{%(0?.$colors[GRN].$colors[RED])}%(!.#.❯) "
     local TMR="%b%F{$colors[BW1]}%(2V.%2v .)"
     local USR="%b%F{$colors[CYN]}%n${SSH_TTY:+@%m} "
