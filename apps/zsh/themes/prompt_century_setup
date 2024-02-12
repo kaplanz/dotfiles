@@ -14,6 +14,7 @@ prompt_century_help () {
 Usage: prompt century [OPTIONS]
 
 Options:
+  -x             Exchange prompt segments
   -1             Render as one line
   -2             Render as two lines
 EOF
@@ -28,8 +29,11 @@ EOF
 function prompt_century_setup() {
     # Parse opts
     local nlines=2
-    while getopts "12" opt; do
+    while getopts "x12" opt; do
         case $opt in
+            x)
+                local xchange=true
+                ;;
             1)
                 nlines=1
                 ;;
@@ -102,17 +106,26 @@ function prompt_century_setup() {
     local TOP="%F{$colors[BW1]}┏ "
     local RST="%b%f%k"
 
+    # Segments
+    local SEGMENT01="${USR}${JOB}${RET}"
+    local SEGMENT02="${CWD}${GIT}"
+    if [ -v $xchange ]; then
+        local tmp="$SEGMENT01"
+        SEGMENT01="$SEGMENT02"
+        SEGMENT02="$tmp"
+    fi
+
     # Prompts
     PS1=
     PS2=
     case $nlines in
         1)
-            PS1+="${PRE}${USR}${JOB}${RET}${SYM}${RST}"
-            RPS1="${TMR}${CWD}${GIT}${CLK}${RST}"
+            PS1+="${PRE}${SEGMENT02}${SYM}${RST}"
+            RPS1="${TMR}${SEGMENT01}${CLK}${RST}"
             ;;
         2)
-            PS1+="${TOP}${CWD}${GIT}${prompt_newline}"
-            PS1+="${BTM}${USR}${JOB}${RET}${SYM}${RST}"
+            PS1+="${TOP}${SEGMENT01}${prompt_newline}"
+            PS1+="${BTM}${SEGMENT02}${SYM}${RST}"
             RPS1="${TMR}${CLK}${RST}"
             ;;
     esac
