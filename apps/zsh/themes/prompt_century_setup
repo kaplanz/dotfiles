@@ -31,7 +31,7 @@ function prompt_century_setup() {
     while getopts "n:x" opt; do
         case $opt in
             n)
-                if [[ "$OPTARG" =~ "^[1-2]$" ]]; then
+                if [[ "$OPTARG" =~ "^[1-3]$" ]]; then
                     args[nlines]="$OPTARG"
                 else
                     echo "$0:$LINENO: bad argument for -$opt: $OPTARG"
@@ -126,6 +126,9 @@ function prompt_century_setup() {
             PS1+="${PRE}${SEGMENT02}${SYM}${RST}"
             RPS1="${TMR}${SEGMENT01}${CLK}${RST}"
             ;;
+        3)
+            PS1+="${prompt_newline}"
+            ;&
         2|"")
             PS1+="${TOP}${SEGMENT01}${prompt_newline}"
             PS1+="${BTM}${SEGMENT02}${SYM}${RST}"
