@@ -9,13 +9,14 @@
 # --    Help    --
 # ----------------
 
-prompt_century_help () {
+function prompt_century_help() {
   cat <<EOF
 Usage: prompt century [OPTIONS]
 
 Options:
   -<1|2|3>       Lines to render prompt
   -x             Exchange prompt segments
+  -p             Preview theme
   -h             Print help
 EOF
 }
@@ -29,7 +30,7 @@ EOF
 function prompt_century_setup() {
     # Parse opts
     local -A args
-    while getopts "123xh" opt; do
+    while getopts "123xph" opt; do
         case $opt in
             1|2|3)
                 args[nlines]=$opt
@@ -37,10 +38,12 @@ function prompt_century_setup() {
             x)
                 args[change]=true
                 ;;
+            p)
+                prompt_century_preview
+                ;|
             h)
                 prompt_century_help
-                return 1
-                ;;
+                ;|
             \?)
                 return 1
         esac
