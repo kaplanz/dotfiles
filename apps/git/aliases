@@ -143,4 +143,4 @@
         ts    = tag --sign
 
 [pretty]
-        dotted = %C(bold italic yellow)%h%Creset %s%C(auto)%d%Creset %>|(-16)%C(italic blue)%ar%Creset %>|(-1,trunc)%C(241)%an%Creset
+        dotted = %C(bold italic yellow)%h%Creset %C(italic blue)%ar%Creset %s%C(auto)%d%Creset %>|(-1,ltrunc)%C(239)%an%Creset
