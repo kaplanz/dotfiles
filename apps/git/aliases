@@ -32,6 +32,8 @@
         co    = checkout
         cor   = checkout --recurse-submodules
         com   = checkout main
+        # checkout-index
+        ci    = checkout-index
         # cherry-pick
         cp    = cherry-pick
         cpa   = cherry-pick --abort
@@ -44,7 +46,6 @@
         # commit
         c     = commit
         cm    = commit --message
-        ci    = commit --patch
         cx    = commit --amend
         cxn   = commit --amend --no-edit
         ca    = commit --all
@@ -60,8 +61,6 @@
         dw    = diff --word-diff
         dc    = diff --cached
         dcw   = diff --cached --word-diff
-        ds    = diff --staged
-        dsw   = diff --staged --word-diff
         # fetch
         f     = fetch
         fa    = fetch --all --prune
@@ -79,20 +78,16 @@
         # push
         p     = push
         pa    = push --all
+        pat   = push --all --tags
         pf    = push --force-with-lease
         pt    = push --tags
         # log
-        lf    = log --pretty=fuller
-        lg    = log --stat
-        lgp   = log --stat --patch
-        lgg   = log --graph
-        lgga  = log --graph --decorate --all
-        lo    = log --graph --oneline --decorate
-        log   = log --graph --oneline --decorate --graph
-        loga  = log --graph --oneline --decorate --graph --all
-        lol   = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-        lola  = log --graph --oneline --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
-        lp    = lola
+        la    = ld --all
+        ls    = ld --branches --tags --remotes
+        ld    = log --pretty=dotted --graph
+        lf    = log --pretty=fuller --graph
+        lg    = log --pretty=fuller --stat --graph
+        lh    = log --pretty=fuller --stat --patch
         # rebase
         rb    = rebase
         rba   = rebase --abort
@@ -115,6 +110,8 @@
         # restore
         ro    = restore
         ros   = restore --staged
+        # rev-list
+        root  = rev-list --abbrev-commit --max-parents=0 HEAD
         # revert
         rev   = revert
         # show
@@ -144,3 +141,6 @@
         t     = tag
         ta    = tag --annotate
         ts    = tag --sign
+
+[pretty]
+        dotted = %C(bold italic yellow)%h%Creset %s%C(auto)%d%Creset %>|(-16)%C(italic blue)%ar%Creset %>|(-1,trunc)%C(241)%an%Creset
