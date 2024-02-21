@@ -76,7 +76,7 @@ alias rm='rm -d'
 # -- Filesystem -- {{{
 # Use `eza` instead of `ls`
 if command -v eza &> /dev/null; then
-    alias ls='eza --binary --classify --git --icons'
+    alias ls='eza --binary --classify --git --git-ignore --icons'
     alias tree='ls -T'
 fi
 # List aliases
