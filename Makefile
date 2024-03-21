@@ -46,7 +46,6 @@ GITHUB = https://github.com
 # tmux
 TMUX_PLUGINS += tmux-plugins/tpm # use tpm to manage tmux plugins
 # Zsh
-ZSH_PLUGINS  += akarzim/zsh-docker-aliases
 ZSH_PLUGINS  += zsh-users/zsh-autosuggestions
 ZSH_PLUGINS  += zsh-users/zsh-syntax-highlighting
 # Zsh: Oh My Zsh
