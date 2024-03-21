@@ -4,48 +4,51 @@
 -- SPDX-License-Identifier: MIT
 -- Vim:         set fdl=0 fdm=marker:
 
-local os = require("os")
-local wezterm = require("wezterm")
+----------------
+--  Prelude   --
+----------------
 
-local act  = wezterm.action
-local font = wezterm.font
+-- Imports
+local os   = require("os")
+local wz   = require("wezterm")
 
-local config = wezterm.config_builder()
+-- Modules
+local act  = wz.action
+local font = wz.font
+local mux  = wz.mux
+
+-- Constants
+local xdir = {
+  cache = (os.getenv("XDG_CACHE_HOME") or (os.getenv("HOME") .. "/.cache")) .. "/wezterm",
+}
+local path = {
+  WINSZ = xdir.cache .. "/winsz.txt",
+}
+
+-- Variables
+local cfg  = wz.config_builder()
+
+
+----------------
+--  Settings  --
+----------------
 
 -- Behaviour: {{{
-config.check_for_updates = false
-config.exit_behavior = "Close"
-config.native_macos_fullscreen_mode = true
-config.show_update_window = false
+cfg.check_for_updates = false
+cfg.exit_behavior = "Close"
+cfg.native_macos_fullscreen_mode = true
+cfg.show_update_window = false
 -- }}}
 
 -- Colour: {{{
-config.color_scheme = "iceberg-dark"
--- }}}
-
--- Events: {{{
-wezterm.on("edit-wezterm-config", function(window, pane)
-  -- Use the user's preference of editor
-  local edit = os.getenv("VISUAL") or os.getenv("EDITOR") or "vi"
-  local file = wezterm.config_file
-
-  -- Open a new tab editing the file
-  window:perform_action(act.SpawnCommandInNewWindow {
-    args = { edit, file },
-    set_environment_variables = {
-      EDITOR = os.getenv("EDITOR"),
-      PATH   = os.getenv("PATH"),
-      VISUAL = os.getenv("VISUAL"),
-    },
-  }, pane)
-end)
+cfg.color_scheme = "iceberg-dark"
 -- }}}
 
 -- Domains: {{{
 local domains = {}
 -- Set up SSH domains
 domains.ssh = {}
-for host, _ in pairs(wezterm.enumerate_ssh_hosts()) do
+for host, _ in pairs(wz.enumerate_ssh_hosts()) do
   table.insert(domains.ssh, {
     -- The name can be anything you want; we're just using the hostname
     name = host,
@@ -64,11 +67,30 @@ for host, _ in pairs(wezterm.enumerate_ssh_hosts()) do
     assume_shell = 'Posix',
   })
 end
-config.ssh_domains = domains.ssh
+cfg.ssh_domains = domains.ssh
+-- }}}
+
+-- Events: {{{
+-- Edit this file when the "edit-config" event is emmitted.
+wz.on("edit-config", function(window, pane)
+  -- Use the user's preference of editor
+  local edit = os.getenv("VISUAL") or os.getenv("EDITOR") or "vi"
+  local file = wz.config_file
+
+  -- Open a new tab editing the file
+  window:perform_action(act.SpawnCommandInNewWindow {
+    args = { edit, file },
+    set_environment_variables = {
+      EDITOR = os.getenv("EDITOR"),
+      PATH   = os.getenv("PATH"),
+      VISUAL = os.getenv("VISUAL"),
+    },
+  }, pane)
+end)
 -- }}}
 
 -- Keymaps {{{
-config.keys = {
+cfg.keys = {
   {
     key = "LeftArrow",
     mods = "SUPER",
@@ -87,20 +109,20 @@ config.keys = {
     key = "UpArrow",
     mods = "SUPER",
     action = act.SplitPane {
-      direction =  "Up",
+      direction = "Up",
     }
   },
   {
     key = "DownArrow",
     mods = "SUPER",
     action = act.SplitPane {
-      direction =  "Down",
+      direction = "Down",
     }
   },
   {
     key = ",",
     mods = "SUPER",
-    action = act.EmitEvent "edit-wezterm-config",
+    action = act.EmitEvent "edit-config",
   },
   {
     key = "w",
@@ -111,10 +133,10 @@ config.keys = {
 -- }}}
 
 -- Text: {{{
-config.allow_square_glyphs_to_overflow_width = "Never"
-config.font = font "Fira Code"
-config.font_size = 13.2
-config.font_rules = {
+cfg.allow_square_glyphs_to_overflow_width = "Never"
+cfg.font = font "Fira Code"
+cfg.font_size = 13.2
+cfg.font_rules = {
   {
     intensity = "Bold",
     italic = true,
@@ -142,7 +164,7 @@ config.font_rules = {
     },
   },
 }
-config.harfbuzz_features = {
+cfg.harfbuzz_features = {
   -- character variants
   "cv01", -- a
   "cv02", -- g
@@ -159,21 +181,21 @@ config.harfbuzz_features = {
   "ss06", -- \\
   "ss10", -- Fl Tl fi fj fl ft
 }
-config.text_background_opacity = 0.85
-config.use_cap_height_to_scale_fallback_fonts = true
+cfg.text_background_opacity = 0.85
+cfg.use_cap_height_to_scale_fallback_fonts = true
 -- }}}
 
 -- Window: {{{
-config.hide_tab_bar_if_only_one_tab = true
-config.initial_cols = 96
-config.initial_rows = 32
-config.macos_window_background_blur = 20
-config.use_fancy_tab_bar = false
-config.use_resize_increments = true
-config.window_background_opacity = 0.85
-config.window_close_confirmation = "NeverPrompt"
-config.window_decorations = "RESIZE"
-config.window_padding = {
+cfg.hide_tab_bar_if_only_one_tab = true
+cfg.initial_cols = 96
+cfg.initial_rows = 32
+cfg.macos_window_background_blur = 20
+cfg.use_fancy_tab_bar = false
+cfg.use_resize_increments = true
+cfg.window_background_opacity = 0.85
+cfg.window_close_confirmation = "NeverPrompt"
+cfg.window_decorations = "RESIZE"
+cfg.window_padding = {
   left = 6,
   right = 6,
   top = 6,
@@ -181,4 +203,4 @@ config.window_padding = {
 }
 -- }}}
 
-return config
+return cfg
