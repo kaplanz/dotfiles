@@ -24,9 +24,9 @@ export FZF_DEFAULT_OPTS="
     --prompt='❯ '
     --select-1
 "
-export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND --strip-cwd-prefix'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --strip-cwd-prefix"
 export FZF_CTRL_T_OPTS="
-    --preview '([[ -d {} ]] && (exa -T {})) ||
+    --preview '([[ -d {} ]] && (eza -T {})) ||
                ([[ -f {} ]] &&
                    (! grep -Iq . {} && file {}) ||
                    bat --style=numbers --color=always {} ||
@@ -39,5 +39,5 @@ export FZF_CTRL_R_OPTS="
     --preview 'echo {}'
     --preview-window down:3:hidden:wrap
 "
-export FZF_ALT_C_COMMAND='$FZF_DEFAULT_COMMAND --type d --follow --strip-cwd-prefix'
-export FZF_ALT_C_OPTS="--preview 'exa -T {}'"
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d --follow --strip-cwd-prefix"
+export FZF_ALT_C_OPTS="--preview 'eza -T {}'"
