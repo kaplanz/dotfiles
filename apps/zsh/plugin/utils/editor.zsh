@@ -4,3 +4,4 @@
 # SPDX-License-Identifier: MIT
 
 alias v='$VISUAL'
+alias nv='nvim'
