@@ -2,12 +2,11 @@
 
 <p align="center">
   <q>
-    UNIX is basically a simple operating system, but you have to be a genius to
-    understand the simplicity.
+    Unix is user-friendly; it's just choosy about who its friends are.
   </q>
   &mdash;
   <i>
-    Dennis Ritchie
+    Anonymous
   </i>
 </p>
 
