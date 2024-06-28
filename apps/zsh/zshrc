@@ -155,7 +155,14 @@ autoload -U promptinit
 promptinit
 
 # Set the prompt theme.
-prompt century
+if command -v starship &> /dev/null; then
+    # If installed, use generate the prompt using starship. This results in a
+    # quicker (🚀) and more responsive UX.
+    eval "$(starship init zsh)"
+else
+    # Otherwise, use the zsh-native implementation.
+    prompt century
+fi
 # }}}
 
 # -- After-hooks -- {{{
