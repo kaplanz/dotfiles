@@ -1,0 +1,246 @@
+# File:        starship.toml
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     27 Jun 2024
+# SPDX-License-Identifier: MIT
+
+# Get editor completions based on the config schema
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Configure the format of the prompt.
+format = '''
+[┏](black) $all
+[┗](black) $username$jobs$status$character
+'''
+
+# Right prompt which renders on the same line as the input.
+right_format = """
+$cmd_duration$time$battery
+"""
+
+# Inserts blank line between shell prompts.
+add_newline = false
+
+# Changes the symbols for each module to use Nerd Font symbols.
+aws.symbol            = "  "
+buf.symbol            = " "
+c.symbol              = " "
+conda.symbol          = " "
+crystal.symbol        = " "
+dart.symbol           = " "
+docker_context.symbol = " "
+elixir.symbol         = " "
+elm.symbol            = " "
+fennel.symbol         = " "
+golang.symbol         = " "
+guix_shell.symbol     = " "
+haskell.symbol        = " "
+haxe.symbol           = " "
+hostname.ssh_symbol   = " "
+java.symbol           = " "
+julia.symbol          = " "
+kotlin.symbol         = " "
+lua.symbol            = " "
+memory_usage.symbol   = "󰍛 "
+meson.symbol          = "󰔷 "
+nim.symbol            = "󰆥 "
+nix_shell.symbol      = " "
+nodejs.symbol         = " "
+ocaml.symbol          = " "
+perl.symbol           = " "
+php.symbol            = " "
+pijul_channel.symbol  = " "
+python.symbol         = " "
+rlang.symbol          = "󰟔 "
+ruby.symbol           = " "
+rust.symbol           = " "
+scala.symbol          = " "
+swift.symbol          = " "
+zig.symbol            = " "
+
+# Sets which color palette from palettes to use.
+palette = "century"
+
+# Collection of color palettes that assign colors to user-defined names.
+#
+# Note that color palettes cannot reference their own color definitions.
+[palettes.century]
+# Standard
+black   = "239"
+red     = "167"
+green   = "107"
+blue    = "025"
+magenta = "183"
+# Brighter
+bright-black  = "242"
+bright-blue   = "110"
+bright-yellow = "222"
+# Custom
+lime  = "071"
+orange = "215"
+
+# How charged the device's battery is.
+[battery]
+full_symbol        = "󰁹 "
+charging_symbol    = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol     = "󰂑 "
+empty_symbol       = "󰂎 "
+format  = '[$symbol$percentage]($style)'
+# Battery: 10%
+[[battery.display]]
+threshold = 10
+style     = "red bold"
+discharging_symbol = "󰁺 "
+# Battery: 20%
+[[battery.display]]
+threshold = 20
+style     = "red"
+discharging_symbol = "󰁻 "
+# Battery: 30%
+[[battery.display]]
+threshold = 30
+style     = "orange"
+discharging_symbol = "󰁼 "
+# Battery: 40%
+[[battery.display]]
+threshold = 40
+style     = "yellow"
+discharging_symbol = "󰁽 "
+# Battery: 50%
+[[battery.display]]
+threshold = 50
+style     = "bright-yellow"
+discharging_symbol = "󰁾 "
+# Battery: 60%
+[[battery.display]]
+threshold = 60
+style     = "green"
+discharging_symbol = "󰁿 "
+# Battery: 70%
+[[battery.display]]
+threshold = 70
+style     = "green"
+discharging_symbol = "󰂀 "
+# Battery: 80%
+[[battery.display]]
+threshold = 80
+style     = "green"
+discharging_symbol = "󰂁 "
+# Battery: 90%
+[[battery.display]]
+threshold = 90
+style     = "green"
+discharging_symbol = "󰂂 "
+# Battery: 100%
+[[battery.display]]
+threshold = 100
+style     = "green"
+discharging_symbol = "󰁹 "
+
+# How long the last command took to execute.
+[cmd_duration]
+min_time = 250
+show_milliseconds  = true
+format   = '[$duration]($style) '
+style    = "black"
+
+# Path to your current directory.
+[directory]
+format = '[$read_only]($read_only_style)[$path]($style) '
+style     = "bold blue"
+read_only = "󰌾 "
+
+# Active branch of the repo in your current directory.
+[git_branch]
+format = '\[[$symbol$branch(:$remote_branch)]($style)\]'
+style  = "lime"
+
+# Current commit hash and also the tag (if any) of the repo in your current
+# directory.
+[git_commit]
+format = '\[[$hash$tag]($style)\]'
+style = "bold italic yellow"
+
+# Number of added and deleted lines in the current git repository.
+[git_metrics]
+disabled = true
+
+# Operations in progress of the repo in your current directory.
+[git_state]
+format       = '\[[$state( $progress_current/$progress_total)]($style)\]'
+rebase       = "rebase"
+merge        = "merge"
+revert       = "revert"
+cherry_pick  = "cherry_pick"
+bisect       = "bisect"
+am           = "am"
+am_or_rebase = "am_or_rebase"
+style        = "magenta"
+
+# Symbols representing the state of the repo in your current directory.
+[git_status]
+format     = """\\[[\
+    $conflicted\
+    $stashed\
+    $staged\
+    $renamed\
+    $deleted\
+    $typechanged\
+    $untracked\
+    $modified\
+    $ahead_behind\
+]($style)\\] """
+conflicted  = '[=](bold magenta)'
+stashed     = '[\$](bold black)'
+staged      = '[✔](bold green)'
+modified    = '[✘](bold red)'
+renamed     = '[#](bold orange)'
+deleted     = '[!](bold orange)'
+typechanged = '[%](bold orange)'
+untracked   = '[?](bold orange)'
+ahead       = '[↑](bold cyan)'
+behind      = '[↓](bold cyan)'
+diverged    = '[~](bold cyan)'
+style       = "cyan"
+ignore_submodules = true
+
+# Current number of jobs running.
+[jobs]
+number_threshold = 1
+format = '[$number$symbol]($style) '
+symbol = "!"
+style  = "yellow"
+
+# Separates the prompt into two lines.
+[line_break]
+disabled = true
+
+# Current directory is the repository for a package.
+[package]
+symbol   = "󰏗 "
+disabled = true
+
+# Exit code of the previous command.
+[status]
+format     = '[$status$symbol]($style) '
+symbol                = "?"
+not_executable_symbol = ";"
+not_found_symbol      = "#"
+sigint_symbol         = "!"
+signal_symbol         = "@"
+style      = "red"
+map_symbol = true
+disabled   = false
+
+# Current local time.
+[time]
+format   = '[\[$time\]]($style) '
+style    = "bright-black"
+disabled = false
+
+# Active user's username.
+[username]
+style_root  = "bright-yellow"
+style_user  = "bright-blue"
+format      = '[$user]($style) '
+show_always = true
