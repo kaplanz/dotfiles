@@ -160,7 +160,7 @@ function prompt_century_precmd() {
 
     let local timer="$EPOCHREALTIME-${psvar[1]:-$EPOCHREALTIME}"
     psvar[1]=
-    (( $timer > 0 )) && {
+    (( $timer > 0.250 )) && {
         psvar[2]="$(printf '%.2fs' $timer)"
     } || {
         psvar[2]=
