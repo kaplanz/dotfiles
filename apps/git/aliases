@@ -30,10 +30,6 @@
         bss   = bisect start
         # checkout
         co    = checkout
-        cor   = checkout --recurse-submodules
-        com   = checkout main
-        # checkout-index
-        ci    = checkout-index
         # cherry-pick
         cp    = cherry-pick
         cpa   = cherry-pick --abort
@@ -71,6 +67,8 @@
         m     = merge
         ma    = merge --abort
         mc    = merge --continue
+        # mergetool
+        mt    = mergetool
         # pull
         l     = pull
         up    = pull --rebase
@@ -134,9 +132,11 @@
         si    = submodule init
         su    = submodule update --init
         # switch
-        sw    = switch
-        swc   = switch --create
-        swC   = switch --force-create
+        s     = switch
+        sm    = switch main
+        sd    = switch --detach
+        sc    = switch --create
+        sC    = switch --force-create
         # tag
         t     = tag
         ta    = tag --annotate
