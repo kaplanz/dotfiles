@@ -134,52 +134,27 @@ cfg.keys = {
 
 -- Text: {{{
 cfg.allow_square_glyphs_to_overflow_width = "Never"
-cfg.font = font "Fira Code"
+cfg.font = font "Maple Mono"
 cfg.font_size = 13.2
-cfg.font_rules = {
-  {
-    intensity = "Bold",
-    italic = true,
-    font = font {
-      family = "Victor Mono",
-      weight = "Bold",
-      style = "Italic",
-    },
-  },
-  {
-    italic = true,
-    intensity = "Half",
-    font = font {
-      family = "Victor Mono",
-      weight = "DemiBold",
-      style = "Italic",
-    },
-  },
-  {
-    italic = true,
-    intensity = "Normal",
-    font = font {
-      family = "Victor Mono",
-      style = "Italic",
-    },
-  },
-}
 cfg.harfbuzz_features = {
   -- character variants
-  "cv01", -- a
-  "cv02", -- g
-  "cv14", -- 3
-  "cv18", -- %
-  "cv25", -- .-
-  "cv26", -- :-
-  "cv32", -- .=
   "zero", -- 0
+  "cv01", -- @ # $ % & Q -> =>
+  "cv02", -- i
+  "cv04", -- @
+  -- italic only
+  "cv31", -- a
+  "cv32", -- f
+  "cv33", -- i j
+  "cv34", -- k
+  "cv35", -- l
+  "cv36", -- x
   -- stylistic sets
-  "ss01", -- r
-  "ss02", -- <= >=
-  "ss04", -- $
-  "ss06", -- \\
-  "ss10", -- Fl Tl fi fj fl ft
+  "ss01", -- == === != !==
+  "ss02", -- [info] [trace] [debug] [warn] [error] [fatal] [vite]
+  "ss03", -- __
+  "ss04", -- >= <=
+  "ss05", -- {{ }}
 }
 cfg.text_background_opacity = 0.85
 cfg.use_cap_height_to_scale_fallback_fonts = true
