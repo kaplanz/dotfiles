@@ -3,4 +3,4 @@
 # Created:     20 Jun 2024
 # SPDX-License-Identifier: MIT
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd=cd zsh)"
