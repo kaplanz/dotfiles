@@ -1,0 +1,520 @@
+# File:        config
+# Author:      Zakhary Kaplan <https://zakhary.dev>
+# Created:     25 Nov 2024
+# SPDX-License-Identifier: NONE
+
+# The font families to use.
+#
+# You can generate the list of valid values using the CLI:
+#
+#     ghostty +list-fonts
+#
+# This configuration can be repeated multiple times to specify preferred
+# fallback fonts when the requested codepoint is not available in the primary
+# font. This is particularly useful for multiple languages, symbolic fonts,
+# etc.
+#
+# Notes on emoji specifically: On macOS, Ghostty by default will always use
+# Apple Color Emoji and on Linux will always use Noto Emoji. You can
+# override this behavior by specifying a font family here that contains
+# emoji glyphs.
+#
+# The specific styles (bold, italic, bold italic) do not need to be
+# explicitly set. If a style is not set, then the regular style (font-family)
+# will be searched for stylistic variants. If a stylistic variant is not
+# found, Ghostty will use the regular style. This prevents falling back to a
+# different font family just to get a style such as bold. This also applies
+# if you explicitly specify a font family for a style. For example, if you
+# set `font-family-bold = FooBar` and "FooBar" cannot be found, Ghostty will
+# use whatever font is set for `font-family` for the bold style.
+#
+# Finally, some styles may be synthesized if they are not supported.
+# For example, if a font does not have an italic style and no alternative
+# italic font is specified, Ghostty will synthesize an italic style by
+# applying a slant to the regular style. If you want to disable these
+# synthesized styles then you can use the `font-style` configurations
+# as documented below.
+#
+# You can disable styles completely by using the `font-style` set of
+# configurations. See the documentation for `font-style` for more information.
+#
+# If you want to overwrite a previous set value rather than append a fallback,
+# specify the value as `""` (empty string) to reset the list and then set the
+# new values. For example:
+#
+#     font-family = ""
+#     font-family = "My Favorite Font"
+#
+# Setting any of these as CLI arguments will automatically clear the
+# values set in configuration files so you don't need to specify
+# `--font-family=""` before setting a new value. You only need to specify
+# this within config files if you want to clear previously set values in
+# configuration files or on the CLI if you want to clear values set on the
+# CLI.
+#
+# Changing this configuration at runtime will only affect new terminals, i.e.
+# new windows, tabs, etc.
+font-family = Maple Mono
+
+# Apply a font feature. This can be repeated multiple times to enable multiple
+# font features. You can NOT set multiple font features with a single value
+# (yet).
+#
+# The font feature will apply to all fonts rendered by Ghostty. A future
+# enhancement will allow targeting specific faces.
+#
+# A valid value is the name of a feature. Prefix the feature with a `-` to
+# explicitly disable it. Example: `ss20` or `-ss20`.
+#
+# To disable programming ligatures, use `-calt` since this is the typical
+# feature name for programming ligatures. To look into what font features
+# your font has and what they do, use a font inspection tool such as
+# [fontdrop.info](https://fontdrop.info).
+#
+# To generally disable most ligatures, use `-calt`, `-liga`, and `-dlig` (as
+# separate repetitive entries in your config).
+
+# -- character variants --
+# zero: 0
+font-feature = zero
+# cv01: @ # $ % & Q -> =>
+font-feature = cv01
+# cv02: i
+font-feature = cv02
+# cv04: @
+font-feature = cv04
+# -- italic only --
+# cv31: a
+font-feature = cv31
+# cv32: f
+font-feature = cv32
+# cv33: i j
+font-feature = cv33
+# cv34: k
+font-feature = cv34
+# cv35: l
+font-feature = cv35
+# cv36: x
+font-feature = cv36
+# -- stylistic sets --
+# ss01: == === != !==
+font-feature = ss01
+# ss02: [info] [trace] [debug] [warn] [error] [fatal] [vite]
+font-feature = ss02
+# ss03: __
+font-feature = ss03
+# ss04: >= <=
+font-feature = ss04
+# ss05: {{ }}
+font-feature = ss05
+
+# A theme to use. This can be a built-in theme name, a custom theme
+# name, or an absolute path to a custom theme file. Ghostty also supports
+# specifying a different them to use for light and dark mode. Each
+# option is documented below.
+#
+# If the theme is an absolute pathname, Ghostty will attempt to load that
+# file as a theme. If that file does not exist or is inaccessible, an error
+# will be logged and no other directories will be searched.
+#
+# If the theme is not an absolute pathname, two different directories will be
+# searched for a file name that matches the theme. This is case sensitive on
+# systems with case-sensitive filesystems. It is an error for a theme name to
+# include path separators unless it is an absolute pathname.
+#
+# The first directory is the `themes` subdirectory of your Ghostty
+# configuration directory. This is `$XDG_CONFIG_DIR/ghostty/themes` or
+# `~/.config/ghostty/themes`.
+#
+# The second directory is the `themes` subdirectory of the Ghostty resources
+# directory. Ghostty ships with a multitude of themes that will be installed
+# into this directory. On macOS, this list is in the `Ghostty.app/Contents/
+# Resources/ghostty/themes` directory. On Linux, this list is in the `share/
+# ghostty/themes` directory (wherever you installed the Ghostty "share"
+# directory.
+#
+# To see a list of available themes, run `ghostty +list-themes`.
+#
+# A theme file is simply another Ghostty configuration file. They share
+# the same syntax and same configuration options. A theme can set any valid
+# configuration option so please do not use a theme file from an untrusted
+# source. The built-in themes are audited to only set safe configuration
+# options.
+#
+# Some options cannot be set within theme files. The reason these are not
+# supported should be self-evident. A theme file cannot set `theme` or
+# `config-file`. At the time of writing this, Ghostty will not show any
+# warnings or errors if you set these options in a theme file but they will
+# be silently ignored.
+#
+# Any additional colors specified via background, foreground, palette, etc.
+# will override the colors specified in the theme.
+#
+# To specify a different theme for light and dark mode, use the following
+# syntax: `light:theme-name,dark:theme-name`. For example:
+# `light:rose-pine-dawn,dark:rose-pine`. Whitespace around all values are
+# trimmed and order of light and dark does not matter. Both light and dark
+# must be specified in this form. In this form, the theme used will be
+# based on the current desktop environment theme.
+#
+# There are some known bugs with light/dark mode theming. These will
+# be fixed in a future update:
+#
+#   - macOS: titlebar tabs style is not updated when switching themes.
+#
+theme = iceberg-dark
+
+# Hide the mouse immediately when typing. The mouse becomes visible again
+# when the mouse is used (button, movement, etc.). Platform-specific behavior
+# may dictate other scenarios where the mouse is shown. For example on macOS,
+# the mouse is shown again when a new window, tab, or split is created.
+mouse-hide-while-typing = true
+
+# The opacity level (opposite of transparency) of the background. A value of
+# 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
+# or greater than 1 will be clamped to the nearest valid value.
+background-opacity = .85
+
+# A positive value enables blurring of the background when background-opacity
+# is less than 1. The value is the blur radius to apply. A value of 20
+# is reasonable for a good looking blur. Higher values will cause strange
+# rendering issues as well as performance issues.
+#
+# This is only supported on macOS.
+background-blur-radius = 20
+
+# The title Ghostty will use for the window. This will force the title of the
+# window to be this title at all times and Ghostty will ignore any set title
+# escape sequences programs (such as Neovim) may send.
+title =
+
+# Key bindings. The format is `trigger=action`. Duplicate triggers will
+# overwrite previously set values. The list of actions is available in
+# the documentation or using the `ghostty +list-actions` command.
+#
+# Trigger: `+`-separated list of keys and modifiers. Example: `ctrl+a`,
+# `ctrl+shift+b`, `up`. Some notes:
+#
+#   * modifiers cannot repeat, `ctrl+ctrl+a` is invalid.
+#
+#   * modifiers and keys can be in any order, `shift+a+ctrl` is *weird*,
+#     but valid.
+#
+#   * only a single key input is allowed, `ctrl+a+b` is invalid.
+#
+#   * the key input can be prefixed with `physical:` to specify a
+#     physical key mapping rather than a logical one. A physical key
+#     mapping responds to the hardware keycode and not the keycode
+#     translated by any system keyboard layouts. Example: "ctrl+physical:a"
+#
+# Valid modifiers a
+# `option`), and `super` (alias: `cmd`, `command`). You may use the modifier
+# or the alias. When debugging keybinds, the non-aliased modifier will always
+# be used in output.
+#
+# Note that the fn or "globe" key on keyboards are not supported as a
+# modifier. This is a limitation of the operating systems and GUI toolkits
+# that Ghostty uses.
+#
+# You may also specify multiple triggers separated by `>` to require a
+# sequence of triggers to activate the action. For example,
+# `ctrl+a>n=new_window` will only trigger the `new_window` action if the
+# user presses `ctrl+a` followed separately by `n`. In other software, this
+# is sometimes called a leader key, a key chord, a key table, etc. There
+# is no hardcoded limit on the number of parts in a sequence.
+#
+# Warning: if you define a sequence as a CLI argument to `ghostty`,
+# you probably have to quote the keybind since `>` is a special character
+# in most shells. Example: ghostty --keybind='ctrl+a>n=new_window'
+#
+# A trigger sequence has some special handling:
+#
+#   * Ghostty will wait an indefinite amount of time for the next key in
+#     the sequence. There is no way to specify a timeout. The only way to
+#     force the output of a prefix key is to assign another keybind to
+#     specifically output that key (i.e. `ctrl+a>ctrl+a=text:foo`) or
+#     press an unbound key which will send both keys to the program.
+#
+#   * If a prefix in a sequence is previously bound, the sequence will
+#     override the previous binding. For example, if `ctrl+a` is bound to
+#     `new_window` and `ctrl+a>n` is bound to `new_tab`, pressing `ctrl+a`
+#     will do nothing.
+#
+#   * Adding to the above, if a previously bound sequence prefix is
+#     used in a new, non-sequence binding, the entire previously bound
+#     sequence will be unbound. For example, if you bind `ctrl+a>n` and
+#     `ctrl+a>t`, and then bind `ctrl+a` directly, both `ctrl+a>n` and
+#     `ctrl+a>t` will become unbound.
+#
+#   * Trigger sequences are not allowed for `global:` or `all:`-prefixed
+#     triggers. This is a limitation we could remove in the future.
+#
+# Action is the action to take when the trigger is satisfied. It takes the
+# format `action` or `action:param`. The latter form is only valid if the
+# action requires a parameter.
+#
+#   * `ignore` - Do nothing, ignore the key input. This can be used to
+#     black hole certain inputs to have no effect.
+#
+#   * `unbind` - Remove the binding. This makes it so the previous action
+#     is removed, and the key will be sent through to the child command
+#     if it is printable.
+#
+#   * `csi:text` - Send a CSI sequence. i.e. `csi:A` sends "cursor up".
+#
+#   * `esc:text` - Send an escape sequence. i.e. `esc:d` deletes to the
+#     end of the word to the right.
+#
+#   * `text:text` - Send a string. Uses Zig string literal syntax.
+#     i.e. `text:\x15` sends Ctrl-U.
+#
+#   * All other actions can be found in the documentation or by using the
+#     `ghostty +list-actions` command.
+#
+# Some notes for the action:
+#
+#   * The parameter is taken as-is after the `:`. Double quotes or
+#     other mechanisms are included and NOT parsed. If you want to
+#     send a string
+#     trigger/action in double quotes. Example: `--keybind="up=csi:A B"`
+#
+# There are some additional special values that can be specified for
+# keybind:
+#
+#   * `keybind=clear` will clear all set keybindings. Warning: this
+#     removes ALL keybindings up to this point, including the default
+#     keybindings.
+#
+# The keybind trigger can be prefixed with some special values to change
+# the behavior of the keybind. These are:
+#
+#   * `all:` - Make the keybind apply to all terminal surfaces. By default,
+#     keybinds only apply to the focused terminal surface. If this is true,
+#     then the keybind will be sent to all terminal surfaces. This only
+#     applies to actions that are surface-specific. For actions that
+#     are already global (i.e. `quit`), this prefix has no effect.
+#
+#   * `global:` - Make the keybind global. By default, keybinds only work
+#     within Ghostty and under the right conditions (application focused,
+#     sometimes terminal focused, etc.). If you want a keybind to work
+#     globally across your system (i.e. even when Ghostty is not focused),
+#     specify this prefix. This prefix implies `all:`. Note: this does not
+#     work in all environments; see the additional notes below for more
+#     information.
+#
+#   * `unconsumed:` - Do not consume the input. By default, a keybind
+#     will consume the input, meaning that the associated encoding (if
+#     any) will not be sent to the running program in the terminal. If
+#     you wish to send the encoded value to the program, specify the
+#     `unconsumed:` prefix before the entire keybind. For example:
+#     `unconsumed:ctrl+a=reload_config`. `global:` and `all:`-prefixed
+#     keybinds will always consume the input regardless of this setting.
+#     Since they are not associated with a specific terminal surface,
+#     they're never encoded.
+#
+# Keybind trigger are not unique per prefix combination. For example,
+# `ctrl+a` and `global:ctrl+a` are not two separate keybinds. The keybind
+# set later will overwrite the keybind set earlier. In this case, the
+# `global:` keybind will be used.
+#
+# Multiple prefixes can be specified. For example,
+# `global:unconsumed:ctrl+a=reload_config` will make the keybind global
+# and not consume the input to reload the config.
+#
+# A note on `global:`: this feature is only supported on macOS. On macOS,
+# this feature requires accessibility permissions to be granted to Ghostty.
+# When a `global:` keybind is specified and Ghostty is launched or reloaded,
+# Ghostty will attempt to request these permissions. If the permissions are
+# not granted, the keybind will not work. On macOS, you can find these
+# permissions in System Preferences -> Privacy & Security -> Accessibility.
+
+# -- splits --
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+keybind = super+shift+down=new_split:down
+keybind = super+shift+left=new_split:left
+keybind = super+shift+right=new_split:right
+keybind = super+shift+up=new_split:up
+# -- terminal --
+keybind = super+shift+p=toggle_quick_terminal
+
+# Valid values:
+#
+#   * `true`
+#   * `false` - windows won't have native decorations, i.e. titlebar and
+#      borders. On macOS this also disables tabs and tab overview.
+#
+# The "toggle_window_decoration" keybind action can be used to create
+# a keybinding to toggle this setting at runtime.
+#
+# Changing this configuration in your configuration and reloading will
+# only affect new windows. Existing windows will not be affected.
+#
+# macOS: To hide the titlebar without removing the native window borders
+#        or rounded corners, use `macos-titlebar-style = hidden` instead.
+window-decoration = true
+
+# The font that will be used for the application's window and tab titles.
+#
+# This is currently only supported on macOS.
+window-title-font-family = Maple Mono
+
+# Resize the window in discrete increments of the focused surface's cell size.
+# If this is disabled, surfaces are resized in pixel increments. Currently
+# only supported on macOS.
+window-step-resize = false
+
+# Confirms that a surface should be closed before closing it. This defaults to
+# true. If set to false, surfaces will close without any confirmation.
+confirm-close-surface = false
+
+# Whether or not to quit after the last surface is closed.
+#
+# This defaults to `false` on macOS since that is standard behavior for
+# a macOS application. On Linux, this defaults to `true` since that is
+# generally expected behavior.
+#
+# On Linux, if this is `true`, Ghostty can delay quitting fully until a
+# configurable amount of time has passed after the last window is closed.
+# See the documentation of `quit-after-last-window-closed-delay`.
+quit-after-last-window-closed = true
+
+# The position of the "quick" terminal window. To learn more about the
+# quick terminal, see the documentation for the `toggle_quick_terminal`
+# binding action.
+#
+# Valid values are:
+#
+#   * `top` - Terminal appears at the top of the screen.
+#   * `bottom` - Terminal appears at the bottom of the screen.
+#   * `left` - Terminal appears at the left of the screen.
+#   * `right` - Terminal appears at the right of the screen.
+#
+# Changing this configuration requires restarting Ghostty completely.
+quick-terminal-position = top
+
+# Custom shaders to run after the default shaders. This is a file path
+# to a GLSL-syntax shader for all platforms.
+#
+# WARNING: Invalid shaders can cause Ghostty to become unusable such as by
+# causing the window to be completely black. If this happens, you can
+# unset this configuration to disable the shader.
+#
+# On Linux, this requires OpenGL 4.2. Ghostty typically only requires
+# OpenGL 3.3, but custom shaders push that requirement up to 4.2.
+#
+# The shader API is identical to the Shadertoy API: you specify a `mainImage`
+# function and the available uniforms match Shadertoy. The iChannel0 uniform
+# is a texture containing the rendered terminal screen.
+#
+# If the shader fails to compile, the shader will be ignored. Any errors
+# related to shader compilation will not show up as configuration errors
+# and only show up in the log, since shader compilation happens after
+# configuration loading on the dedicated render thread.  For interactive
+# development, use [shadertoy.com](https://shadertoy.com).
+#
+# This can be repeated multiple times to load multiple shaders. The shaders
+# will be run in the order they are specified.
+#
+# Changing this value at runtime and reloading the configuration will only
+# affect new windows, tabs, and splits.
+custom-shader =
+
+# The style of the macOS titlebar. Available values are: "native",
+# "transparent", "tabs", and "hidden".
+#
+# The "native" style uses the native macOS titlebar with zero customization.
+# The titlebar will match your window theme (see `window-theme`).
+#
+# The "transparent" style is the same as "native" but the titlebar will
+# be transparent and allow your window background color to come through.
+# This makes a more seamless window appearance but looks a little less
+# typical for a macOS application and may not work well with all themes.
+#
+# The "transparent" style will also update in real-time to dynamic
+# changes to the window background color, i.e. via OSC 11. To make this
+# more aesthetically pleasing, this only happens if the terminal is
+# a window, tab, or split that borders the top of the window. This
+# avoids a disjointed appearance where the titlebar color changes
+# but all the topmost terminals don't match.
+#
+# The "tabs" style is a completely custom titlebar that integrates the
+# tab bar into the titlebar. This titlebar always matches the background
+# color of the terminal. There are some limitations to this style:
+# On macOS 13 and below, saved window state will not restore tabs correctly.
+# macOS 14 does not have this issue and any other macOS version has not
+# been tested.
+#
+# The "hidden" style hides the titlebar. Unlike `window-decoration = false`,
+# however, it does not remove the frame from the window or cause it to have
+# squared corners. Changing to or from this option at run-time may affect
+# existing windows in buggy ways. The top titlebar area of the window will
+# continue to drag the window around and you will not be able to use
+# the mouse for terminal events in this space.
+#
+# The default value is "transparent". This is an opinionated choice
+# but its one I think is the most aesthetically pleasing and works in
+# most cases.
+#
+# Changing this option at runtime only applies to new windows.
+macos-titlebar-style = transparent
+
+# Whether the proxy icon in the macOS titlebar is visible. The proxy icon
+# is the icon that represents the folder of the current working directory.
+# You can see this very clearly in the macOS built-in Terminal.app
+# titlebar.
+#
+# The proxy icon is only visible with the native macOS titlebar style.
+#
+# Valid values are:
+#
+#   * `visible` - Show the proxy icon.
+#   * `hidden` - Hide the proxy icon.
+#
+# The default value is `visible`.
+#
+# This setting can be changed at runtime and will affect all currently
+# open windows but only after their working directory changes again.
+# Therefore, to make this work after changing the setting, you must
+# usually `cd` to a different directory, open a different file in an
+# editor, etc.
+macos-titlebar-proxy-icon = hidden
+
+# If `true`, the *Option* key will be treated as *Alt*. This makes terminal
+# sequences expecting *Alt* to work properly, but will break Unicode input
+# sequences on macOS if you use them via the *Alt* key. You may set this to
+# `false` to restore the macOS *Alt* key unicode sequences but this will break
+# terminal sequences expecting *Alt* to work.
+#
+# The values `left` or `right` enable this for the left or right *Option*
+# key, respectively.
+#
+# Note that if an *Option*-sequence doesn't produce a printable character, it
+# will be treated as *Alt* regardless of this setting. (i.e. `alt+ctrl+a`).
+#
+# This does not work with GLFW builds.
+macos-option-as-alt = true
+
+# Control the auto-update functionality of Ghostty. This is only supported
+# on macOS currently, since Linux builds are distributed via package
+# managers that are not centrally controlled by Ghostty.
+#
+# Checking or downloading an update does not send any information to
+# the project beyond standard network information mandated by the
+# underlying protocols. To put it another way: Ghostty doesn't explicitly
+# add any tracking to the update process. The update process works by
+# downloading information about the latest version and comparing it
+# client-side to the current version.
+#
+# Valid values are:
+#
+#  * `off` - Disable auto-updates.
+#  * `check` - Check for updates and notify the user if an update is
+#    available, but do not automatically download or install the update.
+#  * `download` - Check for updates, automatically download the update,
+#    notify the user, but do not automatically install the update.
+#
+# The default value is `check`.
+#
+# Changing this value at runtime works after a small delay.
+auto-update = check
