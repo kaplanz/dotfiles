@@ -173,7 +173,11 @@ mouse-hide-while-typing = true
 # The opacity level (opposite of transparency) of the background. A value of
 # 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
 # or greater than 1 will be clamped to the nearest valid value.
-background-opacity = .85
+#
+# On macOS, background opacity is disabled when the terminal enters native
+# fullscreen. This is because the background becomes gray and it can cause
+# widgets to show through which isn't generally desirable.
+background-opacity = 0.85
 
 # A positive value enables blurring of the background when background-opacity
 # is less than 1. The value is the blur radius to apply. A value of 20
@@ -207,7 +211,7 @@ title =
 #     mapping responds to the hardware keycode and not the keycode
 #     translated by any system keyboard layouts. Example: "ctrl+physical:a"
 #
-# Valid modifiers a
+# Valid modifiers are `shift`, `ctrl` (alias: `control`), `alt` (alias: `opt`,
 # `option`), and `super` (alias: `cmd`, `command`). You may use the modifier
 # or the alias. When debugging keybinds, the non-aliased modifier will always
 # be used in output.
@@ -275,7 +279,7 @@ title =
 #
 #   * The parameter is taken as-is after the `:`. Double quotes or
 #     other mechanisms are included and NOT parsed. If you want to
-#     send a string
+#     send a string value that includes spaces, wrap the entire
 #     trigger/action in double quotes. Example: `--keybind="up=csi:A B"`
 #
 # There are some additional special values that can be specified for
@@ -331,10 +335,10 @@ title =
 # -- splits --
 keybind = super+d=unbind
 keybind = super+shift+d=unbind
-keybind = super+shift+down=new_split:down
-keybind = super+shift+left=new_split:left
-keybind = super+shift+right=new_split:right
-keybind = super+shift+up=new_split:up
+keybind = super+up=new_split:up
+keybind = super+down=new_split:down
+keybind = super+left=new_split:left
+keybind = super+right=new_split:right
 # -- terminal --
 keybind = super+shift+p=toggle_quick_terminal
 
@@ -377,7 +381,7 @@ confirm-close-surface = false
 # On Linux, if this is `true`, Ghostty can delay quitting fully until a
 # configurable amount of time has passed after the last window is closed.
 # See the documentation of `quit-after-last-window-closed-delay`.
-quit-after-last-window-closed = true
+quit-after-last-window-closed = false
 
 # The position of the "quick" terminal window. To learn more about the
 # quick terminal, see the documentation for the `toggle_quick_terminal`
@@ -391,7 +395,27 @@ quit-after-last-window-closed = true
 #   * `right` - Terminal appears at the right of the screen.
 #
 # Changing this configuration requires restarting Ghostty completely.
-quick-terminal-position = top
+quick-terminal-position = bottom
+
+# The screen where the quick terminal should show up.
+#
+# Valid values are:
+#
+#  * `main` - The screen that the operating system recommends as the main
+#    screen. On macOS, this is the screen that is currently receiving
+#    keyboard input. This screen is defined by the operating system and
+#    not chosen by Ghostty.
+#
+#  * `mouse` - The screen that the mouse is currently hovered over.
+#
+#  * `macos-menu-bar` - The screen that contains the macOS menu bar as
+#    set in the display settings on macOS. This is a bit confusing because
+#    every screen on macOS has a menu bar, but this is the screen that
+#    contains the primary menu bar.
+#
+# The default value is `main` because this is the recommended screen
+# by the operating system.
+quick-terminal-screen = mouse
 
 # Custom shaders to run after the default shaders. This is a file path
 # to a GLSL-syntax shader for all platforms.
@@ -418,7 +442,7 @@ quick-terminal-position = top
 #
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows, tabs, and splits.
-custom-shader =
+custom-shader = # shader/lcd.glsl
 
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", "tabs", and "hidden".
