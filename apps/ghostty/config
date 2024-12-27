@@ -1,7 +1,7 @@
 # File:        config
 # Author:      Zakhary Kaplan <https://zakhary.dev>
 # Created:     25 Nov 2024
-# SPDX-License-Identifier: NONE
+# SPDX-License-Identifier: MIT
 
 # The font families to use.
 #
@@ -110,7 +110,7 @@ font-feature = ss05
 
 # A theme to use. This can be a built-in theme name, a custom theme
 # name, or an absolute path to a custom theme file. Ghostty also supports
-# specifying a different them to use for light and dark mode. Each
+# specifying a different theme to use for light and dark mode. Each
 # option is documented below.
 #
 # If the theme is an absolute pathname, Ghostty will attempt to load that
@@ -187,11 +187,6 @@ background-opacity = 0.85
 # This is only supported on macOS.
 background-blur-radius = 20
 
-# The title Ghostty will use for the window. This will force the title of the
-# window to be this title at all times and Ghostty will ignore any set title
-# escape sequences programs (such as Neovim) may send.
-title =
-
 # Key bindings. The format is `trigger=action`. Duplicate triggers will
 # overwrite previously set values. The list of actions is available in
 # the documentation or using the `ghostty +list-actions` command.
@@ -216,7 +211,7 @@ title =
 # or the alias. When debugging keybinds, the non-aliased modifier will always
 # be used in output.
 #
-# Note that the fn or "globe" key on keyboards are not supported as a
+# Note: The fn or "globe" key on keyboards are not supported as a
 # modifier. This is a limitation of the operating systems and GUI toolkits
 # that Ghostty uses.
 #
@@ -227,7 +222,7 @@ title =
 # is sometimes called a leader key, a key chord, a key table, etc. There
 # is no hardcoded limit on the number of parts in a sequence.
 #
-# Warning: if you define a sequence as a CLI argument to `ghostty`,
+# Warning: If you define a sequence as a CLI argument to `ghostty`,
 # you probably have to quote the keybind since `>` is a special character
 # in most shells. Example: ghostty --keybind='ctrl+a>n=new_window'
 #
@@ -316,7 +311,7 @@ title =
 #     Since they are not associated with a specific terminal surface,
 #     they're never encoded.
 #
-# Keybind trigger are not unique per prefix combination. For example,
+# Keybind triggers are not unique per prefix combination. For example,
 # `ctrl+a` and `global:ctrl+a` are not two separate keybinds. The keybind
 # set later will overwrite the keybind set earlier. In this case, the
 # `global:` keybind will be used.
@@ -325,7 +320,7 @@ title =
 # `global:unconsumed:ctrl+a=reload_config` will make the keybind global
 # and not consume the input to reload the config.
 #
-# A note on `global:`: this feature is only supported on macOS. On macOS,
+# Note: `global:` is only supported on macOS. On macOS,
 # this feature requires accessibility permissions to be granted to Ghostty.
 # When a `global:` keybind is specified and Ghostty is launched or reloaded,
 # Ghostty will attempt to request these permissions. If the permissions are
@@ -340,7 +335,7 @@ keybind = super+down=new_split:down
 keybind = super+left=new_split:left
 keybind = super+right=new_split:right
 # -- terminal --
-keybind = super+shift+p=toggle_quick_terminal
+keybind = global:super+shift+p=toggle_quick_terminal
 
 # Valid values:
 #
@@ -363,25 +358,9 @@ window-decoration = true
 # This is currently only supported on macOS.
 window-title-font-family = Maple Mono
 
-# Resize the window in discrete increments of the focused surface's cell size.
-# If this is disabled, surfaces are resized in pixel increments. Currently
-# only supported on macOS.
-window-step-resize = false
-
 # Confirms that a surface should be closed before closing it. This defaults to
 # true. If set to false, surfaces will close without any confirmation.
 confirm-close-surface = false
-
-# Whether or not to quit after the last surface is closed.
-#
-# This defaults to `false` on macOS since that is standard behavior for
-# a macOS application. On Linux, this defaults to `true` since that is
-# generally expected behavior.
-#
-# On Linux, if this is `true`, Ghostty can delay quitting fully until a
-# configurable amount of time has passed after the last window is closed.
-# See the documentation of `quit-after-last-window-closed-delay`.
-quit-after-last-window-closed = false
 
 # The position of the "quick" terminal window. To learn more about the
 # quick terminal, see the documentation for the `toggle_quick_terminal`
@@ -393,34 +372,15 @@ quit-after-last-window-closed = false
 #   * `bottom` - Terminal appears at the bottom of the screen.
 #   * `left` - Terminal appears at the left of the screen.
 #   * `right` - Terminal appears at the right of the screen.
+#   * `center` - Terminal appears at the center of the screen.
 #
 # Changing this configuration requires restarting Ghostty completely.
 quick-terminal-position = bottom
 
-# The screen where the quick terminal should show up.
-#
-# Valid values are:
-#
-#  * `main` - The screen that the operating system recommends as the main
-#    screen. On macOS, this is the screen that is currently receiving
-#    keyboard input. This screen is defined by the operating system and
-#    not chosen by Ghostty.
-#
-#  * `mouse` - The screen that the mouse is currently hovered over.
-#
-#  * `macos-menu-bar` - The screen that contains the macOS menu bar as
-#    set in the display settings on macOS. This is a bit confusing because
-#    every screen on macOS has a menu bar, but this is the screen that
-#    contains the primary menu bar.
-#
-# The default value is `main` because this is the recommended screen
-# by the operating system.
-quick-terminal-screen = mouse
-
 # Custom shaders to run after the default shaders. This is a file path
 # to a GLSL-syntax shader for all platforms.
 #
-# WARNING: Invalid shaders can cause Ghostty to become unusable such as by
+# Warning: Invalid shaders can cause Ghostty to become unusable such as by
 # causing the window to be completely black. If this happens, you can
 # unset this configuration to disable the shader.
 #
@@ -442,46 +402,7 @@ quick-terminal-screen = mouse
 #
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows, tabs, and splits.
-custom-shader = # shader/lcd.glsl
-
-# The style of the macOS titlebar. Available values are: "native",
-# "transparent", "tabs", and "hidden".
-#
-# The "native" style uses the native macOS titlebar with zero customization.
-# The titlebar will match your window theme (see `window-theme`).
-#
-# The "transparent" style is the same as "native" but the titlebar will
-# be transparent and allow your window background color to come through.
-# This makes a more seamless window appearance but looks a little less
-# typical for a macOS application and may not work well with all themes.
-#
-# The "transparent" style will also update in real-time to dynamic
-# changes to the window background color, i.e. via OSC 11. To make this
-# more aesthetically pleasing, this only happens if the terminal is
-# a window, tab, or split that borders the top of the window. This
-# avoids a disjointed appearance where the titlebar color changes
-# but all the topmost terminals don't match.
-#
-# The "tabs" style is a completely custom titlebar that integrates the
-# tab bar into the titlebar. This titlebar always matches the background
-# color of the terminal. There are some limitations to this style:
-# On macOS 13 and below, saved window state will not restore tabs correctly.
-# macOS 14 does not have this issue and any other macOS version has not
-# been tested.
-#
-# The "hidden" style hides the titlebar. Unlike `window-decoration = false`,
-# however, it does not remove the frame from the window or cause it to have
-# squared corners. Changing to or from this option at run-time may affect
-# existing windows in buggy ways. The top titlebar area of the window will
-# continue to drag the window around and you will not be able to use
-# the mouse for terminal events in this space.
-#
-# The default value is "transparent". This is an opinionated choice
-# but its one I think is the most aesthetically pleasing and works in
-# most cases.
-#
-# Changing this option at runtime only applies to new windows.
-macos-titlebar-style = transparent
+# custom-shader = shader/lcd.glsl
 
 # Whether the proxy icon in the macOS titlebar is visible. The proxy icon
 # is the icon that represents the folder of the current working directory.
@@ -504,41 +425,60 @@ macos-titlebar-style = transparent
 # editor, etc.
 macos-titlebar-proxy-icon = hidden
 
-# If `true`, the *Option* key will be treated as *Alt*. This makes terminal
-# sequences expecting *Alt* to work properly, but will break Unicode input
-# sequences on macOS if you use them via the *Alt* key. You may set this to
-# `false` to restore the macOS *Alt* key unicode sequences but this will break
-# terminal sequences expecting *Alt* to work.
+# macOS doesn't have a distinct "alt" key and instead has the "option"
+# key which behaves slightly differently. On macOS by default, the
+# option key plus a character will sometimes produces a Unicode character.
+# For example, on US standard layouts option-b produces "∫". This may be
+# undesirable if you want to use "option" as an "alt" key for keybindings
+# in terminal programs or shells.
 #
-# The values `left` or `right` enable this for the left or right *Option*
-# key, respectively.
+# This configuration lets you change the behavior so that option is treated
+# as alt.
+#
+# The default behavior (unset) will depend on your active keyboard
+# layout. If your keyboard layout is one of the keyboard layouts listed
+# below, then the default value is "true". Otherwise, the default
+# value is "false". Keyboard layouts with a default value of "true" are:
+#
+#   - U.S. Standard
+#   - U.S. International
 #
 # Note that if an *Option*-sequence doesn't produce a printable character, it
 # will be treated as *Alt* regardless of this setting. (i.e. `alt+ctrl+a`).
 #
+# Explicit values that can be set:
+#
+# If `true`, the *Option* key will be treated as *Alt*. This makes terminal
+# sequences expecting *Alt* to work properly, but will break Unicode input
+# sequences on macOS if you use them via the *Alt* key.
+#
+# You may set this to `false` to restore the macOS *Alt* key unicode
+# sequences but this will break terminal sequences expecting *Alt* to work.
+#
+# The values `left` or `right` enable this for the left or right *Option*
+# key, respectively.
+#
 # This does not work with GLFW builds.
 macos-option-as-alt = true
 
-# Control the auto-update functionality of Ghostty. This is only supported
-# on macOS currently, since Linux builds are distributed via package
-# managers that are not centrally controlled by Ghostty.
+# The release channel to use for auto-updates.
 #
-# Checking or downloading an update does not send any information to
-# the project beyond standard network information mandated by the
-# underlying protocols. To put it another way: Ghostty doesn't explicitly
-# add any tracking to the update process. The update process works by
-# downloading information about the latest version and comparing it
-# client-side to the current version.
+# The default value of this matches the release channel of the currently
+# running Ghostty version. If you download a pre-release version of Ghostty
+# then this will be set to `tip` and you will receive pre-release updates.
+# If you download a stable version of Ghostty then this will be set to
+# `stable` and you will receive stable updates.
 #
 # Valid values are:
 #
-#  * `off` - Disable auto-updates.
-#  * `check` - Check for updates and notify the user if an update is
-#    available, but do not automatically download or install the update.
-#  * `download` - Check for updates, automatically download the update,
-#    notify the user, but do not automatically install the update.
+#  * `stable` - Stable, tagged releases such as "1.0.0".
+#  * `tip` - Pre-release versions generated from each commit to the
+#    main branch. This is the version that was in use during private
+#    beta testing by thousands of people. It is generally stable but
+#    will likely have more bugs than the stable channel.
 #
-# The default value is `check`.
+# Changing this configuration requires a full restart of
+# Ghostty to take effect.
 #
-# Changing this value at runtime works after a small delay.
-auto-update = check
+# This only works on macOS since only macOS has an auto-update feature.
+auto-update-channel = stable
