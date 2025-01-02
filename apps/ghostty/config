@@ -353,11 +353,6 @@ keybind = global:super+shift+p=toggle_quick_terminal
 #        or rounded corners, use `macos-titlebar-style = hidden` instead.
 window-decoration = true
 
-# The font that will be used for the application's window and tab titles.
-#
-# This is currently only supported on macOS.
-window-title-font-family = Maple Mono
-
 # Confirms that a surface should be closed before closing it. This defaults to
 # true. If set to false, surfaces will close without any confirmation.
 confirm-close-surface = false
@@ -403,27 +398,6 @@ quick-terminal-position = bottom
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows, tabs, and splits.
 # custom-shader = shader/lcd.glsl
-
-# Whether the proxy icon in the macOS titlebar is visible. The proxy icon
-# is the icon that represents the folder of the current working directory.
-# You can see this very clearly in the macOS built-in Terminal.app
-# titlebar.
-#
-# The proxy icon is only visible with the native macOS titlebar style.
-#
-# Valid values are:
-#
-#   * `visible` - Show the proxy icon.
-#   * `hidden` - Hide the proxy icon.
-#
-# The default value is `visible`.
-#
-# This setting can be changed at runtime and will affect all currently
-# open windows but only after their working directory changes again.
-# Therefore, to make this work after changing the setting, you must
-# usually `cd` to a different directory, open a different file in an
-# editor, etc.
-macos-titlebar-proxy-icon = hidden
 
 # macOS doesn't have a distinct "alt" key and instead has the "option"
 # key which behaves slightly differently. On macOS by default, the
