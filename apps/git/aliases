@@ -54,8 +54,10 @@
         cfg   = config --global
         # diff
         d     = diff
+        ds    = diff --stat
         dw    = diff --word-diff
         dc    = diff --cached
+        dcs   = diff --cached --stat
         dcw   = diff --cached --word-diff
         # fetch
         f     = fetch
