@@ -74,39 +74,20 @@ font-family = Maple Mono
 # To generally disable most ligatures, use `-calt`, `-liga`, and `-dlig` (as
 # separate repetitive entries in your config).
 
+# -- contextual alternatives --
+font-feature = calt
 # -- character variants --
 # zero: 0
 font-feature = zero
 # cv01: @ # $ % & Q -> =>
 font-feature = cv01
-# cv02: i
-font-feature = cv02
-# cv04: @
-font-feature = cv04
-# -- italic only --
-# cv31: a
-font-feature = cv31
-# cv32: f
-font-feature = cv32
-# cv33: i j
-font-feature = cv33
-# cv34: k
-font-feature = cv34
-# cv35: l
-font-feature = cv35
-# cv36: x
-font-feature = cv36
+# cv03: i
+font-feature = cv03
 # -- stylistic sets --
-# ss01: == === != !==
-font-feature = ss01
-# ss02: [info] [trace] [debug] [warn] [error] [fatal] [vite]
-font-feature = ss02
-# ss03: __
+# ss03: [trace] [debug] [info] [warn] [error] [fatal] [todo] [fixme]
 font-feature = ss03
-# ss04: >= <=
-font-feature = ss04
-# ss05: {{ }}
-font-feature = ss05
+# ss08: >>= -<< ->> >-
+font-feature = ss08
 
 # A theme to use. This can be a built-in theme name, a custom theme
 # name, or an absolute path to a custom theme file. Ghostty also supports
