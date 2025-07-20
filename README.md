@@ -75,7 +75,7 @@ So, you're looking to just get this over with already? Your troubles end here!
 Simply paste this command to download the installer and get on your merry way:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -sSf https://zakhary.dev/dotfiles/script/install | sh
+curl --proto '=https' --tlsv1.2 -sSf https://get.zakhary.dev/dotfiles | sh
 ```
 
 Assuming everything worked as expected, you should receive a message that
