@@ -91,7 +91,7 @@ through each part of what we're going to be doing here.
 Start by cloning this repository to your home directory:
 
 ```sh
-git clone https://github.com/kaplanz/dotfiles.git ~/.dots
+git clone https://git.zakhary.dev/dotfiles ~/.dots
 ```
 
 > [!NOTE]

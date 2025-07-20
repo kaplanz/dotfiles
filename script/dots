@@ -24,7 +24,7 @@ DOTS="${DOTS:-$HOME/.dots}"
 # @env REPO  Remote URL to dotfiles homepage.
 LINK="${LINK:-https://zakhary.dev/dotfiles}"
 # @env REPO  Remote URL to dotfiles repository.
-REPO="${REPO:-https://github.com/kaplanz/dotfiles.git}"
+REPO="${REPO:-https://git.zakhary.dev/dotfiles}"
 
 # @env GIT       Call git from the proper directory.
 GIT="git -C ${DOTS}"
