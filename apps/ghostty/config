@@ -378,7 +378,7 @@ quick-terminal-position = bottom
 #
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows, tabs, and splits.
-# custom-shader = shader/lcd.glsl
+custom-shader = shader/cursor.glsl
 
 # macOS doesn't have a distinct "alt" key and instead has the "option"
 # key which behaves slightly differently. On macOS by default, the
