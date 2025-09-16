@@ -143,7 +143,7 @@ font-feature = ss08
 #
 #   - macOS: titlebar tabs style is not updated when switching themes.
 #
-theme = iceberg-dark
+theme = Iceberg Dark
 
 # Hide the mouse immediately when typing. The mouse becomes visible again
 # when the mouse is used (button, movement, etc.). Platform-specific behavior
@@ -316,7 +316,7 @@ keybind = super+down=new_split:down
 keybind = super+left=new_split:left
 keybind = super+right=new_split:right
 # -- terminal --
-keybind = global:super+shift+p=toggle_quick_terminal
+keybind = global:super+shift+space=toggle_quick_terminal
 
 # Valid values:
 #
