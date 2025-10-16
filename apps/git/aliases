@@ -65,6 +65,7 @@
         sync  = fetch --all --prune --prune-tags
         # help
         h     = help
+        man   = help
         # merge
         m     = merge
         ma    = merge --abort
@@ -89,11 +90,10 @@
         lg    = log --pretty=fuller --stat --graph
         lh    = log --pretty=fuller --stat --patch
         # rebase
-        rb    = rebase
+        rb    = rebase --committer-date-is-author-date
         rba   = rebase --abort
         rbc   = rebase --continue
-        rbd   = rebase --committer-date-is-author-date
-        rbi   = rebase --interactive
+        rbi   = rebase --committer-date-is-author-date --interactive
         # remote
         r     = remote
         ra    = remote add
@@ -143,6 +143,8 @@
         t     = tag
         ta    = tag --annotate
         ts    = tag --sign
+        # worktree
+        w     = worktree
 
 [pretty]
         dotted = %C(bold italic yellow)%h%Creset %C(italic blue)%ar%Creset %C(239)%an%Creset %s%C(auto)%d%Creset
