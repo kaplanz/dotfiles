@@ -178,15 +178,6 @@ configuration, see [tmux.conf].
 >
 > Full configuration is available at `~/.config/tmux`.
 
-#### [Neovim]
-
-My Neovim configuration should have also been installed. If you plan to use it,
-I highly recommend you check out its [README][nvim] for more info.
-
-> [!TIP]
->
-> Full configuration is available at `~/.config/nvim`.
-
 ## Customization
 
 It is often the case that you want to add lines of configuration to your shell.
@@ -243,7 +234,6 @@ the project's [homepage][brew].
 [issue]:     /../../issues/new/choose
 [makefile]:  ./Makefile
 [neovim]:    https://neovim.io
-[nvim]:      https://git.zakhary.dev/nvim
 [tmux.conf]: ./apps/tmux/tmux.conf
 [tmux]:      https://github.com/tmux/tmux/wiki
 [zsh]:       https://www.zsh.org/

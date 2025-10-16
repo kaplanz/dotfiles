@@ -17,8 +17,6 @@ XDG_DATA_HOME   ?= $(HOME)/.local/share
 CRON      = $(HOME)/.cron
 DOTS      = $(HOME)/.dots
 FZF       = $(XDG_DATA_HOME)/fzf
-NVIM      = $(XDG_CONFIG_HOME)/nvim
-PACKER    = $(XDG_DATA_HOME)/nvim/site/pack/packer
 TMUX      = $(XDG_CONFIG_HOME)/tmux
 ZPACK     = $(ZSH)/pack
 ZPLUG     = $(ZSH)/before
@@ -77,16 +75,13 @@ all: apps
 
 # -- Application Goals -- {{{
 .PHONY: apps
-apps: etc local nvim tmux zsh
+apps: etc local tmux zsh
 
 .PHONY: etc
 etc: fzf
 
 .PHONY: local
 local: stow-local
-
-.PHONY: nvim
-nvim: $(NVIM) plug-nvim stow
 
 .PHONY: tmux
 tmux: $(TMUX) plug-tmux stow
@@ -133,20 +128,9 @@ unstow-local:
 
 # -- Plugins Goals -- {{{
 .PHONY: plug
-plug: plug-nvim plug-tmux plug-zsh
+plug: plug-tmux plug-zsh
 
 plug-%: stow # always plug after stow
-
-# Nvim {{{
-.PHONY: plug-nvim
-plug-nvim: $(NVIM)
-
-$(NVIM):
-	@$(MKDIR) $@
-
-.PHONY: packer
-packer: $(NVIM)
-	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 # }}}
 
 # tmux {{{

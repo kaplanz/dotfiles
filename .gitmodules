@@ -1,3 +1,0 @@
-[submodule "apps/nvim"]
-	path = apps/nvim
-	url = https://github.com/kaplanz/nvim
