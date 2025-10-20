@@ -3,8 +3,6 @@
 # Created:     18 Jul 2019
 # SPDX-License-Identifier: MIT
 
-tap "homebrew/bundle"
-
 brew "bash"
 brew "bat"
 brew "coreutils"
