@@ -26,12 +26,11 @@ GIT="git -C ${DOTS}"
 MAKE="make -C ${DOTS}"
 
 # @env LOG_FILE  Logging output file.
-export LOG_FILE="${LOG_FILE:-"${DOTS}/logs/dots.$(date +%s).log"}"
-mkdir -p "$(dirname "${LOG_FILE}")"
+LOG_FILE="${LOG_FILE:-"${DOTS}/logs/dots.$(date +%s).log"}"
 # @env LOG_LEVEL Filter for logging.
-export LOG_LEVEL="${LOG_LEVEL:-info}"
+LOG_LEVEL="${LOG_LEVEL:-info}"
 # @env NO_COLOR  Disable ANSI color escape codes.
-export NO_COLOR="${NO_COLOR}"
+NO_COLOR="${NO_COLOR}"
 
 
 #
@@ -46,16 +45,6 @@ alias warn="log -w"
 alias info="log -i"
 alias debug="log -d"
 alias trace="log -t"
-
-
-# Exports
-
-# @env LOG_FILE  Logging output file.
-export LOG_FILE="${LOG_FILE}"
-# @env LOG_LEVEL Filter for logging. [default: "info"]
-export LOG_LEVEL="${LOG_LEVEL:-info}"
-# @env NO_COLOR  Disable ANSI color escape codes.
-export NO_COLOR="${NO_COLOR}"
 
 
 # Methods
@@ -423,7 +412,7 @@ main() {
             # Download dotfiles
             info "Downloading..."
             if [ ! -d "${DOTS}" ]; then
-                monitor git clone "${REPO}" "${DOTS}"
+                git clone "${REPO}" "${DOTS}"
             else
                 warn "File already exists at path: \`${DOTS}\`"
                 if ${GIT} rev-parse >/dev/null 2>&1; then
