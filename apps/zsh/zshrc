@@ -127,7 +127,8 @@ umask 022
 
 # -- Path -- {{{
 # Use local binaries.
-export path=("$HOME/.local/bin" $path)
+export path=("${XDG_BIN_HOME:-$HOME/.local/bin}" $path)
+export manpath=("${XDG_DATA_HOME:-$HOME/.local/share}/man" $manpath)
 # }}}
 
 # -- Plugins -- {{{
