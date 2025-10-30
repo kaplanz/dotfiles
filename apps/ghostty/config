@@ -380,6 +380,61 @@ quick-terminal-position = bottom
 # affect new windows, tabs, and splits.
 custom-shader = shader/cursor.glsl
 
+# Bell features to enable if bell support is available in your runtime. Not
+# all features are available on all runtimes. The format of this is a list of
+# features to enable separated by commas. If you prefix a feature with `no-`
+# then it is disabled. If you omit a feature, its default value is used.
+#
+# Valid values are:
+#
+#  * `system`
+#
+#    Instruct the system to notify the user using built-in system functions.
+#    This could result in an audiovisual effect, a notification, or something
+#    else entirely. Changing these effects require altering system settings:
+#    for instance under the "Sound > Alert Sound" setting in GNOME,
+#    or the "Accessibility > System Bell" settings in KDE Plasma.
+#
+#    On macOS, this plays the system alert sound.
+#
+#  * `audio`
+#
+#    Play a custom sound. (GTK only)
+#
+#  * `attention` *(enabled by default)*
+#
+#    Request the user's attention when Ghostty is unfocused, until it has
+#    received focus again. On macOS, this will bounce the app icon in the
+#    dock once. On Linux, the behavior depends on the desktop environment
+#    and/or the window manager/compositor:
+#
+#    - On KDE, the background of the desktop icon in the task bar would be
+#      highlighted;
+#
+#    - On GNOME, you may receive a notification that, when clicked, would
+#      bring the Ghostty window into focus;
+#
+#    - On Sway, the window may be decorated with a distinctly colored border;
+#
+#    - On other systems this may have no effect at all.
+#
+#  * `title` *(enabled by default)*
+#
+#    Prepend a bell emoji (🔔) to the title of the alerted surface until the
+#    terminal is re-focused or interacted with (such as on keyboard input).
+#
+#  * `border`
+#
+#    Display a border around the alerted surface until the terminal is
+#    re-focused or interacted with (such as on keyboard input).
+#
+#    GTK only.
+#
+# Example: `audio`, `no-audio`, `system`, `no-system`
+#
+# Available since: 1.2.0
+bell-features = system,audio,no-attention,title,no-border
+
 # macOS doesn't have a distinct "alt" key and instead has the "option"
 # key which behaves slightly differently. On macOS by default, the
 # option key plus a character will sometimes produces a Unicode character.
