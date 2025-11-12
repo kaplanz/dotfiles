@@ -144,7 +144,7 @@
         ta    = tag --annotate
         ts    = tag --sign
         # worktree
-        w     = worktree
+        wt    = worktree
 
 [pretty]
         dotted = %C(bold italic yellow)%h%Creset %C(italic blue)%ar%Creset %C(239)%an%Creset %s%C(auto)%d%Creset
