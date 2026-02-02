@@ -191,7 +191,7 @@ font-shaping-break = cursor
 # be fixed in a future update:
 #
 #   - macOS: titlebar tabs style is not updated when switching themes.
-theme = Iceberg Dark
+theme = light:Solumbra,dark:Lunumbra
 
 # Whether to clear selected text after copying. This defaults to `false`.
 #
