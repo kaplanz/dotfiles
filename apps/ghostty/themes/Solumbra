@@ -1,0 +1,68 @@
+# Color palette for the 256 color form that many terminal applications use.
+# The syntax of this configuration is `N=COLOR` where `N` is 0 to 255 (for
+# the 256 colors in the terminal color table) and `COLOR` is a typical RGB
+# color code such as `#AABBCC` or `AABBCC`, or a named X11 color.
+#
+# The palette index can be in decimal, binary, octal, or hexadecimal.
+# Decimal is assumed unless a prefix is used: `0b` for binary, `0o` for octal,
+# and `0x` for hexadecimal.
+#
+# For definitions on the color indices and what they canonically map to,
+# [see this cheat sheet](https://www.ditig.com/256-colors-cheat-sheet).
+palette =  0=#cbd8d6
+palette =  1=#cf6164
+palette =  2=#6e8f1c
+palette =  3=#c66c21
+palette =  4=#008ec4
+palette =  5=#8e74d2
+palette =  6=#009487
+palette =  7=#33374c
+palette =  8=#8389a3
+palette =  9=#fb767b
+palette = 10=#86ad24
+palette = 11=#c49a36
+palette = 12=#00aded
+palette = 13=#ad8dff
+palette = 14=#00b4a4
+palette = 15=#23212b
+
+# Background color for the window.
+# Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
+background = #f9f3e5
+
+# Foreground color for the window.
+# Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
+foreground = #33374c
+
+# The color of the cursor. If this is not set, a default will be chosen.
+#
+# Direct colors can be specified as either hex (`#RRGGBB` or `RRGGBB`)
+# or a named X11 color.
+#
+# Additionally, special values can be used to set the color to match
+# other colors at runtime:
+#
+#   * `cell-foreground` - Match the cell foreground color.
+#     (Available since: 1.2.0)
+#
+#   * `cell-background` - Match the cell background color.
+#     (Available since: 1.2.0)
+cursor-color = #33374c
+
+# The color of the text under the cursor. If this is not set, a default will
+# be chosen.
+# Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
+# Since version 1.2.0, this can also be set to `cell-foreground` to match
+# the cell foreground color, or `cell-background` to match the cell
+# background color.
+cursor-text = #e8e9ec
+
+# The foreground and background color for selection. If this is not set, then
+# the selection color is just the inverted window background and foreground
+# (note: not to be confused with the cell bg/fg).
+# Specified as either hex (`#RRGGBB` or `RRGGBB`) or a named X11 color.
+# Since version 1.2.0, this can also be set to `cell-foreground` to match
+# the cell foreground color, or `cell-background` to match the cell
+# background color.
+selection-background = #33374c
+selection-foreground = #e8e9ec
