@@ -8,8 +8,8 @@
 
 # Configure the format of the prompt.
 format = '''
-[┏](black) $all
-[┗](black) $username$jobs$status$character
+[┏](bright-black) $all
+[┗](bright-black) $username$jobs$status$character
 '''
 
 # Right prompt which renders on the same line as the input.
@@ -57,27 +57,6 @@ scala.symbol          = " "
 swift.symbol          = " "
 zig.symbol            = " "
 
-# Sets which color palette from palettes to use.
-palette = "century"
-
-# Collection of color palettes that assign colors to user-defined names.
-#
-# Note that color palettes cannot reference their own color definitions.
-[palettes.century]
-# Standard
-black   = "239"
-red     = "167"
-green   = "107"
-blue    = "025"
-magenta = "183"
-# Brighter
-bright-black  = "242"
-bright-blue   = "110"
-bright-yellow = "222"
-# Custom
-lime  = "071"
-orange = "215"
-
 # How charged the device's battery is.
 [battery]
 full_symbol        = "󰁹 "
@@ -99,12 +78,12 @@ discharging_symbol = "󰁻 "
 # Battery: 30%
 [[battery.display]]
 threshold = 30
-style     = "orange"
+style     = "yellow"
 discharging_symbol = "󰁼 "
 # Battery: 40%
 [[battery.display]]
 threshold = 40
-style     = "yellow"
+style     = "bright-yellow"
 discharging_symbol = "󰁽 "
 # Battery: 50%
 [[battery.display]]
@@ -142,7 +121,7 @@ discharging_symbol = "󰁹 "
 min_time = 250
 show_milliseconds  = true
 format   = '[$duration]($style) '
-style    = "black"
+style    = "yellow"
 
 # Path to your current directory.
 [directory]
@@ -153,13 +132,13 @@ read_only = "󰌾 "
 # Active branch of the repo in your current directory.
 [git_branch]
 format = '\[[$symbol$branch(:$remote_branch)]($style)\]'
-style  = "lime"
+style  = "green"
 
 # Current commit hash and also the tag (if any) of the repo in your current
 # directory.
 [git_commit]
 format = '\[[$hash$tag]($style)\]'
-style = "bold italic yellow"
+style = "bold italic bright-yellow"
 
 # Number of added and deleted lines in the current git repository.
 [git_metrics]
@@ -175,7 +154,7 @@ cherry_pick  = "cherry_pick"
 bisect       = "bisect"
 am           = "am"
 am_or_rebase = "am_or_rebase"
-style        = "magenta"
+style        = "purple"
 
 # Symbols representing the state of the repo in your current directory.
 [git_status]
@@ -190,17 +169,17 @@ format     = """\\[[\
     $modified\
     $ahead_behind\
 ]($style)\\] """
-conflicted  = '[=](bold magenta)'
-stashed     = '[\$](bold black)'
+conflicted  = '[=](bold purple)'
+stashed     = '[\$](bold bright-black)'
 staged      = '[✔](bold green)'
 modified    = '[✘](bold red)'
-renamed     = '[#](bold orange)'
-deleted     = '[!](bold orange)'
-typechanged = '[%](bold orange)'
-untracked   = '[?](bold orange)'
-ahead       = '[↑](bold cyan)'
-behind      = '[↓](bold cyan)'
-diverged    = '[~](bold cyan)'
+renamed     = '[#](bold yellow)'
+deleted     = '[!](bold yellow)'
+typechanged = '[%](bold yellow)'
+untracked   = '[?](bold yellow)'
+ahead       = '[↑](bold bright-blue)'
+behind      = '[↓](bold bright-blue)'
+diverged    = '[~](bold bright-blue)'
 style       = "cyan"
 ignore_submodules = true
 
@@ -209,7 +188,7 @@ ignore_submodules = true
 number_threshold = 1
 format = '[$number$symbol]($style) '
 symbol = "!"
-style  = "yellow"
+style  = "bright-yellow"
 
 # Separates the prompt into two lines.
 [line_break]
