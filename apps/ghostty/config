@@ -1015,7 +1015,7 @@ shell-integration-features = cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,pat
 # will be run in the order they are specified.
 #
 # This can be changed at runtime and will affect all open terminals.
-custom-shader = shader/cursor.glsl
+custom-shader = cursor/warp.glsl
 
 # If `true` (default), the focused terminal surface will run an animation
 # loop when custom shaders are used. This uses slightly more CPU (generally
@@ -1033,7 +1033,7 @@ custom-shader = shader/cursor.glsl
 # depending on the shader and your terminal usage.
 #
 # This can be changed at runtime and will affect all open terminals.
-custom-shader-animation = true
+custom-shader-animation = always
 
 # Bell features to enable if bell support is available in your runtime. Not
 # all features are available on all runtimes. The format of this is a list of

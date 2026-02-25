@@ -47,7 +47,7 @@ foreground = #091318
 #
 #   * `cell-background` - Match the cell background color.
 #     (Available since: 1.2.0)
-cursor-color = #091318
+cursor-color = #3e4a50
 
 # The color of the text under the cursor. If this is not set, a default will
 # be chosen.
