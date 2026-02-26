@@ -10,20 +10,20 @@
 # For definitions on the color indices and what they canonically map to,
 # [see this cheat sheet](https://www.ditig.com/256-colors-cheat-sheet).
 palette =  0=#070c0e
-palette =  1=#8f4043
-palette =  2=#4a6111
-palette =  3=#874813
-palette =  4=#006086
-palette =  5=#614e91
-palette =  6=#00655c
+palette =  1=#7f485a
+palette =  2=#4e5f2c
+palette =  3=#a36542
+palette =  4=#345b82
+palette =  5=#5e5283
+palette =  6=#05635b
 palette =  7=#c0bdb7
 palette =  8=#6c7376
-palette =  9=#b85559
-palette = 10=#617e19
-palette = 11=#976d00
-palette = 12=#007eae
-palette = 13=#7e66bb
-palette = 14=#008478
+palette =  9=#a76066
+palette = 10=#667c3c
+palette = 11=#c49c3f
+palette = 12=#067f8f
+palette = 13=#7b6ba9
+palette = 14=#0d8277
 palette = 15=#fcf8ee
 
 # Background color for the window.
@@ -69,4 +69,4 @@ selection-foreground = cell-foreground
 
 # Reference:
 #
-# https://harmonizer.evilmartians.com/#hZPNTsMwEITfZblGyE7q5ufYInEBUdFeEOJgUjeN6trBSYpQ1XdnU1G6DpLJzTO7XzazzhEOyrW1NVDwCLQ6KN1C8XoEI_cKCuCMQQSlNZ2TbYdFjOFx6-xeQsFuGU95loqLNJcNFKbX-hT9EuIRIfcBkyQVjDyTECsZsdLUY2U8pqw4hJqMUFNBUTxmCYUlIZQYoQT3UCL15gpONf1nKi-q8FRpMCvuf1849iy8Qn-BjIdQefA-_e18i2DbK-9KLmqzQ4Y0lcYjF4T-rNZXJ6bOvVPKkC7PfFFa28-rm1HzyaGqrqZgxFz17qO3dUv8mNOCme6p5zUvetdo6ub0vfMvSQfGmTCLVnVdbSrM4_gb4qNdK40NsiklNqxrp8oO_-hBR3lTreysgku0Pyr-6AP9vZpbbd1DXW1xGXCzmW4SVV6NO-l2g85ynvDsrJ9rl510w00fVolly0aWA7VJ4HT6Bg
+# https://harmonizer.evilmartians.com/#hZNNT8MwDIb_S7hWKGmbfh03JC4gJrYLQhyyLuuqZUlJ2yE07b_jTmx1ihRyi1_7sWM7J3KUtq2NJgULiJJHqVpSvJ-IFgdJCsIoJQEpje6saDtwohSuO2sOghT0nrKYJiGntxNf1bloSKF7pc7BDRZOYLnLilIEgpP4WNGElaYOK41ijAt9qHiCSjhGMZo7hXlfyCcozhwUy5wnelGJt6pJUZT5UOk_vcoYHqEXlflHyJ1loIz7WLl3t_5GfgRk10tnPRe13gND6ErBlSL4q9yMAuNIebRSaqSFWHyTSpmvUc2w-GLBKkeR44Sr3n72pm6RHjLsMFM91pzgRW8bhdUc551_C1ww1AStaGXX1bqCdpxuPXw2G6kgQDSlgIBNbWXZwece7GDeViszq8i1s79W-PMDfV3NjTL2qa52MAtyt022kSxH4UHY_WCnOYtYdrFffJedsMOmD5MEt2UjyoHa2mpNzucf
