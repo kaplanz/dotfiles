@@ -8,8 +8,5 @@ if ! command -v bat &> /dev/null; then
     return
 fi
 
-# Configure theme
-export BAT_THEME='Nord'
-
 # Hijack cat
 alias cat='bat'
