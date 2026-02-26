@@ -10,20 +10,20 @@
 # For definitions on the color indices and what they canonically map to,
 # [see this cheat sheet](https://www.ditig.com/256-colors-cheat-sheet).
 palette =  0=#070c0e
-palette =  1=#ff9c9d
-palette =  2=#a5c569
-palette =  3=#fcb280
+palette =  1=#fa7a73
+palette =  2=#88ae2d
+palette =  3=#f2833e
 palette =  4=#5286c0
-palette =  5=#c3acff
-palette =  6=#35cebf
+palette =  5=#ae8ffd
+palette =  6=#00b6a6
 palette =  7=#c0bdb7
 palette =  8=#6c7376
-palette =  9=#ffbcbb
-palette = 10=#c0d79a
-palette = 11=#e8cb8f
-palette = 12=#84befe
-palette = 13=#d4c6ff
-palette = 14=#89ddd2
+palette =  9=#ff9ea6
+palette = 10=#a7c66d
+palette = 11=#dfb559
+palette = 12=#8bdcea
+palette = 13=#c3aeff
+palette = 14=#41cfc0
 palette = 15=#fcf8ee
 
 # Background color for the window.
@@ -66,3 +66,7 @@ cursor-text = #091318
 # background color.
 selection-background = #25514b
 selection-foreground = cell-foreground
+
+# Reference:
+#
+# https://harmonizer.evilmartians.com/#hZPNTsMwEITfZblGyE7q5ufYInEBUdFeEOJgUjeN6trBSYpQ1XdnU1G6DpLJzTO7XzazzhEOyrW1NVDwCLQ6KN1C8XoEI_cKCuCMQQSlNZ2TbYdFjOFx6-xeQsFuGU95loqLNJcNFKbX-hT9EuIRIfcBkyQVjDyTECsZsdLUY2U8pqw4hJqMUFNBUTxmCYUlIZQYoQT3UCL15gpONf1nKi-q8FRpMCvuf1849iy8Qn-BjIdQefA-_e18i2DbK-9KLmqzQ4Y0lcYjF4T-rNZXJ6bOvVPKkC7PfFFa28-rm1HzyaGqrqZgxFz17qO3dUv8mNOCme6p5zUvetdo6ub0vfMvSQfGmTCLVnVdbSrM4_gb4qNdK40NsiklNqxrp8oO_-hBR3lTreysgku0Pyr-6AP9vZpbbd1DXW1xGXCzmW4SVV6NO-l2g85ynvDsrJ9rl510w00fVolly0aWA7VJ4HT6Bg
