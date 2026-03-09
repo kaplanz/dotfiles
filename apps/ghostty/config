@@ -111,33 +111,6 @@ font-feature = ss08
 # (optical size), `wdth` (width), `GRAD` (gradient), etc.
 font-variation = wght=500
 
-# Locations to break font shaping into multiple runs.
-#
-# A "run" is a contiguous segment of text that is shaped together. "Shaping"
-# is the process of converting text (codepoints) into glyphs (renderable
-# characters). This is how ligatures are formed, among other things.
-# For example, if a coding font turns "!=" into a single glyph, then it
-# must see "!" and "=" next to each other in a single run. When a run
-# is broken, the text is shaped separately. To continue our example, if
-# "!" is at the end of one run and "=" is at the start of the next run,
-# then the ligature will not be formed.
-#
-# Ghostty breaks runs at certain points to improve readability or usability.
-# For example, Ghostty by default will break runs under the cursor so that
-# text editing can see the individual characters rather than a ligature.
-# This configuration lets you configure this behavior.
-#
-# Combine values with a comma to set multiple options. Prefix an
-# option with "no-" to disable it. Enabling and disabling options
-# can be done at the same time.
-#
-# Available options:
-#
-#   * `cursor` - Break runs under the cursor.
-#
-# Available since: 1.2.0
-font-shaping-break = cursor
-
 # A theme to use. This can be a built-in theme name, a custom theme
 # name, or an absolute path to a custom theme file. Ghostty also supports
 # specifying a different theme to use for light and dark mode. Each
@@ -193,126 +166,11 @@ font-shaping-break = cursor
 #   - macOS: titlebar tabs style is not updated when switching themes.
 theme = light:Solumbra,dark:Lunumbra
 
-# Whether to clear selected text after copying. This defaults to `false`.
-#
-# When set to `true`, the selection will be automatically cleared after
-# any copy operation that invokes the `copy_to_clipboard` keyboard binding.
-# Importantly, this will not clear the selection if the copy operation
-# was invoked via `copy-on-select`.
-#
-# When set to `false`, the selection remains visible after copying, allowing
-# to see what was copied and potentially perform additional operations
-# on the same selection.
-selection-clear-on-copy = false
-
-# The minimum contrast ratio between the foreground and background colors.
-# The contrast ratio is a value between 1 and 21. A value of 1 allows for no
-# contrast (e.g. black on black). This value is the contrast ratio as defined
-# by the [WCAG 2.0 specification](https://www.w3.org/TR/WCAG20/).
-#
-# If you want to avoid invisible text (same color as background), a value of
-# 1.1 is a good value. If you want to avoid text that is difficult to read, a
-# value of 3 or higher is a good value. The higher the value, the more likely
-# that text will become black or white.
-#
-# This value does not apply to Emoji or images.
-minimum-contrast = 1
-
-# The style of the cursor. This sets the default style. A running program can
-# still request an explicit cursor style using escape sequences (such as `CSI
-# q`). Shell configurations will often request specific cursor styles.
-#
-# Note that shell integration will automatically set the cursor to a bar at
-# a prompt, regardless of this configuration. You can disable that behavior
-# by specifying `shell-integration-features = no-cursor` or disabling shell
-# integration entirely.
-#
-# Valid values are:
-#
-#   * `block`
-#   * `bar`
-#   * `underline`
-#   * `block_hollow`
-cursor-style = block
-
-# Enables the ability to move the cursor at prompts by using `alt+click` on
-# Linux and `option+click` on macOS.
-#
-# This feature requires shell integration (specifically prompt marking
-# via `OSC 133`) and only works in primary screen mode. Alternate screen
-# applications like vim usually have their own version of this feature but
-# this configuration doesn't control that.
-#
-# It should be noted that this feature works by translating your desired
-# position into a series of synthetic arrow key movements, so some weird
-# behavior around edge cases are to be expected. This is unfortunately how
-# this feature is implemented across terminals because there isn't any other
-# way to implement it.
-cursor-click-to-move = true
-
 # Hide the mouse immediately when typing. The mouse becomes visible again
 # when the mouse is used (button, movement, etc.). Platform-specific behavior
 # may dictate other scenarios where the mouse is shown. For example on macOS,
 # the mouse is shown again when a new window, tab, or split is created.
 mouse-hide-while-typing = true
-
-# When to scroll the surface to the bottom. The format of this is a list of
-# options to enable separated by commas. If you prefix an option with `no-`
-# then it is disabled. If you omit an option, its default value is used.
-#
-# Available options:
-#
-# - `keystroke` If set, scroll the surface to the bottom when the user
-#   presses a key that results in data being sent to the PTY (basically
-#   anything but modifiers or keybinds that are processed by Ghostty).
-#
-# - `output` If set, scroll the surface to the bottom if there is new data
-#   to display. (Currently unimplemented.)
-#
-# The default is `keystroke, no-output`.
-scroll-to-bottom = keystroke,no-output
-
-# Determines whether running programs can detect the shift key pressed with a
-# mouse click. Typically, the shift key is used to extend mouse selection.
-#
-# The default value of `false` means that the shift key is not sent with
-# the mouse protocol and will extend the selection. This value can be
-# conditionally overridden by the running program with the `XTSHIFTESCAPE`
-# sequence.
-#
-# The value `true` means that the shift key is sent with the mouse protocol
-# but the running program can override this behavior with `XTSHIFTESCAPE`.
-#
-# The value `never` is the same as `false` but the running program cannot
-# override this behavior with `XTSHIFTESCAPE`. The value `always` is the
-# same as `true` but the running program cannot override this behavior with
-# `XTSHIFTESCAPE`.
-#
-# If you always want shift to extend mouse selection even if the program
-# requests otherwise, set this to `never`.
-#
-# Valid values are:
-#
-#   * `true`
-#   * `false`
-#   * `always`
-#   * `never`
-mouse-shift-capture = false
-
-# Multiplier for scrolling distance with the mouse wheel.
-#
-# A prefix of `precision:` or `discrete:` can be used to set the multiplier
-# only for scrolling with the specific type of devices. These can be
-# comma-separated to set both types of multipliers at the same time, e.g.
-# `precision:0.1,discrete:3`. If no prefix is used, the multiplier applies
-# to all scrolling devices. Specifying a prefix was introduced in Ghostty
-# 1.2.1.
-#
-# The value will be clamped to [0.01, 10,000]. Both of these are extreme
-# and you're likely to have a bad experience if you set either extreme.
-#
-# The default value is "3" for discrete devices and "1" for precision devices.
-mouse-scroll-multiplier = precision:1,discrete:3
 
 # The opacity level (opposite of transparency) of the background. A value of
 # 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
@@ -351,6 +209,15 @@ background-opacity-cells = true
 #     reasonable for a good looking blur. Higher blur intensities may
 #     cause strange rendering and performance issues.
 #
+# On macOS 26.0 and later, there are additional special values that
+# can be set to use the native macOS glass effects:
+#
+#   * `macos-glass-regular` - Standard glass effect with some opacity
+#   * `macos-glass-clear` - Highly transparent glass effect
+#
+# If the macOS values are set, then this implies `background-blur = true`
+# on non-macOS platforms.
+#
 # Supported on macOS and on some Linux desktop environments, including:
 #
 #   * KDE Plasma (Wayland and X11)
@@ -374,45 +241,36 @@ background-opacity-cells = true
 # doing so.
 background-blur = true
 
-# The opacity level (opposite of transparency) of an unfocused split.
-# Unfocused splits by default are slightly faded out to make it easier to see
-# which split is focused. To disable this feature, set this value to 1.
+# The command to run, usually a shell. If this is not an absolute path, it'll
+# be looked up in the `PATH`. If this is not set, a default will be looked up
+# from your system. The rules for the default lookup are:
 #
-# A value of 1 is fully opaque and a value of 0 is fully transparent. Because
-# "0" is not useful (it makes the window look very weird), the minimum value
-# is 0.15. This value still looks weird but you can at least see what's going
-# on. A value outside of the range 0.15 to 1 will be clamped to the nearest
-# valid value.
-unfocused-split-opacity = 0.7
-
-# If true, keep the terminal open after the command exits. Normally, the
-# terminal window closes when the running command (such as a shell) exits.
-# With this true, the terminal window will stay open until any keypress is
-# received.
+#   * `SHELL` environment variable
 #
-# This is primarily useful for scripts or debugging.
-wait-after-command = false
-
-# The size of the scrollback buffer in bytes. This also includes the active
-# screen. No matter what this is set to, enough memory will always be
-# allocated for the visible screen and anything leftover is the limit for
-# the scrollback.
+#   * `passwd` entry (user information)
 #
-# When this limit is reached, the oldest lines are removed from the
-# scrollback.
+# This can contain additional arguments to run the command with. If additional
+# arguments are provided, the command will be executed using `/bin/sh -c`
+# to offload shell argument expansion.
 #
-# Scrollback currently exists completely in memory. This means that the
-# larger this value, the larger potential memory usage. Scrollback is
-# allocated lazily up to this limit, so if you set this to a very large
-# value, it will not immediately consume a lot of memory.
+# To avoid shell expansion altogether, prefix the command with `direct:`, e.g.
+# `direct:nvim foo`. This will avoid the roundtrip to `/bin/sh` but will also
+# not support any shell parsing such as arguments with spaces, filepaths with
+# `~`, globs, etc. (Available since: 1.2.0)
 #
-# This size is per terminal surface, not for the entire application.
+# You can also explicitly prefix the command with `shell:` to always wrap the
+# command in a shell. This can be used to ensure our heuristics to choose the
+# right mode are not used in case they are wrong. (Available since: 1.2.0)
 #
-# It is not currently possible to set an unlimited scrollback buffer.
-# This is a future planned feature.
+# This command will be used for all new terminal surfaces, i.e. new windows,
+# tabs, etc. If you want to run a command only for the first terminal surface
+# created when Ghostty starts, use the `initial-command` configuration.
 #
-# This can be changed at runtime but will only affect new terminal surfaces.
-scrollback-limit = 10000000
+# Ghostty supports the common `-e` flag for executing a command with
+# arguments. For example, `ghostty -e fish --with --custom --args`.
+# This flag sets the `initial-command` configuration, see that for more
+# information.
+command = /bin/zsh
 
 # Key bindings. The format is `trigger=action`. Duplicate triggers will
 # overwrite previously set values. The list of actions is available in
@@ -462,6 +320,13 @@ scrollback-limit = 10000000
 # so if you specify both `a` and `KeyA`, the physical key will always be used
 # regardless of what order they are configured.
 #
+# The special key `catch_all` can be used to match any key that is not
+# otherwise bound. This can be combined with modifiers, for example
+# `ctrl+catch_all` will match any key pressed with `ctrl` that is not
+# otherwise bound. When looking up a binding, Ghostty first tries to match
+# `catch_all` with modifiers. If no match is found and the event has
+# modifiers, it falls back to `catch_all` without modifiers.
+#
 # Valid modifiers are `shift`, `ctrl` (alias: `control`), `alt` (alias: `opt`,
 # `option`), and `super` (alias: `cmd`, `command`). You may use the modifier
 # or the alias. When debugging keybinds, the non-aliased modifier will always
@@ -498,6 +363,11 @@ scrollback-limit = 10000000
 #     force the output of a prefix key is to assign another keybind to
 #     specifically output that key (e.g. `ctrl+a>ctrl+a=text:foo`) or
 #     press an unbound key which will send both keys to the program.
+#
+#   * If an unbound key is pressed during a sequence and a `catch_all`
+#     binding exists that would `ignore` the input, the entire sequence
+#     is dropped and nothing happens. Otherwise, the entire sequence is
+#     encoded and sent to the running program as if no keybind existed.
 #
 #   * If a prefix in a sequence is previously bound, the sequence will
 #     override the previous binding. For example, if `ctrl+a` is bound to
@@ -644,7 +514,105 @@ scrollback-limit = 10000000
 #
 #  - Notably, global shortcuts have not been implemented on wlroots-based
 #    compositors like Sway (see [upstream issue](https://github.com/emersion/xdg-desktop-portal-wlr/issues/240)).
+#
+# ## Chained Actions
+#
+# A keybind can have multiple actions by using the `chain` keyword for
+# subsequent actions. When a keybind is activated, all chained actions are
+# executed in order. The syntax is:
+#
+# ```ini
+# keybind = ctrl+a=new_window
+# keybind = chain=goto_split:left
+# ```
+#
+# This binds `ctrl+a` to first open a new window, then move focus to the
+# left split. Each `chain` entry appends an action to the most recently
+# defined keybind. You can chain as many actions as you want:
+#
+# ```ini
+# keybind = ctrl+a=new_window
+# keybind = chain=goto_split:left
+# keybind = chain=toggle_fullscreen
+# ```
+#
+# Chained actions cannot have prefixes like `global:` or `unconsumed:`.
+# The flags from the original keybind apply to the entire chain.
+#
+# Chained actions work with key sequences as well. For example:
+#
+# ```ini
+# keybind = ctrl+a>n=new_window
+# keybind = chain=goto_split:left
+# ````
+#
+# Chains with key sequences apply to the most recent binding in the
+# sequence.
+#
+# Chained keybinds are available since Ghostty 1.3.0.
+#
+# ## Key Tables
+#
+# You may also create a named set of keybindings known as a "key table."
+# A key table must be explicitly activated for the bindings to become
+# available. This can be used to implement features such as a
+# "copy mode", "vim mode", etc. Generically, this can implement modal
+# keyboard input.
+#
+# Key tables are defined using the syntax `<table>/<binding>`. The
+# `<binding>` value is everything documented above for keybinds. The
+# `<table>` value is the name of the key table. Table names can contain
+# anything except `/`, `=`, `+`, and `>`. The characters `+` and `>` are
+# reserved for keybind syntax (modifier combinations and key sequences).
+# For example `foo/ctrl+a=new_window` defines a binding within a table
+# named `foo`.
+#
+# Tables are activated and deactivated using the binding actions
+# `activate_key_table:<name>` and `deactivate_key_table`. Other table
+# related binding actions also exist; see the documentation for a full list.
+# These are the primary way to interact with key tables.
+#
+# Binding lookup proceeds from the innermost table outward, so keybinds in
+# the default table remain available unless explicitly unbound in an inner
+# table.
+#
+# A key table has some special syntax and handling:
+#
+#   * `<name>/` (with no binding) defines and clears a table, resetting all
+#     of its keybinds and settings.
+#
+#   * You cannot activate a table that is already the innermost table; such
+#     attempts are ignored. However, the same table can appear multiple times
+#     in the stack as long as it is not innermost (e.g., `A -> B -> A -> B`
+#     is valid, but `A -> B -> B` is not).
+#
+#   * A table can be activated in one-shot mode using
+#     `activate_key_table_once:<name>`. A one-shot table is automatically
+#     deactivated when any non-catch-all binding is invoked.
+#
+#   * Key sequences work within tables: `foo/ctrl+a>ctrl+b=new_window`.
+#     If an invalid key is pressed, the sequence ends but the table remains
+#     active.
+#
+#   * Chain actions work within tables, the `chain` keyword applies to
+#     the most recently defined binding in the table. e.g. if you set
+#     `table/ctrl+a=new_window` you can chain by using `chain=text:hello`.
+#     Important: chain itself doesn't get prefixed with the table name,
+#     since it applies to the most recent binding in any table.
+#
+#   * Prefixes like `global:` work within tables:
+#     `foo/global:ctrl+a=new_window`.
+#
+# Key tables are available since Ghostty 1.3.0.
 
+# -- resize --
+keybind = ctrl+a=activate_key_table:resize
+keybind = resize/arrow_up=resize_split:up,10
+keybind = resize/arrow_down=resize_split:down,10
+keybind = resize/arrow_left=resize_split:left,10
+keybind = resize/arrow_right=resize_split:right,10
+keybind = resize/escape=deactivate_key_table
+keybind = resize/catch_all=ignore
 # -- splits --
 keybind = super+d=unbind
 keybind = super+shift+d=unbind
@@ -655,83 +623,30 @@ keybind = super+right=new_split:right
 # -- terminal --
 keybind = global:super+shift+space=toggle_quick_terminal
 
-# The viewport dimensions are usually not perfectly divisible by the cell
-# size. In this case, some extra padding on the end of a column and the bottom
-# of the final row may exist. If this is `true`, then this extra padding
-# is automatically balanced between all four edges to minimize imbalance on
-# one side. If this is `false`, the top left grid cell will always hug the
-# edge with zero padding other than what may be specified with the other
-# `window-padding` options.
-#
-# If other `window-padding` fields are set and this is `true`, this will still
-# apply. The other padding is applied first and may affect how many grid cells
-# actually exist, and this is applied last in order to balance the padding
-# given a certain viewport size and grid cell size.
-window-padding-balance = false
+# If true, new windows will inherit the working directory of the
+# previously focused window. If no window was previously focused, the default
+# working directory will be used (the `working-directory` option).
+window-inherit-working-directory = false
 
-# Configure a preference for window decorations. This setting specifies
-# a _preference_; the actual OS, desktop environment, window manager, etc.
-# may override this preference. Ghostty will do its best to respect this
-# preference but it may not always be possible.
+# The theme to use for the windows. Valid values:
 #
-# Valid values:
+#   * `auto` - Determine the theme based on the configured terminal
+#      background color. This has no effect if the "theme" configuration
+#      has separate light and dark themes. In that case, the behavior
+#      of "auto" is equivalent to "system".
+#   * `system` - Use the system theme.
+#   * `light` - Use the light theme regardless of system theme.
+#   * `dark` - Use the dark theme regardless of system theme.
+#   * `ghostty` - Use the background and foreground colors specified in the
+#     Ghostty configuration. This is only supported on Linux builds.
 #
-#  * `none`
+# On macOS, if `macos-titlebar-style` is `tabs` or `transparent`, the window theme will be
+# automatically set based on the luminosity of the terminal background color.
+# This only applies to terminal windows. This setting will still apply to
+# non-terminal windows within Ghostty.
 #
-#    All window decorations will be disabled. Titlebar, borders, etc. will
-#    not be shown. On macOS, this will also disable tabs (enforced by the
-#    system).
-#
-#  * `auto`
-#
-#    Automatically decide to use either client-side or server-side
-#    decorations based on the detected preferences of the current OS and
-#    desktop environment. This option usually makes Ghostty look the most
-#    "native" for your desktop.
-#
-#  * `client`
-#
-#    Prefer client-side decorations.
-#
-#    Available since: 1.1.0
-#
-#  * `server`
-#
-#    Prefer server-side decorations. This is only relevant on Linux with GTK,
-#    either on X11, or Wayland on a compositor that supports the
-#    `org_kde_kwin_server_decoration` protocol (e.g. KDE Plasma, but almost
-#    any non-GNOME desktop supports this protocol).
-#
-#    If `server` is set but the environment doesn't support server-side
-#    decorations, client-side decorations will be used instead.
-#
-#    Available since: 1.1.0
-#
-# The default value is `auto`.
-#
-# For the sake of backwards compatibility and convenience, this setting also
-# accepts boolean true and false values. If set to `true`, this is equivalent
-# to `auto`. If set to `false`, this is equivalent to `none`.
-# This is convenient for users who live primarily on systems that don't
-# differentiate between client and server-side decorations (e.g. macOS and
-# Windows).
-#
-# The "toggle_window_decorations" keybind action can be used to create
-# a keybinding to toggle this setting at runtime.
-#
-# macOS: To hide the titlebar without removing the native window borders
-#        or rounded corners, use `macos-titlebar-style = hidden` instead.
-window-decoration = auto
-
-# The font that will be used for the application's window and tab titles.
-#
-# If this setting is left unset, the system default font will be used.
-#
-# Note: any font available on the system may be used, this font is not
-# required to be a fixed-width font.
-#
-# Available since: 1.1.0 (on GTK)
-window-title-font-family =
+# This is currently only supported on macOS and Linux.
+window-theme = system
 
 # Whether to enable saving and restoring window state. Window state includes
 # their position, size, tabs, splits, etc. Some window state requires shell
@@ -770,24 +685,11 @@ window-save-state = always
 # only supported on macOS.
 window-step-resize = true
 
-# If true, when there are multiple split panes, the mouse selects the pane
-# that is focused. This only applies to the currently focused window; e.g.
-# mousing over a split in an unfocused window will not focus that split
-# and bring the window to front.
-#
-# Default is false.
-focus-follows-mouse = false
-
-# Enables or disabled title reporting (CSI 21 t). This escape sequence
-# allows the running program to query the terminal title. This is a common
-# security issue and is disabled by default.
-#
-# Warning: This can expose sensitive information at best and enable
-# arbitrary code execution at worst (with a maliciously crafted title
-# and a minor amount of user interaction).
-#
-# Available since: 1.0.1
-title-report = false
+# The time in milliseconds between clicks to consider a click a repeat
+# (double, triple, etc.) or an entirely new single click. A value of zero will
+# use a platform-specific default. The default on macOS is determined by the
+# OS settings. On every other platform it is 500ms.
+click-repeat-interval = 500
 
 # Confirms that a surface should be closed before closing it.
 #
@@ -815,134 +717,6 @@ confirm-close-surface = false
 # Note: There is no default keybind for toggling the quick terminal.
 # To enable this feature, bind the `toggle_quick_terminal` action to a key.
 quick-terminal-position = bottom
-
-# This configuration option determines the behavior of the quick terminal
-# when switching between macOS spaces. macOS spaces are virtual desktops
-# that can be manually created or are automatically created when an
-# application is in full-screen mode.
-#
-# Valid values are:
-#
-#  * `move` - When switching to another space, the quick terminal will
-#    also moved to the current space.
-#
-#  * `remain` - The quick terminal will stay only in the space where it
-#    was originally opened and will not follow when switching to another
-#    space.
-#
-# The default value is `move`.
-#
-# Only implemented on macOS.
-# On Linux the behavior is always equivalent to `move`.
-#
-# Available since: 1.1.0
-quick-terminal-space-behavior = move
-
-# Whether to enable shell integration auto-injection or not. Shell integration
-# greatly enhances the terminal experience by enabling a number of features:
-#
-#   * Working directory reporting so new tabs, splits inherit the
-#     previous terminal's working directory.
-#
-#   * Prompt marking that enables the "jump_to_prompt" keybinding.
-#
-#   * If you're sitting at a prompt, closing a terminal will not ask
-#     for confirmation.
-#
-#   * Resizing the window with a complex prompt usually paints much
-#     better.
-#
-# Allowable values are:
-#
-#   * `none` - Do not do any automatic injection. You can still manually
-#     configure your shell to enable the integration.
-#
-#   * `detect` - Detect the shell based on the filename.
-#
-#   * `bash`, `elvish`, `fish`, `zsh` - Use this specific shell injection scheme.
-#
-# The default value is `detect`.
-shell-integration = detect
-
-# Shell integration features to enable. These require our shell integration
-# to be loaded, either automatically via shell-integration or manually.
-#
-# The format of this is a list of features to enable separated by commas. If
-# you prefix a feature with `no-` then it is disabled. If you omit a feature,
-# its default value is used, so you must explicitly disable features you don't
-# want. You can also use `true` or `false` to turn all features on or off.
-#
-# Example: `cursor`, `no-cursor`, `sudo`, `no-sudo`, `title`, `no-title`
-#
-# Available features:
-#
-#   * `cursor` - Set the cursor to a blinking bar at the prompt.
-#
-#   * `sudo` - Set sudo wrapper to preserve terminfo.
-#
-#   * `title` - Set the window title via shell integration.
-#
-#   * `ssh-env` - Enable SSH environment variable compatibility. Automatically
-#     converts TERM from `xterm-ghostty` to `xterm-256color` when connecting to
-#     remote hosts and propagates COLORTERM, TERM_PROGRAM, and TERM_PROGRAM_VERSION.
-#     Whether or not these variables will be accepted by the remote host(s) will
-#     depend on whether or not the variables are allowed in their sshd_config.
-#     (Available since: 1.2.0)
-#
-#   * `ssh-terminfo` - Enable automatic terminfo installation on remote hosts.
-#     Attempts to install Ghostty's terminfo entry using `infocmp` and `tic` when
-#     connecting to hosts that lack it. Requires `infocmp` to be available locally
-#     and `tic` to be available on remote hosts. Once terminfo is installed on a
-#     remote host, it will be automatically "cached" to avoid repeat installations.
-#     If desired, the `+ssh-cache` CLI action can be used to manage the installation
-#     cache manually using various arguments.
-#     (Available since: 1.2.0)
-#
-#   * `path` - Add Ghostty's binary directory to PATH. This ensures the `ghostty`
-#     command is available in the shell even if shell init scripts reset PATH.
-#     This is particularly useful on macOS where PATH is often overridden by
-#     system scripts. The directory is only added if not already present.
-#
-# SSH features work independently and can be combined for optimal experience:
-# when both `ssh-env` and `ssh-terminfo` are enabled, Ghostty will install its
-# terminfo on remote hosts and use `xterm-ghostty` as TERM, falling back to
-# `xterm-256color` with environment variables if terminfo installation fails.
-shell-integration-features = cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path
-
-# Custom entries into the command palette.
-#
-# Each entry requires the title, the corresponding action, and an optional
-# description. Each field should be prefixed with the field name, a colon
-# (`:`), and then the specified value. The syntax for actions is identical
-# to the one for keybind actions. Whitespace in between fields is ignored.
-#
-# If you need to embed commas or any other special characters in the values,
-# enclose the value in double quotes and it will be interpreted as a Zig
-# string literal. This is also useful for including whitespace at the
-# beginning or the end of a value. See the
-# [Zig documentation](https://ziglang.org/documentation/master/#Escape-Sequences)
-# for more information on string literals. Note that multiline string literals
-# are not supported.
-#
-# Double quotes can not be used around the field names.
-#
-# ```ini
-# command-palette-entry = title:Reset Font Style, action:csi:0m
-# command-palette-entry = title:Crash on Main Thread,description:Causes a crash on the main (UI) thread.,action:crash:main
-# command-palette-entry = title:Focus Split: Right,description:"Focus the split to the right, if it exists.",action:goto_split:right
-# command-palette-entry = title:"Ghostty",description:"Add a little Ghostty to your terminal.",action:"text:\xf0\x9f\x91\xbb"
-# ```
-#
-# By default, the command palette is preloaded with most actions that might
-# be useful in an interactive setting yet do not have easily accessible or
-# memorizable shortcuts. The default entries can be cleared by setting this
-# setting to an empty value:
-#
-# ```ini
-# command-palette-entry =
-# ```
-#
-# Available since: 1.2.0
 
 # Custom shaders to run after the default shaders. This is a file path
 # to a GLSL-syntax shader for all platforms.
@@ -999,11 +773,59 @@ shell-integration-features = cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,pat
 #
 #  * `vec4 iPreviousCursorColor` - Color of the previous terminal cursor.
 #
+#  * `vec4 iCurrentCursorStyle` - Style of the terminal cursor
+#
+#    Macros simplified use are defined for the various cursor styles:
+#
+#    - `CURSORSTYLE_BLOCK` or `0`
+#    - `CURSORSTYLE_BLOCK_HOLLOW` or `1`
+#    - `CURSORSTYLE_BAR` or `2`
+#    - `CURSORSTYLE_UNDERLINE` or `3`
+#    - `CURSORSTYLE_LOCK` or `4`
+#
+#  * `vec4 iPreviousCursorStyle` - Style of the previous terminal cursor
+#
+#  * `vec4 iCursorVisible` - Visibility of the terminal cursor.
+#
 #  * `float iTimeCursorChange` - Timestamp of terminal cursor change.
 #
 #    When the terminal cursor changes position or color, this is set to
 #    the same time as the `iTime` uniform, allowing you to compute the
 #    time since the change by subtracting this from `iTime`.
+#
+#  * `float iTimeFocus` - Timestamp when the surface last gained iFocus.
+#
+#    When the surface gains focus, this is set to the current value of
+#    `iTime`, similar to how `iTimeCursorChange` works. This allows you
+#    to compute the time since focus was gained or lost by calculating
+#    `iTime - iTimeFocus`. Use this to create animations that restart
+#    when the terminal regains focus.
+#
+#  * `int iFocus` - Current focus state of the surface.
+#
+#    Set to 1.0 when the surface is focused, 0.0 when unfocused. This
+#    allows shaders to detect unfocused state and avoid animation artifacts
+#    from large time deltas caused by infrequent "deceptive frames"
+#    (e.g., modifier key presses, link hover events in unfocused split panes).
+#    Check `iFocus > 0` to determine if the surface is currently focused.
+#
+#  * `vec3 iPalette[256]` - The 256-color terminal palette.
+#
+#    RGB values for all 256 colors in the terminal palette, normalized
+#    to [0.0, 1.0]. Index 0-15 are the ANSI colors, 16-231 are the 6x6x6
+#    color cube, and 232-255 are the grayscale colors.
+#
+#  * `vec3 iBackgroundColor` - Terminal background color (RGB).
+#
+#  * `vec3 iForegroundColor` - Terminal foreground color (RGB).
+#
+#  * `vec3 iCursorColor` - Terminal cursor color (RGB).
+#
+#  * `vec3 iCursorText` - Terminal cursor text color (RGB).
+#
+#  * `vec3 iSelectionBackgroundColor` - Selection background color (RGB).
+#
+#  * `vec3 iSelectionForegroundColor` - Selection foreground color (RGB).
 #
 # If the shader fails to compile, the shader will be ignored. Any errors
 # related to shader compilation will not show up as configuration errors
@@ -1048,7 +870,9 @@ custom-shader-animation = always
 #    This could result in an audiovisual effect, a notification, or something
 #    else entirely. Changing these effects require altering system settings:
 #    for instance under the "Sound > Alert Sound" setting in GNOME,
-#    or the "Accessibility > System Bell" settings in KDE Plasma. (GTK only)
+#    or the "Accessibility > System Bell" settings in KDE Plasma.
+#
+#    On macOS, this plays the system alert sound.
 #
 #  * `audio`
 #
@@ -1081,125 +905,12 @@ custom-shader-animation = always
 #    Display a border around the alerted surface until the terminal is
 #    re-focused or interacted with (such as on keyboard input).
 #
-#    GTK only.
+#    Available since: 1.2.0 on GTK, 1.2.1 on macOS
 #
 # Example: `audio`, `no-audio`, `system`, `no-system`
 #
 # Available since: 1.2.0
-bell-features = system,audio,no-attention,title,no-border
-
-# Control the in-app notifications that Ghostty shows.
-#
-# On Linux (GTK), in-app notifications show up as toasts. Toasts appear
-# overlaid on top of the terminal window. They are used to show information
-# that is not critical but may be important.
-#
-# Possible notifications are:
-#
-#   - `clipboard-copy` (default: true) - Show a notification when text is copied
-#     to the clipboard.
-#   - `config-reload` (default: true) - Show a notification when
-#     the configuration is reloaded.
-#
-# To specify a notification to enable, specify the name of the notification.
-# To specify a notification to disable, prefix the name with `no-`. For
-# example, to disable `clipboard-copy`, set this configuration to
-# `no-clipboard-copy`. To enable it, set this configuration to `clipboard-copy`.
-#
-# Multiple notifications can be enabled or disabled by separating them
-# with a comma.
-#
-# A value of "false" will disable all notifications. A value of "true" will
-# enable all notifications.
-#
-# This configuration only applies to GTK.
-#
-# Available since: 1.1.0
-app-notifications = clipboard-copy,config-reload
-
-# Whether the window buttons in the macOS titlebar are visible. The window
-# buttons are the colored buttons in the upper left corner of most macOS apps,
-# also known as the traffic lights, that allow you to close, miniaturize, and
-# zoom the window.
-#
-# This setting has no effect when `window-decoration = false` or
-# `macos-titlebar-style = hidden`, as the window buttons are always hidden in
-# these modes.
-#
-# Valid values are:
-#
-#   * `visible` - Show the window buttons.
-#   * `hidden` - Hide the window buttons.
-#
-# The default value is `visible`.
-#
-# Changing this option at runtime only applies to new windows.
-#
-# Available since: 1.2.0
-macos-window-buttons = visible
-
-# The style of the macOS titlebar. Available values are: "native",
-# "transparent", "tabs", and "hidden".
-#
-# The "native" style uses the native macOS titlebar with zero customization.
-# The titlebar will match your window theme (see `window-theme`).
-#
-# The "transparent" style is the same as "native" but the titlebar will
-# be transparent and allow your window background color to come through.
-# This makes a more seamless window appearance but looks a little less
-# typical for a macOS application and may not work well with all themes.
-#
-# The "transparent" style will also update in real-time to dynamic
-# changes to the window background color, e.g. via OSC 11. To make this
-# more aesthetically pleasing, this only happens if the terminal is
-# a window, tab, or split that borders the top of the window. This
-# avoids a disjointed appearance where the titlebar color changes
-# but all the topmost terminals don't match.
-#
-# The "tabs" style is a completely custom titlebar that integrates the
-# tab bar into the titlebar. This titlebar always matches the background
-# color of the terminal. There are some limitations to this style:
-# On macOS 13 and below, saved window state will not restore tabs correctly.
-# macOS 14 does not have this issue and any other macOS version has not
-# been tested.
-#
-# The "hidden" style hides the titlebar. Unlike `window-decoration = false`,
-# however, it does not remove the frame from the window or cause it to have
-# squared corners. Changing to or from this option at run-time may affect
-# existing windows in buggy ways.
-#
-# When "hidden", the top titlebar area can no longer be used for dragging
-# the window. To drag the window, you can use option+click on the resizable
-# areas of the frame to drag the window. This is a standard macOS behavior
-# and not something Ghostty enables.
-#
-# The default value is "transparent". This is an opinionated choice
-# but its one I think is the most aesthetically pleasing and works in
-# most cases.
-#
-# Changing this option at runtime only applies to new windows.
-macos-titlebar-style = transparent
-
-# Whether the proxy icon in the macOS titlebar is visible. The proxy icon
-# is the icon that represents the folder of the current working directory.
-# You can see this very clearly in the macOS built-in Terminal.app
-# titlebar.
-#
-# The proxy icon is only visible with the native macOS titlebar style.
-#
-# Valid values are:
-#
-#   * `visible` - Show the proxy icon.
-#   * `hidden` - Hide the proxy icon.
-#
-# The default value is `visible`.
-#
-# This setting can be changed at runtime and will affect all currently
-# open windows but only after their working directory changes again.
-# Therefore, to make this work after changing the setting, you must
-# usually `cd` to a different directory, open a different file in an
-# editor, etc.
-macos-titlebar-proxy-icon = visible
+bell-features = system,audio,attention,no-title,no-border
 
 # macOS doesn't have a distinct "alt" key and instead has the "option"
 # key which behaves slightly differently. On macOS by default, the
@@ -1234,73 +945,6 @@ macos-titlebar-proxy-icon = visible
 # The values `left` or `right` enable this for the left or right *Option*
 # key, respectively.
 macos-option-as-alt = true
-
-# Whether to enable the macOS window shadow. The default value is true.
-# With some window managers and window transparency settings, you may
-# find false more visually appealing.
-macos-window-shadow = true
-
-# Whether macOS Shortcuts are allowed to control Ghostty.
-#
-# Ghostty exposes a number of actions that allow Shortcuts to
-# control and interact with Ghostty. This includes creating new
-# terminals, sending text to terminals, running commands, invoking
-# any keybind action, etc.
-#
-# This is a powerful feature but can be a security risk if a malicious
-# shortcut is able to be installed and executed. Therefore, this
-# configuration allows you to disable this feature.
-#
-# Valid values are:
-#
-# * `ask` - Ask the user whether for permission. Ghostty will remember
-#   this choice and never ask again. This is similar to other macOS
-#   permissions such as microphone access, camera access, etc.
-#
-# * `allow` - Allow Shortcuts to control Ghostty without asking.
-#
-# * `deny` - Deny Shortcuts from controlling Ghostty.
-#
-# Available since: 1.2.0
-macos-shortcuts = ask
-
-# If `true` (default), applications running in the terminal can show desktop
-# notifications using certain escape sequences such as OSC 9 or OSC 777.
-desktop-notifications = true
-
-# Modifies the color used for bold text in the terminal.
-#
-# This can be set to a specific color, using the same format as
-# `background` or `foreground` (e.g. `#RRGGBB` but other formats
-# are also supported; see the aforementioned documentation). If a
-# specific color is set, this color will always be used for the default
-# bold text color. It will set the rest of the bold colors to `bright`.
-#
-# This can also be set to `bright`, which uses the bright color palette
-# for bold text. For example, if the text is red, then the bold will
-# use the bright red color. The terminal palette is set with `palette`
-# but can also be overridden by the terminal application itself using
-# escape sequences such as OSC 4. (Since Ghostty 1.2.0, the previous
-# configuration `bold-is-bright` is deprecated and replaced by this
-# usage).
-#
-# Available since Ghostty 1.2.0.
-bold-color =
-
-# The opacity level (opposite of transparency) of the faint text. A value of
-# 1 is fully opaque and a value of 0 is fully transparent. A value less than 0
-# or greater than 1 will be clamped to the nearest valid value.
-#
-# Available since Ghostty 1.2.0.
-faint-opacity = 0.5
-
-# This will be used to set the `TERM` environment variable.
-# HACK: We set this with an `xterm` prefix because vim uses that to enable key
-# protocols (specifically this will enable `modifyOtherKeys`), among other
-# features. An option exists in vim to modify this: `:set
-# keyprotocol=ghostty:kitty`, however a bug in the implementation prevents it
-# from working properly. https://github.com/vim/vim/pull/13211 fixes this.
-term = xterm-ghostty
 
 # Control the auto-update functionality of Ghostty. This is only supported
 # on macOS currently, since Linux builds are distributed via package
