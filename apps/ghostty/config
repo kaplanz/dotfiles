@@ -164,7 +164,7 @@ font-variation = wght=500
 # be fixed in a future update:
 #
 #   - macOS: titlebar tabs style is not updated when switching themes.
-theme = light:Solumbra,dark:Lunumbra
+theme = Lunumbra
 
 # Hide the mouse immediately when typing. The mouse becomes visible again
 # when the mouse is used (button, movement, etc.). Platform-specific behavior
