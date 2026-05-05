@@ -17,7 +17,7 @@ export FZF_DEFAULT_OPTS="
     --bind 'ctrl-a:toggle-all'
     --bind 'ctrl-v:execute(echo {+} | xargs -o "$EDITOR")'
     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
-    --color='prompt:183,pointer:110,marker:222'
+    --color='prompt:13,pointer:14,marker:11'
     --exit-0
     --info=inline
     --multi
