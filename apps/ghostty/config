@@ -708,7 +708,7 @@ confirm-close-surface = false
 #
 # Note: There is no default keybind for toggling the quick terminal.
 # To enable this feature, bind the `toggle_quick_terminal` action to a key.
-quick-terminal-position = bottom
+quick-terminal-position = top
 
 # Custom shaders to run after the default shaders. This is a file path
 # to a GLSL-syntax shader for all platforms.
