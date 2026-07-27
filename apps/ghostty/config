@@ -613,7 +613,7 @@ keybind = super+down=new_split:down
 keybind = super+left=new_split:left
 keybind = super+right=new_split:right
 # -- terminal --
-keybind = global:super+shift+space=toggle_quick_terminal
+keybind = global:alt+space=toggle_quick_terminal
 
 # If true, new windows will inherit the working directory of the
 # previously focused window. If no window was previously focused, the default
