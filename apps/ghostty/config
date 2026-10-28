@@ -606,13 +606,13 @@ command = /bin/zsh
 # Key tables are available since Ghostty 1.3.0.
 
 # -- splits --
-keybind = super+d=unbind
-keybind = super+shift+d=unbind
-keybind = super+up=new_split:up
-keybind = super+down=new_split:down
-keybind = super+left=new_split:left
-keybind = super+right=new_split:right
+keybind = super+shift+up=new_split:up
+keybind = super+shift+down=new_split:down
+keybind = super+shift+left=new_split:left
+keybind = super+shift+right=new_split:right
+keybind = super+enter=new_split:auto
 # -- terminal --
+keybind = super+shift+k=clear_screen
 keybind = global:alt+space=toggle_quick_terminal
 
 # If true, new windows will inherit the working directory of the
